@@ -1,3 +1,49 @@
+JAVA BASICS
+
+Abstraction
+    - hide implementation details
+    - only expose essential features/behavior of the objects
+    - if something extends or implements something, we know part of dits behaviors
+
+Encapsulation
+    - hiding own data from other classes and restricting access to specified methods declared by the class
+
+Polymorphism
+    - ability of a class to act as a different member on the inheritance tree
+    - Polymorphism is an object-oriented programming concept that refers to the ability of a variable, function or object to take on multiple forms. A language that features polymorphism allows developers to program in the general rather than program in the specific.
+    - process objects differently based on their data type
+    - if an object passes 2 instanceof tests, it's polymorphic
+    - all objects in java are polymorphic because it extends Object class
+    - method overloading/overriding
+    - same method signature with diff. behaviors
+    - if an object is an Animal, you can expect it to have Animal class behaviors, even if it's a Cat or a Dog. In other words, a Cat can behave like an Animal
+    - List x = new ArrayList();
+        - good practice to hide implementation details if you want to later change ArrayList to LinkedList (if you later change, you'd need to always return linkedlist if you code against class)
+        - preferable to code against the interface rather than the implemented class so it's easier to change implementation later
+
+Inheritance
+    - extends classes
+    - implements interfaces
+    - interfaces extends other interfaces
+    - java does not support multiple inheritance
+    - can implement multiple interfaces
+    - cannot extends multiple classes
+
+Method overriding
+    - same method signature
+    - required to override method in abstract class
+Method overloading
+    - different method signature
+
+Access Modifiers
+    default
+    public
+    protected
+    private
+
+Nonaccess Modifiers
+
+
 final
     class - cannot be extended
     method - cannot be overriden
@@ -9,10 +55,18 @@ StringBuilder moves faster than StringBuffer,
 since stringbuffer is threadsafe
 
 Strings
-    objects representing series of characters
-    immutable
-    string pool - collection of unique string literals stored on the heap
-    serializable
+    - objects representing series of characters
+    - immutable
+    - string pool - collection of unique string literals stored on the heap
+    - serializable
+
+interfaces - a contract
+    - marker interface - no method. ie serializable
+    - functional interface - exactly 1 abstract method. ie runnable
+
+
+
+
 
 
 
