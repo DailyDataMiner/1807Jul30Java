@@ -1,4 +1,4 @@
-package com.ex.exercises;
+package com.ex.exercises.OOP;
 
 public interface Work {
 
