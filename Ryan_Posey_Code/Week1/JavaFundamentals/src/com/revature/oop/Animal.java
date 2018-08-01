@@ -8,7 +8,12 @@ public abstract class Animal implements Livable{
 	 * They do NOT need to have an abstract method
 	 * to be abstract. They just have the ability to.
 	 */
+	String className = "Animal";
 	public void consume() {
 		System.out.println("Animal nom nom nom");
+	}
+	
+	public static int helperMethod() {
+		return 0;
 	}
 }
