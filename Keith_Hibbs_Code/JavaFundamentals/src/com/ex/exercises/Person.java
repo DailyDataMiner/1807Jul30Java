@@ -1,26 +1,36 @@
 package com.ex.exercises;
 
-public abstract class Person {
-	private String name;
-	private int age;	
-	
-public String getName(){
+public abstract class Person implements Work{
+	private String name="John Smith";
+	private int age=48;	
+		public String getName(){
 return name;
 }
 
 public int getAge() {
-	return age;
+	return age;}
+	
+	public Person(String name, int age) {
+  this.name=name;
+  this.age=age;}
+	public void main(String[] args) {
+
+
+
+
 }
 
-public void setName(String newValue) {
-	name = newValue;}
+public void setName(String name) {
+	this.name = name;}
 
-public void setAge(int newValue) {
-	age = newValue;}
+public void setAge(int age) {
+	this.age = age;}
 	
-	public static void main(String[] args) {
-//Person p = new Person();
 
+//	}
+
+	@Override
+	public void work() {
+System.out.println("I'm unemployed");		
 	}
-
 }

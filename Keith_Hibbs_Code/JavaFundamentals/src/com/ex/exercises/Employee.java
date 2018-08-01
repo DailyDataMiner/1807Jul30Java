@@ -1,27 +1,35 @@
 package com.ex.exercises;
 
 class Employee extends Person{
-
 private String company;
-private int empId;
+public Employee(String name, int age, String company) {
+		super(name, age);
+		this.company =company;
+
+	}
+
 
 public String getCompany(){
 return company;
 }
 
-public int getEmpId() {
-return empId;
+
+public void setCompany(String company) {
+	this.company = "Conglom-O";}
+
+
+
+
+public void main(String[] args) {
+
+System.out.println(super.getName());
+System.out.println(super.getAge());
+System.out.println(this.getCompany());
 }
-public void setCompany(String newValue) {
-	company = newValue;}
 
-public void setEmpId(int newValue) {
-	empId = newValue;}
-
-
-public static void main(String[] args) {
-	Person p1 = new Employee();
-	p1.setName("John Smith");
-	p1.setAge(28);
+@Override
+public void work() {
+System.out.println("I have a job");
+	
 }
 }
