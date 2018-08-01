@@ -1,0 +1,12 @@
+package com.revature.intro;
+
+public class VariableScopes {
+	
+	public static void main(String[] args) {
+		
+		Integer num = new Integer(5);
+		Integer x = new Integer(159109);
+		System.out.println(num.MAX_VALUE == x.MAX_VALUE);
+	}
+
+}

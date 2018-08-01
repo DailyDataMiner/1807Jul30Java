@@ -1,0 +1,5 @@
+package com.revature.fizz;
+
+public class FizzBuzz {
+
+}

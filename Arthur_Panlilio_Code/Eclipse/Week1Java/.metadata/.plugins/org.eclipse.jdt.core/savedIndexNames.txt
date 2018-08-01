@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\Panli\my_git_repos\1807Jul30Java\Arthur_Panlilio_Code\Eclipse\Week1Java\.metadata\.plugins\org.eclipse.jdt.core
+1518499603.index
+3481554108.index
+2622456074.index

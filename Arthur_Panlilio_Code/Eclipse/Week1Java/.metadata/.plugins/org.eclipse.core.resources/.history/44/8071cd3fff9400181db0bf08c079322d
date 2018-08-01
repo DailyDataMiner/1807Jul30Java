@@ -1,0 +1,9 @@
+package com.revature.oop;
+
+public class Cat extends Animal {
+
+	public Cat(String theName, int theAge) {
+		super(theName, theAge);
+	}
+
+}

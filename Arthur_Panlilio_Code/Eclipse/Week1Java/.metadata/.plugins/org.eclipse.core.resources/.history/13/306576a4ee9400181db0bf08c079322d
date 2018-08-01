@@ -1,0 +1,47 @@
+package com.revature.intro;
+
+public enum Days {
+	
+	MONDAY(1){
+		public void live() {
+			System.out.println("Mondays are long days");
+		}
+	},
+	TUEDAY(2){
+		public void live() {
+			System.out.println("Tequila/Taco tuesday");
+		}
+	},
+	WEDNESDAY(3){
+		public void live() {
+			System.out.println("Wear pink");
+		}
+	},
+	THURSDAY(4){
+		public void live() {
+			System.out.println("YEAH");
+		}
+	},
+	FRIDAY(5){
+		public void live() {
+			System.out.println("WOWO");
+		}
+	},
+	SATURDAY(6){
+		public void live() {
+			System.out.println("ahaha");
+		}
+	},
+	SUNDAY(7){
+		public void live() {
+			System.out.println("OK!");
+		}
+	};
+	
+	public abstract void live();
+	
+	Days(int num){
+		
+	}
+
+}

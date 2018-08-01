@@ -1,0 +1,14 @@
+package com.revature.oop;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Animal a = new Animal(95123);
+		a.eat();
+		Dog d = new Dog("Dogbert", 21);
+		d.eat();
+		d.bark();
+
+	}
+
+}

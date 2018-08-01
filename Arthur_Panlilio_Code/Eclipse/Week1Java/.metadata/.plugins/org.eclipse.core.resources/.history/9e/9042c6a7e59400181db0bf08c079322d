@@ -1,0 +1,46 @@
+package com.revature.structures;
+
+import java.util.ArrayList;
+
+public class controlStructures {
+
+	public static void main(String[] args) {
+		int[] nums = {1,2,3,4,5,6,7,8,9,10};
+		ArrayList<donkey> donks = new ArrayList<>();
+		for(int i = 0; i < nums.length; i++) {
+			
+			if(nums[i]==7) {
+				break;
+			}
+			if(nums[i]==4) {
+				continue;
+			} else {
+				System.out.println(nums[i]);
+				donks.add(new donkey(nums[i]));
+			}
+		}
+		for(donkey d: donks) {
+			System.out.println(d.id);
+			switch(d.id) {
+				case d.id = 1:
+					System.out.println("I am the first donkey");
+				
+				case 2:
+					System.out.println("And I am the second!" + d.id);
+			}
+			
+		}
+
+	}
+	
+	
+	public static class donkey{
+		public int id;
+		
+		donkey(int theId){
+			id = theId;
+		}
+		
+	}
+
+}

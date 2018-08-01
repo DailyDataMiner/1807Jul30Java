@@ -1,0 +1,13 @@
+package com.revature.intro;
+
+public class UnderstandingArrays {
+
+	public static void main(String[] args) {
+		
+		int[] nums = {9, 5, 2, 10};
+		int[] n = new int[5];
+		//n[10] = 7;
+		//int wrong = new int[];
+	}
+
+}
