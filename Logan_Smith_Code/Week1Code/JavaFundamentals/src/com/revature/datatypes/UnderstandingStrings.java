@@ -25,6 +25,14 @@ public class UnderstandingStrings {
 		StringBuilder sbuild = new StringBuilder("Hello");
 		sbuild.append(" world!");
 		System.out.println(sbuild);
+		sbuild.reverse();
+		System.out.println(sbuild);
+		
+		StringBuffer sbuff = new StringBuffer(conc);
+		
+		// StringBuffer buffy = "Hi!"; This does not work!
+		
+		
 		
 	}
 
