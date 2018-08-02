@@ -9,6 +9,8 @@ public class Avatar extends HumanBluePrint {
 	public Avatar(String name, String gender) {
 		this.setName(name);
 		this.setGender(gender);
+//		RoleActions a = new RoleActions();
+		
 	}
 	
 	public String getRole() {

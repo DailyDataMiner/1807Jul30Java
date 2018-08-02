@@ -7,18 +7,16 @@ import java.util.Scanner;
 public class Simulator extends Avatar {
 	
 	public static void main(String[] args) {
-			
 		Map<Avatar, String> preAvatarList = initAvatars(); // or prepare Avatars?
 //		Map<HumanBluePrint, String> preAvatarList = initAvatars(); // or prepare Avatars?
-		
 		runSimulation(preAvatarList);
-		
 	}
 	
 	private static void runSimulation(Map<Avatar, String> p_preAvatarList) {
 		
 		print("\n------------------------------------------------------------");
 		
+		//	Format of avatar list value -> < Avatar Object {name, gender}, Role >
 		for (Map.Entry<Avatar, String> avatar : p_preAvatarList.entrySet()) {
 			
 			print("Info about Avatar #" + avatar.hashCode());
