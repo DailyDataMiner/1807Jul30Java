@@ -1,0 +1,16 @@
+package com.revature.io;
+
+import java.util.Scanner;
+import static java.lang.System.in;
+//^ static imports allow us to access static fields of a class w/o class name
+
+public class ScannerExample {
+	public static void main(String[] args) {
+		System.out.println("Hello! Welcome to my app. Enter your name: ");
+		Scanner scan = new Scanner(in);
+		String name = scan.nextLine();
+		
+		
+		scan.close();
+	}
+}

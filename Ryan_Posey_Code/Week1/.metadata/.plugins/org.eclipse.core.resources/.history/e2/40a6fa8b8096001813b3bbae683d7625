@@ -1,0 +1,19 @@
+package com.revature.q6;
+
+import java.math.*;
+
+public class NoMod {
+	
+	public static boolean isEven(int num) {
+		if((2*num)/(Math.pow(num-1, 2)) == 0) return true;
+		else return false;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(isEven(2));
+		System.out.println(isEven(3));
+		System.out.println(isEven(4));
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.revature.io;
+
+public class IODAO {
+	//class used to read from and write to text file
+	
+	void addStudent(Student student) {
+		//name;email;grade
+		
+	}
+}

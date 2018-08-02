@@ -1,0 +1,7 @@
+package com.revature.q7;
+
+import java.util.Comparator;
+
+public class Employees implements Comparator {
+	
+}

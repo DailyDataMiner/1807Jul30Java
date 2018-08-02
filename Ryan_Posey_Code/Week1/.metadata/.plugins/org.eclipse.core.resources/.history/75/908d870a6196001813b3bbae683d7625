@@ -1,0 +1,32 @@
+package com.revature.exceptions;
+
+import java.io.IOException;
+
+public class UnderstandingExceptions {
+
+	public static void main(String[] args) {
+		try {
+			exploreStack(args);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void doThings(String[] args) {
+		try { // must use either a catch, finally, or both
+			System.out.println(args[5].toLowerCase());
+			throw new IOException();
+		}
+		catch(IOException e) {
+			
+		}
+	}
+	
+	static void exploreStack(String[] args) throws Exception{
+		doThings(args);
+		throw new Exception();
+	}
+	
+	
+}

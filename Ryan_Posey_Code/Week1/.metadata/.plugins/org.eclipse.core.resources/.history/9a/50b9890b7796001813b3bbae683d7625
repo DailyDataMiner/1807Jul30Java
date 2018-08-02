@@ -1,0 +1,20 @@
+package com.revature.q2;
+
+public class Fibonacci {
+	
+	public static void fib(int[] fibs, int limit) {
+		fibs[0] = 0;
+		fibs[1] = 1;
+		System.out.println(fibs[0] + ", " + fibs[1] + ", ");
+		for(int i = 2; i < limit-1; i++) {
+			fibs[i] = fibs[i-1] + fibs[i-2];
+			System.out.println(fibs[i] + ", ");
+		}
+	}
+
+	public static void main(String[] args) {
+		int[] sequence = new int[25];
+		fib(sequence, 25);
+	}
+
+}

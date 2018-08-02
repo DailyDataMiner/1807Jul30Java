@@ -1,0 +1,15 @@
+package com.revature.q2;
+
+public class Fibonacci {
+	
+	public static void fib(int limit) {
+		for(int i = 0; i < limit; i++) {
+			System.out.println(0 + ((i-1) + (i-2)));
+		}
+	}
+
+	public static void main(String[] args) {
+		fib(25);
+	}
+
+}

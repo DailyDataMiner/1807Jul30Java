@@ -1,0 +1,40 @@
+package com.revature.q1;
+
+public class BubbleSort {
+	// method for sorting an array of integers using a bubble sort algorithm
+	public static void sort(int nums[]) {
+		int n = nums.length;
+		for(int i = 0; i < n-1; i++) {
+			for(int j = 0; j < n-i-1; j++) {
+				System.out.print("[" + nums[j] + ", " + nums[j+1] + "] " + i + " " + j);
+				if(nums[j] > nums[j+1]) {
+					int temp = nums[j];
+					nums[j] = nums[j+1];
+					nums[j+1] = temp;
+				}
+				else System.out.println("No switch");
+				System.out.println("[" + nums[j] + ", " + nums[j+1] + "]");
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		//int[] testNums = {1,0,5,6,3,2,3,7,9,8,4};
+		int[] testNums = {5,1,4,2,8};
+		
+		System.out.print("[ ");
+		for(int i = 0; i < testNums.length; i++) {
+			System.out.print(testNums[i] + " ");
+		}
+		System.out.println("]");
+		
+		sort(testNums);
+		
+		System.out.print("[ ");
+		for(int i = 0; i < testNums.length; i++) {
+			System.out.print(testNums[i] + " ");
+		}
+		System.out.println("]");
+	}
+
+}
