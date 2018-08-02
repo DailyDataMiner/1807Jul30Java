@@ -6,7 +6,6 @@ public class Character {
 	private int age;
 	private String state;
 	
-	
 	public Character(String firstName, String lastName, int age, String state) {
 		super();
 		this.firstName = firstName;

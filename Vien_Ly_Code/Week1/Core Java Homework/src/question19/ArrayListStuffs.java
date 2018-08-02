@@ -3,6 +3,7 @@ package question19;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArrayListStuffs {
 
@@ -17,23 +18,19 @@ public class ArrayListStuffs {
 		
 		System.out.println(li.toString());
 		
-		// have to iterate over a copy to remove from original list because of concurrent modification issue
-		for(Integer i : new ArrayList<Integer>(li)) {
+		for(Integer i : li) {
 			if (i.intValue() % 2 == 0) {
 				evenSum += i.intValue();
 			} else {
 				oddSum += i.intValue();		
 			}
-			if (isPrime(i)) {
-				li.remove(i);
-			}
-
-
 		}
+		
+		List<Integer> filtered = li.stream().filter(i -> !isPrime(i)).collect(Collectors.toList());
 		
 		System.out.println("Sum of even numbers: " + evenSum);
 		System.out.println("Sum of odd numbers: " + oddSum);
-		System.out.println(li.toString());
+		System.out.println(filtered.toString());
 	}
 	
 	
