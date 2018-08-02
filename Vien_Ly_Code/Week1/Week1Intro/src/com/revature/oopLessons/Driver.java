@@ -7,6 +7,12 @@ public class Driver {
 		d.consume();
 		d.stayinAlive();
 		
+		int x = 5;
+		if (x++ == 5) {
+			System.out.println("asd");
+		}
+		
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 	}
 
 }
