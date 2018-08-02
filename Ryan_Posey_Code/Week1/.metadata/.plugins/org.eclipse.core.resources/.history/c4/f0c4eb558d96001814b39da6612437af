@@ -36,18 +36,13 @@ public class IODAO {
 	}
 	
 	List<Student> readStudents() {
-		List<Student> students = new ArrayList<Student>();
+		List<Student> s = new ArrayList<Student>();
 		try(BufferedReader br = new BufferedReader (
 				new FileReader("src/files/students.txt"))) {
 			
 			String line = null;
 			while((line = br.readLine()) != null) {
-				String[] studentInfo = line.split(";");
-				Student temp = new Student();
-				temp.setName(studentInfo[0]);
-				temp.setEmail(studentInfo[1]);
-				temp.setGrade(Double.parseDouble(studentInfo[2]));
-				students.add(temp);
+				
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -55,6 +50,6 @@ public class IODAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return students;
+		return null;
 	}
 }
