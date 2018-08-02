@@ -5,6 +5,8 @@ public class Student {
 	private String email;
 	private double grade;
 	
+	public Student() {}
+	
 	public Student(String name, String email, double grade) {
 		super();
 		this.name = name;
@@ -12,8 +14,6 @@ public class Student {
 		this.grade = grade;
 	}
 
-	public Student() {}
-	
 	public String getName() {
 		return name;
 	}

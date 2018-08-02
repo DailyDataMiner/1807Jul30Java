@@ -1,11 +1,2 @@
 Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
-Omar Acevedo;omar@mail.com;99.5
+Ramo Odeveca;ramo@mail.com;89.1

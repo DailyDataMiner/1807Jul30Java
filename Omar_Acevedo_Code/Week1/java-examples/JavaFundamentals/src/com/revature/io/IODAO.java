@@ -1,6 +1,9 @@
 package com.revature.io;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,8 +37,32 @@ public class IODAO {
 	}
 	
 	List<Student> readStudents() {
-		List<Student> s = new ArrayList<Student>();
-		return null;
+		
+		List<Student> studentList = new ArrayList<Student>();
+		
+		try (BufferedReader br = new BufferedReader(
+				new FileReader("src/files/students.txt"));) {
+			String line = null;
+			while ( ( line = br.readLine() ) != null) {
+				String[] studentInfo = line.split(";");
+				Student newStudent = new Student();
+				newStudent.setName(studentInfo[0]);
+				newStudent.setEmail(studentInfo[1]);
+				newStudent.setGrade(Double.parseDouble(studentInfo[2]));
+				studentList.add(newStudent);
+			}
+			
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return studentList;
+//		return null;
 	}
 	
 }
