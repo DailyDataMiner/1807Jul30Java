@@ -17,20 +17,19 @@ public class ArrayListStuffs {
 		
 		System.out.println(li.toString());
 		
-		for(Integer i : li) {
+		// have to iterate over a copy to remove from original list because of concurrent modification issue
+		for(Integer i : new ArrayList<Integer>(li)) {
 			if (i.intValue() % 2 == 0) {
 				evenSum += i.intValue();
 			} else {
 				oddSum += i.intValue();		
 			}
-		}
-		
-		for(Integer i : li) {
-			int temp = i.intValue();
-			if (isPrime(temp))
+			if (isPrime(i)) {
 				li.remove(i);
+			}
+
+
 		}
-		
 		
 		System.out.println("Sum of even numbers: " + evenSum);
 		System.out.println("Sum of odd numbers: " + oddSum);
@@ -39,6 +38,7 @@ public class ArrayListStuffs {
 	
 	
 	public static boolean isPrime(int n) {
+		if (n < 2) return false;
 		for (int i = 2; i < n; i++) {
 			if (n % i == 0) {
 				return false;
