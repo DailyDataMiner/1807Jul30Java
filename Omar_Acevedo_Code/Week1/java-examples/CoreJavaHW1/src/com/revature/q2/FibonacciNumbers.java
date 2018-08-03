@@ -11,7 +11,7 @@ public class FibonacciNumbers extends HelperFunctions {
 	static int fn;
 	
 	public static void main(String[] args) {
-		print(fibo(18));
+		print(fibo(9));
 	}
 	
 	private static int fibo(int n) {
