@@ -9,7 +9,7 @@ public class Student implements Serializable{
 	
 	private String name;
 	private String email;
-	private double grade;
+	private transient double grade;
 	
 	public Student() {
 		
