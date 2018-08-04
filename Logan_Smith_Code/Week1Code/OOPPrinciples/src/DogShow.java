@@ -30,6 +30,10 @@ public class DogShow {
 		Scanner dogFinder3 = new Scanner(System.in);
 		String dogFinderSize = dogFinder3.nextLine();
 		
+		dogFinder.close();
+		dogFinder2.close();
+		dogFinder3.close();
+		
 		boolean dogFound = false;
 		for(Dogs dog : dogList) {
 			if (dog.getName().equals(dogFinderName)) {
