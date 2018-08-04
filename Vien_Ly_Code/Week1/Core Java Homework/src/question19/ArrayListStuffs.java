@@ -26,13 +26,12 @@ public class ArrayListStuffs {
 			}
 		}
 		
-		List<Integer> filtered = li.stream().filter(i -> !isPrime(i)).collect(Collectors.toList());
+		li = li.stream().filter(i -> !isPrime(i)).collect(Collectors.toList());
 		
 		System.out.println("Sum of even numbers: " + evenSum);
 		System.out.println("Sum of odd numbers: " + oddSum);
-		System.out.println(filtered.toString());
+		System.out.println(li.toString());
 	}
-	
 	
 	public static boolean isPrime(int n) {
 		if (n < 2) return false;

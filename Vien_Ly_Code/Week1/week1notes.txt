@@ -69,17 +69,21 @@ EXCEPTIONS & ERRORS
 Exceptions and errors are both considered things that go wrong at runtime(as opposed to syntax errors that happens at compile time) but they are very different. We can work with exceptions, but we want to avoid errors
 
 Throwable (abstract class)
-    errors
+    errors -- critical issues, cannot recover from
         stackoverflow
         outofmemory
     
-    exceptions
+    exceptions -- can catch/handle
+        compile time exception: checked exception, have to handle for your code to compile
+            IOException
+            SQLException
+                These are checked/compile time exceptions
+                Still happens at runtime but must be handled at compile time
+
         runtime exceptions: aka unchecked exeption. Not checked for by compiler, don't have to handle, but should if there is risky code
 
-        IOException
-        SQLException
-            These are checked/compile time exceptions
-            Still happens at runtime but must be handled at compile time
+
+    try with resources always has a finally block
 
 How to handle an exceptions
     throw / "propagate" / duck
@@ -102,4 +106,19 @@ Design patterns
     factory
     data access object(DAO)
 
+JUnit
+    Java testing framework
 
+Thread
+    single path of execution
+
+
+project 0
+    simple maven project
+    pojos
+    dao
+        -> dao class
+    service
+        -> biz logic
+    app
+        -> main class

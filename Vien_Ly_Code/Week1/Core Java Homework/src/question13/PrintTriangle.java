@@ -4,16 +4,18 @@ public class PrintTriangle {
 
 	public static void main(String[] args) {
 
-		int i;
+		int counter = 0;
 		int n = 4;
-		String line = "0";
-		for (i = 0; i < n; i++) {
-			System.out.println(line);
-			if (i % 2 == 0) {
-				line += " 1";
-			} else {
-				line += " 0";
+		for (int i = 1; i <= n; i++) {
+			for (int j = 0; j < i; j++) {
+				if (counter % 2 == 0) {
+					System.out.print(0);
+				} else {
+					System.out.print(1);
+				}
+				++counter;
 			}
+			System.out.println();
 		}
 	}
 
