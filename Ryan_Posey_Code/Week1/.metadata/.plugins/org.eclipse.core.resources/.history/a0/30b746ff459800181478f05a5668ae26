@@ -1,0 +1,38 @@
+package com.revature.q8;
+
+import java.util.ArrayList;
+
+public class Palindrome {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<String> strs = new ArrayList<String>();
+		strs.add("karan");
+		strs.add("madam");
+		strs.add("tom");
+		strs.add("civic");
+		strs.add("radar");
+		strs.add("sexes");
+		strs.add("jimmy");
+		strs.add("kayak");
+		strs.add("john");
+		strs.add("refer");
+		strs.add("billy");
+		strs.add("did");
+		
+		ArrayList<String> palindromes = new ArrayList<String>();
+		for(String str : strs) {
+			Boolean isPalindrome = true;
+			for(int i = 0; i < str.length(); i++) {
+				if(str.charAt(i) != str.charAt(str.length()-i-1)) {
+					isPalindrome = false;
+				}
+			}
+			if(!isPalindrome) {
+				palindromes.add(str);
+				isPalindrome = true;
+			}
+		}
+		System.out.println(palindromes);
+	}
+}

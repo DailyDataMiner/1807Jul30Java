@@ -3,9 +3,9 @@ package com.revature.q7;
 public class Employee {
 	private String name;
 	private String department;
-	private String age;
+	private int age;
 	
-	public Employee(String name, String department, String age) {
+	public Employee(String name, String department, int age) {
 		super();
 		this.name = name;
 		this.department = department;
@@ -28,12 +28,19 @@ public class Employee {
 		this.department = department;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", department=" + department + ", age=" + age + "]";
+	}
+	
+	
 	
 }

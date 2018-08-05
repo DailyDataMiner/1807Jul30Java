@@ -1,7 +1,7 @@
 package com.revature.q5;
 
 public class Substring {
-
+	// DONE!
 	public static String sub(String str, int idx) {
 		char[] strArray = str.toCharArray();
 		StringBuffer buffer = new StringBuffer();

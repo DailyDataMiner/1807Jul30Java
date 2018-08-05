@@ -1,0 +1,14 @@
+package com.revature.q12;
+
+public class Even {
+
+	public static void main(String[] args) {
+		int nums[] = new int[100];
+		
+		for(int i = 1; i < nums.length+1; i++) {
+			nums[i] = i;
+			System.out.println(nums[i]);
+		}
+	}
+
+}

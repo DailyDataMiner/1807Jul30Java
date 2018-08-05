@@ -1,0 +1,35 @@
+package com.revature.q9;
+
+import java.util.ArrayList;
+
+public class Prime {
+	
+	static ArrayList<Integer> printPrimes(ArrayList<Integer> nums, int size) {
+		ArrayList<Integer> primes = new ArrayList<Integer>(size);
+		for(int i = 2; i < size; i++) {
+			int numFactors = 0;
+			for(int j = i; j < size; j++) {
+				if(i % j == 0) {
+					numFactors++;
+				}
+			}
+			if(numFactors <= 1) primes.add(nums.get(i));
+		}
+		return primes;
+	}
+
+	public static void main(String[] args) {
+		int size = 100;
+		ArrayList<Integer> nums = new ArrayList<Integer>(size);
+		//System.out.println("hello");
+		for(int i = 1; i <= size; i++) {
+			nums.add(i);
+		}
+		System.out.println(nums);
+		
+		ArrayList<Integer> primes = new ArrayList<Integer>();
+		
+		System.out.println(printPrimes(nums, size));
+	}
+
+}

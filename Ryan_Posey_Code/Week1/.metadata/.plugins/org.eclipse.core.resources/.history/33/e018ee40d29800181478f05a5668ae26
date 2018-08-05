@@ -1,0 +1,8 @@
+package com.revature.q15;
+
+public interface Arithmetic<G> {
+	G addition(G num1, G num2);
+	G subtraction(G num1, G num2);
+	G mulitplication(G num1, G num2);
+	G division(G num1, G num2);
+}
