@@ -31,7 +31,9 @@ public class Threads101 extends HelperFunctions {
 		};
 		
 		Thread l = new Thread(lambda);
+		
 		isThread.setPriority(Thread.MAX_PRIORITY);
+		
 		l.setPriority(Thread.MIN_PRIORITY);
 		l.start();
 		
@@ -40,6 +42,7 @@ public class Threads101 extends HelperFunctions {
 		anonThread.start();
 		et.start();
 		isThread.start();
+		
 		print("STATE OF LAMBDA THREAD " + l.getState());
 		print("STATE OF IR THREAD " + isThread.getState());
 		

@@ -8,4 +8,7 @@ public abstract class Role extends HelperFunctions implements Roles {
 	public abstract void hunter();
 	public abstract void mage();
 	public abstract void healer();
+	
+	public abstract void attack();
+	
 }

@@ -1,4 +1,6 @@
 package com.revature.q6;
+import java.util.Scanner;
+
 import com.revature.helpers.HelperFunctions;
 
 // Q6. Write  a program  to  determine  if  an  integer is  even  without  using  
@@ -8,13 +10,18 @@ public class DetermineEvenIntNoMod extends HelperFunctions {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] evenNumbers = {2,4,6,8};
-		int n = 8/2;
-//		print(8^2);
-//		System.out.println(8^2);
-//		println(n);
-		print(Math.pow(5,  2));
-
+//		int[] evenNumbers = { 0, 2, 4, 6, 8 };
+		
+		Scanner scan = new Scanner(System.in);
+		
+		print("Enter an integer: ");
+		int n = scan.nextInt();		
+		
+		if ( ( (n / 2) * 2 ) == n ) {
+			print(n + " is an even number.");
+		} else 
+			print(n + " is an odd number.");
+		
 	}
 
 }

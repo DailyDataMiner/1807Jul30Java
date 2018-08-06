@@ -31,5 +31,11 @@ public class RoleActions extends Role {
 		// TODO Auto-generated method stub
 		print("Be the best, and heal everyone!");
 	}
+
+	@Override
+	public void attack() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
