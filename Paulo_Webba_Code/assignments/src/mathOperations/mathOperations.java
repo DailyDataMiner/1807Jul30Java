@@ -5,4 +5,5 @@ public interface mathOperations {
 	int subtraction(int x, int y);
 	int muliplication(int x, int y);
 	double division(double x, double y);
+	
 }
