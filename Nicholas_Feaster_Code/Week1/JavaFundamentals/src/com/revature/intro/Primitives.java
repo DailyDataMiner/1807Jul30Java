@@ -73,6 +73,9 @@ public class Primitives {
 		//WRAPPER CLASSES
 		//entity gives object functionality for primitive data types
 		
+		//Self
+		char myBonnie = 8;
+		System.out.println(myBonnie);
 	}
 
 }
