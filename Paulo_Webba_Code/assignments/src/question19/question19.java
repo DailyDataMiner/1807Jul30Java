@@ -26,7 +26,7 @@ public class question19 {
 		ArrayList<Integer> remaining = new ArrayList<Integer>(numbers);
 	 int index = 0; 
 		   for(int i= 1; i <= remaining.size(); i++){
-			   if(Primes.primeNumbers.primeNumba(i)) {
+			   if(primes_Q9.primeNumbers.primeNumba(i)) {
 				   remaining.remove(remaining.get(index));
 				   remaining.trimToSize();
 				 }else index++;
