@@ -3,41 +3,52 @@ package com.revature.datatypes;
 import java.util.Arrays;
 
 public class UnderstandingArrays {
-public static void main(String[] Args) {
-/* an array is a group of variables
- * ele,emts pf am array ,ist ne tje sa,e ty[e
- * e;e,emts are accessed ny am omdex
- * tjhe first element is at the 0th index 
- * find an array's size with arrayName.length
- */
-int [] nums= {9,5,2,10};
-int [] n = new int[5];
-n[10] = 7;
-/*int[] wring = new int[];  // in order to initialize
- * an array, we must either explicitly add uts values
- * or specify the size we want to allocate to it
- */
-int length = nums.length;
-int [][] twoD = new int [4][4];
-twoD[0][0] = 'x';
-
-for(int i=0;i<twoD.length;i++) {
-	for(int j=0; j<twoD[i].length;j++) {
-		System.out.println(twoD[i][j]);
-		}
-	System.out.println();
+	/* An array is a group of variables
+	 * Elements of an array must be the same type
+	 * elements are accessed by an index
+	 * the first element is at the 0th index
+	 * find an array's size with arrayName.length
+	 */
 	
+	public static void main(String[] args) {
+		int[] nums= {9 , 5, 2, 10};
+		int[] n = new int[5];
+	//	n[10] = 7;
+	/*	int[] wrong  = new int[]; // in order to initialize
+	 * an array, we must either explicitly add its values
+	 * or specify the size we want to allocate to it
+	 */
+		
+		int length = nums.length;
+		
+		int[][] twoD = new int[4][4];
+		twoD[0][0]  = 0; 
+		twoD[0][1] = 1;
+		twoD[1][0] = 1;
+		
+		
+		for(int i= 0; i < twoD.length; i++) {
+			for(int j = 0; j < twoD[i].length; j++) {
+				System.out.print(twoD[i][j]);
+			}
+			System.out.println();
+		}
+		
+		Arrays.sort(nums);
+		System.out.println(Arrays.toString(nums));
+		
+		System.out.println(add());
+		System.out.println(add(1, 20958029, 34, 15));
+		System.out.println(add(10, 10, 3, 5, 7, 9));
 	}
-
-Arrays.sort(nums);
-System.out.println(Arrays.toString(nums));
+	
+	//var args
+	//can only have one per param list. and must be last param in list
+	static int add(int... nums) {
+		int sum = 0;
+		for(int n:nums) {
+			sum+=n;
+		}
+		return sum;
+	}
 }
-
-static int add(int...a nums) {
-	int sum = 0;
-	for (int n:nums) ( sum+=n);
-//	return a + b;
-
-}
-
-
