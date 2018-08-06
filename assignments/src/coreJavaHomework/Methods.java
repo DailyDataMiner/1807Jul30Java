@@ -1,0 +1,20 @@
+package coreJavaHomework;
+
+public class Methods {
+	
+	public int[] bubbleSort(int[] nums) {
+		int[] sorted = nums;
+		return sorted'
+		
+		
+	}
+	
+	public String reverseString(Strig str) {
+		return str;
+	}
+	
+	public int factorial(int n) {
+		return n;
+	}
+	
+}
