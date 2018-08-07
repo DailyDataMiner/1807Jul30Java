@@ -5,6 +5,10 @@ import java.util.Scanner;
 public class StartScreen implements Screen{
 	
 	private Screen previousScreen;
+	
+	public StartScreen() {
+		previousScreen = null;
+	}
 
 	public Screen getPreviousScreen() {
 		return previousScreen;

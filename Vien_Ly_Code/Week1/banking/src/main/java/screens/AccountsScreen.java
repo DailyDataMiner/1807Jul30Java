@@ -5,6 +5,10 @@ public class AccountsScreen implements Screen{
 	private Screen previousScreen;
 	private final String screenName = "Account Screen";
 	
+	public AccountsScreen() {
+		previousScreen = null;
+	}
+	
 	// display all accounts this user has
 	// select specific accounts to operate on (considering making a factory of all of the user's accounts)
 	// transfer funds between accounts

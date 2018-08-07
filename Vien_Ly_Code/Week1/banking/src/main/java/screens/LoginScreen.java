@@ -8,9 +8,15 @@ public class LoginScreen implements Screen {
 	private final String screenName = "Login Screen";
 	private Scanner scan = new Scanner(System.in);
 	
+	// consider having start screen be the default previous screen
+	public LoginScreen() {
+		previousScreen = null;
+	}
+	
 	public LoginScreen(Screen previous) {
 		this.previousScreen = previous;
 	}
+	
 
 	public Screen getPreviousScreen() {
 		return previousScreen;
