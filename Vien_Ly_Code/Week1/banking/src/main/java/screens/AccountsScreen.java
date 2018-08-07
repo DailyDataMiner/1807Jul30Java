@@ -14,6 +14,8 @@ public class AccountsScreen implements Screen{
 	// transfer funds between accounts
 	// logout logic (going back to StartScreen screen)
 	public Screen display() {
+		System.out.println("ACCOUNTS");
+		System.out.println();
 		// TODO Auto-generated method stub
 		return null;
 	}

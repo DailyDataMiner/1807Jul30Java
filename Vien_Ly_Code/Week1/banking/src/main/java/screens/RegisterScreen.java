@@ -46,7 +46,7 @@ public class RegisterScreen implements Screen {
 		System.out.println("Registration successful");
 		// cannot go back to register screen from login screen without logging out first
 		// null "previous screen" arg will route back to startscreen when needed
-		return new LoginScreen();
+		return new LoginScreen(new StartScreen());
 	}
 
 }
