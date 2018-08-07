@@ -1,7 +1,10 @@
 package screens;
 
+import models.Account;
+import models.User;
+
 public class AccountsScreen implements Screen{
-//	private User user;
+	private User user;
 	private Screen previousScreen;
 	private final String screenName = "Account Screen";
 	
@@ -15,6 +18,9 @@ public class AccountsScreen implements Screen{
 	// logout logic (going back to StartScreen screen)
 	public Screen display() {
 		System.out.println("ACCOUNTS");
+		for(Account acc : user.getAccounts()) {
+			System.out.println(acc);
+		}
 		System.out.println();
 		// TODO Auto-generated method stub
 		return null;
