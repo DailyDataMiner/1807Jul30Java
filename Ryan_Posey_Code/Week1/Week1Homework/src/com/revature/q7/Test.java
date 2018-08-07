@@ -7,16 +7,20 @@ import java.util.Comparator;
 public class Test{
 
 	public static void main(String[] args) {
+		// ArrayList of employees for comparison
 		ArrayList<Employee> emps = new ArrayList<Employee>();
 		emps.add(new Employee("Helen", "Development", 25));
 		emps.add(new Employee("Rob", "Accounting", 34));
 		emps.add(new Employee("Hiero", "Human Resources", 27));
 		
+		// Unsorted list
 		System.out.println("Unsorted");
 		for(int i = 0; i < emps.size(); i++) {
 			System.out.println(emps.get(i));
 		}
 		
+		
+		// Sort the list by name field
 		Collections.sort(emps, new sortByName());
 		
 		System.out.println("\nSorted by Name");
@@ -24,6 +28,8 @@ public class Test{
 			System.out.println(emps.get(i));
 		}
 		
+		
+		// Sort the list by department field
 		Collections.sort(emps, new sortByDepartment());
 		
 		System.out.println("\nSorted by Department");
@@ -31,6 +37,7 @@ public class Test{
 			System.out.println(emps.get(i));
 		}
 		
+		// Sort the list by age field
 		Collections.sort(emps, new sortByAge());
 		
 		System.out.println("\nSorted by Age");
@@ -40,6 +47,10 @@ public class Test{
 	}
 }
 
+
+// overridden sort methods to compare Employee fields
+
+// compares two employee names
 class sortByName implements Comparator<Employee> {
 
 	@Override
@@ -49,6 +60,7 @@ class sortByName implements Comparator<Employee> {
 	
 }
 
+// compares two employee departments
 class sortByDepartment implements Comparator<Employee> {
 
 	@Override
@@ -58,6 +70,7 @@ class sortByDepartment implements Comparator<Employee> {
 	
 }
 
+// compares two employee ages
 class sortByAge implements Comparator<Employee> {
 
 	@Override

@@ -1,5 +1,6 @@
 package com.revature.q11_1;
 
+// POJO containing two float variables 
 public class FloatClass {
 	private float f1;
 	private float f2;

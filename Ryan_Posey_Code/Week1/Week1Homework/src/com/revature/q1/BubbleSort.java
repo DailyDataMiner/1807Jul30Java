@@ -16,16 +16,20 @@ public class BubbleSort {
 	}
 
 	public static void main(String[] args) {
+		// initialize array
 		int[] testNums = {1,0,5,6,3,2,3,7,9,8,4};
 		
+		//print array to console
 		System.out.print("[ ");
 		for(int i = 0; i < testNums.length; i++) {
 			System.out.print(testNums[i] + " ");
 		}
 		System.out.println("]");
 		
+		//sort the array
 		sort(testNums);
 		
+		//print sorted array
 		System.out.print("[ ");
 		for(int i = 0; i < testNums.length; i++) {
 			System.out.print(testNums[i] + " ");

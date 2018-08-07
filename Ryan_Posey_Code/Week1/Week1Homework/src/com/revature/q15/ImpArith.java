@@ -1,5 +1,6 @@
 package com.revature.q15;
 
+// class that implements the Arithmetic interface, overriding the methods defined
 public class ImpArith implements Arithmetic {
 
 	@Override

@@ -1,5 +1,7 @@
 package com.revature.q7;
 
+
+// POJO for an employee
 public class Employee {
 	private String name;
 	private String department;
