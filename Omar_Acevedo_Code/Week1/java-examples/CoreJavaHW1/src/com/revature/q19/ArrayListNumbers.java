@@ -21,6 +21,8 @@ public class ArrayListNumbers extends HelperFunctions {
 		for ( int i = 1; i <= 10; i++ ) {
 			intArr.add(i);
 		}
+		int[] p = {9};
+		print(p.length);
 		
 //		println(intArr.iterator());
 		

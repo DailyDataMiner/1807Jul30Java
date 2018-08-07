@@ -17,11 +17,17 @@ public class DetermineEvenIntNoMod extends HelperFunctions {
 		print("Enter an integer: ");
 		int n = scan.nextInt();		
 		
-		if ( ( (n / 2) * 2 ) == n ) {
-			print(n + " is an even number.");
-		} else 
-			print(n + " is an odd number.");
+//		if ( ( (n / 2) * 2 ) == n ) {
+//			print(n + " is an even number.");
+//		} else 
+//			print(n + " is an odd number.");
 		
+		println( ( evenNumber(n) ) ? n + " is an even number." : n + " is an odd number." );
+		
+	}
+	
+	public static boolean evenNumber(int n) {
+		return ( ( (n / 2) * 2 ) == n );
 	}
 
 }

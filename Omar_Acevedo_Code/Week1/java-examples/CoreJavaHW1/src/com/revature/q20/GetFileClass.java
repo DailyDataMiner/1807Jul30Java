@@ -25,6 +25,7 @@ import com.revature.helpers.HelperFunctions;
 	Age: 35 years
 	State: Arizona State
  * */
+
 public class GetFileClass extends HelperFunctions {
 	
 	public static void main(String[] args) {
