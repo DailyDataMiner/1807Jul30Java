@@ -19,38 +19,7 @@ import java.util.HashMap;
 
 public class ConcreteSubClass_Abstract extends SuperClass {
 
-//	public static void main(String[] args) {
-//		
-////		Create instance of this same class to use function defined in it.
-////		Without an instnace I'd need to make every function as static to access them directly.
-//		ConcreteSubClass_Abstract thisClass = new ConcreteSubClass_Abstract();
-//
-//		
-////		Input string
-//		String myStr = "Omar Acevedo";
-//
-//		
-//		if (thisClass.checkForUppercase(myStr).get(myStr)) {
-//
-///*	 	1. 	Check for uppercase characters in a string, and return ‘true’ or ‘false’ depending
-// 			if any are found. 																	*/
-//			String strToConvert = thisClass.checkForUppercase(myStr).keySet().toArray()[0].toString();
-//			println("Input string to convert -> " + strToConvert + " has uppercase characters.");
-//
-//
-///*		2. 	Convert all of the lower case characters to uppercase in the input string, and
-//			return the result.																	*/
-//			strToConvert = thisClass.lowerToUpper(strToConvert);
-//			
-//			
-///*		3. 	Convert the input string to integer and add 10, output the result to the console.	*/
-//			thisClass.convertAndShow(strToConvert);
-//			
-//		}	// If End
-//	
-//	}	// Main End
-	
-	
+
 /*	Start of method definitions/implementations (overriding) from superclass.	*/
 	@Override
 	HashMap<String, Boolean> checkForUppercase(String p_str) {
