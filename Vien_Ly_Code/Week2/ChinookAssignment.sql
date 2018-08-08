@@ -2,7 +2,7 @@
 Vien Ly Week 2 Assignment
 */
 
--- 1. SELECT
+-- 2.1 SELECT
 SELECT *
 FROM EMPLOYEE;
 
@@ -14,4 +14,150 @@ SELECT *
 FROM EMPLOYEE
 WHERE FIRSTNAME = 'Andrew' AND REPORTSTO IS NULL;
 
--- 2. ORDER BY
+-- 2.2 ORDER BY
+-- Task – Select all albums in Album table and sort result set in descending order by title.
+SELECT *
+FROM ALBUM
+ORDER BY TITLE;
+
+-- Task – Select first name from Customer and sort result set in ascending order by city
+SELECT CITY, FIRSTNAME
+FROM CUSTOMER
+ORDER BY CITY ASC;
+
+-- 2.3 INSERT INTO
+-- Task – Insert two new records into Genre table
+INSERT INTO GENRE (GENREID, NAME)
+VALUES (26, 'Space Funk');
+  
+INSERT INTO GENRE (GENREID, NAME) 
+VALUES (27, 'Underground Cartoon Bubble Pop');
+
+SELECT * FROM GENRE ORDER BY GENREID;
+
+-- Task – Insert two new records into Employee table
+INSERT INTO EMPLOYEE (EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES (9, 'Brown', 'Black', 'IT Staff', 7, '02-MAY-92', '02-AUG-15', '1231 Dummy St', 'London', 'MD', 'Thailand', 1221, '+100 (299) 231-7777', '+100 (299) 231-7777', 'dummydude@hotmail.com');
+
+INSERT INTO EMPLOYEE (EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+VALUES (10, 'Red', 'Green', 'Sales Manager', 7, '02-SEP-91', '21-MAY-18', '1231 Madeup Ave', 'Leicester', 'CA', 'Iceland', 12, '+12 (211) 231-2227', '+12 (211) 231-2227', 'REDGUY@GMAIL.com');
+
+SELECT * FROM EMPLOYEE;
+
+-- Task – Insert two new records into Customer table
+INSERT INTO CUSTOMER (CUSTOMERID, FIRSTNAME, LASTNAME, EMAIL)
+VALUES (60, 'IM', 'LAZY', 'whatever@gmail.com');
+
+INSERT INTO CUSTOMER (CUSTOMERID, FIRSTNAME, LASTNAME, CITY, EMAIL)
+VALUES (61, 'HELLO', 'WORLD', 'SEATTLE', 'hellohello@aol.com');
+
+SELECT * FROM CUSTOMER;
+
+-- 2.4 UPDATE
+-- Task – Update Aaron Mitchell in Customer table to Robert Walter
+SELECT * FROM CUSTOMER WHERE FIRSTNAME = 'Aaron';
+
+UPDATE CUSTOMER
+SET FIRSTNAME = 'Robert', LASTNAME = 'Walter'
+WHERE CUSTOMERID = 32;
+
+SELECT * FROM CUSTOMER WHERE CUSTOMERID = 32;
+
+-- Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
+UPDATE ARTIST
+SET NAME = 'CCR'
+WHERE NAME = 'Creedence Clearwater Revival';
+
+SELECT * FROM ARTIST WHERE NAME = 'CCR';
+
+-- 2.5 LIKE
+-- Task – Select all invoices with a billing address like “T%”
+SELECT *
+FROM INVOICE
+WHERE BILLINGADDRESS LIKE 'T%';
+
+-- 2.6 BETWEEN
+-- Task – Select all invoices that have a total between 15 and 50
+SELECT *
+FROM INVOICE
+WHERE TOTAL BETWEEN 15 AND 50;
+
+-- Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
+SELECT *
+FROM EMPLOYEE
+WHERE HIREDATE BETWEEN '01-JUN-03' AND '01-MAR-04';
+
+-- 2.7 DELETE
+-- Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
+ALTER TABLE INVOICE
+DROP CONSTRAINT FK_INVOICECUSTOMERID;
+
+DELETE
+FROM CUSTOMER
+WHERE FIRSTNAME = 'Robert'
+AND LASTNAME = 'Walter';
+
+SELECT *
+FROM CUSTOMER
+WHERE CUSTOMERID = 32;
+
+-- 7.0 JOINS
+-- 7.1 INNER JOIN – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+SELECT C.FIRSTNAME, C.LASTNAME, I.INVOICEID
+FROM CUSTOMER C
+JOIN INVOICE I
+ON C.CUSTOMERID = I.CUSTOMERID;
+
+-- 7.2 OUTER - Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total
+SELECT C.CUSTOMERID AS CUSTOMERID,
+        C.FIRSTNAME AS FIRSTNAME,
+        C.LASTNAME AS LASTNAME,
+        I.INVOICEID AS INVOICEID,
+        I.TOTAL AS TOTAL
+FROM CUSTOMER C
+FULL OUTER JOIN INVOICE I
+ON C.CUSTOMERID = I.CUSTOMERID
+ORDER BY C.CUSTOMERID;
+
+-- 7.3 RIGHT - Create a right join that joins album and artist specifying artist name and title
+SELECT AR.NAME AS ARTIST, AL.TITLE AS ALBUM
+FROM ALBUM AL
+RIGHT JOIN ARTIST AR
+ON AL.ARTISTID = AR.ARTISTID
+ORDER BY AR.NAME;
+        
+-- 7.4 CROSS - Create a cross join that joins album and artist and sorts by artist name in ascending order
+SELECT AR.NAME AS ARTIST, AL.TITLE AS ALBUM
+FROM ALBUM AL
+CROSS JOIN ARTIST AR
+ORDER BY AR.NAME;
+
+-- 7.5 SELF - Perform a self-join on the employee table, joining on the reportsto column
+SELECT E1.LASTNAME, E2.LASTNAME
+FROM EMPLOYEE E1
+JOIN EMPLOYEE E2
+ON E1.EMPLOYEEID = E2.REPORTSTO;
+
+-- 7.6 COMPLICATED JOIN
+SELECT ARTIST.NAME AS ARTISTNAME, 
+        ALBUM.TITLE AS ALBUMTITLE, 
+        TRACK.NAME AS TRACKNAME,
+        GENRE.NAME AS GENRE,
+        PLAYLIST.NAME AS PLAYLIST,
+        INVOICELINE.UNITPRICE AS PRICE,
+        INVOICE.TOTAL AS TOTAL,
+        CUSTOMER.COUNTRY AS COUNTRY,
+        EMPLOYEE.STATE AS STATE,
+        MEDIATYPE.NAME AS MEDIA
+FROM TRACK
+JOIN MEDIATYPE ON TRACK.MEDIATYPEid = MEDIATYPE.MEDIATYPEID
+JOIN INVOICELINE ON TRACK.TRACKID = INVOICELINE.TRACKID
+JOIN INVOICE ON INVOICELINE.INVOICEID = INVOICE.INVOICEID
+JOIN CUSTOMER ON INVOICE.BILLINGCOUNTRY = CUSTOMER.COUNTRY
+JOIN EMPLOYEE ON CUSTOMER.STATE = EMPLOYEE.STATE
+JOIN GENRE ON TRACK.GENREID = GENRE.GENREID
+JOIN PLAYLISTTRACK ON TRACK.TRACKID = PLAYLISTTRACK.TRACKID
+JOIN PLAYLIST ON PLAYLISTTRACK.PLAYLISTID = PLAYLIST.PLAYLISTID
+JOIN ALBUM ON TRACK.ALBUMID = ALBUM.ALBUMID
+JOIN ARTIST ON ALBUM.ARTISTID = ARTIST.ARTISTID
+ORDER BY ARTIST.ARTISTID;
