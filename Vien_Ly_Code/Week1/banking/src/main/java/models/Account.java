@@ -8,6 +8,12 @@ public class Account {
 	private int accountNo;
 	private double balance;
 	
+	public Account(User owner, double balance) {
+		this.owner = owner;
+		this.accountNo = idGenerator.incrementAndGet();
+		this.balance = balance;
+	}
+	
 	public User getOwner() {
 		return owner;
 	}
@@ -29,12 +35,6 @@ public class Account {
 	}
 
 	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-
-	public Account(User owner, double balance) {
-		this.owner = owner;
-		this.accountNo = idGenerator.incrementAndGet();
 		this.balance = balance;
 	}
 

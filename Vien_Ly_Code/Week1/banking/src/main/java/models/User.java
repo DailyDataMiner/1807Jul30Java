@@ -5,7 +5,7 @@ import java.util.List;
 public class User {
 	private String username;
 	private String password;
-	List<Account> accounts;
+	private List<Account> accounts;
 	
 	public User(String username, String password) {
 		super();

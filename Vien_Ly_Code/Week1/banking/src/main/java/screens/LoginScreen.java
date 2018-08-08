@@ -41,7 +41,8 @@ public class LoginScreen implements Screen {
 		
 		System.out.println("No such user");
 		System.out.println("1 to retry authentication");
-		System.out.println("0 to cancel and go back to " + this.previousScreen.getScreenName());		
+		System.out.println("0 to cancel and go back to " + this.previousScreen.getScreenName());
+		System.out.println("2 to test account screen");
 		int userInput = Integer.parseInt(scan.nextLine());
 				
 		switch(userInput) {
@@ -51,6 +52,9 @@ public class LoginScreen implements Screen {
 		
 		case 1:
 			return this;
+			
+		case 2:
+			return new AccountsScreen(this);
 			
 		default:
 			System.out.println("Invalid Input");
