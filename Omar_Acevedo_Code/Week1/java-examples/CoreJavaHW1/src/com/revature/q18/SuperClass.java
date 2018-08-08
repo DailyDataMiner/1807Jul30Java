@@ -1,10 +1,14 @@
 package com.revature.q18;
+import java.util.HashMap;
+
 import com.revature.helpers.HelperFunctions;
 
 public abstract class SuperClass extends HelperFunctions {
 	
-	abstract boolean checkForUppercase(String p_str);
+	abstract HashMap<String, Boolean> checkForUppercase(String p_str);
 	
-	abstract void m2();
-	abstract void m3();
+	abstract String lowerToUpper(String strToConvert);
+	
+	abstract void convertAndShow(String strToConvert);
+
 }
