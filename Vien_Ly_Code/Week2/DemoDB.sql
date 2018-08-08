@@ -39,22 +39,21 @@ CREATE TABLE Book_Author
 CREATE SEQUENCE book_seq;
 
 -- This is what happens behind the scenes when a sequence is generated with all default params
-   CREATE SEQUENCE  "DEMO1807JUL30JAVA"."BOOK_SEQ" 
+/*   CREATE SEQUENCE  "DEMO1807JUL30JAVA"."BOOK_SEQ" 
    MINVALUE 1 
    MAXVALUE 9999999999999999999999999999 
    INCREMENT BY 1 
    START WITH 1 
    CACHE 20 NOORDER  NOCYCLE  NOPARTITION ;
+   */
 
-DROP SEQUENCE a;
-
-CREATE sequence genre_seq;
+CREATE SEQUENCE genre_seq;
 
 CREATE SEQUENCE author_seq
 minvalue 1
-start with 5
-increment by 5
-cache 5; -- how many values will be stored in memory for faster access
+start with 1
+increment by 1
+cache 20; -- how many values will be stored in memory for faster access
 
 ------------- TRIGGERS
 CREATE OR REPLACE TRIGGER b_seq_trig -- declare and name trigger
@@ -74,6 +73,7 @@ begin
 end;
 /
 
+
 CREATE OR REPLACE TRIGGER g_seq_trig 
 before insert on genre
 for each row 
@@ -88,12 +88,7 @@ select SYSDATE from DUAL;
 
 
 --------------------------------------------- DML Stuff ...
-
 select * from genre;
-insert into genre (name) values('Action');
-delete from genre where name = 'history';
-
-
-
-
-
+insert into genre (name) values('history');
+insert into genre (name) values('comedy');
+-- delete from genre where name = 'history';

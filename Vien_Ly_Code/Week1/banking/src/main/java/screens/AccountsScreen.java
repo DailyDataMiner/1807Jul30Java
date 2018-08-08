@@ -2,8 +2,8 @@ package screens;
 
 import java.util.Scanner;
 
-import models.Account;
-import models.User;
+import beans.Account;
+import beans.User;
 
 public class AccountsScreen implements Screen{
 	private User user;

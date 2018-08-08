@@ -1,4 +1,4 @@
-import models.Account;
+import beans.Account;
 import screens.Screen;
 import screens.StartScreen;
 
