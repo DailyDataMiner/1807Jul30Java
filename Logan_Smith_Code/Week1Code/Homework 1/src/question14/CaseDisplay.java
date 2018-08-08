@@ -3,16 +3,17 @@
 
 package question14;
 
-import java.sql.Date;
+import java.util.ArrayList;
 
 public class CaseDisplay {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 		CaseDisplay cd = new CaseDisplay(); // instance to access functions
 		
 		cd.caseBased(3, 5); // first int changes case, second int to be rooted
+		
 	}
 	
 	// Function which changes cases depending on input

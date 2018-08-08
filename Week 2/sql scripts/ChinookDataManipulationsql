@@ -1,0 +1,182 @@
+/*
+DATA MANIPULATION LANGUAGE
+*/
+
+select max(artistid) from artist;
+
+insert into artist (artistid, name)
+values(276, 'Purity Ring');
+
+delete from artist where artistid = 276;
+
+delete from artist where artistid BETWEEN 1 AND 10;
+
+delete from artist where artistid = 276;
+
+update artist
+set name = 'Tool'
+where artistid = '276';
+
+rollback;
+
+savepoint SPI;
+
+--TCL intro
+commit;
+--Always commit upon successful db transactions
+
+SELECT * FROM artist;
+-- comment
+
+select name from artist where name like 'A%e';
+select * from artist where name like 'A_a%';
+select * from artist where upper(name) like 'A%M%';
+
+/*
+Scalar function: Functions that operate on single values (upper, length)
+Aggregate function: Functions that operate on multiple rows of data (max, count)
+*/
+
+select count(name) from artist;
+select max(milliseconds) from track;
+select avg(total) from invoice where invoiceid < 10;
+
+/*
+Nested Queries:
+queries inside of queries, also called subqueries
+used for various types of dynamic queries 
+-- IN 
+*/
+
+select * from artist;
+select * from album;
+select artistid from artist where name = 'Foo Fighters';
+select * from album where artistid = 84;
+select * from album where artistid IN (select artistid from artist where name like 'F%');
+
+select count(customerid), company 
+from customer 
+group by company
+order by company ASC;
+
+select * from track;
+
+/*
+Set Operations: used to combine result sets and see overlap of data must have the same # and types of columns
+UNION = or statement. returns all unique rows for both queries
+UNION ALL = or statment v2. returns all rows for both queries, includes duplicates
+INTERSECT = and statement. returns rows that are in both queries
+MINUS = all rows that are in first query and not in second query
+*/
+
+select * from customer where firstname like 'L%';
+select * from customer where country = 'Brazil';
+
+select * from customer where firstname like 'L%' MINUS
+select * from customer where country = 'Brazil';
+
+/*
+JOINS:
+Inner Join: 
+*/ 
+
+select t.name as trackname, al.title
+from track t
+join album al
+on t.ALBUMID = al.ALBUMID;
+
+-- Self referencing
+select * from employee;
+select e1.lastname as "Manager", e2.lastname as "Employee"
+from employee e1
+right join employee e2
+on e1.EMPLOYEEID = e2.REPORTSTO;
+
+-- Self referencing
+select * from employee;
+select e1.lastname as "Manager", e2.lastname as "Employee"
+from employee e1
+full join employee e2
+on e1.EMPLOYEEID = e2.REPORTSTO;
+
+-- Self referencing
+select * from employee;
+select e1.lastname as "Manager", e2.lastname as "Employee"
+from employee e1
+left join employee e2
+on e1.EMPLOYEEID = e2.REPORTSTO;
+
+-- Self referencing
+select * from employee;
+select e1.lastname as "Manager", e2.lastname as "Employee"
+from employee e1
+full join employee e2
+on e1.EMPLOYEEID = e2.REPORTSTO
+where e1.employeeid IS null;
+
+-- Self referencing
+select * from employee;
+select e1.lastname as "Manager", e2.lastname as "Employee"
+from employee e1
+full join employee e2
+on e1.EMPLOYEEID = e2.REPORTSTO
+where e2.employeeid IS null;
+
+--Cartesian Join: cartesion product of two tables
+select e1.lastname as MANAGER, e2.lastname as EMPLOYEE
+from employee e1, employee e2;
+
+--Natural Join: where Oracle attempts to match columns based on names
+select album.title, artist.name 
+from album
+inner join artist
+on album.artistid = artist.artistid;
+
+select * from artist natural join album;
+
+select * from genre;
+select * from track;
+
+select g.name as "Genre Name", count(t.trackid) as "# Tracks"
+from track t
+join genre g
+on g.genreid = t.genreid
+group by g.name
+order by g.name ASC;
+
+create view Al_Art_View as
+select album.albumid, artist.artistid, artist.name
+from album
+join artist
+on album.artistid = artist.artistid;
+
+select * from al_art_view;
+
+--Write a statement that joins all 11 tables in chinook DB and select one column from each table
+
+select * from genre;
+select * from invoiceline;
+select * from track;
+
+select t.name as "Track Name", al.title as "Album Title", ar.name as "Artist Name", plt.playlistid as "PlaylistID", pl.name as "Playlist Name", g.name as "Genre", m.name as "Mediatype", ivl.unitprice as "Unit Price", iv.invoicedate as "Invoice Date", c.lastname as "Customer", em.lastname as "Employee"
+from invoiceline ivl
+join track t
+on ivl.trackid = t.trackid
+join album al
+on t.albumid = al.albumid
+join artist ar
+on al.artistid = ar.artistid
+join playlisttrack plt
+on t.trackid = plt.trackid
+join playlist pl
+on pl.playlistid = plt.playlistid
+join genre g
+on t.genreid = g.genreid
+join mediatype m
+on m.mediatypeid = t.mediatypeid
+join invoice iv
+on iv.invoiceid = ivl.invoiceid
+join customer c
+on iv.customerid = c.customerid
+join employee em
+on em.employeeid = c.customerid;

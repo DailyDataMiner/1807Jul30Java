@@ -12,6 +12,7 @@ public class StringReverse {
 		String pug = "Pugs are great!"; // String to reverse
 		pug = sr.reverser(pug); // reverses string
 		System.out.println(pug);
+		System.out.println(1/2);
 		
 	}
 	

@@ -1,0 +1,159 @@
+/* 
+Logan Smith's Homework for Week 2
+*/
+
+
+
+-------2.1 Select
+--Task: Select all records from the Employee table
+select * from Employee;
+
+--Task: Select all records from the Emplyee table where last name is KIng.
+select * from Employee where lastname = 'King';
+
+--Task – Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL.
+select * from Employee 
+where FirstName = 'Andrew' and REPORTSTO is null;
+
+------2.2 Order By
+--Task – Select all albums in Album table and sort result set in descending order by title.
+select * from Album
+order by title DESC;
+--Task – Select first name from Customer and sort result set in ascending order by city
+select firstname from Customer
+order by firstname asc;
+
+-----2.3 Insert Into
+--Task – Insert two new records into Genre table
+insert into Genre
+(GENREID, NAME)
+values (26, 'Indie Pop');
+
+insert into Genre
+(GENREID, NAME)
+values (27, 'Art Rock');
+
+--Task – Insert two new records into Employee table
+insert into employee
+(EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+values(9, 'Logan', 'Smith', 'Music Tester', 1, '19-JUN-96', '7-AUG-18', '1905 SW 35th ST', 'Redmond', 'OR', 'USA', '97756', '+1 (541) 604-9696', 'Who uses fax?', 'lorgansmith@gmail.com');
+
+insert into employee
+(EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+values(10, 'Brian', 'Bottini', 'Maid', 1, '18-AUG-95', '7-AUG-18', '8216 NE -35th ST', 'Lalaland', 'CA', 'USA', '64763', '+1 (101) 101-1100', 'Who uses fax?', 'megadoom@gmail.com');
+
+--Task – Insert two new records into Customer table
+select * from customer;
+insert into customer
+(CUSTOMERID, FIRSTNAME, lastname, company, address, country, postalcode, phone, email)
+values(60, 'Mario', 'Mario', 'Nintendo', '119 Peaches Castle', 'Mushroom Kingdom', 'World 1', 'BZZT BZZT', 'ogmario@gmail.com');
+
+insert into customer
+(CUSTOMERID, FIRSTNAME, lastname, company, address, city, state, country, postalcode, phone, email)
+values(61, 'Samus', 'Aran', 'Bounty Hunters United', '000 Space', 'Kuiper Belt', 'SP', 'Federation Against Metroids', '59-99', '(203) 582-8527', 'stunstyle@gmail.com');
+
+------2.4 Update
+--Task – Update Aaron Mitchell in Customer table to Robert Walter
+update customer
+set firstname = 'Robert', lastname = 'Walter'
+where firstname = 'Aaron' AND lastname = 'Mitchell';
+
+--Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
+update artist
+set NAME = 'CCR'
+where NAME = 'Creedence Clearwater Revival';
+
+------2.5 Like
+--Task – Select all invoices with a billing address like “T%”
+select * from invoice
+where billingaddress like 'T%';
+
+-----2.6 Between
+--Task – Select all invoices that have a total between 15 and 50
+select * from invoice
+where TOTAL between 15 and 50;
+
+--Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
+select * from employee
+where HIREDATE between '01-JUN-03' and '01-MAR-04';
+
+-----2.7 Delete
+--Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
+--Drops invoice constraint on customerid;
+alter table invoice
+drop constraint FK_INVOICECUSTOMERID;
+--Drops invoiceline constraint on invoiceid;
+alter table invoiceline
+drop constraint FK_INVOICELINEINVOICEID;
+--Add the invoice constraint on customer id, but with 'on delete cascade'
+alter table invoice
+add constraint fk_invoice_update
+foreign key (customerid)
+references customer (customerid)
+on delete cascade;
+--Add the invoiceline constraint on invoice id, but with 'on delete cascade'
+alter table invoiceline
+add constraint fk_invoiceline_update
+foreign key (invoiceid)
+references invoice (invoiceid)
+on delete cascade;
+--Delete the customer safely
+delete from customer
+where firstname = 'Robert' and lastname = 'Walter';
+
+-----7.1 Inner
+--Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+select c.FIRSTNAME, c.lastname, i.invoiceid
+from customer c
+join invoice i
+on c.customerid = i.invoiceid;
+
+-----7.2 Outer
+--Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total.
+select c.customerid, c.FIRSTNAME, c.lastname, i.invoiceid, i.total
+from customer c
+full join invoice i
+on c.customerid = i.invoiceid;
+
+-----7.3 Right
+--Task – Create a right join that joins album and artist specifying artist name and title
+select ar.name, al.title
+from artist ar
+right join album al
+on al.ALBUMID = ar.ARTISTID;
+
+-----7.4 Cross
+--Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+select * from artist a cross join album al
+order by a.NAME ASC;
+
+-----7.5 Self
+--Task – Perform a self-join on the employee table, joining on the reportsto column.
+select * from employee e1
+join employee e2
+on e1.reportsto = e2.reportsto;
+
+-----7.6 Complicated Join Statement
+--Task: Create an inner join between all tables in the chinook database
+select t.name as "Track Name", al.title as "Album Title", ar.name as "Artist Name", plt.playlistid as "PlaylistID", pl.name as "Playlist Name", g.name as "Genre", m.name as "Mediatype", ivl.unitprice as "Unit Price", iv.invoicedate as "Invoice Date", c.lastname as "Customer", em.lastname as "Employee"
+from invoiceline ivl
+join track t
+on ivl.trackid = t.trackid
+join album al
+on t.albumid = al.albumid
+join artist ar
+on al.artistid = ar.artistid
+join playlisttrack plt
+on t.trackid = plt.trackid
+join playlist pl
+on pl.playlistid = plt.playlistid
+join genre g
+on t.genreid = g.genreid
+join mediatype m
+on m.mediatypeid = t.mediatypeid
+join invoice iv
+on iv.invoiceid = ivl.invoiceid
+join customer c
+on iv.customerid = c.customerid
+join employee em
+on em.employeeid = c.customerid;
