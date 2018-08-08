@@ -49,7 +49,74 @@ CREATE TABLE BOOK_AUTHOR
 
 --CONSTRAINT "PK_INVOICELINE" PRIMARY KEY ("INVOICELINEID")
 
-----------
+----------------------------------------------------------------------
+-- Create sequences --
+----------------------------------------------------------------------
+CREATE SEQUENCE  B_GENRE_SEQ
+    MINVALUE 1 
+    MAXVALUE 9999999999999999999999999999 
+    INCREMENT BY 1 
+    START WITH 1 
+    CACHE 20 
+    NOORDER  
+    NOCYCLE  
+    NOPARTITION;
 
+CREATE SEQUENCE B_AUTHOR_SEQ
+    MINVALUE 1 
+    MAXVALUE 9999999999999999999999999999 
+    INCREMENT BY 1 
+    START WITH 1 
+    CACHE 20     -- how many values will be stored in memory for faster
+    NOORDER  
+    NOCYCLE  
+    NOPARTITION;
 
+CREATE SEQUENCE  BOOK_SEQ  
+    MINVALUE 1 
+    MAXVALUE 9999999999999999999999999999 
+    INCREMENT BY 1 
+    START WITH 1 
+    CACHE 20 
+    NOORDER  
+    NOCYCLE  
+    NOPARTITION;
 
+/*
+CREATE SEQUENCE  BOOK_AUTHOR_SEQ  
+    MINVALUE 1 
+    MAXVALUE 9999999999999999999999999999 
+    INCREMENT BY 1 
+    START WITH 1 
+    CACHE 20 
+    NOORDER  
+    NOCYCLE  
+    NOPARTITION;
+*/
+
+----------------------------------------------------------------------
+-- Create triggers --
+----------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER BI_B_GENRE_SEQ_TRIG
+    BEFORE INSERT ON B_GENRE
+    FOR EACH ROW
+    BEGIN
+        SELECT B_GENRE_SEQ.NEXTVAL INTO :NEW.GENRE_ID FROM DUAL;
+    END;
+/
+
+CREATE OR REPLACE TRIGGER BI_B_AUTHOR_SEQ_TRIG
+    BEFORE INSERT ON B_AUTHOR
+    FOR EACH ROW
+    BEGIN
+        SELECT B_AUTHOR_SEQ.NEXTVAL INTO :NEW.AUTHOR_ID FROM DUAL;
+    END;
+/
+
+CREATE OR REPLACE TRIGGER BI_BOOK_SEQ_TRIG
+    BEFORE INSERT ON BOOK
+    FOR EACH ROW
+    BEGIN
+        SELECT BOOK_SEQ.NEXTVAL INTO :NEW.BOOK_ID FROM DUAL;
+    END;
+/
