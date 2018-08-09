@@ -14,12 +14,16 @@ public class bookDAO {
 	
 	public static void main(String[] args) {
 		
-		List<Book> books = findAllBooks();
-		for(Book b : books) {
-			System.out.println(b);
-		}
+		Book book = findOne("'The Two Towers'");
+		System.out.println(book);
+//		
+//		List<Book> books = findAllBooks();
+//		for(Book b : books) {
+//			System.out.println(b);
+//		}
 	}
 	
+	// unsafe, sql injection
 	public static List<Book> findAllBooks() {
 		List<Book> books = new ArrayList<Book>();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -44,5 +48,30 @@ public class bookDAO {
 		}
 		
 		return books;
+	}
+	
+	
+	public static Book findOne(String name) {
+		Book temp = null;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String query = "select * from book where title = " + name;
+			
+			//Statement interface
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()) {
+				// iterate through the result set
+				temp = new Book();
+				temp.setId(rs.getInt(1));
+				temp.setIsbn(rs.getString(2));
+				temp.setTitle(rs.getString(3));
+				temp.setPrice(rs.getDouble(4));				
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return temp;
 	}
 }

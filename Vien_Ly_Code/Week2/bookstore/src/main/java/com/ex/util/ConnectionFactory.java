@@ -24,7 +24,6 @@ public class ConnectionFactory {
 	
 	private ConnectionFactory() {
 		build = false;
-		
 	}
 	
 	public static synchronized ConnectionFactory getInstance() {

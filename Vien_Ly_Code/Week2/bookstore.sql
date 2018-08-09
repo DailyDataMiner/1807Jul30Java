@@ -111,7 +111,9 @@ INSERT INTO book_author (book_id, author_id) VALUES (
     (SELECT author_id FROM author WHERE last_name = 'Tolkien')
 );
 
-select * from book;
+select * from genre;
+
+commit;
 
 SELECT author.last_name, book.title
 FROM author
