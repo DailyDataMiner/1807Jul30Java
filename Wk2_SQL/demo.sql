@@ -1,0 +1,5 @@
+CREATE USER demo
+IDENTIFIED by demo; 
+
+GRANT CONNECT to demo;
+GRANT RESOURCE to demo;
