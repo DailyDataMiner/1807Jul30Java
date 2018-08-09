@@ -31,6 +31,13 @@ public class ConnectionFactory {
 		return cf;
 	}
 	
+	/*
+	 * Connection
+	 * - manages our connection to (session with) the database
+	 * - allows us to execute SQL statements and return results
+	 * - has informations about DB tables, stored procedures,
+	 * 	other details of the DB. Use getMetaData() method
+	 */
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();

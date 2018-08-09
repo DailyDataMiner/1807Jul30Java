@@ -1,0 +1,26 @@
+-- RUNNING ON CHINOOK
+
+create or replace procedure helloWorld
+as -- aka IS
+begin
+  dbms_output.put_line('hello database world');
+end;
+/
+
+execute helloWorld;
+
+-- function
+-- total number of artists
+create or replace function get_num_artists_
+return number
+is
+total number
+begin
+select count(*) into total from artist;
+return total;
+end;
+/
+
+select get_num_artists() from dual;
+
+select count(*) from artist;

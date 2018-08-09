@@ -2,21 +2,17 @@ package screens;
 
 import java.util.Scanner;
 
-import beans.Account;
-import beans.User;
+import dao.UserDAO;
 
 public class AccountsScreen implements Screen{
-	private User user;
+	private UserDAO userDAO;
 	private Screen previousScreen;
 	private final String screenName = "Account Screen";
 	Scanner scan = new Scanner(System.in);
 	
-	public AccountsScreen() {
-		previousScreen = null;
-	}
-	
-	public AccountsScreen(Screen previous) {
+	public AccountsScreen(Screen previous, UserDAO userDAO) {
 		this.previousScreen = previous;
+		this.userDAO = userDAO;
 	}
 	
 	public String getScreenName() {
@@ -73,6 +69,7 @@ public class AccountsScreen implements Screen{
 			
 		case 0:
 			System.out.println("logged out");
+//			this.user = null;
 			return new StartScreen();
 			
 		default:

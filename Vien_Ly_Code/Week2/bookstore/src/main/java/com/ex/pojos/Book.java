@@ -11,13 +11,21 @@ public class Book {
 		super();
 	}
 	
-	public Book(int id, String isbn, String title, double price) {
+	public Book(String isbn, String title, double price, int genreId) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.price = price;
+		this.genreId = genreId;
+	}
+	
+	public Book(int id, String isbn, String title, double price, int genreId) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
 		this.title = title;
 		this.price = price;
-		//this.genreId = genreId;
+		this.genreId = genreId;
 	}
 	
 	public int getId() {
