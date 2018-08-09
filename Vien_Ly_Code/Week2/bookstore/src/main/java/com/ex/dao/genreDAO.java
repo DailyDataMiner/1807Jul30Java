@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ex.pojos.Book;
 import com.ex.pojos.Genre;
 import com.ex.util.ConnectionFactory;
 

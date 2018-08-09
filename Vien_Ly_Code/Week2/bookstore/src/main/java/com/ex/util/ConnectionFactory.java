@@ -35,7 +35,7 @@ public class ConnectionFactory {
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
-		String path = "C:/Users/vienl/git_repos/1807Jul30Java/Vien_Ly_Code/Week2/bookstoreJDBC/src/main/resources/application.properties";
+		String path = "C:/Users/vienl/git_repos/1807Jul30Java/Vien_Ly_Code/Week2/bookstore/src/main/resources/application.properties";
 		try {
 			prop.load(new FileReader(path));
 			Class.forName(prop.getProperty("driver"));
