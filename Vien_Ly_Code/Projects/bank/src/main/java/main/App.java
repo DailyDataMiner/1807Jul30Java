@@ -145,6 +145,7 @@ public class App {
 			if (closing.getBalance() > 0) {
 				System.out.println("choose an account to transfer funds to or -1 to withdraw");
 				int input = Integer.parseInt(scan.nextLine());
+				System.out.println(input);
 				Account to = findInAccounts(input);
 				if (input > -1 && to != null) {
 					to.setBalance(to.getBalance() + closing.getBalance());

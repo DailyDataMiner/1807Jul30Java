@@ -65,8 +65,8 @@ CREATE OR REPLACE TRIGGER Closing_Account
 BEFORE DELETE ON Account
 FOR EACH ROW
 BEGIN
-  INSERT INTO ClosedAccount (CustomerId)
-  VALUES(:old.CustomerId);
+  INSERT INTO ClosedAccount (ClosedAccountId, CustomerId)
+  VALUES(:old.AccountId, :old.CustomerId);
 end;
 /
 
@@ -103,6 +103,9 @@ END;
 /
 
 commit;
+
+select * from account;
+select * from closedaccount;
 
 /*select * from customer;  
 select * from account where customerid = 5;  
