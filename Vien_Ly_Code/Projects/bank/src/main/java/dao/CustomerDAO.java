@@ -1,12 +1,13 @@
 package dao;
 
+import java.awt.print.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
-import beans.Account;
 import beans.Customer;
 import utils.ConnectionFactory;
 
@@ -23,6 +24,26 @@ public class CustomerDAO implements DAO<Customer, Integer> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Customer findOne(String username) {
+		Customer c = new Customer();
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "SELECT * FROM Customer WHERE UserName = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet data = ps.executeQuery();
+			while(data.next()) {
+				c.setId(data.getInt(1));
+				c.setFirstName(data.getString(2));
+				c.setLastName(data.getString(3));
+				c.setUsername(data.getString(4));
+				c.setPasswordHash(data.getString(5));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
 
 	@Override
 	public Customer save(Customer usr) {
@@ -30,24 +51,15 @@ public class CustomerDAO implements DAO<Customer, Integer> {
 			// connections auto commit after tx is complete
 			// set false to do validations
 			conn.setAutoCommit(false);
-			String sql = "INSERT INTO Customer(FirstName, LastName, UserName, PwdHash) values(?, ?, ?, ?)";
+			String sql = "INSERT INTO Customer(FirstName, LastName, UserName, PwdHash) VALUES(?, ?, ?, ?)";
 			// code go get back auto generated PK
 			// can also retrieve other auto generated keys(date stamps etc)
 			String[] keys = {"CustomerId"};
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
 			ps.setString(1, usr.getFirstName());
-			System.out.println(usr.getFirstName());
-			
 			ps.setString(2, usr.getLastName());
-			System.out.println(usr.getLastName());
-
 			ps.setString(3, usr.getUsername());
-			System.out.println(usr.getUsername());
-
 			ps.setString(4, usr.getPasswordHash());
-			System.out.println(usr.getPasswordHash());
-
-			;
 			// update returns number of rows updated
 			// queries return result sets
 			int rowsUpdated = ps.executeUpdate();

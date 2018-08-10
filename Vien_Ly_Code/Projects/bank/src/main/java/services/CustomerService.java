@@ -10,4 +10,8 @@ public class CustomerService {
 	public Customer save(Customer acc) {
 		return custDAO.save(acc);
 	}
+	
+	public Customer findOne(String username) {
+		return ((CustomerDAO) custDAO).findOne(username);
+	}
 }

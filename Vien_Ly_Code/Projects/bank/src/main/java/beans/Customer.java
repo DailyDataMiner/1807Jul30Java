@@ -16,6 +16,8 @@ public class Customer implements Serializable {
 	private String passwordHash;
 	private List<Account> accounts;
 	
+	public Customer() {}
+	
 	public Customer(String username, String firstName, String lastName, String passwordHash) {
 		super();
 		this.username = username;
@@ -44,7 +46,7 @@ public class Customer implements Serializable {
 	public String getUsername() {
 		return username;
 	}
-	public void setusername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getFirstName() {
