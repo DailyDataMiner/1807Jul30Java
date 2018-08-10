@@ -1,0 +1,34 @@
+/*
+stuff about my name
+*/
+
+--2.1
+select * from employee;
+select * from employee where lastname = 'King';
+select * from employee where firstname = 'Andrew' and reportsto is null;
+select * from album order by title desc;
+select firstname from customer order by city;
+
+select max(genreid) from genre;
+insert into genre(GENREID, NAME) values (26, 'An Exiting New Genre!');
+insert into genre(GENREID, NAME) values (27, 'An Amazing Genre You Never Heard Of!');
+
+select * from genre order by genreid desc;
+
+select max(employeeid) from employee;
+insert into employee(employeeid, firstname, lastname, title, reportsto, birthdate, hiredate, address, city, state, country, postalcode, phone, fax, email) 
+values (9, 'Midnight', 'Chardonnay', 'IT Staff', '6', '09-JAN-68', '04-MAR-04', '923 7 ST NW', 'Lethbridge', 'AB', 'Canada', 'T1H 1Y8', '+1 (403) 467-3351', '+1 (403) 467-8772', 'midnight@chinookcorp.com');
+
+delete from employee where employeeid = 9;
+delete from employee where employeeid = 10;
+
+insert into employee(employeeid, firstname, lastname, title, reportsto, birthdate, hiredate, address, city, state, country, postalcode, phone, fax, email) 
+values (10, 'Dawn', 'Sauvignon', 'IT Staff', '6', '09-JAN-68', '04-MAR-04', '923 7 ST NW', 'Lethbridge', 'AB', 'Canada', 'T1H 1Y8', '+1 (403) 467-3351', '+1 (403) 467-8772', 'dawn@chinookcorp.com');
+
+select * from employee order by employeeid desc;
+
+
+
+
+
+

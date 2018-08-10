@@ -38,3 +38,62 @@ values(276, 'Beyonce');
 commit;
 
 
+select EMPLOYEE.LASTNAME, CUSTOMER.LASTNAME, invoice.total, invoiceline.unitprice, track.name, ALBUM.TITLE, ARTIST.NAME, playlist.name, playlisttrack.playlistid
+
+from employee
+
+full outer join customer 
+on employee.employeeid = customer.SUPPORTREPID 
+
+full outer join invoice
+on customer.customerid = invoice.CUSTOMERID
+
+full outer join invoiceline
+on invoice.INVOICEID = invoiceline.INVOICEID 
+
+full outer join track
+on invoiceline.TRACKID = track.TRACKID 
+
+full outer join genre
+on track.genreid = genre.GENREID
+
+full outer join mediatype
+on track.MEDIATYPEID = mediatype.GENREID
+
+full outer join album
+on track.ALBUMID = album.ALBUMID 
+
+full outer join artist
+on album.ARTISTID = artist.ARTISTID
+
+full outer join PLAYLISTTRACK 
+on track.TRACKID = PLAYLISTTRACK.TRACKID
+
+full outer join playlist 
+on playlist.PLAYLISTID = playlisttrack.PLAYLISTID;
+
+select playlist.name, playlisttrack.playlistid
+
+from playlist
+
+full outer join playlisttrack on playlist.PLAYLISTID = playlisttrack.PLAYLISTID;
+
+select name 
+from genre;
+
+select name 
+from MEDIATYPE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
