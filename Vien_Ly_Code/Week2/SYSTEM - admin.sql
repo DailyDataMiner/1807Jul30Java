@@ -12,6 +12,11 @@
    Drop database if it exists
 ********************************************************************************/
 DROP USER chinook CASCADE;
+DROP USER bankDB CASCADE;
+
+SELECT * FROM v$session s;
+ALTER SYSTEM KILL SESSION '138, 363';
+
 
 
 /*******************************************************************************

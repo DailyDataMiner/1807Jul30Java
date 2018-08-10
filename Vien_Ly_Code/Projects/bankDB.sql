@@ -21,7 +21,7 @@ CREATE TABLE Customer
   CustomerId NUMBER NOT NULL,
   FirstName VARCHAR2(20) NOT NULL,
   LastName VARCHAR2(20) NOT NULL,
-  UserName VARCHAR2(40) NOT NULL,
+  UserName VARCHAR2(40) UNIQUE NOT NULL,
   PwdHash VARCHAR2(128) NOT NULL,
   CONSTRAINT PK_CustomerId PRIMARY KEY (CustomerId)
 );
@@ -39,7 +39,6 @@ ALTER TABLE ClosedAccount ADD CONSTRAINT FK_ClosedAccountCustomerId
    Create Sequences
 ********************************************************************************/
 CREATE SEQUENCE account_seq;
-CREATE SEQUENCE closedaccount_seq;
 CREATE SEQUENCE customer_seq;
 
 CREATE OR REPLACE TRIGGER account_seq_trig
@@ -50,13 +49,6 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE TRIGGER closedaccount_seq_trig
-BEFORE INSERT ON ClosedAccount
-FOR EACH ROW
-BEGIN
-    SELECT closedaccount_seq.NEXTVAL INTO :NEW.ClosedAccountId FROM dual;
-END;
-/
 CREATE OR REPLACE TRIGGER customer_seq_trig
 BEFORE INSERT ON Customer
 FOR EACH ROW
@@ -112,9 +104,9 @@ END;
 
 commit;
 
-select * from customer;  
+/*select * from customer;  
 select * from account where customerid = 5;  
 
 variable rc REFCURSOR;
 exec Get_All_Customer_Account(:rc, 5);
-print rc;
+print rc;*/

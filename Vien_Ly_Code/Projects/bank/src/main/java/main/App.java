@@ -25,6 +25,7 @@ public class App {
 			}
 		}
 	}
+	
 	static void mainMenu() {
 		System.out.println("-999 end program");
 		System.out.println("1 new user");
@@ -33,10 +34,10 @@ public class App {
 		switch(option) {
 		case 1:
 			createNewCustomer();
+			
 			break;
 		case 2:
 			logIn();
-			System.out.println(currentCustomer);
 			break;
 		default:
 			break;
@@ -52,6 +53,7 @@ public class App {
 		System.out.println("6 to withdraw from an account");
 		System.out.println("7 to deposit to an account");
 		System.out.println("8 to transfer");
+		System.out.println("9 to close an account");
 		System.out.println("0 logout");
 		try {
 			option = Integer.parseInt(scan.nextLine());
@@ -78,6 +80,9 @@ public class App {
 				break;
 			case 8:
 				transfer();
+				break;
+			case 9:
+				delete();
 				break;
 			case 0:
 				logOut();
@@ -133,6 +138,25 @@ public class App {
 		return null;
 	}
 	
+	static void delete() {
+		System.out.println("account to be closed");
+		Account closing = findInAccounts(Integer.parseInt(scan.nextLine()));
+		if (closing != null) {
+			if (closing.getBalance() > 0) {
+				System.out.println("choose an account to transfer funds to or -1 to withdraw");
+				int input = Integer.parseInt(scan.nextLine());
+				Account to = findInAccounts(input);
+				if (input > -1 && to != null) {
+					to.setBalance(to.getBalance() + closing.getBalance());
+					accService.update(to);
+				}
+				accService.delete(closing);
+				currentCustomer.removeAccount(closing);
+				System.out.println(currentCustomer.getAccounts());
+			}
+		}
+	}
+	
 	static void transfer() {
 		System.out.println("from");
 		int fromId = Integer.parseInt(scan.nextLine());
@@ -140,8 +164,8 @@ public class App {
 		if (from != null) {
 			System.out.println("to");
 			int toId = Integer.parseInt(scan.nextLine());
-			Account to = findInAccounts(toId);
-			if (to != null) {
+			Account to = accService.findOne(toId);
+			if (!to.equals(from) && to != null) {
 				System.out.println("amount");
 				double amount = Double.parseDouble(scan.nextLine());
 				if (from.getBalance() < amount) {
@@ -153,6 +177,8 @@ public class App {
 					accService.update(to);
 					System.out.println(currentCustomer.getAccounts());
 				}
+			} else {
+				System.out.println("invalid destination account");
 			}
 		}
 		menu();
@@ -191,6 +217,10 @@ public class App {
 	static void createNewCustomer() {
 		System.out.println("username");
 		String username = scan.nextLine();
+		if (custService.findOne(username) != null) {
+			System.out.println("username already taken");
+			return;
+		}
 		System.out.println("first name");
 		String firstName = scan.nextLine();
 		System.out.println("last name");
@@ -206,10 +236,10 @@ public class App {
 		System.out.println("Login");
 		System.out.println("username");
 		String username = scan.nextLine();
-		System.out.println("password");
-		String userInputPwd = scan.nextLine();
 		Customer cust = custService.findOne(username);
-		if(cust.getId() > 0) {
+		if(cust != null) {
+			System.out.println("password");
+			String userInputPwd = scan.nextLine();
 			if(Password.validatePassword(userInputPwd, cust.getPasswordHash())) {
 				System.out.println("authenticated");
 				currentCustomer = cust;
@@ -219,6 +249,8 @@ public class App {
 				System.out.println("password does not match");
 				logIn();
 			}
+		} else {
+			System.out.println("no such user");
 		}
 	}
 	

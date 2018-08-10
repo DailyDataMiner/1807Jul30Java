@@ -21,6 +21,10 @@ public class Customer implements Serializable {
 		accounts.add(acc);
 	}
 	
+	public void removeAccount(Account acc) {
+		accounts.remove(acc);
+	}
+	
 	public Customer() {}
 	
 	public Customer(String username, String firstName, String lastName, String passwordHash) {

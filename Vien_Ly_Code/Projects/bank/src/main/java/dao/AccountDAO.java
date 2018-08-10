@@ -67,6 +67,7 @@ public class AccountDAO implements DAO<Account, Integer> {
 		return acc;
 	}
 
+	// Don't need for now, maybe will need if an admin user is implemented
 	@Override
 	public List<Account> findAll() {
 		// TODO Auto-generated method stub
@@ -75,13 +76,14 @@ public class AccountDAO implements DAO<Account, Integer> {
 
 	@Override
 	public Account findOne(Integer id) {
-		Account acc = new Account();
+		Account acc = null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "SELECT * FROM Account WHERE AccountId = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet data = ps.executeQuery();
 			if(data.next()) {
+				acc = new Account();
 				acc.setId(data.getInt(1));
 				acc.setBalance(data.getDouble(2));
 				acc.setCustomerId(data.getInt(3));
@@ -111,9 +113,14 @@ public class AccountDAO implements DAO<Account, Integer> {
 	}
 
 	@Override
-	public void delete(Account obj) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Account acc) {
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "DELETE FROM Account WHERE AccountId = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, acc.getId());
+			ps.executeUpdate();
+		}   catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
 }

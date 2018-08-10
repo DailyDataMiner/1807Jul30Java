@@ -24,4 +24,8 @@ public class AccountService {
 	public List<Account> findAllByCustomerId(int customerId) {
 		return ((AccountDAO)accDAO).findAllByCustomerId(customerId);
 	}
+	
+	public void delete(Account acc) {
+		accDAO.delete(acc);
+	}
 }

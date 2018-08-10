@@ -24,13 +24,14 @@ public class CustomerDAO implements DAO<Customer, Integer> {
 	}
 	
 	public Customer findOne(String username) {
-		Customer c = new Customer();
+		Customer c = null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "SELECT * FROM Customer WHERE UserName = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			ResultSet data = ps.executeQuery();
 			while(data.next()) {
+				c = new Customer();
 				c.setId(data.getInt(1));
 				c.setFirstName(data.getString(2));
 				c.setLastName(data.getString(3));
