@@ -10,7 +10,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public final class Password {
 	
-	public static void main (String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public static void main (String[] args) {
 		String pass = "dumbo";
 		String hash = getHash(pass);
 		System.out.println(hash);
@@ -24,15 +24,21 @@ public final class Password {
 	public static final String HASH_ALGORITHM = "PBKDF2WithHmacSHA1";
 	public static final String SALT_ALGORITHM = "SHA1PRNG";
 
-	private static final SecureRandom r = new SecureRandom();
-	
-	public static String getHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		char[] chars = password.toCharArray();
-		byte[] salt = getSalt();
-		PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATION_COUNT, KEY_LENGTH);
-		SecretKeyFactory skf = SecretKeyFactory.getInstance(HASH_ALGORITHM);
-		byte[] hash = skf.generateSecret(spec).getEncoded();
-		return ITERATION_COUNT + ":" + toHex(salt) + ":" + toHex(hash);
+	public static String getHash(String password) {
+		String hashedPassword = null;
+		try { 
+			char[] chars = password.toCharArray();
+			byte[] salt = getSalt();
+			PBEKeySpec spec = new PBEKeySpec(chars, salt, ITERATION_COUNT, KEY_LENGTH);
+			SecretKeyFactory skf = SecretKeyFactory.getInstance(HASH_ALGORITHM);
+			byte[] hash = skf.generateSecret(spec).getEncoded();
+			hashedPassword = ITERATION_COUNT + ":" + toHex(salt) + ":" + toHex(hash);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			e.printStackTrace();
+		}
+		return hashedPassword;
 	}
 	 
 	private static byte[] getSalt() throws NoSuchAlgorithmException {
@@ -55,21 +61,30 @@ public final class Password {
 	    }
 	}
 	
-	public static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		String[] parts = storedPassword.split(":");
-		int iterations = Integer.parseInt(parts[0]);
-		byte[] salt = fromHex(parts[1]);
-		byte[] hash = fromHex(parts[2]);
-		 
-		PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
-		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-		byte[] testHash = skf.generateSecret(spec).getEncoded();
-		 
-		int diff = hash.length ^ testHash.length;
-		for(int i = 0; i < hash.length && i < testHash.length; i++) {
-			diff |= hash[i] ^ testHash[i];
+	public static boolean validatePassword(String originalPassword, String storedPassword) {
+		boolean valid = false;
+		try { 
+			String[] parts = storedPassword.split(":");
+			
+			int iterations = Integer.parseInt(parts[0]);
+			byte[] salt = fromHex(parts[1]);
+			byte[] hash = fromHex(parts[2]);
+			 
+			PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
+			SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+			byte[] testHash = skf.generateSecret(spec).getEncoded();
+			 
+			int diff = hash.length ^ testHash.length;
+			for(int i = 0; i < hash.length && i < testHash.length; i++) {
+				diff |= hash[i] ^ testHash[i];
+			}
+			valid = (diff == 0);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			e.printStackTrace();
 		}
-		return diff == 0;
+		return valid;
 	}
 	
 	private static byte[] fromHex(String hex) throws NoSuchAlgorithmException {

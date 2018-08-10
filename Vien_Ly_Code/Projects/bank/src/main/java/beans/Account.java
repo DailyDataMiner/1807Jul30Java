@@ -9,11 +9,21 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = 5526181316678024397L;
 	private int id;
 	private double balance;
+	private int customerId;
 	
-	public Account(int id, double balance) {
+	public Account() {}
+	
+	public Account(double balance, int customerId) {
+		super();
+		this.balance = balance;
+		this.customerId = customerId;
+	}
+	
+	public Account(int id, double balance, int customerId) {
 		super();
 		this.id = id;
 		this.balance = balance;
+		this.customerId = customerId;
 	}
 	
 	public int getId() {
@@ -59,6 +69,14 @@ public class Account implements Serializable {
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", balance=" + balance + "]";
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 	
 }

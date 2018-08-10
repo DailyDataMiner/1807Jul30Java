@@ -65,3 +65,5 @@ END;
 /
 
 commit;
+
+select * from book;

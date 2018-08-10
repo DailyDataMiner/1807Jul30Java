@@ -66,6 +66,7 @@ public class App {
 		int genreid = Integer.parseInt(scan.nextLine());
 		Book b = new Book(isbn, title, price, genreid);
 		bService.save(b);
+		
 	}
 	
 	static void viewGenres() {

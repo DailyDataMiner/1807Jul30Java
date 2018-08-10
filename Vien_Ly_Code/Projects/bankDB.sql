@@ -82,6 +82,13 @@ end;
    Stored procedures
 ********************************************************************************/
 
+CREATE OR REPLACE PROCEDURE Get_All_Customer_Account(cp OUT SYS_REFCURSOR, custId NUMBER)
+IS
+BEGIN
+  OPEN cp FOR SELECT * FROM Account WHERE CustomerId = custId;
+END;
+/
+
 CREATE OR REPLACE PROCEDURE Get_All_Account(cp OUT SYS_REFCURSOR)
 IS
 BEGIN
@@ -104,4 +111,10 @@ END;
 /
 
 commit;
-  
+
+select * from customer;  
+select * from account where customerid = 5;  
+
+variable rc REFCURSOR;
+exec Get_All_Customer_Account(:rc, 5);
+print rc;

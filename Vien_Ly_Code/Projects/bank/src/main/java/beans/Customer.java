@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,11 @@ public class Customer implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String passwordHash;
-	private List<Account> accounts;
+	private List<Account> accounts = new ArrayList<Account>();
+	
+	public void addAccount(Account acc) {
+		accounts.add(acc);
+	}
 	
 	public Customer() {}
 	
