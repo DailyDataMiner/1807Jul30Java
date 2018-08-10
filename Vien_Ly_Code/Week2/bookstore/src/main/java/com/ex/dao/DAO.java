@@ -1,6 +1,9 @@
 package com.ex.dao;
 
 import java.util.List;
+
+import com.ex.pojos.Book;
+
 import java.io.Serializable;
 
 public interface DAO<T, I extends Serializable> {

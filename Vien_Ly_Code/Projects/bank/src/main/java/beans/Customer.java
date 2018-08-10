@@ -4,25 +4,35 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class User implements Serializable {
+public class Customer implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5582002563443132161L;
 	private int id;
 	private String username;
 	private String firstName;
 	private String lastName;
-	private byte[] passwordHash;
-	private byte[] passwordSalt;
+	private String passwordHash;
 	private List<Account> accounts;
 	
-	public User(int id, String username, String firstName, String lastName, byte[] passwordHash, byte[] passwordSalt,
-			List<Account> accounts) {
+	public Customer(String username, String firstName, String lastName, String passwordHash) {
+		super();
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.passwordHash = passwordHash;
+//		this.accounts = accounts;
+	}
+	
+	public Customer(int id, String username, String firstName, String lastName, String passwordHash) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.passwordHash = passwordHash;
-		this.passwordSalt = passwordSalt;
-		this.accounts = accounts;
+//		this.accounts = accounts;
 	}
 
 	public int getId() {
@@ -34,7 +44,7 @@ public class User implements Serializable {
 	public String getUsername() {
 		return username;
 	}
-	public void setUsername(String username) {
+	public void setusername(String username) {
 		this.username = username;
 	}
 	public String getFirstName() {
@@ -49,29 +59,17 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public byte[] getPasswordHash() {
+	public String getPasswordHash() {
 		return passwordHash;
 	}
-	public void setPasswordHash(byte[] passwordHash) {
+	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
-	}
-	public byte[] getPasswordSalt() {
-		return passwordSalt;
-	}
-	public void setPasswordSalt(byte[] passwordSalt) {
-		this.passwordSalt = passwordSalt;
 	}
 	public List<Account> getAccounts() {
 		return Collections.unmodifiableList(this.accounts);
 	}
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
-	}
-	
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
-				+ "]";
 	}
 	
 	@Override
@@ -90,9 +88,16 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Customer other = (Customer) obj;
 		if (id != other.id)
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+				+ "]";
+	}
+	
 }

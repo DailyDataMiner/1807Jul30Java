@@ -3,14 +3,16 @@ package beans;
 import java.io.Serializable;
 
 public class Account implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5526181316678024397L;
 	private int id;
-	private String accountTitle;
 	private double balance;
 	
-	public Account(int id, String accountTitle, double balance) {
+	public Account(int id, double balance) {
 		super();
 		this.id = id;
-		this.accountTitle = accountTitle;
 		this.balance = balance;
 	}
 	
@@ -20,12 +22,6 @@ public class Account implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getAccountTitle() {
-		return accountTitle;
-	}
-	public void setAccountTitle(String accountTitle) {
-		this.accountTitle = accountTitle;
-	}
 	public double getBalance() {
 		return balance;
 	}
@@ -33,14 +29,17 @@ public class Account implements Serializable {
 		this.balance = balance;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(balance);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + id;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -50,15 +49,16 @@ public class Account implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
+		if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
+			return false;
 		if (id != other.id)
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", accountTitle=" + accountTitle + ", balance=" + balance + "]";
+		return "Account [id=" + id + ", balance=" + balance + "]";
 	}
-	
 	
 }

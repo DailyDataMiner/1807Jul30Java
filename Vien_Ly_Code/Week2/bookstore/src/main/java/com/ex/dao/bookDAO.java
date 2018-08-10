@@ -58,8 +58,7 @@ public class bookDAO implements DAO<Book, Integer> {
 		return books;
 	}
 	
-	
-	public static Book findOne(String name) {
+	public Book findOne(String name) {
 		Book temp = null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String query = "select * from book where title = " + name;
@@ -83,7 +82,7 @@ public class bookDAO implements DAO<Book, Integer> {
 		return temp;
 	}
 	
-	
+	@Override
 	public Book save(Book b) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			// connections auto commit after tx is complete
