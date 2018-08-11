@@ -78,3 +78,204 @@ ON DELETE CASCADE;
 
 ALTER TABLE invoiceline
 DROP CONSTRAINT fk_invoicelineinvoiceid;
+
+
+
+
+-------------------------------------3.1 System Defined Functions 
+--Task – Create a function that returns the current time.
+CREATE OR REPLACE FUNCTION cur_time
+RETURN date is theDate date;
+
+BEGIN
+
+--Code
+SELECT sysdate
+  into theDate
+  from dual;
+
+return theDate;
+END;
+
+/
+--Task – create a function that returns the length of a mediatype from the mediatype table 
+CREATE OR REPLACE FUNCTION get_length(v varchar2)
+RETURN number IS len number(10);
+
+BEGIN
+
+len := LENGTH(v);
+return len;
+
+END;
+/
+
+------------------3.2 System Defined Aggregate Functions 
+--Task – Create a function that returns the average total of all invoices 
+CREATE OR REPLACE FUNCTION get_avg_total
+RETURN number IS av number(10,2);
+BEGIN
+ SELECT AVG(total) INTO av FROM invoice;
+return av;
+END;
+/
+
+SELECT get_avg_total FROM dual;
+
+
+--Task – Create a function that returns the most expensive track
+CREATE OR REPLACE FUNCTION get_expensive
+RETURN number IS ret number(10,2);
+BEGIN
+  SELECT MAX(unitprice) INTO ret FROM track;
+  return ret;
+END;
+/
+
+SELECT get_expensive FROM dual;
+
+--------------------------3.3 User Defined Functions
+--Task – Create a function that returns the average price of invoiceline items in the invoiceline table 
+CREATE OR REPLACE FUNCTION  get_invoiceline_price
+RETURN number is ret number(10,2);
+BEGIN 
+  SELECT AVG(track.unitprice) INTO ret
+  FROM invoiceline JOIN
+  track ON
+  track.trackid = invoiceline.trackid;
+  return ret;
+END;
+/
+
+SELECT get_invoiceline_price FROM dual;
+
+--------------------------3.4 User Defined Table Valued Functions 
+--Task – Create a function that returns all employees who are born after 1968. 
+
+CREATE OR REPLACE FUNCTION get_born2
+  RETURN SYS_REFCURSOR
+IS
+  l_rc SYS_REFCURSOR;
+BEGIN
+  OPEN l_rc
+   FOR SELECT *
+         FROM employee
+        WHERE birthdate > '31-DEC-68' ;
+  RETURN l_rc;
+END;
+/
+
+Select get_born2 from dual;
+
+--------------------------------4.1 Basic Stored Procedure 
+--Task – Create a stored procedure that selects the first and last names of all the employees. 
+CREATE OR REPLACE PROCEDURE getnames
+(c1 OUT SYS_REFCURSOR)
+AS 
+BEGIN
+  open c1 for
+  SELECT lastname,firstname FROM employee;
+END;
+/
+
+variable c1 refcursor;
+EXECUTE getnames(:c1);
+print c1;
+
+---------------------------------4.2 Stored Procedure Input Parameters 
+--Task – Create a stored procedure that updates the personal information of an employee. 
+
+CREATE OR REPLACE PROCEDURE updateE(s varchar2, intt number)
+is
+BEGIN
+UPDATE employee SET title = s WHERE employeeid = intt;
+END;
+/
+
+execute updateE('CEO', 1);
+
+--Task – Create a stored procedure that returns the managers of an employee. 
+
+------------------------------4.3 Stored Procedure Output Parameters 
+--Task – Create a stored procedure that returns the name and company of a customer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------7.1 INNER 
+--Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId. 
+SELECT customer.firstname, invoice.invoiceid FROM customer 
+INNER JOIN invoice
+ON customer.customerid = invoice.customerid;
+
+
+---------------------------------7.2 OUTER 
+--Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total.
+SELECT customer.customerid, customer.firstname, customer.lastname, invoice.invoiceid, invoice.total FROM customer
+OUTER LEFT JOIN invoice
+ON customer.customerid = invoice.customerid
+Order by customer.customerid;
+
+----------------------------------7.3 RIGHT 
+--Task – Create a right join that joins album and artist specifying artist name and title. 
+SELECT artist.name, album.title FROM artist
+RIGHT JOIN album
+on album.artistid = artist.artistid;
+
+
+-------------------------------------7.4 CROSS 
+--Task – Create a cross join that joins album and artist and sorts by artist name in ascending order. 
+SELECT * FROM album 
+CROSS JOIN artist
+ORDER BY artist.name ASC;
+
+
+
+--------------------------------------7.5 SELF 
+--Task – Perform a self-join on the employee table, joining on the reportsto column
+SELECT * FROM employee e1, employee e2 
+WHERE e1.REPORTSTO = e2.employeeid;
+
+
+
+
+
+-------------------------------------7.6 Complicated Join assignment
+--Create an inner join between all tables in the chinook database
+SELECT album.title as "Album Title", artist.name as "Artist Name", track.name as "Track Name", genre.name as "Genre Name",
+mediatype.name as "Media Type", playlisttrack.playlistid as "Playlist ID", playlist.name as "Playlist name", 
+invoiceline.invoiceid as "Invoice ID", invoice.total as "Invoice total", customer.firstname as "Customer Name", employee.firstname as "Employee Name" FROM album
+JOIN artist
+ON artist.artistid = album.artistid
+JOIN track 
+ON album.albumid = track.albumid
+JOIN genre
+ON track.genreid = genre.genreid
+JOIN mediatype
+ON track.mediatypeid = mediatype.mediatypeid
+JOIN playlisttrack
+ON playlisttrack.trackid = track.trackid
+JOIN playlist
+ON playlist.playlistid = playlisttrack.playlistid
+JOIN invoiceline
+ON invoiceline.trackid = track.trackid
+JOIN invoice
+ON invoiceline.invoiceid = invoice.invoiceid
+JOIN customer
+ON customer.customerid = invoice.customerid
+JOIN employee
+ON customer.supportrepid = employee.employeeid;
+
+------------------9.0 Administration In this section you will be creating backup files of your database. After you create the backup file you will also restore the database. 
+--Task – Create a .bak file for the Chinook database  

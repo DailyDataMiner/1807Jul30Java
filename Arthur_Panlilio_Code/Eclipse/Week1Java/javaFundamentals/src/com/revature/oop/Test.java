@@ -11,6 +11,13 @@ public class Test {
 		
 		Cat c = new Cat();
 		c.consume();
+		
+		System.out.println("--------------------");
+		Animal an =new Dog();
+		an.breathe();
+		System.out.println(an.className);
+		an.haha();
+		
 
 	}
 

@@ -8,8 +8,14 @@ public interface Livable {
 	void consume();
 	void excrete();
 	
+ String className ="live!";
+	
 	//Needs default keyword
 	default void stayinAlive() {
 		System.out.println("ha ha ha ha stayin aliiiiiiiiiiiiiiiiive");
+	}
+	
+	public static void achoo() {
+		System.out.println(className);
 	}
 }

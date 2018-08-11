@@ -10,10 +10,11 @@ public class Driver {
 	public static void main(String[] args) {
 		Student s = new Student("Patrick Walsh", "pjwalsh@revature.com", 85);
 		//System.out.println(s.toString());
-		
+		String a = "5" + 8;
+		System.out.println(a);
 		//dao.addStudent(s);
 		
-		viewStudents();
+		//viewStudents();
 	
 
 	}

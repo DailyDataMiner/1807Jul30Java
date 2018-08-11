@@ -20,5 +20,9 @@ public class Dog extends Animal {
 		System.out.println("dogs poop everywhere");
 
 	}
+	@Override
+	public void haha() {
+		System.out.println(className + " ahhahaa");
+	}
 
 }

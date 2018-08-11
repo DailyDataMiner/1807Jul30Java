@@ -18,5 +18,9 @@ public abstract class Animal implements Livable{
 	private static int helperMethod() {
 		return 0;
 	}
+	
+	public void haha() {
+		System.out.println(className + "haha");
+	}
 
 }
