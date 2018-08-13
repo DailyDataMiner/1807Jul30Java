@@ -112,20 +112,20 @@ return systimestamp;
 end;
 /
 
-select newGetTime as "Date and Time" from dual;
+select newGetTime as "Date and Time" from dual; --Gets the current timestamp
 
 --Task – Create a function that returns the length of a mediatype from the mediatype table
-CREATE OR REPLACE FUNCTION getLengthOfMediaType (mti in int)
-RETURN number
+create or replace function getLengthOfMediaType (mti in int)
+return number
 is ret number;
 mediatoreturn varchar2(100);
 BEGIN  
     select m.name into mediatoreturn from mediatype m where m.mediatypeid = mti;
-    RETURN LENGTH(mediatoreturn);
+    return length(mediatoreturn);
 END;
 /
 
-select GETLENGTHOFMEDIATYPE(1) from dual;
+select GETLENGTHOFMEDIATYPE(1) from dual; --Displays the length of a mediatype given an id
 
 -----3.2 System Defined Aggregate Functions
 --Task – Create a function that returns the average total of all invoices
@@ -139,7 +139,7 @@ BEGIN
 END;
 /
 
-select getAvgInvoicelinePrice from dual;
+select getAvgInvoicelinePrice from dual; --Displays the average total of all invoices
 
 --Task – Create a function that returns the most expensive track
 CREATE OR REPLACE FUNCTION getTrackCostMax
@@ -155,7 +155,7 @@ BEGIN
 END;
 /
 
-select name, unitprice from track where trackid = (getTrackCostMax);
+select name, unitprice from track where trackid = (getTrackCostMax); --Finds the first most expensive track and returns the id
 
 -----3.3 User Defined Functions
 --Task – Create a function that returns the average price of invoiceline items in the invoiceline table
@@ -169,7 +169,7 @@ BEGIN
 END;
 /
 
-select getAvgInvoicelinePrice from dual;
+select getAvgInvoicelinePrice from dual; --Returns the average unitprice of all invoiceline items
 
 -----3.4 User Defined Table Functions
 --Task – Create a function that returns all employees who are born after 1968.
@@ -190,15 +190,15 @@ END getAgeEmployees;
 
 DECLARE
    l_names   SYS_REFCURSOR;
-   l_firstname    varchar2(100);
+   l_firstname    varchar2(100); --Variables that will store the cursor return
    l_lastname     varchar2(100);
    l_birthdate    date;
 BEGIN
    l_names := getAgeEmployees;
    LOOP
-      FETCH l_names INTO l_firstname, l_lastname, l_birthdate;
-      EXIT WHEN l_names%NOTFOUND;
-      DBMS_OUTPUT.put_line(l_firstname || ' ' || l_lastname || ' ' || l_birthdate);
+      FETCH l_names INTO l_firstname, l_lastname, l_birthdate; --Stores cursor elements in variables
+      EXIT WHEN l_names%NOTFOUND; --Checks to see if there are any more elements
+      DBMS_OUTPUT.put_line(l_firstname || ' ' || l_lastname || ' ' || l_birthdate); --Outputs the variables
    END LOOP;
    CLOSE l_names;
 END;
@@ -214,16 +214,9 @@ select Firstname, Lastname from employee;
 end;
 /
 
-variable rc refcursor;
-exec firstAndLastNameSelector(:rc);
-print rc;
-
-declare
-tmp_cursor SYS_REFCURSOR;
-type tt is table of employee%rowtype;
-a2 tt;
-begin
-tmp_cur
+variable rc refcursor; --Define a cursor to use
+exec firstAndLastNameSelector(:rc); --Pass cursor to procedure and execute it
+print rc; --Prints the first and last names selected by the cursor
 
 ------4.2 Stored Procedure Input Parameters
 --Task – Create a stored procedure that updates the personal information of an employee.
@@ -242,7 +235,7 @@ iemail varchar2
 )
 as
 begin
-update employee set 
+update employee set
 lastname = ilastname,
 firstname = ifirstname,
 birthdate = ibirthdate,
@@ -257,8 +250,8 @@ where employeeid = iemployeeid;
 end;
 /
 
-select * from employee;
-exec employeeUpdate(2, 'Hello', 'World', '01-JAN-59', 'Lalaland', 'Lalaland', 'LA', 'Lalaland', 'No', '541-222-2323', 'No');
+select * from employee; 
+exec employeeUpdate(2, 'Hello', 'World', '01-JAN-59', 'Lalaland', 'Lalaland', 'LA', 'Lalaland', 'No', '541-222-2323', 'No'); --Procedure updates the data on the second element
 select * from employee;
 
 --Task – Create a stored procedure that returns the managers of an employee.
@@ -271,7 +264,7 @@ end;
 /
 
 variable rc refcursor;
-exec getManager(7, :rc);
+exec getManager(7, :rc); --Example: Will find the first and last name of the manager that the 7th employee reports to
 print rc;
 
 -----4.3 Stored Procedure Output Parameters
@@ -285,14 +278,72 @@ end;
 /
 
 variable rc refcursor;
-exec returnNameAndCompany(1, :rc);
+exec returnNameAndCompany(1, :rc); --Example: Will return the name and company of the 1st custmomer
 print rc;
 
 -----5.0 Transactions
 --Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+create or replace procedure transactionToDelete (toDelete number)
+as begin
+declare
+begin
+set transaction isolation level read committed;
+SAVEPOINT before_delete;
+delete from invoice where invoiceid = toDelete;
+exception
+when OTHERS then
+            DBMS_OUTPUT.PUT_LINE('Somehow failed to delete that key.');
+            rollback to before_delete;
+commit;
+end;
+end;
+/
 
+create procedure create_customer(pk IN NUMBER, firstname IN VARCHAR, 
+    lastname IN VARCHAR, email IN VARCHAR, phone_number IN VARCHAR, rep IN NUMBER)
+    IS
+BEGIN
+    set transaction isolation level read committed;
+    insert into customer(customerid, firstname, lastname, email)
+        values(pk, firstname, lastname, email);
+    SAVEPOINT new_customer;
+    DBMS_OUTPUT.PUT_LINE('set savepoint new_customer');
+	update customer set company = 'Revature' where customerid = pk;
+    update customer set supportrepid = rep where customerid = pk;
+    exception
+        when INVALID_NUMBER then
+            DBMS_OUTPUT.PUT_LINE('invalid_number occurred');
+            ROLLBACK TO new_customer;
+        when OTHERS then
+            DBMS_OUTPUT.PUT_LINE('some other exception occurred');
+    update customer set phone = phone_number where customerid = pk;
+    COMMIT;
+END;
+/
+-- call a procedure
+call create_dan(61, 'Dan', 'Pickles', 'Dan.pickles@revature.com', '555-5555', 8);
+/
 
 --Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+create or replace procedure transactionToInsert (toInsert number)
+as begin
+declare
+begin
+set transaction isolation level read committed;
+SAVEPOINT before_insert;
+insert into customer
+(CUSTOMERID, FIRSTNAME, lastname, company, address, country, postalcode, phone, email)
+values(58, 'Pug', 'King', 'Pugland', '2465 World Street', 'USA', '22754', '541-212-6565', 'pugster@gmail.com');
+exception
+when OTHERS then
+            DBMS_OUTPUT.PUT_LINE('Somehow failed to insert those values.');
+            rollback to before_insert;
+commit;
+end;
+end;
+/
+
+select * from customer;
 
 -----6.1 Triggers
 --Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.

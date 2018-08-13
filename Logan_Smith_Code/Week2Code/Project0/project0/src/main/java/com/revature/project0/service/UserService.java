@@ -23,15 +23,28 @@ static UserDAO uDao = new UserDAO();
 		uDao.delete(a);
 	}
 	public User updateUsername(User a, String iusername) {
-		List<User> users = getAll();
-		for (User user : users) {
-			if (user.getUsername().equals(iusername)) {
-				return null;
-			}
+		iusername = iusername.toLowerCase();
+		if (!newUsername(iusername)) {
+			return null;
 		}
 		a.setUsername(iusername);
 		return uDao.updateUsername(a);
 	}
+	
+	public boolean newUsername(String newUsername) {
+		newUsername = newUsername.toLowerCase();
+		if (newUsername.equals("") || newUsername.equals("return")) {
+			return false;
+		}
+		List<User> users = getAll();
+		for (User user : users) {
+			if (user.getUsername().equals(newUsername)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public User updatePassword(User a, String ipassword) {
 		a.setPassword(ipassword);
 		return uDao.updatePassword(a);
@@ -45,7 +58,7 @@ static UserDAO uDao = new UserDAO();
 		List<User> users = getAll();
 		User chosenUser = null;
 		for (User user : users) {
-			if (user.getUsername().equals(iusername)) {
+			if (user.getUsername().equals(iusername.toLowerCase())) {
 				chosenUser = user;
 				break;
 			}
@@ -56,13 +69,10 @@ static UserDAO uDao = new UserDAO();
 		return null;
 	}
 	public User createUser(String iusername, String ipassword, String ifirstname, String ilastname) {
-		List<User> users = getAll();
-		for (User user : users) {
-			if (user.getUsername().equals(iusername)) {
-				return null;
-			}
+		if (!newUsername(iusername)) {
+			return null;
 		}
-		User newUser = new User(iusername, ipassword, ifirstname, ilastname);
+		User newUser = new User(iusername.toLowerCase(), ipassword, ifirstname, ilastname);
 		saveUser(newUser);
 		return newUser;
 	}

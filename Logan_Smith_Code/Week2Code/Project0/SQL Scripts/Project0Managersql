@@ -170,7 +170,7 @@ select * from bankuser;
 end;
 /
 
---getAllAccounts: Procedure that returns all account types.
+--getAllAccountTypes: Procedure that returns all account types.
 create or replace procedure getAllAccountTypes
 (
 cursorParam OUT SYS_REFCURSOR
@@ -290,5 +290,6 @@ exec insertAccount(1, 100.56);
 exec INSERTUSERTOACCOUNT(1, 1);
 
 select * from usertoaccount;
+select * from bankuser;
 
 commit;

@@ -4,6 +4,10 @@ public class AccountType {
 
 	private int accountTypeID;
 	private String name;
+	@Override
+	public String toString() {
+		return "Account Type: ID=" + accountTypeID + ", Name=" + name + ", Minimum Balance=" + minimumMoney;
+	}
 	private int minimumMoney;
 	
 	public int getMinimumMoney() {
