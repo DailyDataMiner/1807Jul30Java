@@ -6,69 +6,50 @@
   <name>HelloMaven</name>
   <description>Intro to maven</description>
   
-  <!--POM.XML
+  <!-- POM.xml
   The POM, or Project Object Model is the fundamental
-  unit of work in Maven. It is an XML file that
+  unit of work in Maven. It is an XML file that 
   contains information about the project and configuration
-  details used by Maven to build the project.
+  details used by Maven to build the project. 
   
-  Build means to take your source code and compile 
+  Build means to take your source code and compile
   it into the object code or whatever form is used
   for actually running
   
-  XML - eXstensible Markup Language, it is a markup 
+  XML - eXstensible Markup Language. it is a markup
   language that is typically used to define a set of
-  rules for documents and frameworks. it has elements denoted in <tags>
-   and between opening and closing tag
-   holds the value of the element
-   - related topics: valid vs well formed, DTD XMLNS, 
-   
-   
-   Markup language - a system for annotating a doc 
-   in a way that is syntactically distinguishable from 
-   
+  rules for documents and frameworks. it has elements
+   denoted in <tags> and between opening and closing tags,
+  holds the value of the element
+  related topics: valid vs well formed,DTD, XMLNS, schemas
+  XML parsing, 
+  
+  Markup language - a system for annotating a doc
+  in a way that is syntactically distinguishable from the text
    -->
-   <properties>
-
+   
+   	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
-
 		<maven.compiler.target>1.8</maven.compiler.target>
-
 	</properties>
 
-
-
 	<dependencies>
-
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
-
 		<dependency>
-
 			<groupId>junit</groupId>
-
 			<artifactId>junit</artifactId>
-
 			<version>4.12</version>
-
 			<scope>test</scope>
-
 		</dependency>
-
-
 
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-
 		<dependency>
-
 			<groupId>log4j</groupId>
-
 			<artifactId>log4j</artifactId>
-
 			<version>1.2.17</version>
-
 		</dependency>
 
-
-
 	</dependencies>
+   
+  
 </project>
