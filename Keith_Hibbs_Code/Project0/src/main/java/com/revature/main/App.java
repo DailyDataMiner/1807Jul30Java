@@ -105,7 +105,7 @@ static AccountTypeService atService = new AccountTypeService();
 				System.out.println(i+1 + ": " + Account_Type.get(i));
 			}
 			int AccountTypeIndex = Integer.parseInt(scanner.nextLine())-1;
-			int AccountTypeID = AccountTypeService.get(AccountTypeIndex).getId();
+			int AccountTypeID = ((Account_Type) AccountTypeService.get(AccountTypeIndex)).getAccountTypeId();
 			Accounts a = new Accounts(routing_numb, bal, AccountTypeID);
 		}
 		static void viewAccounts() {
