@@ -1,0 +1,294 @@
+
+
+
+--------------------------------------------------------TABLE SECTION-------------------------------------------------
+
+--AccountType Table
+---AccountTypeID: Unique id for each account type
+---Name: The name of each account
+create table AccountType
+(
+AccountTypeid number(10) primary key,
+Name varchar2(100) not null
+);
+
+--Account Table
+---AccountID: Unique key for each account
+---AccountTypeID: Foreign key referencing an account type from the AccountType table
+---Balance: The balance of an account.
+create table Account
+(
+Accountid number(10) PRIMARY KEY,
+AccountTypeid number(10),
+Balance number(16, 2) not null,
+CONSTRAINT fk_account_accounttypeid
+     FOREIGN KEY (AccountTypeID)
+     REFERENCES AccountType (AccountTypeID)
+     ON DELETE CASCADE
+);
+
+--User Table
+---UserID: Unique id for each user.
+---Username: The account that the user will sign into.
+---Password: The password that the user will user to sign in to.
+---FirstName: The First Name of the user.
+---LastName: The Last Name of the user.
+create table BankUser
+(
+Userid number(10) PRIMARY KEY,
+Username varchar2(100) unique not null,
+Password varchar2(100) not null,
+Firstname varchar2(100) not null,
+Lastname varchar2(100) not null
+);
+--UserToAccount Table: Will link users to accounts
+---UserID: Primary Key of User Table used to create the primary key of the UserToAccount
+---AccountID: Primary Key of Account Table used to create the primary key of the UserToAccount
+create table UserToAccount
+(
+Userid number(10),
+Accountid number(10),
+PRIMARY KEY (Userid, Accountid),
+CONSTRAINT fk_usertoaccount_userid
+     FOREIGN KEY (UserID)
+     REFERENCES BankUser (UserID)
+     ON DELETE CASCADE,
+CONSTRAINT fk_usertoaccount_accountid
+     FOREIGN KEY (AccountID)
+     REFERENCES Account (AccountID)
+     ON DELETE CASCADE
+);
+
+
+-----------------------------------------------SEQUENCE SECTION--------------------------------------------
+--A sequence that will always return an AccountID one higher than the last
+create sequence AccountSequence
+minvalue 1
+start with 1
+increment by 1
+cache 5; -- How many values will be stored in memory for faster access
+
+--A sequence that will always return an UserID one higher than the last
+create sequence BankUserSequence
+minvalue 1
+start with 1
+increment by 1
+cache 5; -- How many values will be stored in memory for faster access
+
+--A sequence that will always return an AccountTypeID one higher than the last
+create sequence AccountTypeSequence
+minvalue 1
+start with 1
+increment by 1
+cache 5; -- How many values will be stored in memory for faster access
+
+
+---------------------------------------TRIGGERS----------------------------------------
+
+--AccountInsertTrigger: Grabs the next value from the AccountSequence and sets it as the next Account's ID
+create or replace trigger AccountInsertTrigger
+before insert on account
+for each row
+begin
+    select AccountSequence.nextVal into :new.Accountid from dual;
+end;
+/
+
+--UserInsertTrigger: Grabs the next value from the UserSequence and sets it as the next User's ID
+create or replace trigger BankUserInsertTrigger
+before insert on bankuser
+for each row
+begin
+    select BankUserSequence.nextVal into :new.Userid from dual;
+end;
+/
+
+--AccountTypeInsertTrigger: Grabs the next value from the AccountTypeSequence and sets it as the next AccountType's ID
+create or replace trigger AccountTypeInsertTrigger
+before insert on accounttype
+for each row
+begin
+    select AccountTypeSequence.nextVal into :new.AccountTypeid from dual;
+end;
+/
+
+--------------------------Procedures--------------------------------
+
+--insertAccount: A procedure to create a new account.
+create or replace procedure insertAccount(iaccounttypeid number, ibalance number)
+is
+begin
+insert into account(accounttypeid, balance) values (iaccounttypeid, ibalance);
+end;
+/
+
+--insertUser: A procedure to create a new user.
+create or replace procedure insertBankUser(iusername varchar2, ipassword varchar2, ifirstname varchar2, ilastname varchar2)
+is
+begin
+insert into bankuser(username, password, firstname, lastname) values (iusername, ipassword, ifirstname, ilastname);
+end;
+/
+
+--insertAccountType: A procedure to create a new accounttype.
+create or replace procedure insertAccountType(iname varchar)
+is
+begin
+insert into accounttype(name) values (iname);
+end;
+/
+
+--insertUserToAccount: A procedure to create a new usertoaccount.
+create or replace procedure insertUserToAccount(iuserid number, iaccountid number)
+is
+begin
+insert into usertoaccount(userid, accountid) values (iuserid, iaccountid);
+end;
+/
+
+--getAllAccounts: Procedure that returns all accounts.
+create or replace procedure getAllAccounts
+(
+cursorParam OUT SYS_REFCURSOR
+)
+is
+begin
+open cursorParam FOR 
+select * from account;
+end;
+/
+
+--getAllBankUsers: Procedure that returns all bank users.
+create or replace procedure getAllBankUsers
+(
+cursorParam OUT SYS_REFCURSOR
+)
+is
+begin
+open cursorParam FOR 
+select * from bankuser;
+end;
+/
+
+--getAllAccounts: Procedure that returns all account types.
+create or replace procedure getAllAccountTypes
+(
+cursorParam OUT SYS_REFCURSOR
+)
+is
+begin
+open cursorParam FOR 
+select * from accounttype;
+end;
+/
+
+--getAllLinkedAccounts: Procedure that returns all accounts linked to a user.
+create or replace procedure getAllLinkedAccounts
+(
+cursorParam OUT SYS_REFCURSOR,
+iuserid number
+)
+is
+begin
+open cursorParam FOR 
+select * from Account b
+join USERTOACCOUNT u
+on b.accountID = u.accountID
+where u.userid = iuserid;
+end;
+/
+
+--getAllLinkedUsers: Procedure that returns all users linked to a account.
+create or replace procedure getAllLinkedUsers
+(
+cursorParam OUT SYS_REFCURSOR,
+iaccountid number
+)
+is
+begin
+open cursorParam FOR 
+select * from BankUser b
+join USERTOACCOUNT u
+on b.userID = u.userID
+where u.accountid = iaccountid;
+end;
+/
+
+--updateAccountBalance: Procedure that updates an account's balance
+create or replace procedure updateAccountBalance (ibalance number, iaccountID number)
+is
+begin
+update Account
+set balance = ibalance
+where ACCOUNTID = iaccountID;
+end;
+/
+
+--updateUsername: Procedure that updates a BankUser's username
+create or replace procedure updateUsername (iusername varchar2, iuserID number)
+is
+begin
+update BANKUSER
+set username = iusername
+where UserID = iuserID;
+end;
+/
+
+--updatePassword: Procedure that updates a BankUser's password
+create or replace procedure updatePassword (ipassword varchar2, iuserID number)
+is
+begin
+update BANKUSER
+set password = ipassword
+where UserID = iuserID;
+end;
+/
+
+--updateName: Procedure that updates a BankUser's Name
+create or replace procedure updateName (ifn varchar2, iln varchar2, iuserID number)
+is
+begin
+update BANKUSER
+set firstname = ifn
+where UserID = iuserID;
+update BANKUSER
+set lastname = iln
+where UserID = iuserID;
+end;
+/
+
+--deleteAccount: Procedure that deletes an account
+create or replace procedure deleteAccount (iaccountID number)
+is
+begin
+delete from Account where accountid = iaccountID;
+end;
+/
+
+--deleteAccount: Procedure that deletes an account
+create or replace procedure deleteBankUser (iuserID number)
+is
+begin
+delete from BankUser where userid = iuserID;
+end;
+/
+
+--deleteLink: Procedure which removes a UserToAccount link
+create or replace procedure deleteUserToAccount (iuserID number, iaccountid number)
+is
+begin
+delete from UserToAccount where userid = iuserID and accountid = iaccountid;
+end;
+/
+
+----------------------------Create Account Types-----------------------------
+exec INSERTACCOUNTTYPE('Checking');
+exec INSERTACCOUNTTYPE('Savings');
+
+exec insertUser('lorgansmith', 'Kingly14', 'Logan', 'Smith');
+exec insertAccount(1, 100.56);
+exec INSERTUSERTOACCOUNT(1, 1);
+
+select * from usertoaccount;
+
+commit;

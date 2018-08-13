@@ -1,0 +1,194 @@
+--Bookstore DDL Script
+
+create table Genre 
+(
+  Genreid number(10) PRIMARY KEY,
+  Name varchar2(256) unique not null
+);
+
+create table Book
+(
+    Bookid number(10) PRIMARY KEY,
+    ISBN varchar2(10) UNIQUE NOT NULL,
+    Title varchar2(256) NOT NULL,
+    Price number(6,2) NOT NULL,
+    Genreid number(10),
+    CONSTRAINT fk_book_genre FOREIGN KEY(Genreid) REFERENCES Genre(Genreid)
+);
+
+create table Author
+(
+    Authorid number(10) PRIMARY KEY,
+    Firstname varchar2(50),
+    Lastname varchar2(50) not null,
+    Bio varchar(1064)
+);
+
+create table AuthorBook
+(
+    Bookid number(10),
+    Authorid number(10),
+    PRIMARY KEY (Bookid, Authorid),
+    FOREIGN KEY(Bookid) REFERENCES Book(Bookid),
+    FOREIGN KEY(Authorid) REFERENCES Author(Authorid)
+);
+
+------------------------ Sequences -------------------------------
+create sequence BookSequence
+minvalue 1
+start with 1
+increment by 1
+cache 5; -- How many values will be stored in memory for faster access
+
+create sequence AuthorSequence
+minvalue 1
+start with 1
+increment by 1
+cache 5; -- How many values will be stored in memory for faster access
+
+create sequence GenreSequence;
+
+---------Triggers--------------
+create or replace trigger BookSequenceTrigger
+before insert on book
+for each row
+begin
+    select BookSequence.nextVal into :new.Bookid from dual;
+end;
+/
+
+create or replace trigger AuthorSequenceTrigger
+before insert on author
+for each row
+begin
+    select AuthorSequence.nextVal into :new.Authorid from dual;
+end;
+/
+
+create or replace trigger GenreSequenceTrigger
+before insert on genre
+for each row
+begin
+    select GenreSequence.nextVal into :new.Genreid from dual;
+end;
+/
+
+
+-----------------------DML Stuff
+select * from genre;
+insert into genre(name)values('Fantasy');
+insert into genre(name)values('Sci-Fi');
+insert into genre(name)values('Romance');
+insert into genre(name)values('Mystery');
+
+delete from genre where name = 'Mystery';
+
+insert into genre(name)values('Biography');
+insert into genre(name)values('Horror');
+
+insert into book(TITLE, ISBN, PRICE, GENREID)values('The Prince', 'A1', 10.62, 1);
+insert into book(TITLE, ISBN, PRICE, GENREID)values('The Dragon', 'A2', 17.22, 4);
+insert into book(TITLE, ISBN, PRICE, GENREID)values('The King', 'A3', 3.62, 6);
+insert into book(TITLE, ISBN, PRICE, GENREID)values('The Hero', 'A4', 20.34, 3);
+
+insert into author(Firstname, lastname, bio)values('George', 'Martin', 'Wrote some good books then stopped');
+insert into author(Firstname, lastname, bio)values('Erin', 'Hunter', 'Wrote some good books then kept going. Forever.');
+insert into author(Firstname, lastname, bio)values('Cornelia', 'Funke', 'Wrote a lot of good books!');
+insert into author(Firstname, lastname, bio)values('Emily', 'Rodda', 'VERY GOOD BOOKS <3');
+
+commit;
+
+select * from Book;
+select * from Author;
+
+
+create or replace procedure getAllBooks
+(
+cursorParam OUT SYS_REFCURSOR
+)
+is
+begin
+open cursorParam FOR 
+select * from book;
+end;
+/
+
+variable rc refcursor;
+exec getAllBooks(:rc);
+print rc;
+commit;
+
+/*
+Oracle creates a context area with all information necessary for processing and sql statement
+- a cursor is apointer to context area
+-the active set is the rows returned by a stmt and is ehlp n the cursor
+there are two types: implicit and explicit
+--> Implicit created by oracle when a DML statement is called
+--> Explicit programmer defined
+--Declare
+--Open
+--Fetch
+--Close
+*/
+
+
+
+
+
+
+create table playerStats
+(
+Playerid number(10),
+Name varchar2(50),
+ShotAttempts number(10), 
+ShotSuccesses number(10),
+ShootingPercentage number(10)
+);
+
+insert into playerstats values (0, 'Mean Mike', 1000, 300, 30);
+insert into playerstats values (1, 'Steph Curry', 10000, 9000, 90);
+insert into playerstats values (2, 'Dunkin Adams', 100, 99, 99);
+insert into playerstats values (3, 'Bugs Bunny', 8960, 5605, 99);
+
+select * from playerstats;
+
+create or replace function calcShootingAvg(attempt number, made number) 
+return number is percentage number(10);
+begin
+percentage := 100*(made/attempt);
+return percentage;
+end;
+/
+
+update playerstats set shootingpercentage = calcShootingAvg(8960, 5605) where playerid = 3;
+
+create sequence playerdataGeneration
+minvalue 0
+start with 100
+increment by 1;
+
+create or replace procedure insertPlayer(iname varchar2, iattempts number, imade number)
+is
+begin
+insert into playerstats values (playerdataGeneration.nextVal, iname, iattempts, imade, calcShootingAvg(iattempts, imade));
+end;
+/
+
+exec insertPlayer('Strong Boi', 654, 365);
+
+create table RetiredPlayer
+(
+Name varchar2(20)
+);
+
+create or replace trigger onRetiringPlayer
+before delete on playerstats
+for each row
+begin
+insert into RetiredPlayer values(:old.Name);
+end;
+/
+
+delete from PLAYERSTATS where playerid = 3;
+select * from playerstats;
+select * from RETIREDPLAYER;

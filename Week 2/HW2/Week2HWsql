@@ -101,6 +101,243 @@ on delete cascade;
 delete from customer
 where firstname = 'Robert' and lastname = 'Walter';
 
+-----3.1 System Defined Functions
+--Task – Create a function that returns the current time
+
+create or replace function newGetTime
+return timestamp
+is
+begin
+return systimestamp;
+end;
+/
+
+select newGetTime as "Date and Time" from dual;
+
+--Task – Create a function that returns the length of a mediatype from the mediatype table
+CREATE OR REPLACE FUNCTION getLengthOfMediaType (mti in int)
+RETURN number
+is ret number;
+mediatoreturn varchar2(100);
+BEGIN  
+    select m.name into mediatoreturn from mediatype m where m.mediatypeid = mti;
+    RETURN LENGTH(mediatoreturn);
+END;
+/
+
+select GETLENGTHOFMEDIATYPE(1) from dual;
+
+-----3.2 System Defined Aggregate Functions
+--Task – Create a function that returns the average total of all invoices
+CREATE OR REPLACE FUNCTION getAvgInvoiceTotal
+RETURN number
+is ret number;
+BEGIN
+    select AVG(ivl.unitprice) into ret
+    FROM invoice iv;
+    RETURN ret;
+END;
+/
+
+select getAvgInvoicelinePrice from dual;
+
+--Task – Create a function that returns the most expensive track
+CREATE OR REPLACE FUNCTION getTrackCostMax
+RETURN number
+is ret number;
+maxprice number;
+BEGIN
+    select t.trackid into ret
+    FROM track t
+    where t.UNITPRICE = (select MAX(track.unitprice) from track)
+    and rownum <= 1;
+    RETURN ret;
+END;
+/
+
+select name, unitprice from track where trackid = (getTrackCostMax);
+
+-----3.3 User Defined Functions
+--Task – Create a function that returns the average price of invoiceline items in the invoiceline table
+CREATE OR REPLACE FUNCTION getAvgInvoicelinePrice
+RETURN number
+is ret number;
+BEGIN  
+    select AVG(ivl.unitprice) into ret
+    FROM invoiceline ivl;
+    RETURN ret;
+END;
+/
+
+select getAvgInvoicelinePrice from dual;
+
+-----3.4 User Defined Table Functions
+--Task – Create a function that returns all employees who are born after 1968.
+
+CREATE OR REPLACE FUNCTION getAgeEmployees
+     RETURN SYS_REFCURSOR
+  IS
+     l_return   SYS_REFCURSOR;
+  BEGIN
+           OPEN l_return FOR
+                SELECT lastname, firstname, birthdate
+                  FROM employee
+                  where birthdate > '01-Jan-68'
+              ORDER BY employeeid;
+     RETURN l_return;
+END getAgeEmployees;
+/
+
+DECLARE
+   l_names   SYS_REFCURSOR;
+   l_firstname    varchar2(100);
+   l_lastname     varchar2(100);
+   l_birthdate    date;
+BEGIN
+   l_names := getAgeEmployees;
+   LOOP
+      FETCH l_names INTO l_firstname, l_lastname, l_birthdate;
+      EXIT WHEN l_names%NOTFOUND;
+      DBMS_OUTPUT.put_line(l_firstname || ' ' || l_lastname || ' ' || l_birthdate);
+   END LOOP;
+   CLOSE l_names;
+END;
+/
+
+-----4.1 Basic Stored Procedure
+--Task – Create a stored procedure that selects the first and last names of all the employees.
+create or replace procedure firstAndLastNameSelector (prc out SYS_REFCURSOR)
+is
+begin
+open prc for
+select Firstname, Lastname from employee;
+end;
+/
+
+variable rc refcursor;
+exec firstAndLastNameSelector(:rc);
+print rc;
+
+declare
+tmp_cursor SYS_REFCURSOR;
+type tt is table of employee%rowtype;
+a2 tt;
+begin
+tmp_cur
+
+------4.2 Stored Procedure Input Parameters
+--Task – Create a stored procedure that updates the personal information of an employee.
+create or replace procedure employeeUpdate(
+iemployeeid number,
+ilastname varchar2, 
+ifirstname varchar2, 
+ibirthdate date, 
+iaddress varchar2, 
+icity varchar2, 
+istate varchar2, 
+ipostalcode varchar2, 
+iphone varchar2,
+ifax varchar2,
+iemail varchar2
+)
+as
+begin
+update employee set 
+lastname = ilastname,
+firstname = ifirstname,
+birthdate = ibirthdate,
+address = iaddress,
+city = icity,
+state = istate,
+postalcode = ipostalcode,
+phone = iphone,
+fax = ifax,
+email = iemail
+where employeeid = iemployeeid;
+end;
+/
+
+select * from employee;
+exec employeeUpdate(2, 'Hello', 'World', '01-JAN-59', 'Lalaland', 'Lalaland', 'LA', 'Lalaland', 'No', '541-222-2323', 'No');
+select * from employee;
+
+--Task – Create a stored procedure that returns the managers of an employee.
+create or replace procedure getManager (iemployeeid number, prc out sys_refcursor)
+as
+begin
+open prc for 
+select firstname, lastname from employee where employeeid = (select reportsto from employee where iemployeeid = employeeid);
+end;
+/
+
+variable rc refcursor;
+exec getManager(7, :rc);
+print rc;
+
+-----4.3 Stored Procedure Output Parameters
+--Task – Create a stored procedure that returns the name and company of a customer.
+create or replace procedure returnNameAndCompany(icustomerid number, prc out sys_refcursor)
+as
+begin
+open prc for 
+select firstname, lastname, company from Customer where customerid = icustomerid;
+end;
+/
+
+variable rc refcursor;
+exec returnNameAndCompany(1, :rc);
+print rc;
+
+-----5.0 Transactions
+--Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+
+
+--Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+
+-----6.1 Triggers
+--Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+create or replace trigger employeeInsertTrigger
+after insert on employee
+begin
+update employee
+set firstname = 'UPDATED', lastname = 'DATABASE'
+where employeeid = 1;
+end;
+/
+
+select * from employee;
+
+insert into employee
+(EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL)
+values(13, 'Brian', 'Bottini', 'Maid', 1, '18-AUG-95', '7-AUG-18', '8216 NE -35th ST', 'Lalaland', 'CA', 'USA', '64763', '+1 (101) 101-1100', 'Who uses fax?', 'megadoom@gmail.com');
+
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+create or replace trigger albumUpdateTrigger
+after update on album
+begin
+insert into album(Albumid, title, artistid)values(348, 'begin again', 275);
+end;
+/
+select * from album;
+update album
+set title = 'UPDATED'
+where albumid = 2;
+select * from album;
+
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+create or replace trigger customerDeleteTrigger
+after delete on customer
+begin
+update customer
+set firstname = 'UPDATED', lastname = 'DATABASE'
+where customerid = 1;
+end;
+/
+select * from customer;
+delete from customer
+where customerid = 2;
+select * from customer;
+
 -----7.1 Inner
 --Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
 select c.FIRSTNAME, c.lastname, i.invoiceid
