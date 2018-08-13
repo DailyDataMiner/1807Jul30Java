@@ -12,9 +12,15 @@ import java.util.List;
 import com.revature.pojo.User;
 import com.revature.util.ConnectionFactory;
 
-public class UserDAO {
+/**
+ * The DAO of the User object
+ * 
+ * @author Arthur Panlilio
+ *
+ */
+public class UserDAO implements DAO<User, Integer>{
 	
-	
+	@Override
 	public List<User> findAll(){
 		List<User> users = new ArrayList<>();
 		try(Connection conn = ConnectionFactory.getConnection()){
@@ -42,7 +48,13 @@ public class UserDAO {
 		return users;
 	}
 	
-
+	
+	/**
+	 * Returns a specific User
+	 * 
+	 * @param uName is the username
+	 * @return the user
+	 */
 	public User findOne(String uName){
 		User u = null;
 		ConnectionFactory.getInstance();
@@ -65,7 +77,7 @@ public class UserDAO {
 		return u;
 	}
 	
-	
+	@Override
 	public User save(User u) {
 		ConnectionFactory.getInstance();
 		try(Connection conn = ConnectionFactory
@@ -97,8 +109,9 @@ public class UserDAO {
 		}
 		return u;
 	}
-	
-	
+
+
+
 	
 
 }

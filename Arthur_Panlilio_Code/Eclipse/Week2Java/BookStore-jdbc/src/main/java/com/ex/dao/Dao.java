@@ -1,9 +1,9 @@
 package com.ex.dao;
 
-import java.io.Serializable;
+
 import java.util.List;
 
-public interface Dao<T, I extends Serializable>{
+public interface Dao<T, I>{
 	
 	List<T> findAll();
 	T findOne(I id);

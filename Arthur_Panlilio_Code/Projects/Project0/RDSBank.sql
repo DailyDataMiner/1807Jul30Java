@@ -78,3 +78,34 @@ INSERT INTO accountType VALUES (2, 'Savings');
 INSERT INTO accountType VALUES (3, 'Communal');
 INSERT INTO accountType VALUES (4, 'Gambling');
 INSERT INTO accountType VALUES (5, 'Admin');
+
+DELEtE FROM account WHERE accountId = 21;
+
+commit;
+
+SELECT * FROM account where userID = 21 and acctypeid = 1;
+TRUNCATE TABLE account;
+
+CREATE OR REPLACE PROCEDURE deposit(amount number, accId number)
+IS 
+BEGIN
+UPDATE account SET balance = balance + amount WHERE accountId = accId;
+END;
+/
+
+UPDATE account SET balance = 0 WHERE accountId = 32;
+commit;
+EXEC deposit(20.00, 32);
+
+CREATE OR REPLACE PROCEDURE withdraw(amount number, accId number)
+AS
+b number;
+BEGIN
+SELECT balance INTO b FROM account WHERE accountID = accId;
+IF amount <= b THEN
+  UPDATE account SET balance = balance-amount WHERE accountId = accId;
+END IF;
+END;
+/
+
+Exec withdraw(5772, 32);

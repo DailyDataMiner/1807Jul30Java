@@ -2,6 +2,14 @@ package com.revature.pojo;
 
 import java.sql.Date;
 
+import com.revature.util.AccountType;
+
+/**
+ * The account pojo holds information
+ * 
+ * @author Arthur Panlilio
+ *
+ */
 public class Account {
 	
 	private int accountId;
@@ -9,8 +17,11 @@ public class Account {
 	private double balance;
 	private int accountTypeId;
 	private Date lastUpdate;
+	private AccountType myAccountType = null;
 	
 	
+
+
 	public Account() {
 		
 	}
@@ -73,6 +84,16 @@ public class Account {
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+	
+	public AccountType getMyAccountType() {
+		return myAccountType;
+	}
+
+
+	public void setMyAccountType(AccountType myAccountType) {
+		this.myAccountType = myAccountType;
+	}
+
 	
 	@Override
 	public String toString() {

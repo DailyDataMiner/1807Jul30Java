@@ -1,5 +1,12 @@
 package com.revature.pojo;
 
+
+/**
+ * The user pojo holds user information
+ * 
+ * @author Arthur Panlilio
+ *
+ */
 public class User {
 	
 	private int id;

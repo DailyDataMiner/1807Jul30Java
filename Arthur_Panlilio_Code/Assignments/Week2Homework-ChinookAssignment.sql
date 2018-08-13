@@ -195,21 +195,97 @@ END;
 execute updateE('CEO', 1);
 
 --Task – Create a stored procedure that returns the managers of an employee. 
+CREATE OR REPLACE PROCEDURE returnManagers
+(c1 OUT SYS_REFCURSOR)
+AS 
+BEGIN
+  open c1 for
+  SELECT DISTINCT e2.firstname, e2.lastname FROM employee e1, employee e2 WHERE
+  e1.REPORTSTO = e2.employeeid;
+END;
+/
+variable c1 refcursor;
+EXECUTE returnManagers(:c1);
+print c1;
+
 
 ------------------------------4.3 Stored Procedure Output Parameters 
 --Task – Create a stored procedure that returns the name and company of a customer.
+CREATE OR REPLACE PROCEDURE returnCompany
+(c1 OUT SYS_REFCURSOR)
+AS 
+BEGIN
+  open c1 for
+  SELECT firstname, lastname, company FROM customer;
+END;
+/
+
+variable c1 refcursor;
+EXEC returnCompany(:c1);
+print c1;
 
 
 
 
+------------------------------------------5.0 Transactions In this section you will be working with transactions. Transactions are usually nested within a stored procedure. 
+--Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).   
+CREATE OR REPLACE PROCEDURE delInvoiceId(id number)
+is 
+BEGIN
+DELETE FROM invoice WHERE invoiceId = id;
+END;
+/
+
+EXEC delInvoiceId(405);
+--Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table 
+
+
+CREATE SEQUENCE customer_seq
+minvalue 1
+start with 62
+increment by 1;
+
+CREATE OR REPLACE TRIGGER c_seq_trig --declare and name trigger
+BEFORE INSERT ON  customer --When we will execute
+FOR EACH ROW --necessary to change value of table
+BEGIN
+  -- What to do when trigger is fired
+  SELECT customer_seq.nextVAl INTO :new.customerId FROM dual;
+END;
+/
+
+
+CREATE OR REPLACE PROCEDURE insertRec(fname varchar2, lname varchar2, emailt varchar2)
+is
+BEGIN
+  INSERT INTO customer (firstname, lastname, email) VALUES (fname, lname, emailt);
+END;
+/
+
+EXEC insertRec('Bob', 'Bobsley', 'BO@bo.com');
+
+
+-----------------------------6.1 AFTER/FOR Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table. 
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table 
+CREATE OR REPLACE TRIGGER insertToAlbum
+AFTER INSERT on album
+FOR EACH ROW
+BEGIN
+ dbms_output.put_line('After Insert');
+END;
+/
 
 
 
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table
 
-
-
-
-
+CREATE OR REPLACE TRIGGER deleteFromCustomer
+BEFORE DELETE on customer
+FOR EACH ROW
+BEGIN
+ dbms_output.put_line('Before delete');
+END;
+/
 
 
 
@@ -244,7 +320,7 @@ ORDER BY artist.name ASC;
 
 --------------------------------------7.5 SELF 
 --Task – Perform a self-join on the employee table, joining on the reportsto column
-SELECT * FROM employee e1, employee e2 
+SELECT e1.lastname as lackey, e2.lastname as manager FROM employee e1, employee e2 
 WHERE e1.REPORTSTO = e2.employeeid;
 
 
