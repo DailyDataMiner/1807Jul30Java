@@ -1,0 +1,255 @@
+/*
+Week 2 Assignemnt
+*/
+
+--2.1 Select
+--Task – Select all records from the Employee table.
+select * from employee;
+--Task – Select all records from the Employee table where last name is King.
+select * from employee where lastname = 'King';
+--Task – Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL.
+select * from employee where firstname = 'Andrew' and reportsto is null;
+
+--2.2 Order By
+--Task – Select all albums in Album table and sort result set in descending order by title.
+select * from album order by title desc;
+--Task – Select first name from Customer and sort result set in ascending order by city
+select firstname from customer order by city asc;
+
+--2.3 INSERT INTO
+--Task – Insert two new records into Genre table
+insert into genre values(26, 'Genre26');
+insert into genre (genreid) values(27);
+--Task – Insert two new records into Employee table
+insert into employee values (9, 'Employee',
+  'Employee', 'Intern', 3, to_date('01-JAN-00'), to_date('01-JAN-18'), '1000 Place', 'Some City', 'Some State', 
+  'Some Country', '00000', '000-000-0000', '111-111-1111', 'Employee@Company.com');
+insert into employee (employeeid, lastname, firstname) values (10, 'Person', 'Person');
+--Task – Insert two new records into Customer table
+insert into customer (customerid, firstname, lastname, email) values (60, 'FName', 'LName', 'a@a.com');
+insert into customer (customerid, firstname, lastname, email) values (61, 'Fname2', 'LName2', 'b@b.com');
+
+--2.4 Update
+--Task – Update Aaron Mitchell in Customer table to Robert Walter
+update customer set firstname = 'Robert' where firstname = 'Aaron';
+update customer set lastname = 'Walter' where lastname = 'Mitchell';
+--Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
+update artist set name = 'CCR' where name = 'Creedence Clearwater Revival';
+
+--2.5 Like
+--Task – Select all invoices with a billing address like “T%”
+select * from invoice where billingaddress like 'T%';
+
+--2.6 Between
+--Task – Select all invoices that have a total between 15 and 50
+select * from invoice where total between 15 and 50;
+--Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
+select * from employee where hiredate between to_date('06/01/2003', 'MM/DD/YYYY') and to_date('03/01/2004', 'MM/DD/YYYY');
+
+--2.7 Delete
+--Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints
+--that rely on this, find out how to resolve them).
+/*
+alter table invoiceline drop constraint fk_invoicelineinvoiceid;
+alter table invoiceline add constraint fk_invoicelineinvoiceid
+  foreign key (invoiceid) references invoice(invoiceid) on delete cascade;
+alter table invoice drop constraint fk_invoicecustomerid;
+alter table invoice add constraint fk_invoicecustomerid
+  foreign key (customerid) references customer(customerid) on delete cascade;
+delete from customer where firstname = 'Robert' and lastname = 'Walter';
+*/
+delete from invoiceline where invoiceid in (select invoiceid from invoice where customerid = 
+  (select customerid from customer where firstname = 'Robert' and lastname = 'Walter'));
+delete from invoice where customerid = 
+  (select customerid from customer where firstname = 'Robert' and lastname = 'Walter');
+delete from customer where firstname = 'Robert' and lastname = 'Walter';
+
+--3.1 System Defined Functions
+--Task – Create a function that returns the current time.
+create or replace function get_time
+return timestamp
+is 
+begin
+  return systimestamp;
+end;
+/
+--Task – create a function that returns the length of a mediatype from the mediatype table
+create or replace function get_mediatype_length (mediatypeidin number)
+return number
+is
+temp varchar2(50);
+begin
+  select name into temp from mediatype where mediatypeid = mediatypeidin;
+  return length(temp);
+end;
+/
+
+--3.2 System Defined Aggregate Functions
+--Task – Create a function that returns the average total of all invoices
+create or replace function get_avg_total
+return number
+is
+average number;
+begin
+  select avg(total) into average from invoice;
+  return average;
+end;
+/
+--Task – Create a function that returns the most expensive track
+create or replace function get_exp_track
+return varchar2
+is
+trackname varchar2(50);
+begin
+  select max(unitprice) into trackname from track;
+  return trackname;
+end;
+/
+
+--3.3 User Defined Functions
+--Task – Create a function that returns the average price of invoiceline items in the invoiceline table
+create or replace function get_avg_invoiceline
+return number
+is
+total number;
+average number;
+begin
+  select avg(quantity * unitprice) into average from invoiceline;
+  return average;
+end;
+/
+
+--3.4 User Defined Table Valued Functions
+--Task – Create a function that returns all employees who are born after 1968.
+create or replace function born_after_1968
+return sys_refcursor
+is
+cur sys_refcursor;
+begin
+  open cur for select * from employee where birthdate > to_date('01-01-1968', 'DD-MM-YYYY');
+  return cur;
+end;
+/
+
+--4.1 Basic Stored Procedure
+--Task – Create a stored procedure that selects the first and last names of all the employees.
+create or replace procedure get_names (cur out sys_refcursor)
+is
+begin
+  open cur for select firstname, lastname from employee;
+end;
+/
+
+--4.2 Stored Procedure Input Parameters
+--Task – Create a stored procedure that updates the personal information of an employee.
+create or replace procedure update_employee_info (employeeidin in number, addressin in varchar2, cityin in varchar2,
+  statein in varchar2, countryin in varchar2, postalcodein in varchar2, phonein in varchar2, faxin in varchar2, 
+  emailin in varchar2)
+is
+begin
+  update employee set address = addressin, city = cityin, state = statein, country = countryin, postalcode = postalcodein,
+    phone = phonein, fax = faxin, email = emailin
+    where employeeid = employeeidin;
+end;
+/
+--Task – Create a stored procedure that returns the managers of an employee.
+create or replace procedure get_managers (employeeidin in number, cur out sys_refcursor)
+is
+begin
+  open cur for select * from employee where employeeid = (select reportsto from employee where employeeid = employeeidin);
+end;
+/
+--4.3 Stored Procedure Output Parameters
+--Task – Create a stored procedure that returns the name and company of a customer.
+create or replace procedure get_customer_name_company (customeridin in number, cur out sys_refcursor)
+is
+begin
+  open cur for select firstname, lastname, company from customer where customerid = customeridin;
+end;
+/
+
+--5.0 Transactions
+--Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that
+--rely on this, find out how to resolve them).
+delete from invoiceline where invoiceid = '1';
+delete from invoice where invoiceid = '1';
+rollback;
+--Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer
+--table
+create or replace procedure insert_customer (customeridin in number, firstnamein in varchar2, lastnamein in varchar2,
+  emailin in varchar2)
+is
+begin
+  insert into customer (customerid, firstname, lastname, email) values (customeridin, firstnamein,
+    lastnamein, emailin);
+  commit;
+end;
+/
+
+--6.1 After/For
+--Task - Create an after insert trigger on the employee table fired after a new record is inserted into the
+--table.
+create or replace trigger trigger1
+after insert on employee
+for each row
+begin
+  insert into employee (employeeid, lastname, firstname) values(:old.employeeid, :old.lastname, :old.firstname);
+end;
+/
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+create or replace trigger trigger2
+after insert on album
+for each row
+begin
+  insert into album values(:old.albumid, :old.title, :old.artistid);
+end;
+/
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the
+--table.
+create or replace trigger trigger3
+after delete on customer
+begin
+  dbms_output.put_line('Customer Deleted');
+end;
+/
+
+--7.1 Inner
+--Task – Create an inner join that joins customers and orders and specifies the name of the customer and
+--the invoiceId.
+select c.firstname, c.lastname, i.invoiceid from customer c inner join invoice i on c.customerid = i.customerid;
+
+--7.2 Outer
+--Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId,
+--firstname, lastname, invoiceId, and total.
+select c.customerid, c.firstname, c.lastname, i.invoiceid, i.total from customer c 
+  left outer join invoice i on c.customerid = i.customerid;
+
+--7.3 Right
+--Task – Create a right join that joins album and artist specifying artist name and title.
+select artist.name, album.title from artist right join album on artist.artistid = album.artistid;
+
+--7.4 Cross
+--Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+select * from album cross join artist order by artist.name ASC;
+
+--7.5 Self
+--Task – Perform a self-join on the employee table, joining on the reportsto column.
+select e1.firstname, e1.lastname, e2.firstname, e2.lastname from employee e1 
+  join employee e2 on e1.reportsto = e2.employeeid;
+
+--7.6 Complicated Join Assignment
+--Create an inner join between all tables in the chinook database.
+select track.name as TRACK_NAME, playlisttrack.playlistid as PLAYLIST_ID, playlist.name as PLAYLIST_NAME, 
+  album.title as ALBUM_TITLE, artist.name as ARTIST_NAME, genre.name as GENRE_NAME, mediatype.name as MEDIA_TYPE,
+  invoiceline.unitprice as UNIT_PRICE, invoice.total as INVOICE_TOTAL, customer.firstname as CUSTOMER_NAME,
+  employee.firstname as EMPLOYEE_NAME from track 
+  inner join playlisttrack on track.trackid = playlisttrack.trackid
+  inner join playlist on playlisttrack.playlistid = playlist.playlistid
+  inner join album on track.albumid = album.albumid
+  inner join artist on album.artistid = artist.artistid
+  inner join genre on track.genreid = genre.genreid
+  inner join mediatype on track.mediatypeid = mediatype.mediatypeid
+  inner join invoiceline on invoiceline.trackid = track.trackid
+  inner join invoice on invoiceline.invoiceid = invoice.invoiceid
+  inner join customer on customer.customerid = invoice.customerid
+  inner join employee on customer.supportrepid = employee.employeeid;
