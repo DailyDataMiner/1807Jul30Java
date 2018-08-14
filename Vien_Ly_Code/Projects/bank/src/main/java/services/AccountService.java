@@ -5,6 +5,7 @@ import java.util.List;
 import beans.Account;
 import dao.AccountDAO;
 import dao.DAO;
+import exceptions.UsernameNotAvailableException;
 
 public class AccountService {
 	static DAO<Account, Integer> accDAO = new AccountDAO();

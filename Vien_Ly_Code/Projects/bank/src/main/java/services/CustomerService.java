@@ -3,6 +3,7 @@ package services;
 import beans.Customer;
 import dao.CustomerDAO;
 import dao.DAO;
+import exceptions.UsernameNotAvailableException;
 
 public class CustomerService {
 	static DAO<Customer, Integer> custDAO = new CustomerDAO();

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import beans.Account;
 import beans.Customer;
+import exceptions.*;
 import services.AccountService;
 import services.CustomerService;
 import utils.Password;
@@ -92,26 +93,35 @@ public class App {
 			default:
 				return;
 		}
-		menu();
+		mainMenu();
 	}
 
 	static void withdraw() {
 		System.out.println("id of account to withdraw from: ");
 		int id = Integer.parseInt(scan.nextLine());
 		Account acc = findInAccounts(id);
+		System.out.println(acc);
 		if (acc != null) {
+			System.out.println("Enter the amount to withdraw");
 			double amount = Double.parseDouble(scan.nextLine());
 			if (amount > acc.getBalance()) {
-				System.out.println("that's more than you have bud");
+				try {
+					throw new NotEnoughFundException(id);
+				} catch (NotEnoughFundException e) {
+					System.out.println(e.getMessage());
+				}
 			} else {
 				acc.setBalance(acc.getBalance() - amount);
 				acc = accService.update(acc);
 				System.out.println("after withdrawal: " + acc);
 			}
 		} else {
-			System.out.println("you do have any account with this accountid");
+			try {
+				throw new NoSuchAccountException(id);
+			} catch (NoSuchAccountException e) {
+				System.out.println(e.getMessage());
+			}
 		}
-		menu();
 	}
 	
 	static void deposit() {
@@ -124,9 +134,12 @@ public class App {
 			acc = accService.update(acc);
 			System.out.println("after deposit: " + acc);
 		} else {
-			System.out.println("you do have any account with this accountid");
+			try {
+				throw new NoSuchAccountException(id);
+			} catch (NoSuchAccountException e) {
+				System.out.println(e.getMessage());
+			}
 		}
-		menu();
 	}
 	
 	static Account findInAccounts(int id) {
@@ -140,7 +153,8 @@ public class App {
 	
 	static void delete() {
 		System.out.println("account to be closed");
-		Account closing = findInAccounts(Integer.parseInt(scan.nextLine()));
+		int id = Integer.parseInt(scan.nextLine());
+		Account closing = findInAccounts(id);
 		if (closing != null) {
 			if (closing.getBalance() > 0) {
 				System.out.println("choose an account to transfer funds to or -1 to withdraw");
@@ -154,6 +168,12 @@ public class App {
 				accService.delete(closing);
 				currentCustomer.removeAccount(closing);
 				System.out.println(currentCustomer.getAccounts());
+			}
+		} else {
+			try {
+				throw new NoSuchAccountException(id);
+			} catch (NoSuchAccountException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
@@ -219,8 +239,12 @@ public class App {
 		System.out.println("username");
 		String username = scan.nextLine();
 		if (custService.findOne(username) != null) {
-			System.out.println("username already taken");
-			return;
+			try {
+				throw new UsernameNotAvailableException(username);
+			} catch (UsernameNotAvailableException e) {
+				System.out.println(e.getMessage());
+				return;
+			}
 		}
 		System.out.println("first name");
 		String firstName = scan.nextLine();
@@ -238,20 +262,29 @@ public class App {
 		System.out.println("username");
 		String username = scan.nextLine();
 		Customer cust = custService.findOne(username);
-		if(cust != null) {
-			System.out.println("password");
-			String userInputPwd = scan.nextLine();
-			if(Password.validatePassword(userInputPwd, cust.getPasswordHash())) {
-				System.out.println("authenticated");
-				currentCustomer = cust;
-				currentCustomer.setAccounts(getAllCustomerAccounts());
-				menu();
-			} else {
-				System.out.println("password does not match");
+		
+		if(cust == null) {
+			try {
+				throw new NoSuchUserException(username);
+			} catch(NoSuchUserException e) {
+				return;
+			}
+		}
+		
+		System.out.println("password");
+		String userInputPwd = scan.nextLine();
+		if(Password.validatePassword(userInputPwd, cust.getPasswordHash())) {
+			System.out.println("authenticated");
+			currentCustomer = cust;
+			currentCustomer.setAccounts(getAllCustomerAccounts());
+			menu();
+		} else {
+			try {
+				throw new PasswordMismatchException();
+			} catch(PasswordMismatchException e) {
+				System.out.println(e.getMessage());
 				logIn();
 			}
-		} else {
-			System.out.println("no such user");
 		}
 	}
 	

@@ -3,6 +3,8 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 
+import exceptions.*;
+
 public interface DAO<T, I extends Serializable>{
 	List<T> findAll();
 	T findOne(I id);
