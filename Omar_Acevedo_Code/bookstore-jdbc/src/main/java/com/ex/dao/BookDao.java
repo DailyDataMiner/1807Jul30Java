@@ -73,7 +73,7 @@ public class BookDao extends HelperFunctions implements Dao<Book, Integer> {
 			String[] autogen_keys = {"book_id"};
 			
 			PreparedStatement ps = conn.prepareStatement(query, autogen_keys);
-
+			print("hey");
 //			print(autogen_keys.toString());
 			
 			ps.setString(1, obj.getIsbn());
@@ -81,6 +81,7 @@ public class BookDao extends HelperFunctions implements Dao<Book, Integer> {
 			ps.setDouble(3, obj.getPrice());	// watch it this one, number (6, 2) in db
 			ps.setInt(4, obj.getGenre_id());
 			ps.setInt(5, obj.getAuthor_id());
+			
 			
 			int rowsInserted = ps.executeUpdate();
 			
@@ -90,6 +91,10 @@ public class BookDao extends HelperFunctions implements Dao<Book, Integer> {
 				ResultSet rsGenKeys = ps.getGeneratedKeys();
 				
 				while (rsGenKeys.next()) {
+					
+					print("=====>");
+					print(rsGenKeys.getObject(1));
+					print(rsGenKeys.getInt(1));
 					
 					print(rsGenKeys.toString());
 					obj.setBook_id(rsGenKeys.getInt(1));

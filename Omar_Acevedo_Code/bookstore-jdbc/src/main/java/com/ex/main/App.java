@@ -20,15 +20,24 @@ public class App extends HelperFunctions {
 	private static List<Book> booksList;
 
 	private static boolean success = false;
-	private static String genreName = "Motivation";
+	private static String genreName = "Motivation8";
 	private static String[] genreList;
 	
+//	public class Test{     
+//		public static void testInts(Integer obj, int var){         
+//			obj = var++;         
+//			obj++;     
+//			}     public static void main(String[] args) {         Integer val1 = new Integer(5);         int val2 = 9;         testInts(val1++, ++val2);         System.out.println(val1+" "+val2);     } }            
+//	
+//	
 	
 	public static void main(String[] args) {
 		
-		StringBuilder b1 = new StringBuilder("snorkler");
-		StringBuilder b2 = new StringBuilder("yoodler");
-		print(b1);
+		 
+		// when there is no connection to db.
+		// try and catch exception SQLRecoverableException
+        
+
 		
 		
 // 		Display genres
@@ -55,7 +64,7 @@ public class App extends HelperFunctions {
 		showBooks();
 		
 //		Create book
-		int bookId = createBook(new Book("839-99-47382-30-1", "Highly Effective People", 31.99, genreId, 1));
+		int bookId = createBook(new Book("829-70-41322-30-1", "Highly Effective People", 31.99, genreId, 1));
 		print("Book id: " + bookId + " successfully created.");
 
 	}

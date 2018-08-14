@@ -56,6 +56,7 @@ public class GenreDao extends HelperFunctions implements Dao<Genre, Integer> {
 			String query = "select * from b_genre where genre_id = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1,  id);
+			
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
