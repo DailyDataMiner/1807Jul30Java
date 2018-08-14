@@ -48,19 +48,19 @@ public class App extends HelperFunctions {
 //		print("LOGIN ? -> YES/NO");
 // 		ASK FOR USER LOGIN CREDENTIALS
 		
-		print("    2) Sign Up | 1) Log In");
+		print("    1) Log In | 2) Sign Up ");
 		
 		String option = readFromUser.next();
 		
 		do {
 			if ( option.equals("2") ) {	// Sign Up chosen
 				
-				User newUserObj = UserUI.display();
+				User newUserObj = UserUI.display();	// rethink where this should go.
 				
 				// stupidiest condition ever .. change this; redefine it
 				if (newUserObj.getUserid() > 0) {
 					
-					print("    WANT TO CREATE ACCOUNT NOW? (y/s)");
+					print("    WANT TO CREATE ACCOUNT NOW? (y/n)");
 					_createAccount = (readFromUser.next().equals("y") ? true : false);
 					
 					if (_createAccount) {
@@ -81,6 +81,7 @@ public class App extends HelperFunctions {
 						
 					} else {
 						print("in the else line... _createAccount -> " + _createAccount); 
+						_continueInLogInPage = true;
 					}
 				}
 				
