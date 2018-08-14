@@ -6,7 +6,8 @@ public class AccountAccountType {
 	private int accountid;
 	private int accounttypesid;
 	private double balance;
-	
+	private String accountTypeName = "";	// This is custom here, ... meaning; is not as a table column
+
 	public AccountAccountType() {
 		super();
 	}
@@ -16,6 +17,15 @@ public class AccountAccountType {
 		this.accountid = accountid;
 		this.accounttypesid = accounttypesid;
 		this.balance = balance;
+	}
+	
+	//	This one is setting/passing the Account Type Name
+	public AccountAccountType(int accountid, int accounttypesid, double balance, String accountTypeName) {
+		super();
+		this.accountid = accountid;
+		this.accounttypesid = accounttypesid;
+		this.balance = balance;
+		this.accountTypeName = accountTypeName;
 	}
 	
 	public AccountAccountType(int account_accounttypeid, int accountid, int accounttypesid, double balance) {
@@ -57,11 +67,20 @@ public class AccountAccountType {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
+	
+	public String getAccountTypeName() {
+		return accountTypeName;
+	}
+
+	public void setAccountTypeName(String accountTypeName) {
+		this.accountTypeName = accountTypeName;
+	}
 
 	@Override
 	public String toString() {
 		return "AccountAccountType [account_accounttypeid=" + account_accounttypeid + ", accountid=" + accountid
-				+ ", accounttypesid=" + accounttypesid + ", balance=" + balance + "]";
+				+ ", accounttypesid=" + accounttypesid + ", balance=" + balance 
+				+ ", accountTypeName=" + accountTypeName + "]";
 	}
 	
 }

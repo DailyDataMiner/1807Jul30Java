@@ -27,11 +27,12 @@ public class Account extends AccountAccountType  {
 	}
 	
 	public Account(int accountid, String account_number, int userid, String status, 
-				   int accounttypesid, double balance) {
+				   int accounttypesid, double balance, String accountTypeName) {
 		
 		//	This is going to also set the object instance constructor of the 
 		//	extended AccountAccountType class 
-		super(accountid, accounttypesid, balance);
+		super(accountid, accounttypesid, balance, accountTypeName);
+		
 		this.accountid = accountid;
 		this.account_number = account_number;
 		this.userid = userid;
@@ -80,7 +81,7 @@ public class Account extends AccountAccountType  {
 
 	@Override
 	public String toString() {
-		return "Account [accountid=" + accountid + ", account_number=" + account_number + ", userid=" + userid
+		return "Account Info [accountid=" + accountid + ", account_number=" + account_number + ", userid=" + userid
 				+ ", status=" + status + "]";
 	}
 	

@@ -87,7 +87,7 @@ public class AccountDao implements Dao<Account, Integer> {
 			
 			CallableStatement cs = conn.prepareCall(call_procedure);
 			
-//			cs.registerOutParameter(1, id);
+//			cs.registerOutParameter(1, id);	// throws error... nonono is an out param, and prc do not use out as first param.
 			cs.setInt(1,  id);
 			cs.registerOutParameter(2, OracleTypes.CURSOR);
 			cs.execute();
@@ -97,27 +97,16 @@ public class AccountDao implements Dao<Account, Integer> {
 			
 			while ( rs.next() ) {
 				
-				System.out.println(rs.getInt("ACCOUNTID"));
-				System.out.println(rs.getString("ACCOUNT_NUMBER"));
-				System.out.println(rs.getInt("USERID"));
-				System.out.println(rs.getString("STATUS"));
-				System.out.println(rs.getInt("ACCOUNTTYPESID"));		// id of account type
-				System.out.println(rs.getDouble("BALANCE"));
-				
 				accountObj = new Account(rs.getInt("ACCOUNTID"), 
 										 rs.getString("ACCOUNT_NUMBER"), 
 										 rs.getInt("USERID"), 
 										 rs.getString("STATUS"),
 										 rs.getInt("ACCOUNTTYPESID"),		// id of account type
-										 rs.getDouble("BALANCE"));
+										 rs.getDouble("BALANCE"),
+										 rs.getString("ACCOUNTTYPE"));
 				
-//				rs.getInt("ACCOUNTTYPESID")	// id of account type
 //				rs.getString("ACCOUNTTYPE") // name of account type
 //				rs.getInt("ACCOUNT_ACCOUNTTYPEID")	// Do I need this?
-				System.out.println("accountObj -> " + accountObj.toString());
-				System.out.println(accountObj.getAccounttypesid());
-				System.out.println(accountObj.getBalance());
-				System.out.println(rs.getString("ACCOUNTTYPE"));
 			}
 			
 			

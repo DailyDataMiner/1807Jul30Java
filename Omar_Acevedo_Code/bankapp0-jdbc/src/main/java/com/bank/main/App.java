@@ -96,7 +96,7 @@ public class App extends HelperFunctions {
 					_continueInLogInPage = true;
 
 				} else {
-					print("You can now continue...");
+					print("\nYou can now continue...");
 					
 					Account accountObj = null;
 					
@@ -105,8 +105,11 @@ public class App extends HelperFunctions {
 					
 					accountObj = AccountUI.getAccountInfo(userObj.getUserid());
 					
-					print("This is your Account Info -> ");
+					//	Show account info.
 					print(accountObj.toString());
+					print("  Accounttypesid -> " + accountObj.getAccounttypesid());
+					print("  Account Type -> " + accountObj.getAccountTypeName());
+					print("  Balance -> $" + accountObj.getBalance() + "\n");
 					
 					_continueInLogInPage = false;
 				}
