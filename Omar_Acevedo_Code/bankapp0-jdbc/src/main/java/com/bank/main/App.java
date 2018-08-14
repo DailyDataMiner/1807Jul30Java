@@ -7,6 +7,7 @@ import com.bank.pojos.Account;
 import com.bank.pojos.Person;
 import com.bank.pojos.User;
 import com.bank.userinteractions.AccountUI;
+import com.bank.userinteractions.TransactionUI;
 import com.bank.userinteractions.UserUI;
 import com.bank.utils.HelperFunctions;
 
@@ -43,8 +44,9 @@ public class App extends HelperFunctions {
 		boolean _continueInLogInPage = true;
 		String userResponse;
 		Scanner readFromUser = new Scanner(in);
+		Account accountObj = null;
 		
-		print(" WELCOME TO MY PROGRAM ");
+		print(" \nWELCOME TO MY PROGRAM ");
 //		print("LOGIN ? -> YES/NO");
 // 		ASK FOR USER LOGIN CREDENTIALS
 		
@@ -65,7 +67,6 @@ public class App extends HelperFunctions {
 					
 					if (_createAccount) {
 						
-						Account accountObj;
 						
 		// 				Retrieve newly created user to use in creation of account
 		//				User newUserObj = UserUI.display();
@@ -91,22 +92,20 @@ public class App extends HelperFunctions {
 				
 				print(" Welcome " + userObj.getUsername() + "!");
 				print(" " + userObj.toString());
+				print(" user id is -> " + userObj.getUserid());
+				print(userObj.getUserid() == 0);
 				
 				if (userObj.getUserid() == 0)  {
 					print("Your user does not exist here.\nTry again");
 					_continueInLogInPage = true;
 
 				} else {
-					print("\nYou can now continue...");
 					
-					Account accountObj = null;
-					
-// 					here I get the account info from the userObj
-//					accountObj = AccountUI... // this will return a new instance of Account object. ?
-					
+// 					Get account info from the userObj
+//					return a new instance of Account object. ?
 					accountObj = AccountUI.getAccountInfo(userObj.getUserid());
 					
-					//	Show account info.
+//					Show account info.
 					print(accountObj.toString());
 					print("  Accounttypesid -> " + accountObj.getAccounttypesid());
 					print("  Account Type -> " + accountObj.getAccountTypeName());
@@ -119,17 +118,21 @@ public class App extends HelperFunctions {
 			
 		} while (_continueInLogInPage);
 		
-		// log in and log out(end interaction with the app and have transaction persisted)
+		
+//		Log in and log out(end interaction with the app and have transaction persisted)
 		print(" These are the options: ");
+		
 		
 		// if creating user, you can ask if account has been created.
 		// here, part of the account creation is creating a user, which will also add data to persons table
 		// create one or more account(s) of specified types
 		print(" 1 - CREATE/REGISTER NEW ACCOUNT ");
 		
+		
 		// user must be able to withdraw and deposit money 
 		print(" 2 - DO TRANSACTION ( deposit, withdrawal, transfer money  ");
 
+		
 		// EXIT application? ... log out
 		print(" 3 - EXIT application? ... (log out)");
 		
@@ -139,20 +142,25 @@ public class App extends HelperFunctions {
 		switch (userResponse) {
 			case "1":
 				print("\t --> You selected 1.");
-				// do stuff like create user...person
+/* 				
+ * 				- Do stuff like create user (and/or person?)
+ *				- Remember, a user can create more than one account. 				
+ */
 				AccountUI.display();
 				_flag = true;
 				break;
+				
+				
 			case "2":
 				print("You selected 2; let's do a transaction");
-				print("What type of transaction do you want to make ( 1.deposit, 2.withdrawal, 3.transfer money ) ?");
-				// read from user to see what transaction the user wants to make
-				// call function and pass accountObj as argument to a TransactionUI; which uses TransactionDao
-				print("What type of transaction do you want to make ( 1.deposit, 2.withdrawal, 3.transfer money ) ?");
-				// line above will go insie doTransaction() ... ?
-//				TransactionUI.doTransaction();
+/* 				
+ * 				- Read from user to see what transaction the user wants to make			
+ */			
+				TransactionUI.doTransactions(accountObj);
 				_flag = true;
 				break;
+				
+				
 			case "3":
 				print("You selected 3. you are going to exit/log out the app.");
 				// do stuff like create user...person

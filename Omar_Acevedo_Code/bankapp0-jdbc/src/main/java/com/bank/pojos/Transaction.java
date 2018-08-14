@@ -3,18 +3,23 @@ package com.bank.pojos;
 public class Transaction {
 
 	private int transactionid;
+	
+//	DateTime that transaction occurred.
 	private String datetime;
 	
-//	WITHDRAWAL, DEPOSIT, TRANSFER ( CHECKING -> SAVINGS; SAVIGS -> CHECKING )
+//	Type of transaction -> WITHDRAWAL, DEPOSIT, TRANSFER ( CHECKING -> SAVINGS; SAVIGS -> CHECKING ).
 	private String type;
 	
+//	Amount of money used in transaction ( whether a withdrawal, deposit, transfer ).
 	private double amount;
+	
+//	Account that did the transaction.
 	private int account_accounttypeid;
 	
 	public Transaction() {
 		super();
 	}
-
+	
 	public Transaction(String datetime, String type, double amount, int account_accounttypeid) {
 		super();
 		this.datetime = datetime;

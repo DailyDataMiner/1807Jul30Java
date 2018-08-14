@@ -20,9 +20,10 @@ public class AccountAccountType {
 	}
 	
 	//	This one is setting/passing the Account Type Name
-	public AccountAccountType(int accountid, int accounttypesid, double balance, String accountTypeName) {
+	public AccountAccountType(int account_accounttypeid, int accountid, int accounttypesid, double balance, String accountTypeName) {
 		super();
 		this.accountid = accountid;
+		this.account_accounttypeid = account_accounttypeid;
 		this.accounttypesid = accounttypesid;
 		this.balance = balance;
 		this.accountTypeName = accountTypeName;

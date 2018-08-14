@@ -92,6 +92,7 @@ public class AccountDao implements Dao<Account, Integer> {
 			cs.registerOutParameter(2, OracleTypes.CURSOR);
 			cs.execute();
 			
+			
 			// out cursor ?
 			ResultSet rs = (ResultSet)cs.getObject(2); // out cursor ?
 			
@@ -101,10 +102,11 @@ public class AccountDao implements Dao<Account, Integer> {
 										 rs.getString("ACCOUNT_NUMBER"), 
 										 rs.getInt("USERID"), 
 										 rs.getString("STATUS"),
+										 rs.getInt("ACCOUNT_ACCOUNTTYPEID"),// Needed for transactions (transactions table uses this as id as fk)
 										 rs.getInt("ACCOUNTTYPESID"),		// id of account type
 										 rs.getDouble("BALANCE"),
 										 rs.getString("ACCOUNTTYPE"));
-				
+			
 //				rs.getString("ACCOUNTTYPE") // name of account type
 //				rs.getInt("ACCOUNT_ACCOUNTTYPEID")	// Do I need this?
 			}

@@ -68,6 +68,7 @@ public class UserUI extends HelperFunctions {
 		
 		String _username;
 		_username = readFromUser.next();
+//		_username = readFromUser.nextLine();
 		
 		print("  Password: ");
 		String _password;
