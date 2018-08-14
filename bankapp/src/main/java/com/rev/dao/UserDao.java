@@ -1,10 +1,5 @@
 package com.rev.dao;
 
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.sql.Statement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +8,6 @@ import com.rev.pojos.User;
 import com.rev.util.ConnectionFactory;
 
 public class UserDao {
-
-	public static void main(String[] args) {
-		List<User> users = findAll();
-		for(User u : users) {
-			System.out.println(u);
-		}
-//		System.out.println(findOne(5));
-//		System.out.println(findUser("JohnSmith"));
-	}
 
 	public static List<User> findAll() {
 		List<User> users = new ArrayList<User>();
@@ -75,7 +61,6 @@ public class UserDao {
 				u.setUserpassword(info.getString(5));
 
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -157,7 +142,6 @@ public class UserDao {
 		}
 		catch (SQLException e) {
 			return null;
-//			e.printStackTrace();
 		}
 		return obj;
 	}

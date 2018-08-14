@@ -46,8 +46,6 @@ public class AccountService {
 		
 		withdrawal.setAccountid(accountToWithdrawFrom);
 		withdrawal.setAmountToWithdraw(amountToWithdraw);
-
-//		AccountDao.Withdraw(accountToWithdrawFrom, amountToWithdraw);
 		
 		if(AccountDao.Withdraw(accountToWithdrawFrom, amountToWithdraw, loggedInUser)) {
 			System.out.println("You have withdrawn $" + amountToWithdraw + "0");
@@ -63,7 +61,15 @@ public class AccountService {
 		
 		Scanner iceCave = new Scanner(System.in);
 		String s = iceCave.nextLine();
-		int option = Integer.parseInt(s);
+		
+		int option = 0;
+		try {
+			option = Integer.parseInt(s);
+		}
+		catch(NumberFormatException e){
+			System.out.println("You must enter 1 or 2!\n");
+			openAccount(loggedInUser);
+		}
 
 		if(option != 1 && option != 2 || s == null) {
 			System.out.println("Sorry, you must enter 1 or 2!");
@@ -83,26 +89,8 @@ public class AccountService {
 		newAccount.setAccounttype(typeOfAccountToMake);
 		
 		AccountDao.save(newAccount, loggedInUser);
-		
 		UserService.welcomeUserMenu(loggedInUser);
 		
 		iceCave.close();
 	}
-	
-	public static User easyAccess(User loggedInUser) {
-		
-		
-		
-		return loggedInUser;
-	}
-	
-	public static void openCheckingAccount(User loggedInUser) {
-//		CheckingAccount sa = new CheckingAccount();
-//		
-//		sa.setUserid(loggedInUser.getUserid());
-//		sa.setAmount(0);
-//		
-//		SavingsAccountDao.save(sa, loggedInUser);
-	}
-	
 }

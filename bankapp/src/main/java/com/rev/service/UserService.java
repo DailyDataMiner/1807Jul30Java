@@ -56,8 +56,6 @@ public class UserService {
 		addedUser.setUsername(uname);
 		addedUser.setUserpassword(upass);
 
-//		userScanner.close();
-
 		User checkedUser = UserDao.save(addedUser);
 		
 		if(checkedUser == null) {
@@ -74,6 +72,7 @@ public class UserService {
 		
 		int loggedInUsersID = loggedInUser.getUserid();
 		List<Account> accounts = AccountDao.findAllOfUsersAccounts(loggedInUsersID);
+		int numberOfAccounts = accounts.size();
 		
 		System.out.println("\nHello " + loggedInUser.getFirstname() + "\n");
 		System.out.println("Your Accounts: \n");
@@ -83,11 +82,18 @@ public class UserService {
 		}
 		
 		System.out.println("\nWhat would you like to do?\n" + "Enter 1 to make a deposit\n"
-				+ "Enter 2 to make a withdrawal\n" + "Enter 3 to open a new account\n" + "Enter 4 to close the program\n");
+				+ "Enter 2 to make a withdrawal\n" + "Enter 3 to open a new account\n" + "Enter 4 to log out\n");
 		
 		Scanner iceCave = new Scanner(System.in);
 		String s = iceCave.nextLine();
-		int option = Integer.parseInt(s);
+		int option = 0;
+		try {
+			option = Integer.parseInt(s);
+		}
+		catch(NumberFormatException e){
+			System.out.println("Sorry, you must enter a number between 1 and 4!\n");
+			welcomeUserMenu(loggedInUser);
+		}
 
 		if(option != 1 && option != 2 && option != 3 && option != 4 || s == null) {
 			System.out.println("Sorry, you must enter a number between 1 and 4!");
@@ -96,16 +102,29 @@ public class UserService {
 
 		switch (option) {
 		case 1:
-			AccountService.makeDeposit(loggedInUser);
+			if(numberOfAccounts != 0) {
+				AccountService.makeDeposit(loggedInUser);
+			}
+			else if(numberOfAccounts == 0) {
+				System.out.println("You have no accounts!");
+				welcomeUserMenu(loggedInUser);
+			}
 			break;
 		case 2:
-			AccountService.makeWithdrawal(loggedInUser);
+			if(numberOfAccounts != 0) {
+				AccountService.makeWithdrawal(loggedInUser);
+			}
+			else if(numberOfAccounts == 0) {
+				System.out.println("You have no accounts!");
+				welcomeUserMenu(loggedInUser);
+			}
 			break;
 		case 3:
 			AccountService.openAccount(loggedInUser);
 			break;
 		case 4:
-			App.closeProgram(option);
+			String[] args = new String[1];
+			App.main(args);
 			break;
 		}
 		iceCave.close();

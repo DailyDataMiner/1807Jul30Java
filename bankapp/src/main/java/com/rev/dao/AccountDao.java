@@ -5,24 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rev.pojos.Account;
-import com.rev.pojos.SavingsAccount;
 import com.rev.pojos.User;
 import com.rev.service.AccountService;
 import com.rev.util.ConnectionFactory;
 
 public class AccountDao {
-	public static void main(String[] args) {
-
-//		User testUser = new User();
-//		testUser.setUserid(5);
-
-//		List<Account> accounts = findAllOfUsersAccounts(5); //String userid
-//		for (Account a : accounts) {
-//			System.out.println(a);
-//		}
-
-//		System.out.println(findOne(5));
-	}
 
 	public static List<Account> findAllOfUsersAccounts(int UserId) {
 		
@@ -30,7 +17,6 @@ public class AccountDao {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "select * from accounts where userid = ?";
-			// where userid = ?
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, UserId);
@@ -58,32 +44,6 @@ public class AccountDao {
 		return accounts;
 	}
 
-	public static Account findAccountToGetID(String username, String password) {
-		User u = null;
-		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-			String sql = "select * from users where username = ? and userpassword = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ResultSet info = ps.executeQuery();
-
-			while (info.next()) {
-				u = new User();
-
-				u.setUserid(info.getInt(1));
-				u.setFirstname(info.getString(2));
-				u.setLastname(info.getString(3));
-				u.setUsername(info.getString(4));
-				u.setUserpassword(info.getString(5));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Errors Happened!!!");
-		}
-		return u;
-	}
-
 	public static Account save(Account newAccount, User loggedInUser) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -98,11 +58,6 @@ public class AccountDao {
 			ps.setDouble(3, 0d);
 			ps.executeUpdate();
 
-			ResultSet pk = ps.getGeneratedKeys();
-
-//			while (pk.next()) {
-//				obj.setAccountid(pk.getInt(1));
-//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -123,11 +78,6 @@ public class AccountDao {
 			ps.setInt(2, accountToDepositInto);
 			ps.executeUpdate();
 
-//			ResultSet pk = ps.getGeneratedKeys();
-
-//			while (pk.next()) {
-//				obj.setAccountid(pk.getInt(1));
-//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -150,9 +100,7 @@ public class AccountDao {
 			System.out.println("Can't withdraw that much!");
 			AccountService.makeWithdrawal(loggedInUser);
 			return false;
-//			e.printStackTrace();
 		}
 		return true;
 	}
-	
 }
