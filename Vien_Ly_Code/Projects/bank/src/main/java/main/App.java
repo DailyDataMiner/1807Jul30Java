@@ -28,72 +28,89 @@ public class App {
 	}
 	
 	static void mainMenu() {
-		System.out.println("-999 end program");
 		System.out.println("1 new user");
 		System.out.println("2 login");
-		int option = Integer.parseInt(scan.nextLine());
+		System.out.println("-1 to exit the program");
+
+		int option = 0;
+		try {
+			option = Integer.parseInt(scan.nextLine());
+			if (option != -1 && option != 1 && option != 2) {
+				throw new NumberFormatException();
+			}
+		} catch(NumberFormatException e) {
+			System.out.println("input must be 1 or 2");
+			mainMenu();
+		}
+		
 		switch(option) {
 		case 1:
 			createNewCustomer();
-			
 			break;
 		case 2:
 			logIn();
 			break;
+		case -1:
+			System.exit(0);
 		default:
-			break;
+			mainMenu();
 		}
 		mainMenu();
 	}
 	
 	static void menu(){
 		int option = 0;
-		System.out.println("3 register account");
-		System.out.println("4 show all accounts");
-		System.out.println("5 check specific account");
-		System.out.println("6 to withdraw from an account");
-		System.out.println("7 to deposit to an account");
-		System.out.println("8 to transfer");
-		System.out.println("9 to close an account");
+		System.out.println("1 register account");
+		System.out.println("2 show all accounts");
+		System.out.println("3 check specific account");
+		System.out.println("4 to withdraw from an account");
+		System.out.println("5 to deposit to an account");
+		System.out.println("6 to transfer");
+		System.out.println("7 to close an account");
 		System.out.println("0 logout");
+		System.out.println("-1 to exit the program");
+
 		try {
 			option = Integer.parseInt(scan.nextLine());
+			if (option < -1 || option > 7) {
+				throw new NumberFormatException();
+			}
 		} catch(NumberFormatException e) {
-			System.out.println("input must be 1-6");
+			System.out.println("input must be -1 to 7");
 			menu();
 		}
 		
 		switch(option) {
-			case 3:
+			case 1:
 				registerNewAccount();
 				break;
-			case 4:
+			case 2:
 				getAllCustomerAccounts();
 				break;
-			case 5:
+			case 3:
 				findAccountById();
 				break;
-			case 6:
+			case 4:
 				withdraw();
 				break;
-			case 7:
+			case 5:
 				deposit();
 				break;
-			case 8:
+			case 6:
 				transfer();
 				break;
-			case 9:
+			case 7:
 				delete();
 				break;
 			case 0:
 				logOut();
 				break;
-			case -999:
+			case -1:
 				System.exit(0);
 			default:
 				return;
 		}
-		mainMenu();
+		menu();
 	}
 
 	static void withdraw() {
@@ -167,7 +184,6 @@ public class App {
 				}
 				accService.delete(closing);
 				currentCustomer.removeAccount(closing);
-				System.out.println(currentCustomer.getAccounts());
 			}
 		} else {
 			try {
@@ -190,19 +206,31 @@ public class App {
 				System.out.println("amount");
 				double amount = Double.parseDouble(scan.nextLine());
 				if (from.getBalance() < amount) {
-					System.out.println("amount exceeds your available fund in account# " + from.getId());
+					try {
+						throw new NotEnoughFundException(fromId);
+					} catch (NotEnoughFundException e) {
+						System.out.println(e.getMessage());
+					}
 				} else {
 					from.setBalance(from.getBalance() - amount);
 					to.setBalance(to.getBalance() + amount);
 					accService.update(from);
 					accService.update(to);
-					System.out.println(currentCustomer.getAccounts());
 				}
 			} else {
-				System.out.println("invalid destination account");
+				try {
+					throw new Exception("Invalid destination account");
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		} else {
+			try {
+				throw new NoSuchAccountException(fromId);
+			} catch (NoSuchAccountException e) {
+				System.out.println(e.getMessage());
 			}
 		}
-		menu();
 	}
 	
 	static void findAccountById() {
@@ -230,9 +258,6 @@ public class App {
 		double amount = Double.parseDouble(scan.nextLine());
 		Account newAccount = accService.save(new Account(amount, currentCustomer.getId()));
 		currentCustomer.addAccount(newAccount);
-		for (Account acc : currentCustomer.getAccounts()) {
-			System.out.println(acc);
-		}
 	}
 	
 	static void createNewCustomer() {
