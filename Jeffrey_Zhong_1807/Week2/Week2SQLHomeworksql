@@ -1,0 +1,280 @@
+--Jeffrey Zhong Week 2 SQL Homework 8/7 Java
+
+--2.1 SELECT
+--Task – Select all records from the Employee table.
+Select * From Employee;
+--Task – Select all records from the Employee table where last name is King.
+Select * From Employee Where LastName = 'King';
+--Task – Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL.
+Select * From Employee Where firstname = 'Andrew' and REPORTSTO IS NULL;
+ 
+--2.2 ORDER BY
+--Task – Select all albums in Album table and sort result set in descending order by title.
+Select * From Album Order by title desc;
+--Task – Select first name from Customer and sort result set in ascending order by city
+Select Firstname From Customer Order by City Asc;
+--2.3 INSERT INTO
+--Task – Insert two new records into Genre table
+Insert Into Genre VALUES (26, 'HipNewGenre')
+Insert Into Genre VALUES (27,'HipHopNewGenre')
+--Task – Insert two new records into Employee table
+Insert into CHINOOK.EMPLOYEE (EMPLOYEEID,LASTNAME,FIRSTNAME,TITLE,REPORTSTO,BIRTHDATE,HIREDATE,ADDRESS,CITY,STATE,COUNTRY,POSTALCODE,PHONE,FAX,EMAIL) values (11,'Zhong','Jeffrey','Sales Support Agent',2,to_date('19-SEP-47 00:00','DD-MON-RR HH24:MI'),to_date('03-MAY-03 00:00','DD-MON-RR HH24:MI'),'683 10 Street SW','Calgary','AB','Canada','T2P 5G3','+1 (403) 263-4423','+1 (403) 263-4289','margaret@chinookcorp.com');
+Insert into CHINOOK.EMPLOYEE (EMPLOYEEID,LASTNAME,FIRSTNAME,TITLE,REPORTSTO,BIRTHDATE,HIREDATE,ADDRESS,CITY,STATE,COUNTRY,POSTALCODE,PHONE,FAX,EMAIL) values (10,'Park','Margaret','Sales Support Agent',2,to_date('19-SEP-47 00:00','DD-MON-RR HH24:MI'),to_date('03-MAY-03 00:00','DD-MON-RR HH24:MI'),'683 10 Street SW','Calgary','AB','Canada','T2P 5G3','+1 (403) 263-4423','+1 (403) 263-4289','margaret@chinookcorp.com');
+
+--Task – Insert two new records into Customer table
+Insert into CHINOOK.CUSTOMER (CUSTOMERID,FIRSTNAME,LASTNAME,COMPANY,ADDRESS,CITY,STATE,COUNTRY,POSTALCODE,PHONE,FAX,EMAIL,SUPPORTREPID) values (60,'Jeffrey','Zhong',null,'1548 Saranell Ave','Fort Worth','IL','USA','60540','+1 (817) 924-7272',null,'ricunningham@hotmail.com',4);
+Insert into CHINOOK.CUSTOMER (CUSTOMERID,FIRSTNAME,LASTNAME,COMPANY,ADDRESS,CITY,STATE,COUNTRY,POSTALCODE,PHONE,FAX,EMAIL,SUPPORTREPID) values (61,'Wesely','Zhong',null,'2211 W Berry Street','Fort Worth','TX','USA','76110','+1 (817) 924-7272',null,'ricunningham@hotmail.com',4);
+
+--2.4 UPDATE
+--Task – Update Aaron Mitchell in Customer table to Robert Walter
+Update Customer 
+SET FirstName = 'Robert', LastName = 'Walter'
+Where FirstName = 'Aaron' and LastName = 'Mitchell'
+--Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
+Update Artist 
+SET Name = 'CCR'
+Where Name = 'Creedence Clearwater Revival'
+--2.5 LIKE
+--Task – Select all invoices with a billing address like “T%”
+Select * From Invoice Where BillingAddress Like 'T%';
+--2.6 BETWEEN
+--Task – Select all invoices that have a total between 15 and 50
+Select * From Invoice Where Total Between 15 and 50;
+--Task – Select all employees hired between 1st of June 2003 and  1st of March 2004
+Select * From Employee Where HireDate Between '01-JUN-03' and '01-MAR-04';
+--2.7 DELETE
+--Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints
+--that rely on this, find out how to resolve them).
+Alter Table Invoice DROP CONSTRAINT FK_INVOICECUSTOMERID
+DELETE FROM CUSTOMER WHERE FirstName = 'Robert' and LastName = 'Walter'
+--SQL Work Book
+--Copyright © Revature Page 4
+--3.0 SQL Functions
+--In this section you will be using the Oracle system functions, as well as your own functions, to perform
+--various actions against the database
+--3.1 System Defined Functions
+--Task – Create a function that returns the current time.
+create or replace function getTime
+return sys_refcursor is c1 sys_refcursor;
+    begin
+    open c1 
+    for 
+    SELECT Sysdate From Dual;
+return c1;
+end;
+
+select 
+
+Select getTime
+From Dual
+--Task – create a function that returns the length of a mediatype from the mediatype table
+Create Or Replace Function MediaLength(MLID NUMBER)      
+Return NUMBER is mediatypelength NUMBER := 0;
+BEGIN
+SELECT Length(NAME) into mediatypelength FROM mediatype WHERE MEDIATYPEID = MLID;
+return mediatypelength;
+END;
+
+select MediaLength(1) From dual
+--3.2 System Defined Aggregate Functions
+--Task – Create a function that returns the average total of all invoices
+Create Or Replace Function InvoiceAverage    
+Return NUMBER is invAvg NUMBER := 0;
+BEGIN
+SELECT Avg(Total) into invAvg FROM Invoice;
+return invAvg;
+END;
+
+Select InvoiceAverage From Dual
+
+--Task – Create a function that returns the most expensive track
+Create Or Replace Function MostExpTrack    
+Return NUMBER is ExpTrack NUMBER := 0;
+BEGIN
+SELECT Max(UnitPrice) into ExpTrack FROM Track;
+return ExpTrack;
+END;
+
+Select MostExpTrack From Dual
+--3.3 User Defined Functions
+--Task – Create a function that returns the average price of invoiceline items in the invoiceline table
+CREATE OR REPLACE FUNCTION avgILI
+RETURN NUMBER IS avgPrice
+BEGIN
+SELECT AVG(UNITPRICE)INTO avgPrice FROM Invoiceline
+
+--3.4 User Defined Table Valued Functions
+--Task – Create a function that returns all employees who are born after 1968.
+
+    create or replace function getEmpAft
+    return sys_refcursor is c1 sys_refcursor;
+        begin
+        open c1 
+        for 
+        SELECT CONCAT(CONCAT(FirstName,' '), LastName) as name
+        FROM EMPLOYEE
+        WHERE BirthDate > '01-JAN-68';
+    return c1;
+    END;
+
+select getEmpAft
+from dual
+--4.0 Stored Procedures  In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters. 
+--4.1 Basic Stored Procedure Task – Create a stored procedure that selects the first and last names of all the employees. 
+create or replace Procedure get_Employee_Name
+IS
+Emp_Temp EMPLOYEE.FirstName%TYPE;
+CURSOR Emp_c 
+IS  
+    Select CONCAT(CONCAT(FirstName,' '), LastName) FROM EMPLOYEE;
+BEGIN
+OPEN Emp_c;
+    LOOP
+        FETCH Emp_c INTO Emp_Temp;
+        EXIT WHEN Emp_c%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(Emp_Temp);            
+    END LOOP;
+CLOSE Emp_c;
+END;
+
+execute get_Employee_Name;
+--4.2 Stored Procedure Input Parameters 
+--Task – Create a stored procedure that updates the personal information of an employee. 
+Create or replace Procedure updateEmpHD(empID Number)
+IS
+Begin
+update Employee set HireDate = sysdate where employeeID = empID;
+end;
+
+execute updateEMPHD(11);
+--Task – Create a stored procedure that returns the managers of an employee. 
+create or replace Procedure get_Manager(empID NUMBER)
+IS
+Emp_Temp EMPLOYEE.FirstName%TYPE;
+CURSOR Emp_c 
+IS  
+   Select Concat(Concat(manager.FirstName,' '),manager.LastName) as Manager
+   From Employee manager Inner join Employee emp ON manager.employeeid = emp.reportsto WHERE emp.EmployeeID = empID;
+BEGIN
+OPEN Emp_c;
+    LOOP
+        FETCH Emp_c INTO Emp_Temp;
+        EXIT WHEN Emp_c%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(Emp_Temp);            
+    END LOOP;
+CLOSE Emp_c;
+END;
+
+execute get_Manager(2);
+
+--4.3 Stored Procedure Output Parameters Task – Create a stored procedure that returns the name and company of a customer. 
+create or replace Procedure getCustNameComp
+AS
+Cust_Temp_Name CUSTOMER.FirstName%TYPE;
+Cust_Temp_Comp  CUSTOMER.company%TYPE;
+CURSOR Cust_n
+IS  
+    Select CONCAT(CONCAT(FirstName,' '), LastName) FROM Customer;
+CURSOR Cust_c
+IS  
+    Select COMPANY FROM CUSTOMER;
+BEGIN
+OPEN Cust_n;
+OPEN Cust_c;
+    LOOP
+        FETCH Cust_n INTO Cust_Temp_Name;
+        FETCH Cust_C INTO Cust_Temp_Comp;
+        EXIT WHEN Cust_n%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Name: ' || Cust_Temp_Name ||' Company: ' || Cust_Temp_Comp);
+    END LOOP;
+CLOSE Cust_n;
+CLOSE Cust_c;
+END;
+
+execute getCustNameComp;
+--5.0 Transactions In this section you will be working with transactions. Transactions are usually nested within a stored procedure. 
+--Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them). 
+ALTER TABLE INVOICELINE  DROP Constraint FK_INVOICELINEINVOICEID
+DELETE FROM INVOICE WHERE INVOICEID = 55;
+COMMIT;
+--Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table 
+-- SQL Work Book  
+Create or replace Procedure insertCust
+IS
+Begin
+Insert INTO customer(CUSTOMERID, FIRSTNAME, LASTNAME, EMAIL) VALUES (112,'Andy', 'Zhong','1234@gmail.com');
+end;
+
+execute InsertCust;
+
+-- 
+-- 
+
+-- 
+--6.0 Triggers In this section you will create various kinds of triggers that work when certain DML statements are executed on a table. 
+--6.1 AFTER/FOR Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table. 
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table 
+CREATE or Replace TRIGGER A_F_Trig
+AFTER UPDATE
+ON Album    
+FOR EACH ROW
+BEGIN
+Commit;
+END;
+
+
+
+
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+
+--7.0 JOINS
+--In this section you will be working with combing various tables through the use of joins. You will work
+--with outer, inner, right, left, cross, and self joins.
+--7.1 INNER
+--Task – Create an inner join that joins customers and orders and specifies the name of the customer and
+--the invoiceId.
+Select Concat(Concat(Customer.FirstName,' '),Customer.LastName) as Name, Invoice.InvoiceID from Customer Inner Join 
+Invoice On Customer.CustomerID = Invoice.CustomerID;
+--7.2 OUTER
+--Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId,
+--firstname, lastname, invoiceId, and total.
+Select Customer.FirstName, Customer.LastName, Invoice.InvoiceID, Invoice.Total 
+from customer Full outer join Invoice ON customer.customerID = Invoice.CustomerID
+--7.3 RIGHT
+--Task – Create a right join that joins album and artist specifying artist name and title.
+Select Artist.Name, Album.Title FROM album Right Join Artist ON Artist.ArtistID = Album.ArtistID;
+--7.4 CROSS
+--Task – Create a cross join that joins     album and artist and sorts by artist name in ascending order.
+Select Artist.Name FROM Artist Cross Join Album ORDER BY Artist.Name ASC;
+--7.5 SELF
+--Task – Perform a self-join on the employee table, joining on the reportsto column.
+Select Concat(Concat(manager.FirstName,' '),manager.LastName) as Manager, Concat(Concat(emp.FirstName,' '),emp.LastName) as Employee From Employee manager Inner join Employee emp ON manager.employeeid = emp.reportsto WHERE emp.EmployeeID = 4;
+--7.6 Complicated Join assignment
+--Create an inner join between all tables in the chinook database.
+--Statement that joins all 11 tables in chinook database
+Select Count(*) From Employee
+Inner join Customer
+ON Employee.EmployeeID = CUSTOMER.SUPPORTREPID
+Inner join INVOICE
+ON Customer.CustomerID = Invoice.CustomerID
+Inner join INVOICELINE
+ON  Invoice.INVOICEID = INVOICELINE.INVOICEID 
+Inner join Track
+ON  Invoiceline.TrackID = Track.TrackID
+Inner join Genre
+ON  Track.GenreID = Genre.GenreID
+Inner join Mediatype
+ON  Track.MediatypeID = Mediatype.MediatypeID
+Inner join Album
+ON  Track.AlbumID = Album.AlbumID
+Inner join Artist
+ON  Album.ArtistID = Artist.ArtistID
+Inner join PlayListTrack
+ON  Track.TrackID = PlayListTrack.TrackID
+Inner join PlayList
+ON  PlayListTrack.PlayListID = PlayList.PlayListID;
+
+
+
+
+
