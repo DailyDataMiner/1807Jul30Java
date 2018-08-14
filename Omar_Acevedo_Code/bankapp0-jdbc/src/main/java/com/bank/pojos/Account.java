@@ -25,6 +25,18 @@ public class Account extends AccountAccountType  {
 		this.userid = userid;
 		this.status = status;
 	}
+	
+	public Account(int accountid, String account_number, int userid, String status, 
+				   int accounttypesid, double balance) {
+		
+		//	This is going to also set the object instance constructor of the 
+		//	extended AccountAccountType class 
+		super(accountid, accounttypesid, balance);
+		this.accountid = accountid;
+		this.account_number = account_number;
+		this.userid = userid;
+		this.status = status;
+	}
 
 
 	public int getAccountid() {

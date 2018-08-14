@@ -115,4 +115,16 @@ public class AccountUI extends HelperFunctions {
 		
 	}
 	
+	public static Account getAccountInfo(int p_userid) {
+		
+		// get account info from db using p_userid
+//		accountDao = null;
+		accountDao = new AccountDao();
+//		accountObj = new Account();
+		
+		accountObj = accountDao.read(p_userid);
+		
+		return accountObj;
+	}
+	
 }

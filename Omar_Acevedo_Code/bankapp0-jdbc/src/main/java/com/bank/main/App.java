@@ -102,7 +102,11 @@ public class App extends HelperFunctions {
 					
 // 					here I get the account info from the userObj
 //					accountObj = AccountUI... // this will return a new instance of Account object. ?
-					accountObj = AccountUI.getAccountInfo();
+					
+					accountObj = AccountUI.getAccountInfo(userObj.getUserid());
+					
+					print("This is your Account Info -> ");
+					print(accountObj.toString());
 					
 					_continueInLogInPage = false;
 				}

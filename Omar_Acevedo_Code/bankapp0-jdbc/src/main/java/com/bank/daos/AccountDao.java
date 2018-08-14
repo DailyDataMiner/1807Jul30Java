@@ -1,5 +1,6 @@
 package com.bank.daos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,8 @@ import java.util.List;
 
 import com.bank.pojos.Account;
 import com.bank.utils.ConnectionFactory;
+
+import oracle.jdbc.internal.OracleTypes;
 
 
 public class AccountDao implements Dao<Account, Integer> {
@@ -75,8 +78,55 @@ public class AccountDao implements Dao<Account, Integer> {
 
 	@Override
 	public Account read(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Account accountObj = null;
+		
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			
+			String call_procedure = "{call accountinfo(?, ?)}";
+			
+			CallableStatement cs = conn.prepareCall(call_procedure);
+			
+//			cs.registerOutParameter(1, id);
+			cs.setInt(1,  id);
+			cs.registerOutParameter(2, OracleTypes.CURSOR);
+			cs.execute();
+			
+			// out cursor ?
+			ResultSet rs = (ResultSet)cs.getObject(2); // out cursor ?
+			
+			while ( rs.next() ) {
+				
+				System.out.println(rs.getInt("ACCOUNTID"));
+				System.out.println(rs.getString("ACCOUNT_NUMBER"));
+				System.out.println(rs.getInt("USERID"));
+				System.out.println(rs.getString("STATUS"));
+				System.out.println(rs.getInt("ACCOUNTTYPESID"));		// id of account type
+				System.out.println(rs.getDouble("BALANCE"));
+				
+				accountObj = new Account(rs.getInt("ACCOUNTID"), 
+										 rs.getString("ACCOUNT_NUMBER"), 
+										 rs.getInt("USERID"), 
+										 rs.getString("STATUS"),
+										 rs.getInt("ACCOUNTTYPESID"),		// id of account type
+										 rs.getDouble("BALANCE"));
+				
+//				rs.getInt("ACCOUNTTYPESID")	// id of account type
+//				rs.getString("ACCOUNTTYPE") // name of account type
+//				rs.getInt("ACCOUNT_ACCOUNTTYPEID")	// Do I need this?
+				System.out.println("accountObj -> " + accountObj.toString());
+				System.out.println(accountObj.getAccounttypesid());
+				System.out.println(accountObj.getBalance());
+				System.out.println(rs.getString("ACCOUNTTYPE"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		return accountObj;
 	}
 
 	@Override
