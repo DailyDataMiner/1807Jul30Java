@@ -112,6 +112,7 @@ public class App extends HelperFunctions {
 					print("\t|  Account Number:  " + accountObj.getAccount_number());
 					print("\t|  Account Type:    " + accountObj.getAccountTypeName());
 					print("\t|  Account Balance: $" + accountObj.getBalance());
+					print("\t|  Account Status:  " + accountObj.getStatus());
 					print("\t-----------------------------");
 					
 					_continueInLogInPage = false;

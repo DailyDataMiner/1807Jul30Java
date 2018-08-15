@@ -23,7 +23,7 @@ public class TransactionUI extends HelperFunctions {
 		print("\t|  2 - WITHDRAWAL ");
 		print("\t|  3 - TRANSFER MONEY ");
 		print("\t-------------------------------\n");
-
+		
 		
 		userResponse = readFromUser.next();
 		
@@ -31,25 +31,39 @@ public class TransactionUI extends HelperFunctions {
 		switch (userResponse) {
 		
 			case "1":
-				print("You chose DEPOSIT");
-				print(accountObj.toString());
-				print("Account Type: " + accountObj.getAccountTypeName());
-				print("Account Balance: " + accountObj.getBalance());
-				print("Account Account Type Id: " + accountObj.getAccount_accounttypeid());
 				
-				print("Enter amount to deposit: ");
+				print("\t---Deposit Menu------------");
+				print("-----------------------------");
+				print("\t|	*Account Info");
+				print("-----------------------------");
+				print("\t|  Account Type:    " + accountObj.getAccountTypeName());
+				print("\t|  Account Balance: $" + accountObj.getBalance());
+				print("\t----------------------------");
+				
+				
+				print("\tEnter amount to deposit: ");
 				transactionAmount = readFromUser.nextDouble();
 				
-				// pass accountObj object into dao below
+				
+//				Pass accountObj object into Transaction DAO, for deposit.
 				transactionObj = TransactionDao.deposit(accountObj, transactionAmount);
 				
 				break;
-			case "2":
-				print("You chose WITHDRAWAL");
 				
-				print("Enter amount to withdraw: ");
+			case "2":
+
+				print("\t---Withdrawal Menu------------");
+				print("\t|--Account Info------------");
+				print("\t|  Account Type:    " + accountObj.getAccountTypeName());
+				print("\t|  Account Balance: $" + accountObj.getBalance());
+				print("\t----------------------------");
+				
+				
+				print("\tEnter amount to withdraw: ");
 				transactionAmount = readFromUser.nextDouble();
 				
+				
+//				Pass accountObj object into Transaction DAO, for withdrawal.
 				transactionObj = TransactionDao.withdraw(accountObj, transactionAmount);
 				
 				break;

@@ -105,29 +105,29 @@ public class TransactionDao implements Dao<Transaction, Integer> {
 	}
 	
 	public static Transaction deposit(Account accountObj, double p_transactionAmount) {
-		
-		final String 	transactionType;
-		double 			amount;
+
+/*------------------------------------------------------------------------------------------*/
+//		Insert transaction data using accountObj.
+//		Type of transaction	=>	DEPOSIT
+//		
+//		We're going to pass in parameters to doTransaction function and receive a number.
+//		:	date, transactionType, p_transactionAmount, accountObj.getAccount_accounttypeid()
+/*------------------------------------------------------------------------------------------*/
+
 		Transaction 	transactionObj = null;
 		AccountDao 		accountDao = null;
+		final String 	transactionType;
+		double 			amount;
 		int 			accountAccountTypeId;
+		long 			millis;
+		Date 				date;
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-		
-/*	
-			 Insert transaction data (using obj)
-			 Type of transactions ->
-				WITHDRAWAL, DEPOSIT, TRANSFER ( CHECKING -> SAVINGS; SAVIGS -> CHECKING )
-			
-			 Pass in parameters to procedure that inserts (creates) transaction -> 
-				date, transactionType, p_transactionAmount,  obj.getAccount_accounttypeid()
-*/
-			
-			
-			//	Set vars
-			long millis = System.currentTimeMillis();  
-	        Date date = new java.sql.Date(millis); 
 
+//			Set vars
+			millis = System.currentTimeMillis();  
+	        date = new java.sql.Date(millis); 
+	        
 			transactionType = TransactionType.DEPOSIT.toString();
 			amount = p_transactionAmount;
 			accountAccountTypeId = accountObj.getAccount_accounttypeid();
@@ -138,7 +138,8 @@ public class TransactionDao implements Dao<Transaction, Integer> {
 			
 			CallableStatement cs = conn.prepareCall(call_procedure);
 			
-			cs.registerOutParameter(1, Types.VARCHAR);			
+			cs.registerOutParameter(1, Types.VARCHAR);	// or Types.INTEGER?		
+//			cs.registerOutParameter(1, Types.INTEGER);		
 			cs.setDate(2, date);
 			cs.setString(3,  transactionType);
 			cs.setDouble(4,  amount);
