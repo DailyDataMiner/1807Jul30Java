@@ -36,8 +36,10 @@ public class App extends HelperFunctions {
 		
 	}
 	
+	
 	private static boolean displayMenu() {
-		
+
+//		init vars
 		User userObj;
 		boolean _flag = false;
 		boolean _createAccount = false;
@@ -46,16 +48,15 @@ public class App extends HelperFunctions {
 		Scanner readFromUser = new Scanner(in);
 		Account accountObj = null;
 		
-		print(" \nWELCOME TO MY PROGRAM ");
-//		print("LOGIN ? -> YES/NO");
-// 		ASK FOR USER LOGIN CREDENTIALS
+		print(" \nWELCOME TO THE BANK APPLICATION (v0) ");
+		print("    Press 1 to Log In");
+		print("    Press 2 to Sign Up");
 		
-		print("    1) Log In | 2) Sign Up ");
-		
-		String option = readFromUser.next();
+//		String option = readFromUser.next();
+		int option = readFromUser.nextInt();
 		
 		do {
-			if ( option.equals("2") ) {	// Sign Up chosen
+			if ( option == 2 ) {	// Sign Up chosen
 				
 				User newUserObj = UserUI.display();	// rethink where this should go.
 				
@@ -66,7 +67,6 @@ public class App extends HelperFunctions {
 					_createAccount = (readFromUser.next().equals("y") ? true : false);
 					
 					if (_createAccount) {
-						
 						
 		// 				Retrieve newly created user to use in creation of account
 		//				User newUserObj = UserUI.display();
@@ -86,14 +86,11 @@ public class App extends HelperFunctions {
 					}
 				}
 				
-			} else if ( option.equals("1") ) {
+			} else if ( option == 1 ) {
 				
-				userObj = UserUI.logIn(); // this will return a new instance of User object. ?
+//				Display log in menu options, and this will return a new instance of User object. ?
+				userObj = UserUI.logIn(); 
 				
-				print(" Welcome " + userObj.getUsername() + "!");
-				print(" " + userObj.toString());
-				print(" user id is -> " + userObj.getUserid());
-				print(userObj.getUserid() == 0);
 				
 				if (userObj.getUserid() == 0)  {
 					print("Your user does not exist here.\nTry again");
@@ -101,15 +98,21 @@ public class App extends HelperFunctions {
 
 				} else {
 					
+					print("\tWelcome " + userObj.getUsername() + " (" + userObj.getUserid() + ") !");
+
 // 					Get account info from the userObj
 //					return a new instance of Account object. ?
+//					Show account info.
+					
 					accountObj = AccountUI.getAccountInfo(userObj.getUserid());
 					
-//					Show account info.
-					print(accountObj.toString());
-					print("  Accounttypesid -> " + accountObj.getAccounttypesid());
-					print("  Account Type -> " + accountObj.getAccountTypeName());
-					print("  Balance -> $" + accountObj.getBalance() + "\n");
+					print("\t---Account Info------------");
+//					print(accountObj.toString());
+					print("\t|  User name:       " + userObj.getUsername());
+					print("\t|  Account Number:  " + accountObj.getAccount_number());
+					print("\t|  Account Type:    " + accountObj.getAccountTypeName());
+					print("\t|  Account Balance: $" + accountObj.getBalance());
+					print("\t-----------------------------");
 					
 					_continueInLogInPage = false;
 				}
@@ -120,24 +123,27 @@ public class App extends HelperFunctions {
 		
 		
 //		Log in and log out(end interaction with the app and have transaction persisted)
-		print(" These are the options: ");
+		print("\tWhat would you like to do? ");
+		
+		print("\t---Options------------");
+		
+// 		if creating user, you can ask if account has been created.
+// 		here, part of the account creation is creating a user, which 
+//		will also add data to persons table
+// 		create one or more account(s) of specified types
+		print("\t|  1 - CREATE/REGISTER NEW ACCOUNT ");
 		
 		
-		// if creating user, you can ask if account has been created.
-		// here, part of the account creation is creating a user, which will also add data to persons table
-		// create one or more account(s) of specified types
-		print(" 1 - CREATE/REGISTER NEW ACCOUNT ");
-		
-		
-		// user must be able to withdraw and deposit money 
-		print(" 2 - DO TRANSACTION ( deposit, withdrawal, transfer money  ");
+//		User must be able to withdraw and deposit money 
+		print("\t|  2 - DO TRANSACTION ( deposit, withdrawal, transfer money  ");
 
 		
-		// EXIT application? ... log out
-		print(" 3 - EXIT application? ... (log out)");
+//		EXIT application? ... log out --> go back to log in page
+		print("\t|  3 - EXIT application? ... (log out)");
+		
 		
 		userResponse = readFromUser.next();
-//		userResponse = readFromUser.nextLine();
+		
 		
 		switch (userResponse) {
 			case "1":

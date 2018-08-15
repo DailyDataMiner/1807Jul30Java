@@ -36,12 +36,17 @@ public class TransactionUI extends HelperFunctions {
 				// pass accountObj object into dao below
 				transactionObj = TransactionDao.deposit(accountObj, transactionAmount);
 				
-				
 				break;
 			case "2":
 				print("You chose WITHDRAWAL");
-//				TransactionDao
+				
+				print("Enter amount to withdraw: ");
+				transactionAmount = readFromUser.nextDouble();
+				
+				transactionObj = TransactionDao.withdraw(accountObj, transactionAmount);
+				
 				break;
+				
 			case "3":
 				print("You chose TRANSFER MONEY");
 //				TransactionDao ? 

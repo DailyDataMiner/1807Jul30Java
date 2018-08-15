@@ -68,20 +68,19 @@ public class UserUI extends HelperFunctions {
 		
 		String _username;
 		_username = readFromUser.next();
-//		_username = readFromUser.nextLine();
 		
 		print("  Password: ");
 		String _password;
 		_password = readFromUser.next();
 		
 		
-		//	Get login info (success flag and userid) from db.
+//		Get login info (success flag and userid) from db.
 		_loginInfo 	= userDao.login(_username, _password);
 		_canLogIn 	= _loginInfo[0];
 		_userId 	= _loginInfo[1];
 		
 		
-		//	Verify if user exists
+//		Verify if user exists
 		if (_canLogIn == 1) {
 			
 			userObj.setUserid(_userId);

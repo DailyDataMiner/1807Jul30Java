@@ -120,17 +120,16 @@ public class AccountDao implements Dao<Account, Integer> {
 		return accountObj;
 	}
 
-	@Override
-	public Account update(Account obj) {
+	public Account updateBalance(Account accountObj, String p_transactionType) {
 		
-		int accountId = obj.getAccountid();
-		int accountTypeId = obj.getAccounttypesid();
-		double newBalance = obj.getBalance();
+		int accountId = accountObj.getAccountid();
+		int accountTypeId = accountObj.getAccounttypesid();
+		double newBalance = accountObj.getBalance();
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
 			
-			String call_procedure = "{call updateAccountBlance(?, ?, ?)}";
+			String call_procedure = "{call updateAccountBalance(?, ?, ?, ?)}";
 			
 			
 			CallableStatement cs = conn.prepareCall(call_procedure);
@@ -139,6 +138,7 @@ public class AccountDao implements Dao<Account, Integer> {
 			cs.setInt(1, accountId);
 			cs.setInt(2,  accountTypeId);
 			cs.setDouble(3,  newBalance);
+			cs.setString(4, p_transactionType);
 			
 			
 			cs.execute();
@@ -148,7 +148,12 @@ public class AccountDao implements Dao<Account, Integer> {
 			e.printStackTrace();
 		}
 		
-		return obj;
+		return accountObj;
+	}
+	
+	@Override
+	public Account update(Account accountObj) {
+		return null;
 	}
 
 	@Override
