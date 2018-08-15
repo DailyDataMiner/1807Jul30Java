@@ -45,8 +45,10 @@ public class App {
 		case 3:
 			System.out.println("Thank you for using Revature Bank! Goodbye!");
 			System.exit(0);
+		default:
+			System.out.println("Invalid Option Number. Please try again.");
+			menu();
 		}
-		
 	}
 	
 	static void newSession(User session) {
@@ -74,6 +76,9 @@ public class App {
 			case 3:
 				System.out.println("Thank you for using Revature Bank. Goodbye!");
 				System.exit(0);
+			default:
+				System.out.println("Invalid Option Number. Please try again.");
+				newSession(session);
 		}
 	}
 	
@@ -101,56 +106,61 @@ public class App {
 			case 3:
 				System.out.println("Thank you for using Revature Bank! Goodbye!");
 				System.exit(0);
+			default:
+				System.out.println("Invalid Option Number. Please try again.");
+				transaction(id);
 		}
 	}
 	
 	static void withdraw(int id) {
-		System.out.print("Select the account you would like to withdraw from: ");
+		System.out.print("Select the number of the account you would like to withdraw from: ");
 		
 		List<Account> accounts = aService.listAccounts(id);
 		int accountIndex = Integer.parseInt(scanner.nextLine())-1;
 		int accountID = accounts.get(accountIndex).getId();
 		
-		System.out.println("How much would you like to withdraw?: ");
+		System.out.print("How much would you like to withdraw?: ");
 		double amount = Double.parseDouble(scanner.nextLine());
 		
 		Account temp = aService.getAccount(accountID);
-		System.out.println(temp.toString());
-		
-		Account updated = new Account(temp.getId(), temp.getType(), temp.getBalance()-amount, temp.getUserid());
-		System.out.println(updated.toString());
-		
-		aService.updateAccount(updated);
-		
-		System.out.println("Withdrawal Successful. The remaining balance on this account is: $" + updated.getBalance());
-		System.out.print("Would you like to make another transaction? Please enter yes or no: ");
-		
-		String choice = scanner.nextLine();
-		if(choice.equals("yes")) {
-			viewAccounts(id);
-			transaction(id);
+		if(temp.getBalance() > amount) {
+			Account updated = new Account(temp.getId(), temp.getType(), temp.getBalance()-amount, temp.getUserid());
+			
+			aService.updateAccount(updated);
+			
+			System.out.println("Withdrawal Successful. The remaining balance on this account is: $" + updated.getBalance());
+			System.out.print("Would you like to make another transaction? Please enter yes or no: ");
+			
+			String choice = scanner.nextLine();
+			if(choice.equals("yes")) {
+				viewAccounts(id);
+				transaction(id);
+			}
+			else {
+				System.out.println("Thank you for using Revature Bank! Goodbye!");
+				System.exit(0);
+			}
 		}
 		else {
-			System.out.println("Thank you for using Revature Bank! Goodbye!");
-			System.exit(0);
+			System.out.println("Withdrawal amount is larger than funds available. Transaction aborted.");
+			viewAccounts(id);
+			transaction(id);
 		}
 	}
 	
 	static void deposit(int id) {
-		System.out.print("Select the account you would like to deposit into: ");
+		System.out.print("Select the number of the account you would like to deposit into: ");
 		
 		List<Account> accounts = aService.listAccounts(id);
 		int accountIndex = Integer.parseInt(scanner.nextLine())-1;
 		int accountID = accounts.get(accountIndex).getId();
 		
-		System.out.println("How much would you like to deposit?: ");
+		System.out.print("How much would you like to deposit?: ");
 		double amount = Double.parseDouble(scanner.nextLine());
 		
 		Account temp = aService.getAccount(accountID);
-		System.out.println(temp.toString());
 		
 		Account updated = new Account(temp.getId(), temp.getType(), (temp.getBalance()+amount), temp.getUserid());
-		System.out.println(updated.toString());
 		
 		aService.updateAccount(updated);
 		
@@ -239,8 +249,10 @@ public class App {
 	static void viewAccounts(int id) {
 		System.out.println("Current Accounts");
 		List<Account> accounts = aService.listAccounts(id);
+		int listNumber = 1;
 		for(Account a : accounts) {
-			System.out.println(a.getId() + ") Account Type: " + a.getType() + " -- Account Balance: $" + a.getBalance());
+			System.out.println(listNumber + ") Account Type: " + a.getType() + " -- Account Balance: $" + a.getBalance());
+			listNumber++;
 		}
 	}
 	
