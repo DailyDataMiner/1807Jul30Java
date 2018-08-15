@@ -122,8 +122,33 @@ public class AccountDao implements Dao<Account, Integer> {
 
 	@Override
 	public Account update(Account obj) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int accountId = obj.getAccountid();
+		int accountTypeId = obj.getAccounttypesid();
+		double newBalance = obj.getBalance();
+		
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			
+			
+			String call_procedure = "{call updateAccountBlance(?, ?, ?)}";
+			
+			
+			CallableStatement cs = conn.prepareCall(call_procedure);
+			
+			
+			cs.setInt(1, accountId);
+			cs.setInt(2,  accountTypeId);
+			cs.setDouble(3,  newBalance);
+			
+			
+			cs.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return obj;
 	}
 
 	@Override
