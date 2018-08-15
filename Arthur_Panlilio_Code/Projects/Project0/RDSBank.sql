@@ -67,7 +67,7 @@ BEFORE INSERT ON  account --When we will execute
 FOR EACH ROW --necessary to change value of table
 BEGIN
   -- What to do when trigger is fired
-  SELECT account_seq.nextVAl INTO :new.accountId FROM dual;
+  SELECT account_seq.nextVAL INTO :new.accountId FROM dual;
 END;
 /
 
@@ -109,3 +109,10 @@ END;
 /
 
 Exec withdraw(5772, 32);
+
+ALTER TABLE account MODIFY (userid not null);
+DELETE FROM accounttype WHERE accounttypeid = 5;
+TRUNCATE TABLE account;
+ALTER TABLE account DROP COLUMN new_col;
+ALTER TABLE account ADD name varchar2(256) not null;
+commit;

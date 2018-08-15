@@ -1,0 +1,88 @@
+<!DOCTYPE html> <!--  "type '!' and Enter for html shortcut-->
+<html lang="en"> <!-- root element of the html page-->
+<head> <!-- all metadata about page lives here-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title> <!--on the web tab-->
+    <link rel="stylesheet" href="../CSS/CSS101.css">
+</head>
+<body> <!-- where all content to display goes. Note* elements can be hidden/removed-->
+    Hello! this is our first HTML page!
+    <p id="text1">Hello! This is text inside of our paragraph</p>
+    <h1>h1</h1> <!-- type 'h1' and press tab-->
+    <h2>h2</h2>
+    <h3>h3</h3>
+    <h4>h4</h4>
+    <h5>h5</h5>
+    <h6>h6</h6>
+
+ <hr> <!-- horizontal line-->
+    <!-- use 'ctrl + / to comment whole line' -->
+    <br>
+<hr>
+    <br>
+    <br><!-- use 'shift + alt + a' to comment in line -->
+    <br><!--  -->
+    <br>
+<hr>
+
+<h3>Lists</h3>
+<h4>There are two types: ordered(numbers) and unordered(bullets</h4>
+<ul>
+    <li class="first colorful-class">First<!-- no need to comma for seperate classes --> 
+        <ul>
+        <li>HI</li>
+        </ul>
+    </li>
+    <li>Second</li>
+    <li>third</li>
+</ul>
+
+<ol>
+    <li class="first">first</li>
+    <li>second</li>
+</ol>
+
+<div>
+
+</div>
+<hr>
+<h2>Forms</h2>
+<form method="GET" action="test"> <!-- use name for forms -->
+    <input type="text" placeholder="Username" name="username"> <br>
+    <input type="number" max="100" min="0" name="age"> <br>
+    <input type="password" placeholder="Password" name="password"> <br>
+    <input type="radio" name="role" value="Associate"> Associate <br>
+    <input type="radio" name="role" value="Trainer" checked> Trainer <br>
+    Countries Traveled: <br>
+    <input type="checkbox" name="Cuba" value="cuba"> Cuba <br>
+    <input type="checkbox" name="Mexico" value="mexico"> Mexico <br>
+    <input type="checkbox" name="Australia" value="australia"> Australia <br>
+    <input type="color" name="favcolor">
+    <input type="submit" value="Submit Button">
+</form>
+<!-- file:///C:/Users/Panli/my_git_repos/1807Jul30Java/Arthur_Panlilio_Code/HTML/test?
+    username=ewqe&
+    age=12&
+    password=12%60&
+    role=Associate&
+    Mexico=mexico&
+    Australia=australia&
+    favcolor=%23400040 -->
+
+   
+    <h4> More on forms...Lets check out <i>outputs</i></h4>
+    <form oninput="y.value=a.value">
+        <input type="range" name="a" min="0" max="100">
+        <output name="y" for="a"></output>
+    </form>
+    <button>this is a button</button>
+
+    
+<footer>
+    this is a footer
+</footer>
+</body>
+</html>
+

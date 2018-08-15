@@ -18,8 +18,10 @@ public class Account {
 	private int accountTypeId;
 	private Date lastUpdate;
 	private AccountType myAccountType = null;
+	private String name;
 	
 	
+
 
 
 	public Account() {
@@ -27,12 +29,13 @@ public class Account {
 	}
 
 
-	public Account(int accountId, int userId, double balance, int accountTypeId, Date lastUpdate) {
+	public Account(int accountId, int userId, double balance, int accountTypeId, Date lastUpdate, String name) {
 		this.accountId = accountId;
 		this.userId = userId;
 		this.balance = balance;
 		this.accountTypeId = accountTypeId;
 		this.lastUpdate = lastUpdate;
+		this.name = name;
 	}
 
 
@@ -93,6 +96,23 @@ public class Account {
 	public void setMyAccountType(AccountType myAccountType) {
 		this.myAccountType = myAccountType;
 	}
+	
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 	
 	@Override

@@ -1,9 +1,12 @@
 package com.revature.main;
 
 
+
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,6 +15,7 @@ import com.revature.pojo.Account;
 import com.revature.pojo.User;
 import com.revature.service.AccountService;
 import com.revature.service.UserService;
+import com.revature.util.LessThanZeroException;
 import com.revature.util.WithdrawException;
 
 
@@ -28,6 +32,8 @@ public class App {
 	//These service objects are used for logic and talking to the Dao
 	static UserService uService = new UserService();
 	static AccountService aService = new AccountService();
+	
+	static NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
 	
 	static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM-dd-yyyy");  
 	static LocalDate currentDate = LocalDate.now();
@@ -102,18 +108,21 @@ public class App {
 		System.out.println("--------Creating new Account-------------\n\n\n");
 		System.out.println("What account type shall be created?");
 		int i = 1;
-		for(i = 1; i < 6; i++) {
+		for(i = 1; i < 4; i++) {
 			System.out.println(i + ". " + aService.getAccType(i));
 		}
 		System.out.println(i + ". Return to User Menu");
-		int response = getInput(6);
+		int response = getInput(4);
 		if(response == 0) {
 			registerAcc();
 		}
-		if(response == 6) {
+		if(response == 4) {
 			initUserOptions();
 		}
+		System.out.println("What would you like to name this account?");
+		String name = scan.nextLine();
 		Account account = new Account();
+		account.setName(name);
 		account.setUserId(uService.getCurrentUser().getId());
 		account.setBalance(0.0);
 		account.setAccountTypeId(response);
@@ -213,15 +222,16 @@ public class App {
 		List<Account> acc = aService.getAllMine(uService.getCurrentUser().getId(), currentDate, 4);
 		double total = 0;
 		for(Account a: acc) {
-			System.out.println(a.getBalance());
-			total += a.getBalance();
+			if(!aService.getAccType(a.getAccountTypeId()).equals("Communal"))			
+				total += a.getBalance();
 		}
 		System.out.printf("\n=================My Accounts========================\n"
-				+ "Total Balance: $%.2f\n"
+				+ "Total Balance: $%.2f (Excluding Communal Accounts)\n"
 				+ "Select an Account:\n", total);
 		int i = 0;
 		for(i = 0; i < acc.size(); i++) {
-			System.out.println(i+1+". My " + aService.getAccType(acc.get(i).getAccountTypeId()) + " Account");
+			System.out.println(i+1+". My " + aService.getAccType(acc.get(i).getAccountTypeId()) + " Account"
+					+ ": " + acc.get(i).getName());
 		}
 		System.out.println(i+1+". Return to User Menu");
 		int response = getInput(acc.size() + 1);
@@ -241,14 +251,24 @@ public class App {
 	 * @param a is an account that is
 	 */
 	public static void initMyAccountOptions(Account a) {
-		System.out.println("\"=================My " + aService.getAccType(a.getAccountTypeId()) +  " Account=="
+		System.out.println("\"=================My " + aService.getAccType(a.getAccountTypeId()) +  " Account: " + a.getName() +"=="
 				+ "======================\n");	
-		System.out.printf("Current Balance: $%.2f\n", aService.getBalance(a));
+		if(!aService.getAccType(a.getAccountTypeId()).equals("Communal")) {
+			System.out.printf("Current Balance: $%.2f\n", aService.getBalance(a));
+		} else {
+			double totalBalance = 0;
+			List<Account> accs = aService.getAllofType(a.getAccountTypeId());
+			for(Account ca: accs) {
+				totalBalance += ca.getBalance();
+			}
+			System.out.printf("Current Balance: $%.2f\n", totalBalance);
+		}
 		System.out.println("1. Deposit \n"
 				+ "2. Withdraw \n"
 				+ "3. Information \n"
-				+ "4. Return");
-		int response = getInput(4);
+				+ "4. Delete \n"
+				+ "5. Return");
+		int response = getInput(5);
 		switch(response) {
 		case 0:
 			initMyAccountOptions(a);
@@ -263,6 +283,9 @@ public class App {
 			showInformation(a.getAccountTypeId(), a);
 			break;
 		case 4:
+			delete(a);
+			break;
+		case 5:
 			initMyAccounts();
 			break;
 		}
@@ -282,7 +305,21 @@ public class App {
 			System.out.println("Sorry! You must enter a number!");
 			deposit(a);
 		}
-		aService.deposit(dep, a);
+		int response = aService.deposit(dep, a);
+		switch (response) {
+		case 0:
+			System.out.println("Deposit failed.");
+			break;
+		case 1:
+			System.out.printf("Successfully deposited $%.2f\n",dep);
+			break;
+		case 2:
+			System.out.printf("It's your lucky day! You deposited $%.2f as well as an extra $%.2f!\n", dep, (dep/2));
+			break;
+		case 3:
+			System.out.printf("Sorry..you lost. You deposited $%.2f and lost $%.2f\n", dep/2, dep/2);
+			break;
+		}
 		initMyAccountOptions(a);
 		
 	}
@@ -303,10 +340,17 @@ public class App {
 		}
 		try {
 			aService.withdraw(wit, a);
-			System.out.printf("\nSuccesfully withdrawn $%.2f.\n", wit);
+			if(!aService.getAccType(a.getAccountTypeId()).equals("Savings")) {
+				System.out.printf("\nSuccesfully withdrawn $%.2f.\n", wit);
+			} else {
+				System.out.printf("You have withdrawn $%.2f. (25%% withdrawal fee was applied)\n", (wit - (wit * .25)));
+			}
 			initMyAccountOptions(a);
 		} catch(WithdrawException e) {
-			System.out.printf("\nSorry! You need at least $%.2f more to withdraw.\n", e.getAmount());
+			System.out.printf("\nSorry! You need at least $%.2f more to withdraw that amount.\n", e.getAmount());
+			withdraw(a);
+		} catch (LessThanZeroException e) {
+			System.out.println("\nSorry! Number must be more than zero.");
 			withdraw(a);
 		}
 	}
@@ -318,25 +362,51 @@ public class App {
 			System.out.println("This a normal checking account. You put money in, you can get money out.");
 			break;
 		case "Savings":
-			System.out.println("Money saved here increases by 4% everyday! You can only withdraw up to $5,000 a day!");
+			System.out.println("Money saved here increases by 4% everyday. Includes a 25% withdrawal fee.");
 			break;
 		case "Communal":
-			System.out.println("Everybody shares a balance...comrade.");
+			System.out.println("All communal accounts share a balance.");
 			break;
 		case "Gambling":
 			System.out.println("When you deposit money, there is a 50% chance you'll gain money, 50% chance you'll lose money.");
-			break;
-		case "Admin":
-			System.out.println("Access all other user accounts. Unlimited Power!!!");
 			break;
 		}
 		System.out.println("1. Return");
 		int response = getInput(1);
 		if(response == 1) {
 			initMyAccountOptions(a);
+		} else {
+			showInformation(accType, a);
 		}
 	}
 	
+	/**
+	 * Deletes an account
+	 * 
+	 * @param a is the account to be deleted
+	 */
+	public static void delete(Account a) {
+		System.out.print("\nAre you sure you want to delete " + a.getName() + " Account?"); 
+		if(!aService.getAccType(a.getAccountTypeId()).equals("Communal")) {
+			System.out.printf(" It has $%.2f", aService.getBalance(a));
+		}
+		System.out.println("\n1. Yes \n"+ "2. No \n");	
+		int response = getInput(2);
+		if(response == 1) {
+			if(aService.delete(a)) {
+				System.out.println("Account Deleted.");
+			} else {
+				System.out.println("Something went wrong.");
+			}
+			initMyAccounts();
+		} else {
+			initMyAccountOptions(a);
+		}
+	}
+	
+	/**
+	 * Asks the user to change the date
+	 */
 	public static void changeTime() {
 		System.out.println("What is today's date? Format: 'MMM-dd-YYYY' ex: Jun-21-2020" );
 		String d = scan.nextLine();
@@ -375,7 +445,6 @@ public class App {
 		return response;
 	}
 	
-	
-	
+
 
 }

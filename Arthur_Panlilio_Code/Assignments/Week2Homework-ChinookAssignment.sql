@@ -232,7 +232,13 @@ print c1;
 CREATE OR REPLACE PROCEDURE delInvoiceId(id number)
 is 
 BEGIN
+set transaction isolation level read committed;
+SavePoint dell;
 DELETE FROM invoice WHERE invoiceId = id;
+EXCEPTION
+WHEN OTHERS THEN
+  ROLLBACK TO dell;
+commit;
 END;
 /
 
@@ -258,7 +264,13 @@ END;
 CREATE OR REPLACE PROCEDURE insertRec(fname varchar2, lname varchar2, emailt varchar2)
 is
 BEGIN
+  set transaction isolation level read committed;
+  SAVEPOINT newCust;
   INSERT INTO customer (firstname, lastname, email) VALUES (fname, lname, emailt);
+  EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK TO newCust;
+  commit;
 END;
 /
 
@@ -353,5 +365,3 @@ ON customer.customerid = invoice.customerid
 JOIN employee
 ON customer.supportrepid = employee.employeeid;
 
-------------------9.0 Administration In this section you will be creating backup files of your database. After you create the backup file you will also restore the database. 
---Task – Create a .bak file for the Chinook database  

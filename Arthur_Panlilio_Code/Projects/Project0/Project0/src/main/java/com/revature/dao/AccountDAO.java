@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import com.revature.pojo.Account;
 import com.revature.util.ConnectionFactory;
@@ -42,6 +41,7 @@ public class AccountDAO implements DAO<Account, Integer>{
 				temp.setBalance(rs.getDouble(3));
 				temp.setAccountTypeId(rs.getInt(4));
 				temp.setLastUpdate(rs.getDate(5));
+				temp.setName(rs.getString(6));
 				accounts.add(temp);
 			}
 			
@@ -57,10 +57,10 @@ public class AccountDAO implements DAO<Account, Integer>{
 	 * @param userId is the id of the user
 	 * @return a list of the user's account
 	 */
-	public List<Account> findAllMine(int userId, LocalDate currDate, double interest){
+	public List<Account> findAllMine(int userId){
 		List<Account> accounts = new ArrayList<>();
 		try(Connection conn = ConnectionFactory.getConnection()){
-			String query = "SELECT * FROM account WHERE userId = ?";
+			String query = "SELECT * FROM account WHERE userId = ? ORDER BY acctypeid ASC";
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
@@ -73,9 +73,7 @@ public class AccountDAO implements DAO<Account, Integer>{
 				temp.setBalance(rs.getDouble(3));
 				temp.setAccountTypeId(rs.getInt(4));
 				temp.setLastUpdate(rs.getDate(5));
-				Account a = updateDate(temp, currDate, interest);
-				temp.setBalance(a.getBalance());
-				temp.setLastUpdate(a.getLastUpdate());
+				temp.setName(rs.getString(6));
 				accounts.add(temp);
 				
 			}
@@ -86,11 +84,37 @@ public class AccountDAO implements DAO<Account, Integer>{
 		return accounts;
 	}
 	
-	public Account updateDate(Account a, LocalDate newDate, double interest) {
+	public List<Account> findAllofType(int accTypeId){
+			List<Account> accounts = new ArrayList<>();
+			try(Connection conn = ConnectionFactory.getConnection()){
+				String query = "SELECT * FROM account WHERE accTypeId = ?";
+				PreparedStatement ps = conn.prepareStatement(query);
+				ps.setInt(1, accTypeId);
+				ResultSet rs = ps.executeQuery();
+				while(rs.next()) {
+					//iterate through each row
+					Account temp = new Account();
+					
+					temp.setAccountId(rs.getInt(1));
+					temp.setUserId(rs.getInt(2));
+					temp.setBalance(rs.getDouble(3));
+					temp.setAccountTypeId(rs.getInt(4));
+					temp.setLastUpdate(rs.getDate(5));
+					temp.setName(rs.getString(6));
+					accounts.add(temp);
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return accounts;
+	}
+	
+	public Account updateDate(Account a, LocalDate newDate, double interest, int daysPassed) {
 		try(Connection conn = ConnectionFactory.getConnection()){
 			String query = "UPDATE account SET lastUpdated = ?, balance = ? WHERE accountId = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
-			int daysPassed = getDifferenceDays(a.getLastUpdate(), Date.valueOf(newDate));
 			double newBalance = a.getBalance();
 			if(findAccountTypeName(a.getAccountTypeId()).equals("Savings") && daysPassed > 0) {
 				newBalance =  newBalance + (daysPassed * (newBalance * interest/100));
@@ -115,13 +139,13 @@ public class AccountDAO implements DAO<Account, Integer>{
 	 * @param accTypeId the accounts type id
 	 * @return an account
 	 */
-	public Account findOne(int userId, int accTypeId){
+	public Account findOne(int userId, String name){
 		Account a = null;
 		try(Connection conn = ConnectionFactory.getConnection()){
-			String sql = "SELECT * FROM account WHERE userId = ? AND accTypeId = ?";
+			String sql = "SELECT * FROM account WHERE userId = ? AND name = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1,userId);
-			ps.setInt(2,  accTypeId);
+			ps.setString(2,  name);
 			ResultSet info = ps.executeQuery();
 			while(info.next()) {
 				a = new Account();
@@ -130,6 +154,7 @@ public class AccountDAO implements DAO<Account, Integer>{
 				a.setBalance(info.getDouble(3));
 				a.setAccountTypeId(info.getInt(4));
 				a.setLastUpdate(info.getDate(5));
+				a.setName(info.getString(6));
 			}
 			
 		} catch (SQLException e) {
@@ -165,7 +190,7 @@ public class AccountDAO implements DAO<Account, Integer>{
 				.getConnection()){
 			//connections automatically commit after tx is complete, set to false to do some sort of validation
 			conn.setAutoCommit(false);					
-			String sql = "INSERT INTO account (userId, balance, accTypeId, lastUpdated) VALUES (?, ?, ? , ?)";
+			String sql = "INSERT INTO account (userId, balance, accTypeId, lastUpdated, name) VALUES (?, ?, ? , ?, ?)";
 			//code to get back auto-generated PK (other columns can be auto generated too)
 			String[] keys = {"accountId"};
 			
@@ -174,6 +199,7 @@ public class AccountDAO implements DAO<Account, Integer>{
 			ps.setDouble(2, a.getBalance());
 			ps.setInt(3, a.getAccountTypeId());
 			ps.setDate(4, a.getLastUpdate());
+			ps.setString(5, a.getName());
 
 			
 			//Updates return num rows added/updated/delted
@@ -230,10 +256,23 @@ public class AccountDAO implements DAO<Account, Integer>{
 		}		
 	}
 	
-	public static int  getDifferenceDays(Date d1, Date d2) {
-	    long diff = d2.getTime() - d1.getTime();
-	    return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+	public boolean delete(int accId) {
+		boolean worked = false;
+		try(Connection conn = ConnectionFactory.getConnection()){
+			conn.setAutoCommit(false);	
+			String sql = "DELETE FROM account WHERE accountId = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, accId);
+			ps.executeQuery();
+			worked = true;
+		} catch (SQLException e) {
+		}
+		return worked;
+		
 	}
+	
+	
+	
 	
 
 }
