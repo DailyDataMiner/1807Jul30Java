@@ -36,6 +36,7 @@ public class TransactionDao implements Dao<Transaction, Integer> {
 		
 	}
 	
+	
 	public static Transaction deposit(Account accountObj, double p_transactionAmount) {
 
 /*------------------------------------------------------------------------------------------*/
@@ -91,7 +92,9 @@ public class TransactionDao implements Dao<Transaction, Integer> {
 			
 			final String 	transactionType;
 			double 			amount;
+			double			newBalance;
 			AccountDao 		accountDao = null;
+			AccountAccountTypeDao	accountAccountTypeDao = null;
 			int 			accountAccountTypeId;
 			long 			millis;
 			Date			date;
@@ -117,7 +120,6 @@ public class TransactionDao implements Dao<Transaction, Integer> {
 			
 			CallableStatement cs = conn.prepareCall(call_function);
 			
-//			
 			cs.registerOutParameter(1, Types.VARCHAR);			
 			cs.setDate(2,	date);
 			cs.setString(3,	transactionType);
@@ -144,6 +146,11 @@ public class TransactionDao implements Dao<Transaction, Integer> {
 			
 //			Calling dao to update table to change account balance
 			accountDao.updateBalance(accountObj, transactionType);
+			
+			accountAccountTypeDao = new AccountAccountTypeDao();
+			newBalance = accountAccountTypeDao.getNewBalance(accountAccountTypeId);
+			
+			System.out.println("This is your new balance: $" + newBalance);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

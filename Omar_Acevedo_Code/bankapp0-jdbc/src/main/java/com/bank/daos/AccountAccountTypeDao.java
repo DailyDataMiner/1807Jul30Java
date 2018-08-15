@@ -158,5 +158,29 @@ public class AccountAccountTypeDao implements Dao<Account, Integer> {
 		return theOtherAccountTypeName;
 		
 	}
+	
+	public double getNewBalance(int accountAccountTypeId) {
+		
+		double newBalance = 0.0;
+		
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String select_query = "select balance " + 
+								  "from p0_account_accounttype " + 
+								  "where account_accounttypeid = ?";
+
+			PreparedStatement ps = conn.prepareStatement(select_query);
+			ps.setInt(1, accountAccountTypeId);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+//			print("new balance -> " + rs.getDouble(1));
+			newBalance = rs.getDouble(1);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return newBalance;
+	}
 
 }
