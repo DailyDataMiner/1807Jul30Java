@@ -113,60 +113,73 @@ public class TransactionDao implements Dao<Transaction, Integer> {
 //		We're going to pass in parameters to doTransaction function and receive a number.
 //		:	date, transactionType, p_transactionAmount, accountObj.getAccount_accounttypeid()
 /*------------------------------------------------------------------------------------------*/
-
-		Transaction 	transactionObj = null;
-		AccountDao 		accountDao = null;
-		final String 	transactionType;
-		double 			amount;
-		int 			accountAccountTypeId;
-		long 			millis;
-		Date 				date;
 		
+		
+//		Init transaction object
+		Transaction 	transactionObj = null;
+
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-//			Set vars
+			
+//			Declare vars
+			AccountDao 		accountDao = null;
+			Date 			date;
+			final String 	transactionType;
+			double 			amount;
+			int 			accountAccountTypeId;
+			long 			millis;
+
+			
+//			Set date
 			millis = System.currentTimeMillis();  
-	        date = new java.sql.Date(millis); 
+	        date = new Date(millis); 
 	        
+	        
+//			Set transaction type ( DEPOSIT )
 			transactionType = TransactionType.DEPOSIT.toString();
+			
+			
+//			Set amount to deposit
 			amount = p_transactionAmount;
+			
+			
+//			Get and set account id gotten from junction table.
 			accountAccountTypeId = accountObj.getAccount_accounttypeid();
 			
 			
-			//	Start sql
+//			Set SQL
 			String call_procedure = "{ ? = call doTransaction(?, ?, ?, ?)}";
 			
 			CallableStatement cs = conn.prepareCall(call_procedure);
 			
 			cs.registerOutParameter(1, Types.VARCHAR);	// or Types.INTEGER?		
 //			cs.registerOutParameter(1, Types.INTEGER);		
-			cs.setDate(2, date);
-			cs.setString(3,  transactionType);
-			cs.setDouble(4,  amount);
-			cs.setInt(5,  accountAccountTypeId);
+			cs.setDate(2, 	date);
+			cs.setString(3,	transactionType);
+			cs.setDouble(4,	amount);
+			cs.setInt(5,  	accountAccountTypeId);
 			
 			cs.execute();
-			
+
+//			Get and set transaction id
 			int transactionId = cs.getInt(1);
-// https://stackoverflow.com/questions/27860245/how-to-call-a-sql-function-from-preparedstatement
-			
 			
 			System.out.println("transaction id value -> " + transactionId);
 			
 			
-//			Setting the transaction object
+//			Set Transaction object
 			transactionObj = new Transaction(transactionId, date.toString(), transactionType, amount, accountAccountTypeId);
 			
-						
-//			Setting balance to account object
+			
+//			Set balance to Account object
 			accountObj.setBalance(amount);
 			
 			
-//			Update account (obj) balance
+//			Create AccountDao object to update account balance in DB.
 			accountDao = new AccountDao();
 			
 			
-//			Calling dao to update table to change account balance
+//			Make the update call from AccountDAO object instance 
 			accountDao.updateBalance(accountObj, transactionType);
 			
 			

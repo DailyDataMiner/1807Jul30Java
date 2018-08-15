@@ -33,9 +33,9 @@ public class TransactionUI extends HelperFunctions {
 			case "1":
 				
 				print("\t---Deposit Menu------------");
-				print("-----------------------------");
+				print("\t-----------------------------");
 				print("\t|	*Account Info");
-				print("-----------------------------");
+				print("\t-----------------------------");
 				print("\t|  Account Type:    " + accountObj.getAccountTypeName());
 				print("\t|  Account Balance: $" + accountObj.getBalance());
 				print("\t----------------------------");
@@ -53,7 +53,9 @@ public class TransactionUI extends HelperFunctions {
 			case "2":
 
 				print("\t---Withdrawal Menu------------");
-				print("\t|--Account Info------------");
+				print("\t-----------------------------");
+				print("\t|	*Account Info");
+				print("\t-----------------------------");
 				print("\t|  Account Type:    " + accountObj.getAccountTypeName());
 				print("\t|  Account Balance: $" + accountObj.getBalance());
 				print("\t----------------------------");

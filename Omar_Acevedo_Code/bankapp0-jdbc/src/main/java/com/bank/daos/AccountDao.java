@@ -121,27 +121,38 @@ public class AccountDao implements Dao<Account, Integer> {
 	}
 
 	public Account updateBalance(Account accountObj, String p_transactionType) {
-		
-		int accountId = accountObj.getAccountid();
-		int accountTypeId = accountObj.getAccounttypesid();
-		double newBalance = accountObj.getBalance();
+
+/*------------------------------------------------------------------------------------------*/
+//		Update account balance data using accountObj.
+//		
+/*------------------------------------------------------------------------------------------*/
+
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
 			
-			String call_procedure = "{call updateAccountBalance(?, ?, ?, ?)}";
+			int 	accountId;
+			int 	accountTypeId;
+			double 	newBalance;
 			
+			
+			accountId 		= accountObj.getAccountid();
+			accountTypeId 	= accountObj.getAccounttypesid();
+			newBalance 		= accountObj.getBalance();
+			
+			
+			String call_procedure = "{call updateAccountBalance(?, ?, ?, ?)}";
 			
 			CallableStatement cs = conn.prepareCall(call_procedure);
 			
-			
-			cs.setInt(1, accountId);
-			cs.setInt(2,  accountTypeId);
-			cs.setDouble(3,  newBalance);
-			cs.setString(4, p_transactionType);
-			
+			cs.setInt(1,	accountId);
+			cs.setInt(2,  	accountTypeId);
+			cs.setDouble(3,	newBalance);
+			cs.setString(4,	p_transactionType);
 			
 			cs.execute();
+			
+			System.out.println("Account updated [Transaction type: " + p_transactionType + "]");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
