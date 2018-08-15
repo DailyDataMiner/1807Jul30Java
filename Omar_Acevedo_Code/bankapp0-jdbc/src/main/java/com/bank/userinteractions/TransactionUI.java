@@ -14,15 +14,22 @@ public class TransactionUI extends HelperFunctions {
 	public static void doTransactions(Account accountObj) {
 		
 		Scanner readFromUser = new Scanner(System.in);
-		
 		String userResponse;
-		print(" - TRANSACTION MENU - ");
-		print("    What type of transaction do you want to make: \n ( 1.deposit, 2.withdrawal, 3.transfer money ) ?");
-		userResponse = readFromUser.next(); // try with nextLine()
-		
 		double transactionAmount = 0.00;
+		
+		
+		print("\t---Transaction Menu------------");
+		print("\t|  1 - DEPOSIT ");
+		print("\t|  2 - WITHDRAWAL ");
+		print("\t|  3 - TRANSFER MONEY ");
+		print("\t-------------------------------\n");
+
+		
+		userResponse = readFromUser.next();
+		
 
 		switch (userResponse) {
+		
 			case "1":
 				print("You chose DEPOSIT");
 				print(accountObj.toString());

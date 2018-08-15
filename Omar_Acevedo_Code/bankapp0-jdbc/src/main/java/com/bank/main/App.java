@@ -106,7 +106,7 @@ public class App extends HelperFunctions {
 					
 					accountObj = AccountUI.getAccountInfo(userObj.getUserid());
 					
-					print("\t---Account Info------------");
+					print("\t---Account Info--------------");
 //					print(accountObj.toString());
 					print("\t|  User name:       " + userObj.getUsername());
 					print("\t|  Account Number:  " + accountObj.getAccount_number());
@@ -124,9 +124,8 @@ public class App extends HelperFunctions {
 		
 //		Log in and log out(end interaction with the app and have transaction persisted)
 		print("\tWhat would you like to do? ");
-		
-		print("\t---Options------------");
-		
+		print("\t[ select a number ]");
+		print("\t---Options---------------------");
 // 		if creating user, you can ask if account has been created.
 // 		here, part of the account creation is creating a user, which 
 //		will also add data to persons table
@@ -135,13 +134,15 @@ public class App extends HelperFunctions {
 		
 		
 //		User must be able to withdraw and deposit money 
-		print("\t|  2 - DO TRANSACTION ( deposit, withdrawal, transfer money  ");
+		print("\t|  2 - DO TRANSACTION ( deposit, withdrawal, transfer money )");
 
 		
 //		EXIT application? ... log out --> go back to log in page
 		print("\t|  3 - EXIT application? ... (log out)");
+		print("\t-----------------------------\n");
 		
 		
+//		Wait for the user to choose an option.
 		userResponse = readFromUser.next();
 		
 		
@@ -156,22 +157,25 @@ public class App extends HelperFunctions {
 				_flag = true;
 				break;
 				
-				
+			
 			case "2":
-				print("You selected 2; let's do a transaction");
-/* 				
- * 				- Read from user to see what transaction the user wants to make			
- */			
+
+//				Go to the transactions menu UI, and pass account object to interact with user's acct.		
 				TransactionUI.doTransactions(accountObj);
+				
 				_flag = true;
 				break;
 				
-				
 			case "3":
+				
 				print("You selected 3. you are going to exit/log out the app.");
-				// do stuff like create user...person
 				_flag = false;
+
+//				Go back to start
+				App.main(new String[0]);
+				
 				break;
+				
 			default:
 				print("continue?");
 				break;
