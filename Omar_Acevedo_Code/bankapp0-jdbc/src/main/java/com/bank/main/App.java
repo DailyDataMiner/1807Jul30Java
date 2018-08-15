@@ -40,7 +40,8 @@ public class App extends HelperFunctions {
 	private static boolean displayMenu() {
 
 //		init vars
-		User userObj;
+		User userObj = null;
+		User newUserObj = null;
 		boolean _flag = false;
 		boolean _createAccount = false;
 		boolean _continueInLogInPage = true;
@@ -58,7 +59,7 @@ public class App extends HelperFunctions {
 		do {
 			if ( option == 2 ) {	// Sign Up chosen
 				
-				User newUserObj = UserUI.display();	// rethink where this should go.
+				newUserObj = UserUI.display();	// rethink where this should go.
 				
 				// stupidiest condition ever .. change this; redefine it
 				if (newUserObj.getUserid() > 0) {
@@ -75,8 +76,8 @@ public class App extends HelperFunctions {
 						accountObj = AccountUI.createAccount(userId);  // returns Account
 					
 						print("Account has been created");
-						print("account name -> " + newUserObj.getUsername() + " (" + accountObj.getAccount_number() + " )" );
-						print(newUserObj.toString() + "\n");
+						print("Account name:  " + newUserObj.getUsername() + " (" + accountObj.getAccount_number() + " )");
+						print("Account email: " + newUserObj.getEmail());
 						
 						_continueInLogInPage = false;
 						
@@ -131,8 +132,24 @@ public class App extends HelperFunctions {
 // 		here, part of the account creation is creating a user, which 
 //		will also add data to persons table
 // 		create one or more account(s) of specified types
-		print("\t|  1 - CREATE/REGISTER NEW ACCOUNT ");
 		
+		
+		try {
+				
+			if (userObj.getUserid() != 0) {		
+				print("\t|  1 - REGISTER NEW ACCOUNT FOR USER " + userObj.getUsername().toUpperCase());
+			} else { // if id == 0
+				print("\t|  1 - CREATE/REGISTER NEW ACCOUNT ");
+			}	
+			
+		} catch(NullPointerException npe) {
+			
+			if (newUserObj.getUserid() != 0) {		
+				print("\t|  1 - REGISTER NEW ACCOUNT FOR USER " + newUserObj.getUsername().toUpperCase());
+			} else { // if id == 0
+				print("\t|  1 - CREATE/REGISTER NEW ACCOUNT ");
+			}
+		}
 		
 //		User must be able to withdraw and deposit money 
 		print("\t|  2 - DO TRANSACTION ( deposit, withdrawal, transfer money )");
@@ -148,13 +165,16 @@ public class App extends HelperFunctions {
 		
 		
 		switch (userResponse) {
+		
 			case "1":
 				print("\t --> You selected 1.");
 /* 				
  * 				- Do stuff like create user (and/or person?)
  *				- Remember, a user can create more than one account. 				
  */
-				AccountUI.display();
+//				AccountUI.display();
+				AccountUI.createAccTypeForUser(userObj);
+				
 				_flag = true;
 				break;
 				

@@ -11,10 +11,72 @@ import com.bank.pojos.Account;
 import com.bank.utils.ConnectionFactory;
 
 import oracle.jdbc.internal.OracleTypes;
+import com.bank.utils.HelperFunctions;
 
 
-public class AccountDao implements Dao<Account, Integer> {
-
+public class AccountDao extends HelperFunctions implements Dao<Account, Integer> {
+	
+	
+	
+	public Account createAccTypeForUser(Account accountObj, String newAccType, double newBalance) {
+		
+//		This will create a new account TYPE
+		
+		
+		AccountAccountTypeDao accountAccountTypeDao = new AccountAccountTypeDao();
+		
+		int currAccountId 		= accountObj.getAccountid();
+		int newAccTypeId 		= accountAccountTypeDao.getAccountTypeId(newAccType);
+		
+		
+// 		Set Account instance object, new values, regarding account type.
+		accountObj.setAccounttypesid(newAccTypeId);	// id of type
+		accountObj.setAccountTypeName(newAccType);	// name of type
+		accountObj.setBalance(newBalance);
+		
+		
+//		Do the DML.
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			
+			String insert_statement = "insert into p0_account_accounttype " +
+										"( ACCOUNTID, ACCOUNTTYPESID, BALANCE ) " +
+										"values " +
+										"( ?, ?, ? )";
+			
+			PreparedStatement ps = conn.prepareStatement(insert_statement);
+			ps.setInt(1, currAccountId);
+			ps.setInt(2, newAccTypeId); 	// This is where relation happen.
+			ps.setDouble(3, newBalance);
+			
+			
+//			Execute insert statement and return number of rows added.
+			int rowsInserted = ps.executeUpdate();
+			
+			if (rowsInserted > 0) {
+				
+//				Get the results (such as ACCOUNTID pk) from database after insert statement was executed.
+//				ResultSet rs = ps.getGeneratedKeys();
+				
+//				Loop over result(s) from insert.
+//				while ( rs.next() ) {
+					
+					//	Set id attribute of Person object
+//					accountObj.setAccountid(rs.getInt(1));
+					
+//				}
+				print(rowsInserted + " were added into table.");
+//				conn.commit();
+				
+			} // end if
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return accountObj;
+	}
 	
 	@Override
 	public Account create(Account accountObj) {

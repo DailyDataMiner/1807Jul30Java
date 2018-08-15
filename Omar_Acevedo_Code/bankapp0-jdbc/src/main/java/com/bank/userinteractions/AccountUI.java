@@ -1,6 +1,7 @@
 package com.bank.userinteractions;
 import static java.lang.System.in;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,13 +10,14 @@ import com.bank.daos.AccountDao;
 import com.bank.pojos.Account;
 import com.bank.pojos.AccountStatus;
 import com.bank.pojos.AccountType;
+import com.bank.pojos.User;
 import com.bank.utils.HelperFunctions;
 
 public class AccountUI extends HelperFunctions {
 	
+	private static Account accountObj = null;
 	private static AccountDao accountDao = null;
 	private static AccountAccountTypeDao accountAccountTypeDao = null;
-	private static Account accountObj = null;
 	private static Scanner readFromUser = null;
 
 	public static void display() {
@@ -25,6 +27,51 @@ public class AccountUI extends HelperFunctions {
 		
 	}
 	
+	public static void createAccTypeForUser(User userObj) {
+		
+		String userAnswer;
+		double newBalance = 0.00;
+		readFromUser = new Scanner(in);
+		accountDao = new AccountDao();
+		accountAccountTypeDao = new AccountAccountTypeDao();
+		
+		// Get account data from userObj user id
+		accountObj = accountDao.read(userObj.getUserid());
+		
+		
+//		Verify for current account type (SAVINGS or CHECKING)
+//		HashMap<Integer, String> currAccType = new HashMap<Integer, String>();
+		
+		
+//		Get the other account type, this account doesn't currently have.
+		String newAccType = accountAccountTypeDao.getSuggestedAccType(accountObj);
+		
+		
+		print("Current account type is " + accountObj.getAccountTypeName());
+		print("Do you want to add a " + newAccType + " type to your account? (yes or no)");
+		
+		userAnswer = readFromUser.next();
+		
+		if (userAnswer.equals("yes")) {
+			
+			// Add new type of account... with SAME account.
+			print("Ok, ... Do you want to add some money to this new " + newAccType + " account? (yes or no)");
+			
+			userAnswer = readFromUser.next();
+			
+			if (userAnswer.equals("yes")) {
+				print("Enter it below: ");
+				newBalance = readFromUser.nextDouble();	
+			}
+			
+			accountDao.createAccTypeForUser(accountObj, newAccType, newBalance);
+			
+		} else {
+			print("ok, fine...");
+		}
+		
+		
+	}
 	
 	// this function (createAccount) is called from the UserUI class, because first goes the user creation, 
 	//	then, the account to connect them user with account.
@@ -50,7 +97,8 @@ public class AccountUI extends HelperFunctions {
 		String	_accountTypeName;
 		double	_accountBalance = 0.00;
 		
-		//	Get account number
+		
+//		Get account number
 		print("	  ACCOUNT NUMBER: ");
 		
 		_accountNumber = readFromUser.next();
@@ -69,8 +117,8 @@ public class AccountUI extends HelperFunctions {
 		//	Set account status
 		accountObj.setStatus(_status);
 		
-		//	Account DAO ( do DML )
-		//  Here the accountid gets generated and can be used later (following this line)
+//		Account DAO ( do DML )
+// 	 	Here the accountid gets generated and can be used later (following this line)
 		accountObj = accountDao.create(accountObj);
 		
 		
@@ -86,6 +134,7 @@ public class AccountUI extends HelperFunctions {
 		if ( ( _accountTypeName.equals(AccountType.CHECKING.toString())) || 
 			 ( _accountTypeName.equals(AccountType.SAVINGS.toString())) ) {
 			
+			print("Account type set to " + _accountTypeName);
 			
 			//	Get id from acc. type name. Dao is used here to get the id of the account type name.
 			_accountTypeId = accountAccountTypeDao.getAccountTypeId(_accountTypeName);

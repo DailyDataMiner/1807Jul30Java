@@ -124,5 +124,39 @@ public class AccountAccountTypeDao implements Dao<Account, Integer> {
 		
 		return _accountTypeId;
 	}
+	
+	
+	public String getSuggestedAccType(Account accountObj) {
+		
+		int accountId 		= accountObj.getAccountid();
+		int accountTypeId 	= accountObj.getAccounttypesid();	// checking or savings (id)
+		
+		int theOtherAccountTypeID;
+		String theOtherAccountTypeName = "";
+		
+		try ( Connection conn = ConnectionFactory.getInstance().getConnection() ) {
+			
+			String select_query = "select ACCOUNTTYPESID, NAME from P0_ACCOUNTTYPES " +
+								  "where ACCOUNTTYPESID <> ?";
+			
+			
+			PreparedStatement ps = conn.prepareStatement(select_query);
+			ps.setInt(1, accountTypeId);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			theOtherAccountTypeID = rs.getInt(1);
+			theOtherAccountTypeName = rs.getString(2);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return theOtherAccountTypeName;
+		
+	}
 
 }
