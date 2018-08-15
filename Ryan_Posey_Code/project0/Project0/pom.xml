@@ -3,4 +3,18 @@
   <groupId>Revature</groupId>
   <artifactId>Project0</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <name>Banking App</name>
+  
+  <properties>
+	<maven.compiler.source>1.8</maven.compiler.source>
+	<maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+	
+  <dependencies>
+	<dependency>
+		<groupId>com.oracle</groupId>
+		<artifactId>ojdbc7</artifactId>
+		<version>11.2.0</version>
+	</dependency>
+  </dependencies>
 </project>
