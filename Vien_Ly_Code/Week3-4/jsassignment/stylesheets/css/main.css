@@ -14,9 +14,10 @@ body {
     font-size: 2em;
 }
 
-
-
-
 .section {
     margin-bottom: 1em;
+}
+
+.output {
+    color: #fd5c63;
 }
