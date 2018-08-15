@@ -16,8 +16,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [UserID=" + UserID + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + "]";
+		return firstName + " " + lastName + "'s Account. Username: " + username + ".";
 	}
 	public User() {}
 	public User(String username, String password, String firstName, String lastName) {

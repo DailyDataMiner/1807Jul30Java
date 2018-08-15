@@ -1,5 +1,7 @@
 package com.revature.project0.projectobjects;
 
+import com.revature.project0.myexceptions.NotEnoughMoneyException;
+
 public class Account {
 
 	private int accountID;
@@ -38,13 +40,18 @@ public class Account {
 	}
 	@Override
 	public String toString() {
-		return "Account [accountID=" + accountID + ", accountType=" + accountType.getName() + ", balance=" + balance + "]";
+		return accountType.getName() + " account. Balance=" + balance + ". ID: " + accountID + ".";
 	}
 	
-	public void withdraw(double withdrawAmount) {
-		balance = balance-withdrawAmount;
+	public void withdraw(double withdrawAmount) throws NotEnoughMoneyException {
+		if (balance - withdrawAmount < accountType.getMinimumMoney()) {
+			throw new NotEnoughMoneyException();
+		}
+		else {
+		balance = (double) Math.round((balance-withdrawAmount) * 100) / 100;
+		}
 	}
 	public void deposit(double depositAmount) {
-		balance = balance+depositAmount;
+		balance = (double) Math.round((balance+depositAmount) * 100) / 100;
 	}
 }

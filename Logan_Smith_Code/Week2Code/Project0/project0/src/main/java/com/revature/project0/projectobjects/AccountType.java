@@ -4,12 +4,11 @@ public class AccountType {
 
 	private int accountTypeID;
 	private String name;
+	private int minimumMoney;
 	@Override
 	public String toString() {
-		return "Account Type: ID=" + accountTypeID + ", Name=" + name + ", Minimum Balance=" + minimumMoney;
+		return accountTypeID + ": " + name + " Account. Minimum Balance=" + minimumMoney;
 	}
-	private int minimumMoney;
-	
 	public int getMinimumMoney() {
 		return minimumMoney;
 	}
@@ -43,6 +42,10 @@ public class AccountType {
 		case 2:
 			this.name = "Savings";
 			this.minimumMoney = 0;
+			break;
+		case 3:
+			this.name = "Credit";
+			this.minimumMoney = -2000;
 			break;
 		default:
 			System.out.println("Unfound account type");

@@ -3,7 +3,7 @@ package com.revature.project0.service;
 import java.util.List;
 
 import com.revature.project0.dao.AccountDAO;
-import com.revature.project0.dao.Dao;
+import com.revature.project0.myexceptions.NotEnoughMoneyException;
 import com.revature.project0.projectobjects.Account;
 
 
@@ -27,7 +27,7 @@ static AccountDAO aDao = new AccountDAO();
 	public Account updateAccountBalance(Account a) {
 		return aDao.updateAccountBalance(a);
 	}
-	public Account withdraw(Account a, double withdrawAmount) {
+	public Account withdraw(Account a, double withdrawAmount) throws NotEnoughMoneyException {
 		a.withdraw(withdrawAmount);
 		return updateAccountBalance(a);
 	}
@@ -35,7 +35,7 @@ static AccountDAO aDao = new AccountDAO();
 		a.deposit(depositAmount);
 		return updateAccountBalance(a);
 	}
-	public Account transfer(Account a, Account b, double transferAmount) {
+	public Account transfer(Account a, Account b, double transferAmount) throws NotEnoughMoneyException {
 		a.withdraw(transferAmount);
 		b.deposit(transferAmount);
 		updateAccountBalance(b);
