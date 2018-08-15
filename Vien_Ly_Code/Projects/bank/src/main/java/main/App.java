@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 import beans.Account;
 import beans.Customer;
-import exceptions.*;
+import exceptions.NoSuchAccountException;
 import services.AccountService;
 import services.CustomerService;
 import utils.Password;
+import exceptions.*;
 
 public class App {
 	static AccountService accService = new AccountService();
@@ -28,6 +29,7 @@ public class App {
 	}
 	
 	static void mainMenu() {
+		System.out.println("---MENU---");
 		System.out.println("1 new user");
 		System.out.println("2 login");
 		System.out.println("-1 to exit the program");
@@ -60,6 +62,7 @@ public class App {
 	
 	static void menu(){
 		int option = 0;
+		System.out.println("---USER CONTROL PANEL---");
 		System.out.println("1 register account");
 		System.out.println("2 show all accounts");
 		System.out.println("3 check specific account");
@@ -256,13 +259,31 @@ public class App {
 	static void registerNewAccount() {
 		System.out.println("Initial account deposit: ");
 		double amount = Double.parseDouble(scan.nextLine());
+		if (amount < 0) {
+			try {
+				throw new Exception("Please specify a positive value to be the base fund");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				registerNewAccount();
+			}
+		}
+
 		Account newAccount = accService.save(new Account(amount, currentCustomer.getId()));
 		currentCustomer.addAccount(newAccount);
 	}
 	
 	static void createNewCustomer() {
-		System.out.println("username");
+		System.out.println("username (at least 4 characters)");
 		String username = scan.nextLine();
+		try {
+			if (username.length() < 4) {
+				throw new ShortInputException(username);
+
+			}
+		} catch (ShortInputException e) {
+			System.out.println(e.getMessage());
+			createNewCustomer();
+		}
 		if (custService.findOne(username) != null) {
 			try {
 				throw new UsernameNotAvailableException(username);
@@ -273,10 +294,36 @@ public class App {
 		}
 		System.out.println("first name");
 		String firstName = scan.nextLine();
+		if (firstName.length() < 1) {
+			try {
+				throw new ShortInputException(firstName);
+			} catch (ShortInputException e) {
+				System.out.println(e.getMessage());
+				System.out.println("Cannot have empty name fields");
+				createNewCustomer();
+			}
+		}
 		System.out.println("last name");
 		String lastName = scan.nextLine();
-		System.out.println("password");
+		if (lastName.length() < 1) {
+			try {
+				throw new ShortInputException(lastName);
+			} catch (ShortInputException e) {
+				System.out.println(e.getMessage());
+				System.out.println("Cannot have empty name fields");
+				createNewCustomer();
+			}
+		}
+		System.out.println("password (at least 4 characters");
 		String password = scan.nextLine();
+		if (password.length() < 4) {
+			try {
+				throw new ShortInputException(password);
+			} catch (ShortInputException e) {
+				System.out.println(e.getMessage());
+				createNewCustomer();
+			}
+		}
 		String passwordHash = Password.getHash(password);
 		Customer newCustomer = new Customer(username, firstName, lastName, passwordHash);
 		custService.save(newCustomer);

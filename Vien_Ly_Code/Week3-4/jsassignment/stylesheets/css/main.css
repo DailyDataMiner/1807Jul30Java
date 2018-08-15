@@ -1,0 +1,22 @@
+* {
+    color: #ccc;
+}
+
+body {
+    margin-top: 2em;
+    background-color: #222;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.heading {
+    font-family: 'Julius Sans One', sans-serif;
+    text-transform: uppercase;
+    font-size: 2em;
+}
+
+
+
+
+.section {
+    margin-bottom: 1em;
+}

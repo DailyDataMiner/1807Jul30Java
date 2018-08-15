@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> <!-- metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../css/css101.css">
+
+</head>
+<body>
+    first HTML example
+    <p id="text1">Hello This is text inside of a paragraph text</p>
+    <h1>h1</h1>
+    <h2>h2</h2>
+    <h3>h3</h3>
+    <h4>h4</h4>
+    <h5>h5</h5>
+    <hr>
+    
+    <h3>Lists: </h3>
+    <h6>OL and UL</h6>
+    <ul>
+        <li class="first">first</li>
+
+        <li>second</li>
+    </ul>
+    <ol>
+        <li class="first">first</li>
+        <li>second</li>
+    </ol>
+
+    <h3>forms</h3>
+    <form method="GET" action="TEST">
+        <input type="text" placeholder="username" name="username">
+        <br>
+        <input type="number" placeholder="age" max="100" min="0" name="age">
+        <br>
+        <input type="password" placeholder="password" name="password">
+        <br>
+        <input type="radio" name="role" value="Associate" checked> Associate
+        <input type="radio" name="role" value="Trainer"> Trainer
+        <br>
+        Countries traveled
+        <input type="checkbox" name="Cuba" value="cuba"> Cuba
+        <input type="checkbox" name="Mexico" value="mexico"> Mexico
+        <input type="checkbox" name="Aus" value="aus"> Australia
+        <br>
+        <input type="color" name="favcolor">
+        <br>
+        <input type="submit" value="Submit Button">
+        <br>
+        <button>another button</button>
+    </form>
+    
+    <br>
+
+    <h3>more on form <i>outputs</i></h6>
+    <form oninput="y.value = a.value">
+        <input type="range" name="a" min="0" max="100">
+        <output name="y" for="a"></output>
+    </form>
+<footer>footer</footer>
+</body>
+</html>
