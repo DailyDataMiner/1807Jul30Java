@@ -73,13 +73,12 @@ public class AccountUI extends HelperFunctions {
 		
 	}
 	
-	// this function (createAccount) is called from the UserUI class, because first goes the user creation, 
-	//	then, the account to connect them user with account.
-	
 	public static Account createAccount(int p_userId) {
-		// I am passing newUserObj id into create account dao, to use it as fk in accounts table.
-		// here I ask the user for account info
-		// use this ... -> newUserObj which is the newly created user
+		
+//	Function used for signing up for the first time.
+// 	I am passing newUserObj id into create account dao, to use it as fk in accounts table.
+// 	here I ask the user for account info
+// 	use this ... -> newUserObj which is the newly created user
 		
 		accountDao 				= new AccountDao();
 		accountAccountTypeDao 	= new AccountAccountTypeDao();
@@ -101,9 +100,14 @@ public class AccountUI extends HelperFunctions {
 //		Get account number
 		print("	  ACCOUNT NUMBER: ");
 		
-		_accountNumber = readFromUser.next();
+//		Let the user create (enter) an account number?
+//		_accountNumber = readFromUser.next();
 
-//		_accountNumber = rand.nextInt(500);
+		
+//		Or generate it randomly?
+//		int randNum = rand.nextInt(500);
+		_accountNumber = Integer.toHexString(rand.nextInt(500));
+		
 		//50 is the maximum and the 1 is our minimum 
 		
 //		print();
@@ -128,7 +132,7 @@ public class AccountUI extends HelperFunctions {
 		accountObj.setAccountid( accountObj.getAccountid() );
 		
 		//	Ask for account type
-		print("  ACCOUNT TYPE => C) CHECKING or S) SAVINGS " );
+		print("  ACCOUNT TYPE => CHECKING or SAVINGS " );
 		_accountTypeName = readFromUser.next().toUpperCase();
 		
 		if ( ( _accountTypeName.equals(AccountType.CHECKING.toString())) || 

@@ -151,8 +151,8 @@ public class App extends HelperFunctions {
 			}
 		}
 		
-//		User must be able to withdraw and deposit money 
-		print("\t|  2 - DO TRANSACTION ( deposit, withdrawal, transfer money )");
+//		User must be able to withdraw and deposit money  (also transfer money...? -for next version
+		print("\t|  2 - DO TRANSACTION ( deposit, withdrawal )");
 
 		
 //		EXIT application? ... log out --> go back to log in page
