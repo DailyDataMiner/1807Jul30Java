@@ -1,0 +1,40 @@
+- Create sequence for account_id in the table bankaccount and a sequence for user_id in bankuser
+
+- Create a BankAccountDAO and BankUserDAO
+	- In these, create a findAll() function  genre dao line 24 and save() function -- genre Dao Line73	
+
+. These can be found in her GenreDAO and BookDAO in her examples.
+		- getAll() is used to retrieve all rows from a table and store them as objects in a list in Java, where you can access them
+
+		- Copy and modify them to fit your BankAccountDAO and BankUserDAO
+
+- SIGN UP FUNCTION (userservice.java) 
+	- Ask for username (scanner(system.in))
+	- Check if username is unique (business logic)
+		- Get all usernames in database, store each username as an object in a username list (Look at ex.dao.GenreDAO line 24 findAll() method)
+		- Compare the inputted username to the list of usernames (for loop to compare username against all usernames)
+			- If there is a match, tell the user they can't use that username (restart) (use a for loop)
+			- If there is no match for usernames, let them continue and ask for the rest of the fields (first name, last name, password)
+			- Save that as an object and pass it into sequel, where sequel will autogenerate a new ID for it
+
+- LOGIN FUNCTION (userservice.java) 
+	- Ask for a username via scan input
+	- getUser() and return into a user object
+	- ask for a password
+	- userobject.getPass_word() and compare the password (== or .equals())
+	- if password matches, go onto menu (2)
+
+- MENU (1) (ex.main.App)
+	- Prompts the user to login or sign up. (ex.main.App) line 46
+	- Calls the respective login() or signup() functions. Make login and signup functions. (ex.main.App) line 53
+
+- MENU (2)
+	- view accounts
+	- create a new bank account
+	- deposit
+	- withdraw
+	- logout
+		- return to main menu
+
+
+sequence -- BookDDL -- create SQ line 39-- create triger line 60. for userID and AccountID only. 
