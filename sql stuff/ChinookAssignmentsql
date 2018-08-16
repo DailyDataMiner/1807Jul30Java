@@ -6,9 +6,10 @@ stuff about my name
 select * from employee;
 select * from employee where lastname = 'King';
 select * from employee where firstname = 'Andrew' and reportsto is null;
+--2.2
 select * from album order by title desc;
 select firstname from customer order by city;
-
+--2.3
 select max(genreid) from genre;
 insert into genre(GENREID, NAME) values (26, 'An Exiting New Genre!');
 insert into genre(GENREID, NAME) values (27, 'An Amazing Genre You Never Heard Of!');
