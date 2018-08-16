@@ -95,21 +95,20 @@ public class App {
 		}
 		System.out.println("Enter Account Name: ");
 		String acName = scanner.nextLine();
-		AccountIDDAO accDao = new AccountIDDAO();
 		AccountID acId = new AccountID(acName,option);
-		
-		acId.setAccName(acName);
-		acId.setAccType(option);
+		AccountIDDAO accDao = new AccountIDDAO();
+		accDao.save(acId);
 		System.out.println();
 		
-		System.out.println("Enter your username:");
+		System.out.println("Enter your username:");//new 
 		String userName = scanner.nextLine();
 		System.out.println("Enter your password:");
 		String password = scanner.nextLine();
 		
-		temp = bService.findOneId(new BankUser(userName, password));
 		
+		temp = bService.findOneId(new BankUser(userName, password));//to new 
 		
+		System.out.println(temp.getUserID());
 		Account acc = new Account(temp.getUserID(), option);
 		
 		AccountDAO accountDao = new AccountDAO();
@@ -128,6 +127,7 @@ public class App {
 		String userName = scanner.nextLine();
 		System.out.println("Enter your password:");
 		String password = scanner.nextLine();
+		
 		
 		temp = bService.findOneId(new BankUser(userName, password));
 		
@@ -241,16 +241,9 @@ public class App {
 		String userName = scanner.nextLine();
 		System.out.println("Enter your password:");
 		String password = scanner.nextLine();
-		
-		
-		
-		
-		temp = bService.findOneId(new BankUser(userName, password));
 			
 		
 		BankUser b = new BankUser(firstName, lastName, email, userName, password);
-		Account a = new Account();
-		a.setUserID(b.getUserID());
 		bService.insert(b);
 		//call book service addBook() which calls dao addBook()
 		//WE HAVE MAINTAINED REFERENTIAL INTEGRITY

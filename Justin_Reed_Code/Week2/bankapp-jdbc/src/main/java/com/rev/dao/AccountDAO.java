@@ -22,7 +22,6 @@ public class AccountDAO implements Dao<Account ,Integer >{
 	public double findOne(Account obj) {
 		
 		double balance = 0;
-		double total = 0;
 	
 		try(Connection conn = ConnectionFactory
 				.getInstance().getConnection()){
@@ -61,7 +60,7 @@ public class AccountDAO implements Dao<Account ,Integer >{
 				.getConnection()){
 			conn.setAutoCommit(false);
 			
-	
+
 			
 			String sql = "Insert Into Accounts(user_ID, type_ID) values(?,?)"; 
 			
@@ -116,17 +115,11 @@ public class AccountDAO implements Dao<Account ,Integer >{
 			}
 			if(type  == 1) {
 				total = (balance - usrInput);
-				if (total < 0) {
-				total = total + usrInput;
-				System.out.println("You cannot withdraw that amount! Your current Balance is"+ total);
-				
 			}else {
 			total = (balance + usrInput);
-			System.out.println("total: " + total);
 			}
 			
-				
-		
+			System.out.println("total: " + total);
 			
 			
 			
@@ -146,7 +139,7 @@ public class AccountDAO implements Dao<Account ,Integer >{
 			//int numRowsAffected = ps.executeUpdate();
 			conn.commit();
 			
-			}} catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	
