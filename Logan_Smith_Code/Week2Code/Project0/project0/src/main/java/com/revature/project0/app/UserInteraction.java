@@ -105,7 +105,6 @@ public class UserInteraction {
 			accountService.saveAccount(newAccount);
 			utaService.saveUserToAccount(currentUser, newAccount);
 			System.out.println("Created new account.");
-			//app.userMenu(currentUser);
 			return;
 		}
 	}
@@ -210,6 +209,10 @@ public class UserInteraction {
 					return;
 				}
 				option = Integer.parseInt(checker);
+				if (option <= 0) {
+					System.out.println("Incorrect Input");
+					option = 0;
+				}
 			} catch (NumberFormatException e) {
 				System.out.println("Incorrect input.");
 			}
@@ -352,7 +355,7 @@ public class UserInteraction {
 		app.accountMenu(currentUser, currentAccount);
 	}
 	public void removeUserFromAccount(User currentUser, Account currentAccount) {
-		System.out.println("These users are linked to this account.");
+		System.out.println("These users are linked to this account.\n");
 		List<User> users = utaService.getAllLinkedUsers(currentAccount.getAccountID());
 		for (User user : users) {
 			System.out.println(user);
@@ -362,7 +365,7 @@ public class UserInteraction {
 			System.out.println("If you wish to remove the account, please use the remove account option.");
 			app.accountMenu(currentUser, currentAccount);
 		}
-		System.out.println("Enter the username of the user you would like to remove.");
+		System.out.println("\nEnter the username of the user you would like to remove.");
 		System.out.println("Otherwise, enter 'return'.");
 		String userToDelete = scanner.nextLine();
 		if (userToDelete.equals("return")) {

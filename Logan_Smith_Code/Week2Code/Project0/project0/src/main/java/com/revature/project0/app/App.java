@@ -29,7 +29,7 @@ public class App {
 	static AccountTypeService atService = new AccountTypeService();
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to the Logan Smith Virtual Banking App!");
+		System.out.println("Welcome to Logan Smith's Virtual Banking App!");
 		App app = new App();
 		app.menu();
 	}
