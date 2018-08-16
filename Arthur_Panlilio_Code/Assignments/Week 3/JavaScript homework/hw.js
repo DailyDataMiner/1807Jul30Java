@@ -1,6 +1,8 @@
 window.onload = function(){
     //alert('Js is loaded');
     //add event listener to button
+    document.getElementById('fibonacciButton').addEventListener(
+        "click",fib,true);
     document.getElementById('bubbleButton').addEventListener(
         "click", bubbleSortInit, true);
     document.getElementById('reverseButton').addEventListener(
@@ -13,14 +15,33 @@ window.onload = function(){
         "click", isEven, true);
     document.getElementById('isPalindromeButton').addEventListener(
         "click", isPalindrome, true);
+    document.getElementById('personButton').addEventListener(
+        "click", personMaker, true);
     document.getElementById('shapeButton').addEventListener(
         "click", printShape, true);
-    
-    
-    
-    
+}
+
+window.addEventListener("load", startTime);
+
+
+/**1. Fibonacci 
+Define function: fib(n) 
+Return the nth number in the fibonacci sequence.
+ */
+function fib(n){
+
+    n = parseInt(document.getElementById('fibonacciInput').value);
+    var fibb = fibonacci(n);
+    document.getElementById('fibonacciOutput').innerHTML = fibb;
 
 }
+function fibonacci(n) {
+    if(n <= 2) {
+        return 1;
+    } else {
+        return this.fibonacci(n - 1) + this.fibonacci(n - 2);
+    }
+  }
 
 /**2. Bubble Sort
 Define function: bubbleSort(numArray)
@@ -190,6 +211,21 @@ function printShape(shape, height, character){
 }
 
 
+/**12. Defining an object using a constructor
+Define a function Person(name, age)
+The following line should set a Person object to the variable john:
+	var john = new Person("John", 30); */
+function person(name, age){
+    this.name = name;
+    this.age = age;
+}
+
+function personMaker(){
+    var name = document.getElementById('personNameInput').value;
+    var age  = parseInt(document.getElementById('personAgeInput').value);
+    var p = new person(name, age);
+    document.getElementById('personOutput').innerHTML =  p.name + " is " + p.age + " years old!";
+}
 
 /**
 14. Display the current time on the top right of your HTML page, 
