@@ -1,19 +1,20 @@
 package com.ex.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.ex.pojos.Person;
+
 import com.ex.pojos.User;
-import com.ex.service.personService;
+
 import com.ex.util.ConnectionFactory;
 
 public class userDao implements InterDao<User, Integer>{
-	static personService  pservice = new personService();
+	//static personService  pservice = new personService();
 	static Scanner scanner = new Scanner(System.in);
 	
 	public userDao (){}

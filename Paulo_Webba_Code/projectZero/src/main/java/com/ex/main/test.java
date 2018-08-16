@@ -2,14 +2,14 @@ package com.ex.main;
 
 import java.util.List;
 
+
 import com.ex.dao.AccntDao;
 import com.ex.dao.InterDao;
-import com.ex.dao.PersonDao;
 import com.ex.dao.userDao;
-import com.ex.pojos.Person;
+
 import com.ex.pojos.User;
 import com.ex.pojos.bank_account;
-import com.ex.service.personService;
+
 
 public class test {
 

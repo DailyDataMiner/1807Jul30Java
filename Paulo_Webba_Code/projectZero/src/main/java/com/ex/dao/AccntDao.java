@@ -1,17 +1,18 @@
 package com.ex.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.ex.pojos.bank_account;
-import com.ex.service.personService;
+
 import com.ex.util.ConnectionFactory;
 
 public class AccntDao implements InterDao<bank_account, Integer>{
-	static personService  pservice = new personService();
+	//static personService  pservice = new personService();
 	
 	public AccntDao(){};
 	
