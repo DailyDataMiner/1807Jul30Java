@@ -1,15 +1,15 @@
 'use strict';
 // BAREBONE JS PRACTICE
-window.onload = function() {
+window.onload = function () {
     document.getElementById('fibSubmit').addEventListener(
         "click", fibonacci, true);
 
     document.getElementById("sortSubmit").addEventListener(
         "click", bubbleSort, true);
-      
+
     document.getElementById("strReverseSubmit").addEventListener(
         "click", strReverse, true);
-    
+
     document.getElementById("factSubmit").addEventListener(
         "click", factorial, true);
 
@@ -32,9 +32,9 @@ function factorial() {
 
 function factorialHelper(n) {
     let result = n;
-    if (n === 0 || n === 1) 
-        return 1; 
-    while (n > 1) { 
+    if (n === 0 || n === 1)
+        return 1;
+    while (n > 1) {
         n--;
         result *= n;
     }
@@ -48,17 +48,15 @@ function strReverse() {
 
 function fibonacci() {
     let n = parseInt(document.getElementById("fibInput").value);
-    console.log(typeof(n));
     document.getElementById("fibOutput").value = fibHelper(n);
-    console.log(fibHelper(n));
 }
 
 function fibHelper(n) {
     let arr = [0, 1];
     for (let i = 2; i < n + 1; i++) {
-        arr.push(arr[i - 2] + arr[i -1]);
+        arr.push(arr[i - 2] + arr[i - 1]);
     }
-   return arr[n];
+    return arr[n];
 }
 
 // recursive method, not ideal for web browsers, stack overflows quickly
@@ -70,10 +68,7 @@ function fibHelperR(n) {
 }
 
 function bubbleSort() {
-    console.log('hello');
     let arr = document.getElementById("sortInput").value.split(",").map(Number);
-    console.log(typeof(arr[0]));
-    console.log(arr);
     document.getElementById("sortOutput").value = bubbleSortHelper(arr).join(",");
 }
 
@@ -81,13 +76,13 @@ function bubbleSortHelper(array) {
     var swapped;
     do {
         swapped = false;
-        for(let i = 0; i < array.length; i++) {
-            if(array[i] && array[i + 1] && array[i] > array[i + 1]) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] && array[i + 1] && array[i] > array[i + 1]) {
                 swap(array, i, i + 1);
                 swapped = true;
             }
         }
-    } while(swapped);
+    } while (swapped);
     return array;
 }
 
@@ -103,7 +98,7 @@ function traverseObject(someObj) {
     }
 }
 
-let car = {type:"Fiat", model:"500", color:"white"};
+let car = { type: "Fiat", model: "500", color: "white" };
 traverseObject(car);
 
 function deleteElement(someArr) {
@@ -111,18 +106,18 @@ function deleteElement(someArr) {
     delete someArr[2];
     console.log(someArr);
 }
-let testArr0 = [1,2,3,4,5,6];
+let testArr0 = [1, 2, 3, 4, 5, 6];
 deleteElement(testArr0);
 
 function spliceElement(someArr) {
     console.log(someArr);
     console.log(someArr.length);
-    console.log(someArr.splice(2,1));
+    console.log(someArr.splice(2, 1));
     console.log(someArr);
     console.log(someArr.length);
 }
 
-let testArr1 = [1,2,3,4,5,6];
+let testArr1 = [1, 2, 3, 4, 5, 6];
 spliceElement(testArr1);
 
 function Person(name, age) {
