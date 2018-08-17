@@ -115,6 +115,8 @@ commit;
 select * from customer;  
 select * from account where customerid = 12;  
 
+select * from closedaccount;
+
 variable rc REFCURSOR;
 exec Get_All_Customer_Account(:rc, 5);
 print rc;

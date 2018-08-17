@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,23 @@
     <title>JS Assignment</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
-    <link rel="stylesheet" href="../stylesheets/vendor/bootstrap-4.1.3-dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../stylesheets/css/main.css"/>
+    <link rel="stylesheet" href="../stylesheets/vendor/bootstrap-4.1.3-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../stylesheets/css/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <body>
     <div class="container">
-        
-        <h1 class="heading">JAVASCRIPT ASSIGNMENT</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-auto">
+                    <h1 class="heading">JAVASCRIPT ASSIGNMENT</h1>
+                </div>
+                <div class="col-md text-right">
+                    <p id="currentTime"></p>
+                </div>
+            </div>
+        </div>
 
         <div class="main container">
             <div class="section" id="q1">
@@ -50,7 +60,7 @@
                 </div>
             </div>
 
-            
+
             <div class="section" id="q4">
                 <h5 class="section-label">4. Factorial</h5>
                 <div class="input-group">
@@ -68,7 +78,7 @@
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-primary" type="submit" id="substrSubmit">Extract Substring</button>
                     </div>
-                    <input type="text" aria-label="substr-input" class="input form-control" placeholder="input string" id="substrInput">
+                    <input type="text" aria-label="substr-input" class="input form-control" placeholder="string input" id="substrInput">
                     <input type="number" aria-label="substr-input" class="input form-control" placeholder="start index" id="substrStart">
                     <input type="number" aria-label="substr-input" class="input form-control" placeholder="length" id="substrLength">
                     <output type="text" aria-label="substr-output" class="output form-control" id="substrOutput">
@@ -92,8 +102,38 @@
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-primary" type="submit" id="palindromeSubmit">Check Palindrome</button>
                     </div>
-                    <input type="text" aria-label="even-input" class="input form-control" placeholder="input string" id="palindromeInput">
-                    <output type="text" aria-label="even-output" class="output form-control" id="palindromeOutput">
+                    <input type="text" aria-label="palindrome-input" class="input form-control" placeholder="string input" id="palindromeInput">
+                    <output type="text" aria-label="palindrome-output" class="output form-control" id="palindromeOutput">
+                </div>
+            </div>
+
+            <div class="section" id="q8">
+                <h5 class="section-label">8. Print Shapes</h5>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-primary" type="submit" id="printSubmit">Print</button>
+                    </div>
+                    <select class="form-control" name="shapes" id="printShape">
+                        <option value="triangle">Triangle</option>
+                        <option value="square">Square</option>
+                        <option value="diamond">Diamond</option>
+                    </select>
+                    <input type="number" aria-label="print-input" class="input form-control" placeholder="height" id="printHeight">
+                    <input type="text" aria-label="print-input" class="input form-control" placeholder="character" id="printCharacter">
+                </div>
+                <div class="jumbotron output d-none" id="q8-draw-area">
+                    <pre class="readonly" id="printOutput"></pre>
+                </div>
+            </div>
+
+            <div class="section" id="q15">
+                <h5 class="section-label">15. Descending Order</h5>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-primary" type="submit" id="descSubmit">Rearrange</button>
+                    </div>
+                    <input type="number" aria-label="desc-input" class="input form-control" placeholder="integer input" id="descInput">
+                    <output type="number" aria-label="desc-output" class="output form-control" id="descOutput">
                 </div>
             </div>
         </div>
@@ -102,7 +142,10 @@
     <script type="text/javascript" src="../js/js.js"></script>
     <script type="text/javascript" src="../js/jq.js"></script>
     <script src="../stylesheets/vendor/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

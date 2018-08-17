@@ -1,3 +1,4 @@
+'use strict';
 // BAREBONE JS PRACTICE
 window.onload = function() {
     document.getElementById('fibSubmit').addEventListener(
@@ -96,39 +97,37 @@ function swap(array, i, j) {
     array[j] = temp;
 }
 
-function printShape(shape, height, character) {
-    let input = shape.toLowerCase();
-    switch(input) {
-        case("square"):
-            printSquare(height, character);
-            break;
-        case("triangle"):
-            printTriangle(height, character);
-            break;
-        case("diamond"):
-            printDiamond(height, character);
-            break;
+function traverseObject(someObj) {
+    for (let prop in someObj) {
+        console.log(`${prop}: ${someObj[prop]}`);
     }
 }
 
-function printSquare(height, character) {
-    for(let i = 0; i < height; i++) {
-        for (let j = 0; j < height; j++) {
-            console.log(character);
-        }
-        console.log("\n");
-    }
+let car = {type:"Fiat", model:"500", color:"white"};
+traverseObject(car);
+
+function deleteElement(someArr) {
+    console.log(someArr);
+    delete someArr[2];
+    console.log(someArr);
+}
+let testArr0 = [1,2,3,4,5,6];
+deleteElement(testArr0);
+
+function spliceElement(someArr) {
+    console.log(someArr);
+    console.log(someArr.length);
+    console.log(someArr.splice(2,1));
+    console.log(someArr);
+    console.log(someArr.length);
 }
 
-function printTriangle(height, character) {
-    for(let i = 1; i <= height; i ++) {
-        for (let j = 1; j <= i; j++) {
-            console.log(character);
-        }
-        console.log("\n");
-    }
+let testArr1 = [1,2,3,4,5,6];
+spliceElement(testArr1);
+
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
 }
 
-function printDiamond(height, character) {
-
-}
+let John = new Person("John", 30);

@@ -68,3 +68,16 @@ function scopes(cond) {
     noDeclaration = 'this variable was never declared but is used in a function';
     console.log(noDeclaration);
 }
+
+/*
+OPERATORS
+*/
+let currentSession = null;
+let userInfo = {
+    username: "vien",
+    password: "123"
+}
+
+let getUser = curr;
+// default operator Session && userInfo
+// if first operand is truthy, return it, else return second operand
