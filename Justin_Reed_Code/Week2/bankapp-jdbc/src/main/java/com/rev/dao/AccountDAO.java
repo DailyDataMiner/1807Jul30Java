@@ -103,34 +103,37 @@ public class AccountDAO implements Dao<Account ,Integer >{
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
 		
 			ps1.setInt(1, obj.getAccountID() );
-			System.out.println("Account ID: " + obj.getAccountID());
+			
 			ps1.setInt(2, obj.getUserID() );
-			System.out.println("user ID: "+obj.getUserID());
+			
 			
 			
 			
 			ResultSet rs1 = ps1.executeQuery();
 			
-			System.out.println("After execute " +"balance "+ balance +"total " +total);
+			
 		
 			while(rs1.next()) {
-				System.out.println("IN while rs1 before " +"balance "+ balance +"total " +total);
-				System.out.println(rs1.getFloat(4));
-				balance = rs1.getFloat("balance");
-				System.out.println("IN while rs1 after " +"balance "+ balance +"total " +total);
+				
+				
+				balance = rs1.getDouble("balance");
+				
 				
 			}
 			if(type  == 1) {
 				total = (balance - usrInput);
-				System.out.println("IN if " +" balance "+ balance +" total " +total);
+				if (total < 0 ) {
+					total = balance;
+					System.out.println("You cannot withdraw that much\n"+
+					"Your Balance is "+balance);
+				}
+				
 			}else {
 			total = (balance + usrInput);
-			System.out.println("IN if " +" balance "+ balance +" total " +total);
+			
 			}
 			
-			System.out.println("total: " + total);
 			
-			System.out.println("Real " +"balance "+ balance +"total " +total);
 			
 			String sql = "Update Accounts set Balance = ? Where User_ID = ? AND Type_ID = ? AND Account_ID =?"; 
 						

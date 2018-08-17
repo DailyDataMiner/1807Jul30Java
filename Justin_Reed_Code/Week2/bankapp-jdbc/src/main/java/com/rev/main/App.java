@@ -88,6 +88,15 @@ public class App {
 		int option = 0;
 		try { 
 			option = Integer.parseInt(scanner.nextLine());
+			if (option > 2) {
+				System.out.println("Please input a valid number");
+				menu2();
+			}
+			else if(option < 1) {
+				System.out.println("Please input a valid number");
+				menu2();
+			}
+				
 		}
 		catch(NumberFormatException e) {
 			System.out.println("Sorry, you must 1 or 2 :)");
@@ -107,6 +116,8 @@ public class App {
 		
 		
 		temp = bService.findOneId(new BankUser(userName, password));//to new 
+		
+		
 		
 		System.out.println(temp.getUserID());
 		Account acc = new Account(temp.getUserID(), option);
