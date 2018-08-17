@@ -167,7 +167,7 @@ public class App {
 			DepositToAccount();
 			break;
 		case 4:
-			LogOut();
+			BalanceInquiry();
 			break;
 		default:
 			System.out.println("Sorry Please enter a Valid number");
@@ -188,15 +188,21 @@ public class App {
 	}
 
 	private static void WithdrawFromAccount() {
-		System.out.println("Please Enter the Account ID of the Account you  would like to withdraw from: ");
-		int acctWithdraw = scanner.nextInt();
+		System.out.println("Withdraw from Checkings or Savings: ");
+		int accDeposite = scanner.nextInt();
+		
+		System.out.println("Enter your Account Number: ");
+		int accID = scanner.nextInt();
+		
 		System.out.println("How much do you want to withdraw? ");
-		int withdrawAmt  = scanner.nextInt();
+		double depositeAmt  = scanner.nextDouble();
+		
+		
 
-		Account withdraw = new Account(temp.getUserID(),acctWithdraw);
+		Account withdraw = new Account(temp.getUserID(),accDeposite,accID,depositeAmt);
 		AccountDAO aDao = new AccountDAO();
 
-		aDao.update(withdraw, withdrawAmt,1);
+		aDao.update(withdraw, depositeAmt,1);
 		
 		
 		
@@ -204,12 +210,18 @@ public class App {
 	}
 
 	private static void DepositToAccount() {
-		System.out.println("Please Enter the Account ID of the Account you would like to deposite to: ");
+		System.out.println("Deposit to Checkings or Savings: ");
 		int accDeposite = scanner.nextInt();
+		
+		System.out.println("Enter your Account Number: ");
+		int accID = scanner.nextInt();
+		
 		System.out.println("How much do you want to deposit? ");
-		int depositeAmt  = scanner.nextInt();
+		double depositeAmt  = scanner.nextDouble();
+		
+		
 
-		Account withdraw = new Account(temp.getUserID(),accDeposite);
+		Account withdraw = new Account(temp.getUserID(),accDeposite,accID,depositeAmt);
 		AccountDAO aDao = new AccountDAO();
 
 		aDao.update(withdraw, depositeAmt,2);
@@ -221,7 +233,7 @@ public class App {
 		System.out.println("Which Account you like to Check? ");
 		int checkThis = scanner.nextInt();
 		
-
+		
 		Account withdraw = new Account(temp.getUserID(),checkThis);
 		AccountDAO aDao = new AccountDAO();
 
@@ -231,22 +243,24 @@ public class App {
 	}
 
 	static void SignUpUser() {
-		System.out.println("Enter your First Name:");
-		String firstName = scanner.nextLine();
-		System.out.println("Enter your Last Name:");
-		String lastName = scanner.nextLine();
-		System.out.println("Enter your email:");
-		String email = scanner.nextLine(); 		
-		System.out.println("Enter your username:");
-		String userName = scanner.nextLine();
-		System.out.println("Enter your password:");
-		String password = scanner.nextLine();
-			
 		
-		BankUser b = new BankUser(firstName, lastName, email, userName, password);
-		bService.insert(b);
-		//call book service addBook() which calls dao addBook()
-		//WE HAVE MAINTAINED REFERENTIAL INTEGRITY
+			System.out.println("Enter your First Name:");
+			String firstName = scanner.nextLine();
+			System.out.println("Enter your Last Name:");
+			String lastName = scanner.nextLine();
+			System.out.println("Enter your email:");
+			String email = scanner.nextLine(); 		
+			System.out.println("Enter your username:");
+			String userName = scanner.nextLine();
+			System.out.println("Enter your password:");
+			String password = scanner.nextLine();
+				
+			
+			BankUser b = new BankUser(firstName, lastName, email, userName, password);
+			bService.insert(b);
+			//call book service addBook() which calls dao addBook()
+			//WE HAVE MAINTAINED REFERENTIAL INTEGRITY
+			
 		
 	}
 	static void viewBankUsers() {
