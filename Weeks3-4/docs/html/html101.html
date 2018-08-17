@@ -1,0 +1,91 @@
+<!DOCTYPE html><!-- must be first line of HTML file. Indicates that it is HTML5-->
+<html lang="en"> <!--ROOT ELEMENT of html page-->
+<head> <!--all metadata about page lives here-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML101</title>
+    <link rel = "stylesheet" href="../css/css101.css">
+
+    <style>
+        .first{
+            color: blue;
+        }
+        
+    </style>
+</head>
+<body><!--Where all content to display goes. note* elements can be hidden removed-->
+    Hello! This is our first HTML page!
+    <p id = "text1">Hello! This is text inside a paragraph tag</p>
+    <h1>H1</h1>
+    <h2>H2</h2>
+    <h3>H3</h3>
+    <h4>H4</h4>
+    <h5>H5</h5>
+    
+    <h6>H6</h6>
+
+    <hr>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <br>
+        <h3>Lists:</h3>
+        <h6>There are two types of lists: Oredered(numbered) and Unordered(bullets)</h6>
+        <ul>
+            <li class = "first">first</li>
+                <ul><li>indexed</li></ul>
+            <li>second </li>
+            <li>third</li>
+        </ul>
+    <hr>
+
+    <ol>
+        <li class = "first">first</li>
+        <li>second</li>
+    </ol>
+
+
+
+    <div>
+        
+    </div>
+   
+    <!--horizonatl line-->
+    <hr>
+    <h2>Forms</h2>
+    <form method="GET" action="test"> 
+        <input type = "text" placeholder="Username" name="Username"><br>
+        <input type = "number" max="100" min="0" name="age"><br>
+        <input type="password" name="password"><br>
+        <input type="radio" name="role" value"Associate">Associate  <br>    
+        <input type="radio" name="role" value="Trainer" checked> Trainer <br>
+        Countries Traveled:     <br>
+            <input type="checkbox" name="Cuba" value="cuba"> Cuba   <br>
+            <input type="checkbox" name="Mexico" value="Mexico"> Mexico <br>
+            <input type="checkbox" name="Australia" value="Australia"> Australia    <br>
+            <input type="color" name="favcolor" > <br>
+            <input type="submit" value="submit button"> <br>
+
+    </form>
+        <button>Tis a button</button> <br>
+    <!--file:///C:/Users/Student0011/Documents/watchme/R1/Up2EndofAugF/1807Jul30Java/Weeks3-4/docs/
+        test?
+        Username=new+User
+        &age=75
+        &password=%5Bassword
+        &role=Trainer
+        &Cuba=cuba
+        &Mexico=Mexico
+        &favcolor=%23400040  -->
+
+        <h6>More on forms...Lets check out <i>outputs</i></h6>
+        <form oninput="y.value=a.value">
+            <input type="range" name="a" min="0" max="100">
+            <output name = "y" for "a"></output>
+        </form>
+     <footer>this is a footer</footer>
+</body>
+</html>
