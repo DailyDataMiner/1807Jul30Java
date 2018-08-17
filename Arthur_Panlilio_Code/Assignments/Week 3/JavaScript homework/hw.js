@@ -108,7 +108,7 @@ function substring(someStr, length, offset){
     var offset = parseInt(document.getElementById("substringOffsetInput").value);
     var newString = '';
     var arr = someStr.split(''); 
-    if(offset < 0 || length < 0 || offset + length > someStr.length){
+    if(offset < 0 || length < 0 || offset + length > someStr.length-1){
         alert("Numbers are either negative or when they're added they're bigger than string length");
         return;
     }
@@ -139,6 +139,8 @@ Return true if someStr is a palindrome, otherwise return false */
 function isPalindrome(someStr){
     var someStr = document.getElementById("isPalindromeInput").value;
     var str1 = someStr.split('').reverse().join("");
+    someStr = someStr.toLowerCase();
+    str1 = str1.toLowerCase();
     if(someStr==str1){
         document.getElementById("isPalindromeOutput").innerHTML = "True";
     } else{

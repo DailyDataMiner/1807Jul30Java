@@ -14,7 +14,7 @@
         <script type="text/javascript" src="hw.js"> </script>
     <div class="col-xs-8 text-right">#14 Current Time</div>
     <div class="col-xs-8 text-right" id="clock"> Clock</div>
-    <div class="jumbotron" id="wrapper" align="center">Week 3 homework
+    <div class="jumbotron" id="wrapper">Week 3 homework
      <br>
      <br>
      <br>
@@ -22,77 +22,82 @@
      <br>
      <br>
      <br>
+     <div class="row">
+        <div class="col-4">
+            <h5>#1 Fibonacci</h5>
+            <input type="number" id="fibonacciInput" class="form-control col-4"
+                placeholder="how much fibonacci?">
+                <button class="btn btn-submit" id="fibonacciButton">Submit</button>
+                <span id="fibonacciOutput"><i>output</i></span>
 
-    <h5>#1 Fibonacci</h5>
-    <input type="number" id="fibonacciInput" class="form-control col-4"
-        placeholder="how much fibonacci?">
-        <button class="btn btn-submit" id="fibonacciButton">Submit</button>
-        <span id="fibonacciOutput"><i>output</i></span>
-
-    <h5>#2 Bubble Sort</h5>
-    <input type="text" id="bubbleInput" class="form-control col-4"
-        placeholder="Seperate numbers with a comma">
-        <button class="btn btn-submit" id="bubbleButton">Submit</button>
-        <span id="bubbleOutput"><i>output</i></span>
+            <h5>#2 Bubble Sort</h5>
+            <input type="text" id="bubbleInput" class="form-control col-4"
+                placeholder="Seperate numbers with a comma">
+                <button class="btn btn-submit" id="bubbleButton">Submit</button>
+                <span id="bubbleOutput"><i>output</i></span>
 
 
-    <h5>#3 Reverse String</h5>
-    <input type="text" id="reverseInput" class="form-control col-4"
-        placeholder="Reverse this string">
-        <button class="btn btn-submit" id="reverseButton">Reverse it, lemme work it</button>
-        <span id="reverseOutput"><i>output</i></span>
+            <h5>#3 Reverse String</h5>
+            <input type="text" id="reverseInput" class="form-control col-4"
+                placeholder="Reverse this string">
+                <button class="btn btn-submit" id="reverseButton">Reverse it, lemme work it</button>
+                <span id="reverseOutput"><i>output</i></span>
+        </div>
+        <div class="col-4">
+            <h5>#4 Factorial</h5>
+            <input type="number" id="factorialInput" class="form-control col-4"
+                placeholder="Number">
+                <button class="btn btn-submit" id="factorialButton">Factorialize</button>
+                <span id="factorialOutput"><i>output</i></span>
 
-    <h5>#4 Factorial</h5>
-    <input type="number" id="factorialInput" class="form-control col-4"
-        placeholder="Number">
-        <button class="btn btn-submit" id="factorialButton">Factorialize</button>
-        <span id="factorialOutput"><i>output</i></span>
+            <h5>#5 Substring</h5>
+            <input type="text" id="substringTextInput" class="col-sm-2"
+                placeholder="String">
+            <input type="number" id="substringLengthInput" class="col-sm-2"
+                placeholder="Length">
+            <input type="number" id="substringOffsetInput" class="col-sm-2"
+                placeholder="Offset">
+                <button class="btn btn-submit" id="substringButton">Substring</button>
+                <span id="substringOutput"><i>output</i></span>
 
-    <h5>#5 Substring</h5>
-    <input type="text" id="substringTextInput" class="col-sm-2"
-        placeholder="String">
-    <input type="number" id="substringLengthInput" class="col-sm-2"
-        placeholder="Length">
-    <input type="number" id="substringOffsetInput" class="col-sm-2"
-        placeholder="Offset">
-        <button class="btn btn-submit" id="substringButton">Substring</button>
-        <span id="substringOutput"><i>output</i></span>
+            <h5>#6 isEven</h5>
+            <input type="number" id="isEvenInput" class="form-control col-4"
+                placeholder="Number">
+                <button class="btn btn-submit" id="isEvenButton">Is this even</button>
+                <span id="isEvenOutput"><i>output</i></span>
 
-    <h5>#6 isEven</h5>
-    <input type="number" id="isEvenInput" class="form-control col-4"
-        placeholder="Number">
-        <button class="btn btn-submit" id="isEvenButton">Is this even</button>
-        <span id="isEvenOutput"><i>output</i></span>
+            <h5>#7 isPalindrome</h5>
+            <input type="text" id="isPalindromeInput" class="form-control col-4"
+                placeholder="text">
+                <button class="btn btn-submit" id="isPalindromeButton">Is this a palindrome</button>
+                <span id="isPalindromeOutput"><i>output</i></span>
+        </div>
+        <div class="col-4">
+            <h5>#8 printShape</h5>
+            <input type="radio" name="shapeInput" class="radio-inline"
+                value="square"> Square
+                <input type="radio" name="shapeInput" class="radio-inline"
+                value="triangle"> Triangle
+                <input type="radio" name="shapeInput" class="radio-inline"
+                value="diamond"> Diamond
+            <input type="number" id="shapeHeightInput" class="form-control col-4"
+                placeholder="Height">
+            <input type="text" id="shapeCharacterInput" class="form-control col-4"
+                placeholder="Symbol">
+                <button class="btn btn-submit" id="shapeButton">Check the console</button>
 
-    <h5>#7 isPalindrome</h5>
-    <input type="text" id="isPalindromeInput" class="form-control col-4"
-        placeholder="text">
-        <button class="btn btn-submit" id="isPalindromeButton">Is this a palindrome</button>
-        <span id="isPalindromeOutput"><i>output</i></span>
+            <h5>#12 personMaker</h5>
+            <input type="text" id="personNameInput" class="form-control col-4"
+                placeholder="name?">
+            <input type="number" id="personAgeInput" class="form-control col-4"
+                placeholder="age?">
+                <button class="btn btn-submit" id="personButton">Create a person</button>
+                <span id="personOutput"><i>output</i></span>
 
-    <h5>#8 printShape</h5>
-    <input type="radio" name="shapeInput" class="radio-inline"
-        value="square"> Square
-        <input type="radio" name="shapeInput" class="radio-inline"
-        value="triangle"> Triangle
-        <input type="radio" name="shapeInput" class="radio-inline"
-        value="diamond"> Diamond
-    <input type="number" id="shapeHeightInput" class="form-control col-4"
-        placeholder="Height">
-    <input type="text" id="shapeCharacterInput" class="form-control col-4"
-        placeholder="Symbol">
-        <button class="btn btn-submit" id="shapeButton">Check the console</button>
-
-    <h5>#12 personMaker</h5>
-    <input type="text" id="personNameInput" class="form-control col-4"
-        placeholder="name?">
-    <input type="number" id="personAgeInput" class="form-control col-4"
-        placeholder="age?">
-        <button class="btn btn-submit" id="personButton">Create a person</button>
-        <span id="personOutput"><i>output</i></span>
-
+            </div>
+        </div>
     </div>
-
+    
     
 </body>
 </html>

@@ -1,0 +1,19 @@
+.carousel-control-prev {
+    margin-left: 25px;
+  }
+  
+  .carousel-control-next {
+    margin-right: 25px;
+  }
+.cara{
+    min-width:100%; 
+    height: 750px
+}
+.navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity:0.9;
+}

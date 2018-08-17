@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Access Modifiers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="access.css">
+</head>
+<body>
+    <div>
+        <nav class="navbar transparent navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-center">
+        <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Public</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#a">Default</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Protected</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Private</a>
+                </li>
+                </ul>
+        </nav>
+    </div>
+
+
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+      
+        <!-- The slideshow -->
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+            <img src="bandmember.jpg" alt="Los Angeles"  class="cara">
+            <div class="carousel-caption">
+                <h3>Los Angeles</h3>
+                <p>We had such a great time in LA!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="bandmember.jpg" alt="Chicago"  class="cara">
+          </div>
+          <div class="carousel-item">
+            <img src="bandmember.jpg" alt="New York" class="cara" >
+          </div>
+        </div>
+      
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      
+      </div>
+     
+    <div align="center">
+            <h1 align="center">Access Modifiers</h1>
+        <h6 class="col-6"  id="a">Default: When no access modifier is specified for a class , method or data member – It is said to be having the default access modifier by default.
+            The data members, class or methods which are not declared using any access modifiers i.e. having default access modifier are accessible only within the same package.
+            In this example, we will create two packages and the classes in the packages will be having the default access modifiers and we will try to access a class from one package from a class of second package.
+        </h6>
+    </div>
+
+   
+
+    
+</body>
+</html>

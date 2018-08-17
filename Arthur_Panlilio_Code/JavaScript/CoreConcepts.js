@@ -84,3 +84,17 @@ function testScope(){
     }
     console.log(i);//this is bad! but it works
 }
+/**
+ * Guard operator returns second if first is true, otherwise returns first
+ */
+var currentSession = null;
+var userInfo = {username: "gBonds", password: 123};
+var getUser = currSession && userInfo;
+
+/**
+ * If the first operator is tru return it
+ * otherwise return the second
+ */
+var earlyLeave = 1;
+var regularLeave = 530;
+var timeOUt = earlyLeave || regularLeave;
