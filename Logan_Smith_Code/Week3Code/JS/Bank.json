@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Genesis",
+      "lastName": "Bonds",
+      "username": "gb",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "firstName": "test",
+      "lastName": "test",
+      "username": "test",
+      "password": "test"
+    },
+    {
+      "id": 3,
+      "firstName": "Pug",
+      "lastName": "Boy",
+      "username": "pb",
+      "password": "1235"
+    },
+    {
+      "firstName": "Logan",
+      "lastName": "Smith",
+      "username": "lorgansmith",
+      "password": "darklight",
+      "id": 4
+    },
+    {
+      "firstName": "Logan",
+      "lastName": "Smith",
+      "username": "lorgansmith",
+      "password": "darklight",
+      "id": 5
+    },
+    {
+      "firstName": "Dog",
+      "lastName": "Man",
+      "username": "dm",
+      "password": "134",
+      "id": 6
+    },
+    {
+      "firstName": "Dog",
+      "lastName": "Hero",
+      "username": "dh",
+      "password": "145",
+      "id": 7
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "balance": 1000,
+      "owner": 1
+    }
+  ]
+}

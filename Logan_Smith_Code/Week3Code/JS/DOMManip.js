@@ -2,7 +2,7 @@ window.onload = function() {
     //this.alert("JS is loaded");
 
     document.getElementById("loginbutton").addEventListener(
-        "click", getUserInfo, true);
+        "click", getUserInfo);
 }
 
     function getUserInfo() {
