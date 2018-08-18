@@ -21,7 +21,7 @@ public class TransactionUI extends HelperFunctions {
 		print("\t---Transaction Menu------------");
 		print("\t|  1 - DEPOSIT ");
 		print("\t|  2 - WITHDRAWAL ");
-		print("\t|  3 - TRANSFER MONEY ");
+		//print("\t|  3 - TRANSFER MONEY ");
 		print("\t-------------------------------\n");
 		
 		

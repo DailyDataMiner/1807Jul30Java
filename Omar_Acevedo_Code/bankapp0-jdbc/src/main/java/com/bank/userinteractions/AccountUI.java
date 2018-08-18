@@ -98,7 +98,7 @@ public class AccountUI extends HelperFunctions {
 		
 		
 //		Get account number
-		print("	  ACCOUNT NUMBER: ");
+		//print("	  ACCOUNT NUMBER: ");
 		
 //		Let the user create (enter) an account number?
 //		_accountNumber = readFromUser.next();
@@ -106,9 +106,9 @@ public class AccountUI extends HelperFunctions {
 		
 //		Or generate it randomly?
 //		int randNum = rand.nextInt(500);
-		_accountNumber = Integer.toHexString(rand.nextInt(500));
+//		_accountNumber = Integer.toHexString(rand.nextInt(500));
+		_accountNumber = Integer.toString(rand.nextInt(5000));
 		
-		//50 is the maximum and the 1 is our minimum 
 		
 //		print();
 		//	Set account number

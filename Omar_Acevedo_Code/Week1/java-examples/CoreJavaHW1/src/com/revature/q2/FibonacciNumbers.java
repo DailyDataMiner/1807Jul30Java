@@ -18,8 +18,12 @@ public class FibonacciNumbers extends HelperFunctions {
 		
 		if (n <= 1) return n;
 		else {
+			
 			fn = fibo(n-1) + fibo(n-2);
 			return fn;
+
+			// return fibo(n-1) + fibo(n-2);
+
 		}
 	}
 

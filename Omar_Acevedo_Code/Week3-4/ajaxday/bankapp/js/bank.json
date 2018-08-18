@@ -1,0 +1,80 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fistName": "Omar",
+      "lastName": "Acevedo",
+      "username": "omarace",
+      "password": "mypassword"
+    },
+    {
+      "id": 2,
+      "fistName": "Ramo",
+      "lastName": "Odeveca",
+      "username": "racemo",
+      "password": "thepassword"
+    },
+    {
+      "id": 3
+    },
+    {
+      "lastName": "Acevedo",
+      "id": 4
+    },
+    {
+      "firstName": "ramorm",
+      "id": 5
+    },
+    {
+      "firstName": "ramorm",
+      "id": 6
+    },
+    {
+      "firstName": "ramorm",
+      "id": 7
+    },
+    {
+      "firstName": "ramorm",
+      "id": 8
+    },
+    {
+      "firstName": "ramorm",
+      "id": 9
+    },
+    {
+      "firstName": "ramorm",
+      "id": 10
+    },
+    {
+      "firstName": "ramorm",
+      "id": 11
+    },
+    {
+      "<!DOCTYPE html><html lang": "\"en\"><head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n    <title>Document</title>\n    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">\n</head>\n<body>\n    \n    <hr>\n\n    <button id=\"thePosterBtn\">let's post something</button>\n\n    <hr>\n\n    <div id=\"landingView\" class=\"jumbotron\">\n        \n        <input type=\"text\" placeholder=\"Username\" id=\"username\" class=\"form-control\">\n        <input type=\"password\" name=\"\" id=\"password\" class=\"form-control\">\n        \n        \n        <button id=\"logIn\" class=\"btn btn-submit\">Log In</button>\n\n        <!-- <span id=\"message\" class=\"alert alert-danger col-4\"></span> -->\n        <span id=\"message\" class=\"form-control alert alert-danger col-4\" hidden=\"hidden\">Please fill out all form fields!</span>\n    </div>\n\n    <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X 965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH 8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js\" integrity=\"sha384-ZMP7rVo3mIykV 2 9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49\" crossorigin=\"anonymous\"></script>\n    <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js\" integrity=\"sha384-ChfqqxuZUCnJSK3 MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy\" crossorigin=\"anonymous\"></script>        \n\n    <script src=\"../js/bankapp.js\"></script>\n\n</body></html>",
+      "id": 12
+    },
+    {
+      "firstName": "ramorm",
+      "id": 13
+    },
+    {
+      "firstName": "ramorm",
+      "id": 14
+    },
+    {
+      "firstName": "ramorm",
+      "id": 15
+    },
+    {
+      "firstName": "ramorm",
+      "id": 16
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "balance": 1000,
+      "owner": 1
+    }
+  ]
+}
