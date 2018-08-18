@@ -10,70 +10,180 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="access.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="parallax">
+
     <div>
         <nav class="navbar transparent navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-center">
         <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Public</a>
+                    <a class="nav-link" href="#pub">Public</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#a">Default</a>
-                </li>
+                        <a class="nav-link" href="#prot">Protected</a>
+                    </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Protected</a>
-                </li>
+                    <a class="nav-link" href="#def">Default</a>
+                </li>          
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Private</a>
+                    <a class="nav-link" href="#priv">Private</a>
                 </li>
                 </ul>
         </nav>
     </div>
 
-
-    <div id="demo" class="carousel slide" data-ride="carousel">
-
-        <!-- Indicators -->
-        <ul class="carousel-indicators">
-          <li data-target="#demo" data-slide-to="0" class="active"></li>
-          <li data-target="#demo" data-slide-to="1"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
-        </ul>
-      
-        <!-- The slideshow -->
-        <div class="carousel-inner text-center">
-          <div class="carousel-item active">
-            <img src="bandmember.jpg" alt="Los Angeles"  class="cara">
-            <div class="carousel-caption">
-                <h3>Los Angeles</h3>
-                <p>We had such a great time in LA!</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="bandmember.jpg" alt="Chicago"  class="cara">
-          </div>
-          <div class="carousel-item">
-            <img src="bandmember.jpg" alt="New York" class="cara" >
-          </div>
+    <div  class="row" >
+        <div class="col-1">
+            <h1 class="vertical-text">P U B L I C</h1>
         </div>
-      
-        <!-- Left and right controls -->
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
-      
-      </div>
-     
-    <div align="center">
-            <h1 align="center">Access Modifiers</h1>
-        <h6 class="col-6"  id="a">Default: When no access modifier is specified for a class , method or data member – It is said to be having the default access modifier by default.
-            The data members, class or methods which are not declared using any access modifiers i.e. having default access modifier are accessible only within the same package.
-            In this example, we will create two packages and the classes in the packages will be having the default access modifiers and we will try to access a class from one package from a class of second package.
-        </h6>
+        <div class="col-1">
+            <h1 class="vertical-text" style="letter-spacing:13px; margin-bottom:-13px;">PROTECTED</h1>
+        </div>
+       
+        <div id="demo" class="carousel slide col-8" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+        
+            <!-- The slideshow -->
+            <div class="carousel-inner text-center">
+                <div class="carousel-item active">
+                <img src="abe.jpg" alt="Los Angeles"  class="cara">
+                    <div class="carousel-caption text-right">
+                        <h3 class="lead">Protected is less restrictive than default?!?</h3>
+                        <p class="lead"><i>-Abraham Lincoln 1865</i></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="sun.jpg" alt="Chicago"  class="cara">
+                    <div class="carousel-caption text-right">
+                        <h3 class="lead">All warfare is based on deception.</h3>
+                        <h3 class="lead">Hence, we set our variables to private</h3>
+                        <p class="lead"><i>-Sun Tzu 470 B.C.</i></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="bug.png" alt="New York" class="cara" >
+                    <div class="carousel-caption text-left" >
+                        <h3 class="lead">The only good public variable is a constant public variable.</h3>
+                        <p class="lead"><i>-Guy from Starship Troopers 23rd Century</i></p>
+                    </div>
+                </div>
+            
+        
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            </a>
+        
+            </div>
+        </div>
+        <div class="col-1">
+            <h1 class="vertical-text" style="letter-spacing:34px; margin-bottom:-34px;">DEFAULT</h1>
+        </div>
+        <div class="col-1">
+            <h1 class="vertical-text" style="letter-spacing:34px; margin-bottom:-34px;">PRIVATE</h1>
+        </div>
+    </div>
+
+ 
+    <div id="main" align="center" >
+        <div align="center" style="background:#112255; opacity: 0.75;">
+
+            <h1 class="strong head" >ACCESS MODIFIERS</h1>
+            <h6 class="col-6 section">Keywords that set the accessibility of variables, methods, and classes are known as Access Modifiers. In the Java language, 
+                there exists four different types of modifiers: Public, Protected, Default, and Private.
+                 A top level class can only use Public and Default while the member level case use any of the 
+                 four. Access modifiers, at least their concept, we're seen as early as 1972 in the Simula 
+                 language in the form of the protected and hidden declarations. Even back in the early days of 
+                 programming, encapsulation and the ability to regulate visibility were crucial in regards to 
+                 security, maintainability, and flexibility.
+                </h6>
+
+        </div>
+        <div align="center" style="background:#4466aa; opacity: 0.75;">
+
+            <h1 class="strong head" id="pub">PUBLIC</h1>
+            <ul class="col-6 section">
+                <li>Has the widest scope among all access modifiers.</li>
+                <li>Variables and methods can be accessed anywhere.</li>
+                <li>Outside packages still need to import the public class.</li>
+                <li>All public methods and variables from a class are inherited by its subclasses</li>
+                <li>Methods declared public in the superclass must be declared public in the subclass</li>
+                <li>Used rarely for member variables since it violates encapsulation</li>
+            </ul>
+        </div>
+        <div align="center" style="background:#6699bb; opacity: 0.75;">
+            <h1 class="strong head"  id="prot">Protected</h1>
+            <ul class="col-6 section">
+                <li>Variables, methods, and constructors can only be accessed from any class within the package or a subclass in another package.</li>
+                <li>Cannot be used on class and interface.</li>
+                <li>Cannot be used on methods and fields in an interface.</li>
+                <li>Methods declared protected in a superclass must be declared protected or public.</li>
+                <li>Protected is less restrictive than default.</li>
+            </ul>
+        </div>
+        <div align="center" style="background:#bbcccc; opacity: 0.75;";>
+            <h1 class="strong head"  style="color: rgb(31, 24, 24)" id="def">Default</h1>
+            <ul class="col-6 section"style="color: rgb(31, 24, 24)">
+                <li>Default access modifiers are not explicitly declared for a class, field, or method.</li>
+                <li>Accessible to any other class in the same package.</li>
+                <li>Methods and fields in an interface are public by default.</li>
+                <li>Default is more restrictive than protected.</li>
+            </ul>
+        </div>
+        <div align="center" style="background:#000000; opacity: 0.75;">
+            <h1 class="strong head"id="priv">Private</h1>
+            <ul class="col-6 section">
+                <li>Methods, variables, and constructors that are private can only be accessed within the class they are in.</li>
+                <li>Class and interface cannot be declared private.</li>
+                <li>Private variables can only be accessed from outside a class via public getter and setter methods inside the class.</li>
+                <li>The private modifier is the main way encapsulation is enforced since it hides data from the outside world.</li>
+                <li>Private methods and fields are not inherited.</li>
+            </ul>
+        </div>
+        <footer class="page-footer font-small  pt-4" style="text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;">
+                <div class="container-fluid text-center text-md-left">
+                  <div class="row">
+                    <hr class="clearfix w-100 d-md-none pb-3">
+                    <div class="col-md-1"></div>
+                      <div class="col-md-3 mb-md-0 mb-3">
+                        <h5 class="text-uppercase">Links</h5>         
+                        <ul class="list-unstyled">
+                          <li></li>
+                            <a href="http://folk.uio.no/simula67/Archive/concepts.pdf">http://folk.uio.no/simula67/Archive/concepts.pdf</a>
+                          </li>
+                          <li>
+                            <a href="https://www.geeksforgeeks.org/access-modifiers-java/">https://www.geeksforgeeks.org/access-modifiers-java/</a>
+                          </li>
+                          <li>
+                            <a href="https://www.tutorialspoint.com/java/java_access_modifiers.htm">https://www.tutorialspoint.com/java/java_access_modifiers.htm</a>
+                          </li>
+                          <li>
+                            <a href="https://www.tutorialspoint.com/java/java_access_modifiers.htm">https://www.tutorialspoint.com/java/java_access_modifiers.htm</a>
+                          </li>
+                        </ul>           
+                      </div>
+                  </div>
+                </div>
+                <div class="footer-copyright text-center py-3">Made by:
+                  <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Arthur Panlilio</a>
+                </div>
+              </footer>
+              <!-- Footer -->
     </div>
 
    
