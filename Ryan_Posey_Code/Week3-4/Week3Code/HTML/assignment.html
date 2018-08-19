@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Revature JS Assignment</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="jumbotron">
+        <h2 align="center">Revature Javascript Assignment</h2>
+    </div>
+    <div class="text-center">
+        <div class="btn-group" role="group" aria-label="Basic example" id="buttonGroup">
+            <button type="button" class="btn btn-dark" id="fib">Fibonacci</button>
+            <button type="button" class="btn btn-danger" id="bubble">Bubble Sort</button>
+            <button type="button" class="btn btn-warning" id="reverse">Reverse String</button>
+            <button type="button" class="btn btn-light" id="fact">Factorial</button>
+            <button type="button" class="btn btn-light" id="sub">Substring</button>
+            <button type="button" class="btn btn-warning" id="even">Even?</button>
+            <button type="button" class="btn btn-danger" id="palin">Palindrome?</button>
+            <button type="button" class="btn btn-dark">---</button>
+        </div><br><br>
+        <h4 id="output">Output: ---</h4>
+
+        <div class="modal" tabindex="-1" role="dialog" id="fibInputModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Fibonacci</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="fibClose">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="fibInputInquiry">This function will calculate the nth number in the fibonacci sequence. Please enter a number:</p>
+                  <input type="number" id="fibInput">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="fibCalculate">Show Output!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="bubbleInputModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Bubble Sort</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="bubbleClose">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="bubbleInputInquiry">This function will sort a list of numbers via the bubble sort algorithm. Please enter a list of numbers in the input boxes:</p>
+                  <input type="number" id="bubbleInput1">
+                  <input type="number" id="bubbleInput2">
+                  <input type="number" id="bubbleInput3">
+                  <input type="number" id="bubbleInput4">
+                  <input type="number" id="bubbleInput5">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="bubbleCalculate">Show Output!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="reverseInputModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Reverse String</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="reverseClose">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="reverseInputInquiry">This function will reverse any string. Please enter a string:</p>
+                  <input type="text" id="reverseInput">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="reverseCalculate">Show Output!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="factInputModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Factorial</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="factClose">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="factInputInquiry">This function will compute n factorial. Please enter a number:</p>
+                  <input type="number" id="factInput">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="factCalculate">Show Output!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="subInputModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Substring</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="subClose">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="subInputInquiry">This function will return a substring from the speficied offset to the end of any string. Please enter a string and the offset:</p>
+                  <input type="text" id="subInput">
+                  <input type="number" id="subOffset">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="subCalculate">Show Output!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="evenInputModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Even?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="evenClose">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="evenInputInquiry">This function will tell you if a number is even. Please enter a number:</p>
+                  <input type="number" id="evenInput">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="evenCalculate">Show Output!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="palinInputModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Palindrome?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="palinClose">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="palinInputInquiry">This function will tell you if a string is a palindrome. Please enter a string:</p>
+                  <input type="text" id="palinInput">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="palinCalculate">Show Output!</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/Javascript" src="../JS/assignment.js"></script>
+</body>
+</html>
