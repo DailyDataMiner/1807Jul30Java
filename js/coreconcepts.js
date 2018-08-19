@@ -144,3 +144,34 @@ delete obj.name
 //The for...in statement iterates over all non-Symbol, enumerable properties of an object.
 for (var prop in obj) { console.log(prop) } //print out all properties of obj
 for (var prop in obj) { console.log(obj[prop]) } //print out value of each property of obj
+
+function guard(op1, op2){
+    return op2 && op2;
+}
+
+guard(true, false)
+guard(0,0)
+guard("","guarded")
+
+var exists = null;
+var password = "123"'
+var userInfo = exists && password;
+userInfo
+
+function defaultOp(op1, op2){
+    return op1 || op2;
+}
+
+///Operators -- the equivalents of short-circuit operators in Java
+var currentSession = null;
+var userInfo = {username:"jdevos"}, password: "password"};
+//guard
+var getUser = currentSession && userInfo;
+
+var earlyLeave = 1;
+var regularLeave = 530;
+//default
+var timeOut = earlyLeave || regularLeave;
+
+
+
