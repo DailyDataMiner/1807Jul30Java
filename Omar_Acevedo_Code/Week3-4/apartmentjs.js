@@ -76,29 +76,133 @@ $(document).ready(function() {
     Reverse and return the String.  */
 
     function reverseStr(someStr) {
-        for (var i = userStr.length; i >= 0; i--) {
-            console.log(userStr[i]);
+        let reversedStr = "";
+        for (var i = someStr.length-1; i >= 0; i--) {
+            reversedStr += someStr[i];
         }
+        return reversedStr;
     }
 
     $('#doReverseStr').click(function() {
-        let userStr = $('#userStr').val();
-        alert(userStr);
+        var userStr = $('#userStr').val();
+        userStr = reverseStr(userStr);
+        $('#reversedStr').html(userStr);
     });
 
+    $('#userStr').click(function() {
+        $(this).val('');
+    });
 
 
 /** Exercise 4 ****************************************************/
 /*    4. Factorial
     Define function: factorial(someNum)
     Use recursion to compute and return the factorial of someNum.   */
+//  n = n * (n-1)
+    function factorial(someNum) {
+        return ( someNum == 1 ) ? someNum : someNum * factorial(someNum-1);
+    }
+    
+    $('#doFactorial').click(function() {
+        var factorialParam = $('#factorialParam').val();
+        factorialParam = factorial(factorialParam);
+        $('#factorialResult').html(factorialParam);
+    });
+
+    $('#factorialParam').click(function() {
+        $(this).val('');
+    });
+    
     
 /*    5. Substring
     Define function substring(someStr, length, offset)
     Return the substring contained between offset and (offset + length) inclusively.
-    If incorrect input is entered, use the alert function and describe why the input was incorrect.
+    If incorrect input is entered, use the alert function and describe why 
+    the input was incorrect. */
+    function substring(someStr, length, offset) {
+        let len = length-1;
+        let subStr = "";
+        for (var i = offset; i <= len; i++) {
+            subStr += someStr[i];
+        }
+        return subStr;
+    }
+
+
+//  Disable length text input.
+    $('#stringParam_len').attr('disabled', true);
+
+
+//  Get substring on button click.
+    $('#doSubstring').click(function() {
+        
+        var stringParam = $('#stringParam').val();
+        var stringParam_offset = $('#stringParam_offset').val();
+
+
+//      Get global variable thisLen (length of string input).
+        var stringParam_len = thisLen;
+
+
+//      Call substring function.
+        substringVal = substring(stringParam, stringParam_len, stringParam_offset);
+        
+
+//      Put values in results box.
+        $('#subsStringResult').html(substringVal);
+    });
+
+
+//  Get length of string input  ( for each key up ).
+    $('#stringParam').keyup(function() {
+        thisLen = $(this).val().length;
+        $('#stringParam_len').val(thisLen);
+    });
+
     
-    6. Even Number
+//  Clear fields (string, length, and offset ) when string input is clicked.
+    $('#stringParam').focus(function() {
+        $(this).val('');
+        $('#stringParam_len').val('');
+        $('#stringParam_offset').val('');
+    });
+
+
+//  Clear inputs when offset input is clicked.
+    $('#stringParam_offset').focus(function() {
+        $(this).val('');
+    });
+
+
+//  If it's not a number, disable button and tell user.
+    $('#stringParam_offset').blur(function() {
+
+        if (isNaN($(this).val())) {
+            $('#doSubstring').attr('disabled', true);
+            alert('Hey, enter a number.');
+            $(this).val('');
+            $(this).focus();
+            return;
+        } else if ($(this).val() < 0) {
+            $('#doSubstring').attr('disabled', true);
+            alert('Hey, enter a positive number.');
+            $(this).val('');
+            $(this).focus();
+            return;
+        } else {
+            if (!$('#doSubstring').prop('disabled')) {
+                $('#doSubstring').attr('disabled', false);
+            }
+        }
+    });
+
+//  Disable button whenever 
+    $('#stringParam_offset').keyup(function() {
+        $('#doSubstring').attr('disabled', false);
+    });
+    
+
+/*    6. Even Number
     Define function: isEven(someNum)
     Return true if even, false if odd.
     Do not use % operator.
@@ -180,4 +284,3 @@ $(document).ready(function() {
     // });
 //
 });
-

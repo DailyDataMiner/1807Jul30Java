@@ -9,16 +9,49 @@
     <style>
         #main-box {}
         .col-md-4 {
-            margin:20px;
+             margin:20px;
             padding:20px;
             padding-top: 1rem;
             padding-bottom: 1rem;
             background-color: rgba(86, 61, 124, .15);
             border: 1px solid rgba(86, 61, 124, .2);
         }
+
+        /* #first {
+            border: 1px solid black;
+            width:10%;
+            margin:0 auto;
+        }
+        #second {
+            border: 1px solid black;
+            width:10%;
+            margin:0 auto;
+        } */
+        #stringParam {
+            width: 62%;
+
+        }
+        #stringParam_len {
+            width: 16%;
+        }
+        #stringParam_offset {
+            width: 16%;
+        }
+        
     </style>
 </head>
 <body>
+
+    <!-- <div id="first">
+        ...
+    </div>
+
+    <div id="second">
+        ...
+    </div> -->
+
+    <hr />
+
     <div id="main-box" class="container-fluid">
     
         <!-- Fibonacci -->
@@ -61,6 +94,36 @@
                 <span id="reversedStr">...</span>
             </div>
             
+        </div>
+
+        <!-- Factorial -->
+        <div class="row">
+
+                <div class="col-md-4">
+                    <input type="text" id="factorialParam">
+                    <button id="doFactorial">Do Factorial</button>
+                </div>
+    
+                <div class="col-md-4" class="resultsBox">
+                    <span id="factorialResult">...</span>
+                </div>
+                
+        </div>
+
+        <!-- Substring -->
+        <div class="row">
+
+                <div class="col-md-4">
+                    <input type="text" id="stringParam" placeholder="string">
+                    <input type="text" id="stringParam_len" placeholder="len">
+                    <input type="text" id="stringParam_offset" placeholder="offs">
+                    <button id="doSubstring">Do Substring</button>
+                </div>
+                
+                <div class="col-md-4" class="resultsBox">
+                    <span id="subsStringResult">...</span>
+                </div>
+                
         </div>
     
     </div>
