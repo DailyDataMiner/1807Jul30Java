@@ -34,14 +34,20 @@ $(document).ready(function() {
     Return the sorted array.    */
 
     function bubbleSort(numArray) {
+        
         for  (var i = 0; i < numArray.length - 1; i++) {
             var swapped = false;
+
             for (var j = 0; j < numArray.length - 1; j++) {
+
                 if ( numArray[j] > numArray[j + 1] ) {
+
                     var temp = numArray[j + 1];
                     numArray[j + 1] = numArray[j];
                     numArray[j] = temp;
+                    
                     swapped = true;
+
                 }
             }
             if (!swapped) {

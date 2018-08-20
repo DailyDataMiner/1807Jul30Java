@@ -40,8 +40,21 @@ body {
 
 .cover-container {
   max-width: 42em;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+/*
+ * Custom Stuff
+ */
+
+ .anon-fn-onimg {
+    position: relative;
+    top: 144px;
+  }
+
+  #sub-ul {
+    margin-left: 18.2%;
+  }
 
 /*
  * Header
