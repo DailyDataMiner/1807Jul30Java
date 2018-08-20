@@ -34,7 +34,7 @@
                 Enter n:
                 <br>
                 <input type="number" id="fibonacciN" name="fibonacciNumber">
-                <button id="fibonacciButton">Calculate nth Fibonacci Number!</button>
+                <button id="fibonacciButton" class="btn btn-primary">Calculate nth Fibonacci Number!</button>
                 <p id="fibonacciResult"></p>
             </p>
         </div>
@@ -46,7 +46,7 @@
                 Enter the numbers you wish to sort here (separated by a space):
                 <br>
                 <input type="text" id="bubbleSortInput" name="bubbleSort">
-                <button id="bubbleSortButton">Submit Numbers</button>
+                <button id="bubbleSortButton" class="btn btn-primary">Submit Numbers</button>
                 <p id="bubbleSortResult"></p>
             </p>
         </div>
@@ -58,7 +58,7 @@
                 Enter a String here:
                 <br>
                 <input type="text" id="reverseInput" name="reverseString">
-                <button id="reverseButton">Reverse It!</button>
+                <button id="reverseButton" class="btn btn-primary">Reverse It!</button>
                 <p id="reversedStringOutput"></p>
             </p>
         </div>
@@ -70,7 +70,7 @@
                 Please enter a number:
                 <br>
                 <input type="number" id="factorialInput" name="factorialNumber">
-                <button id="factorialButton">Get Factorial</button>
+                <button id="factorialButton" class="btn btn-primary">Get Factorial</button>
                 <p id="factorialOutput"></p>
             </p>
         </div>
@@ -88,50 +88,47 @@
                 <br> Choose an offset:
                 <br>
                 <input type="number" id="substringUserOffset" name="userOffset">
-                <button id="substringButton">Get Substring</button>
+                <button id="substringButton" class="btn btn-primary">Get Substring</button>
                 <p id="substringOutput"></p>
             </p>
         </div>
 
+        <!-- 5. Even - returns whether user's input was even or not -->
         <div>
             <h3>6) Is It Even?</h3>
             <p>
                 Enter your number:
                 <br>
                 <input type="number" id="evenInput" name="isItEven">
-                <button id="evenButton">Check to see...</button>
+                <button id="evenButton" class="btn btn-primary">Check to see...</button>
                 <p id="evenOutput"></p>
             </p>
         </div>
 
+        <!-- 7. Palindrome - returns whether user's input was a palindrome or not -->
         <div>
             <h3>7) Palindrome...</h3>
             <p>
                 Enter something here:
                 <br>
                 <input type="text" id="palindromeInput" name="isItAPalindrome">
-                <button id="palindromeButton">Is it a palindrome?</button>
+                <button id="palindromeButton" class="btn btn-primary">Is it a palindrome?</button>
                 <p id="palindromeOutput"></p>
             </p>
         </div>
 
+        <!-- 8. Shapes - returns a shape of the user's choice -->
         <div>
             <h3>8) Shapes</h3>
             <p>
                 Shape:
                 <br>
-                <select id="shapeOptionInput" class="form-control">
-                    <option value="Square">Square</option>
-                    <option value="Triangle">Triangle</option>
-                    <option value="Diamond">Diamond</option>
-                </select>
-                
-                <input type="radio" name="shape" value="Square" checked> Square
-                <br>
-                <input type="radio" name="shape" value="Triangle"> Triangle
-                <br>
-                <input type="radio" name="shape" value="Diamond"> Diamond
-                <br>
+                <div id="shapeInputs" name="shapeOptions">
+                    <input type="radio" name="shape" value="Square" checked>Square
+                    <input type="radio" name="shape" value="Triangle">Triangle
+                    <input type="radio" name="shape" value="Diamond">Diamond
+                </div>
+                <p id="shapeResult"></p>
 
                 Height:
                 <br>
@@ -140,50 +137,18 @@
                 Character:
                 <br>
                 <input type="text" id="characterOptionInput" class="form-control" placeholder="Character">
+
+                <button id="shapeButton" class="btn btn-primary">Compute</button>
+                <pre id="shapeOutput"></pre>
             </p>
+
         </div>
 
-
-
-        <div id="question8" class="question">
-
-            <h3>Input</h3>
-            <div class="form-inline mb-3">
-
-                <div class="form-group mr-2 mb-2 mb-md-0">
-                    <label class="sr-only" for="q8-input2">Shape</label>
-                    <select id="q8-input1" class="form-control custom-select">
-                        <option value="Square">Square</option>
-                        <option value="Triangle">Triangle</option>
-                        <option value="Diamond">Diamond</option>
-                    </select>
-                </div>
-
-                <div class="form-group mr-2 mb-2 mb-md-0">
-                    <label class="sr-only" for="q8-input2">Height</label>
-                    <input type="number" id="q8-input2" class="form-control" placeholder="Height">
-                </div>
-
-                <div class="form-group mr-2 mb-2 mb-md-0">
-                    <label class="sr-only" for="q8-input3">Character</label>
-                    <input type="text" id="q8-input3" class="form-control" placeholder="Character">
-                </div>
-
-                <button id="q8-submit" class="btn btn-primary">Compute</button>
-            </div>
-
-            <h3>Output</h3>
-            <pre id="q8-output" class="output"></pre>
+        <div>
+            <p align="center">* * * * * * * * * * * * *</p>
         </div>
-
-
-
-
 
     </div>
-
-
-
 
     <script type="text/javascript" src="../../js/jsassignment/jsassignment.js"></script>
 

@@ -1,5 +1,5 @@
 window.onload = function () {
-    getTime();
+    // getTime();
 }
 
 //this thing is going to "listen" for a click on the fibonacciButton, and then trigger theFibonacciSequenceFunction whenit "hears" one:
@@ -117,12 +117,81 @@ function thePalindromeFunction() {
     document.getElementById("palindromeOutput").innerHTML = theAnswer;
 }
 
+document.getElementById("shapeInputs").addEventListener("click", shapeSelector, true);
 
+let selectedShape;
 
-
-
-function getTime() {
-    let now = new Date().toLocaleTimeString();
-    document.getElementById("JustInCaseYouNeedToKnowTheTime").innerHTML = now;
-    setTimeout(getTime, 1000);
+function shapeSelector() {
+    selectedShape = document.querySelector('input[name = shape]:checked').value;
+    document.getElementById("shapeResult").innerHTML = 'Your selected shape: ' + selectedShape;
 }
+
+document.getElementById("shapeButton").addEventListener("click", theShapePrinterFunction, true);
+
+function theShapePrinterFunction() {
+
+    let shape = selectedShape;
+    let height = document.getElementById("heightOptionInput").value;
+    let character = document.getElementById("characterOptionInput").value;
+
+
+        let printer = "";
+        document.getElementById("shapeOutput").innerHTML += printer;
+        switch (shape) {
+            case "Square":
+                for (let i = 0; i < height; i++) {
+                    for (let j = 0; j < height; j++) {
+                        printer += character;
+                        document.getElementById("shapeOutput").innerHTML += character;
+                    }
+                    printer += "\n";
+                    document.getElementById("shapeOutput").innerHTML += "<br />";
+                }
+                break;
+            case "Triangle":
+                for (let i = 0; i < height; i++) {
+                    for (let j = i; j >= 0; j--) {
+                        printer += character;
+                        document.getElementById("shapeOutput").innerHTML += character;
+                    }
+                    printer += "\n";
+                    document.getElementById("shapeOutput").innerHTML += "<br />";
+                }
+                break;
+            case "Diamond":
+                for (let j = 1; j <= height; j += 2) {
+                    for (let k = 0; k < (height - j / 2 - height / 2); k++) {
+                        printer += " ";
+                        document.getElementById("shapeOutput").innerHTML += " ";
+                    }
+                    for (let i = 1; i <= j; i++) {
+                        printer += character;
+                        document.getElementById("shapeOutput").innerHTML += character;
+                    }
+                    printer += "\n";
+                    document.getElementById("shapeOutput").innerHTML += "<br />";
+                }
+                for (let j = height - 2; j >= 0; j -= 2) {
+                    for (let k = 0; k < (height - j / 2 - height / 2); k++) {
+                        printer += " ";
+                        document.getElementById("shapeOutput").innerHTML += " ";
+                    }
+                    for (let i = 1; i <= j; i++) {
+                        printer += character;
+                        document.getElementById("shapeOutput").innerHTML += character;
+                    }
+                    printer += "\n";
+                    document.getElementById("shapeOutput").innerHTML += "<br />";
+                }
+                break;
+        }
+        console.log(printer);
+        // document.getElementById("shapeOutput").innerHTML = printer;
+}
+
+
+// function getTime() {
+//     let now = new Date().toLocaleTimeString();
+//     document.getElementById("JustInCaseYouNeedToKnowTheTime").innerHTML = now;
+//     setTimeout(getTime, 1000);
+// }
