@@ -2,7 +2,7 @@ window.onload = function () {
     // getTime();
 }
 
-//this thing is going to "listen" for a click on the fibonacciButton, and then trigger theFibonacciSequenceFunction whenit "hears" one:
+//this thing is going to "listen" for a click on the fibonacciButton and then trigger theFibonacciSequenceFunction whenit "hears" one:
 document.getElementById("fibonacciButton").addEventListener("click", theFibonacciSequenceFunction, true);
 
 function theFibonacciSequenceFunction() {
