@@ -1,5 +1,13 @@
+// Logan Smith, 8/19/2018
+// HW3
+
 let currentFunction = 0;
 
+/*
+1. Fibonacci 
+Define function: fib(n) 
+Return the nth number in the fibonacci sequence.
+*/
 var fibonacci = function (n) {
     let output = "";
 
@@ -16,6 +24,12 @@ var fibonacci = function (n) {
     return output;
 }
 
+/*
+2. Bubble Sort
+Define function: bubbleSort(numArray)
+Use the bubble sort algorithm to sort the array.
+Return the sorted array.
+*/
 var bubbleSort = function (numArray) {
     for (var i = 0; i <= numArray.length - 1; i++) {
         var finished = true;
@@ -34,6 +48,11 @@ var bubbleSort = function (numArray) {
     return numArray;
 }
 
+/*
+3. Reverse String
+Define function: reverseStr(someStr)
+Reverse and return the String.
+*/
 var reverseStr = function (someStr) {
     for (i = someStr.length - 2; i >= 0; i--) {
         someStr = someStr.substring(0, i) + someStr.substring(i + 1, someStr.length) + someStr.substring(i, i + 1);
@@ -41,6 +60,11 @@ var reverseStr = function (someStr) {
     return someStr;
 }
 
+/*
+4. Factorial
+Define function: factorial(someNum)
+Use recursion to compute and return the factorial of someNum.
+*/
 var factorial = function (someNum) {
     if (someNum == 0) {
         return 1;
@@ -50,6 +74,12 @@ var factorial = function (someNum) {
     }
 }
 
+/*
+5. Substring
+Define function substring(someStr, length, offset)
+Return the substring contained between offset and (offset + length) inclusively.
+If incorrect input is entered, use the alert function and describe why the input was incorrect.
+*/
 var substring = function (someStr, length, offset) {
     if ((typeof someStr) != "string") {
         alert("You did not enter a string.");
@@ -64,6 +94,12 @@ var substring = function (someStr, length, offset) {
     return someStr.substring(offset, offset + length);
 }
 
+/*
+6. Even Number
+Define function: isEven(someNum)
+Return true if even, false if odd.
+Do not use % operator.
+*/
 var isEven = function (someNum) {
     let checker = someNum;
     someNum = parseInt(someNum / 2);
@@ -74,6 +110,11 @@ var isEven = function (someNum) {
     return "false";
 }
 
+/*
+7. Palindrome
+Define function isPalindrome(someStr)
+Return true if someStr is a palindrome, otherwise return false
+*/
 var isPalindrome = function (someStr) {
     let isPalindrome = "true";
     someStr = someStr.toLowerCase();
@@ -85,6 +126,29 @@ var isPalindrome = function (someStr) {
     return isPalindrome;
 }
 
+/*
+8. Shapes
+Define function: printShape(shape, height, character)
+shape is a String and is either "Square", "Triangle", "Diamond".
+height is a Number and is the height of the shape. Assume the number is odd.
+character is a String that represents the contents of the shape. Assume this String contains just one character.
+Use a switch statement to determine which shape was passed in.
+Use the console.log function to print the desired shape.
+Example for printShape("Square", 3, "%");
+%%%
+%%%
+%%%
+Example for printShape("Triangle", 3, "$");
+$
+$$
+$$$
+Example for printShape("Diamond", 5, "*");
+  *
+ ***
+*****
+ ***
+  *
+*/
 var printShape = function (shape, height, character) {
     let outputLine = "";
     switch (shape) {
@@ -128,6 +192,11 @@ var printShape = function (shape, height, character) {
     console.log(outputLine);
 }
 
+/*
+9. Object literal
+Define function traverseObject(someObj)
+Print every property and it's value.
+*/
 var pug = {
     name: "Tori",
     size: "Medium",
@@ -145,6 +214,14 @@ var traceObj = function (someObj) {
     return output;
 }
 
+/*
+10. Delete Element
+Define function deleteElement(someArr)
+Print length
+Delete the third element in the array.
+Print length
+The lengths should be the same.
+*/
 var deleteElement = function (someArray) {
     console.log(someArray.length);
     delete someArray[3];
@@ -152,6 +229,7 @@ var deleteElement = function (someArray) {
 
 }
 
+// General function to run all of the other functions depending on the selected index of the dropdown.
 function runFunction() {
     var sFun = $("#functionSelector").val();
     var output;
@@ -214,7 +292,7 @@ function runFunction() {
 }
 
 
-
+//Sets the event handler for the output button.
 window.onload = function () {
     $("#outputbutton").on(
         "click", runFunction);

@@ -13,11 +13,152 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <style>
+    body {
+    background-image: url("https://previews.123rf.com/images/tatianakost/tatianakost1505/tatianakost150500116/40621726-social-media-word-icon-pattern-background-doodle-sketchy.jpg");
+    background-repeat: repeat;
+    background-color: rgba(255,255,255,0.6);
+    background-blend-mode: lighten;
+    }
+    .newHeader {
+        max-width: 1000px;
+        background-image: url(https://vignette.wikia.nocookie.net/merlin1/images/d/d8/Page_background.png/revision/latest?cb=20120627120335);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .mainArea {
+        max-width: 1000px;
+        background-image: url(https://vignette.wikia.nocookie.net/merlin1/images/d/d8/Page_background.png/revision/latest?cb=20120627120335);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .fancyTextHeaders {
+        font: italic bold 2.5em 'Fira Sans', serif;
+    }
+
+    </style>
 </head>
 <body>
-    <div class="jumbotron" align="center">
+    <div id="introHeader" class="jumbotron p-3 center-block mx-auto newHeader" align="center">
         <h1 style="font: italic 4em 'Fira Sans', serif;">The Wonder World of Strings</h1>
         <h4 style="font: italic 1.5em 'Fira Sans', serif;">A Guide by Logan Smith</h4>
     </div>
+    <br>
+    <div id="tableOfContents" class="p-3 center-block mx-auto mainArea">
+        <h4 class="text-center fancyTextHeaders">Table of Contents</h4>
+        <div class="list-group">
+            <a href="#introduction" class="list-group-item list-group-item-action">Introduction</a>
+            <a href="#strings" class="list-group-item list-group-item-action">Strings</a>
+            <a href="#stringBuilder" class="list-group-item list-group-item-action">String Builders</a>
+            <a href="#stringBuffer" class="list-group-item list-group-item-action disabled">String Builders</a>
+          </div>
+    </div>
+    <br>
+    <div id="introduction" class="p-3 center-block mx-auto mainArea">
+        <a name="introduction"></a>
+        <h4 class="text-center fancyTextHeaders">Introduction</h4>
+        <br>
+        <p>
+            Strings are one of the most common objects used in Java programming. They are among the only ways that programmers can show readable information
+            to their consumers. Generally, a string will represent every word in every sentence, whether displayed to the user, or returned by the user.
+            This means that, though a string is not one of the core Java primitives, it is still an extremely important part of Java as a whole, and is treated
+            as such by language itself.
+            <br>
+            Here, we will investigate what a string actually is in Java, what makes it unique, and why programmers might use a few of the string alternatives.
+        </p>
+    </div>
+    <br>
+    <div id="strings" class="p-3 center-block mx-auto mainArea">
+        <a name="strings"></a>
+        <h4 class="text-center fancyTextHeaders">Strings</h4>
+        <br>
+        <p>
+            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" target="_blank">Strings</a> are a special type of Java object, but that doesn't mean that they aren't objects. In fact, Java Strings are included in the Java.lang package,
+            and they extend the Object class. They also implement the marker interface <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html" target="_blank">Serializable</a>, 
+            as well as the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html" target="_blank">Comparable</a> interface used for comparing objects.
+            Finally, String implements the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/CharSequence.html" target="_blank">CharSequence</a> interface which allows its implementing classes to represent a sequence of characters. 
+            StringBuilder and StringBuffer will also implement this interface.
+            <br>
+            It is also important to note that the String class is Final and Immutable.
+            <br>
+            <a href="https://docs.oracle.com/javase/tutorial/java/IandI/final.html" target="_blank">Final</a>: The String class cannot be extended.
+            <br>
+            <a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html" target="_blank">Immutable</a>: Strings cannot be changed once created.
+            <br>
+            Because Strings are immutable, a new String must be created every time programmers attempt to manipulate them. This means that even changing one letter
+            creates a new String. Luckily, Strings have a special area in memory for their storage, unlike most objects.
+            <br>
+            This special place in memory is called the String Pool. Though it is on the heap, where all objects are stored, it behaves very differently. The String Pool
+            contains only String Literals. Strings and String Literals aren't quite the same thing. As we've gone over, Strings are actually objects, not primitives. When 
+            a String Object is created, it is stored on the heap, as usual. String Literals are technically String Objects as well, but they stored in the String Pool to increase
+            performance. String Literals are also represented by a character string such as "Hello" instead of the normal 'new String()' used for Objects.
+            <br>
+            The differences between the two are pretty confusing, but very important. This is because String Literals in the String Pool can be referenced in new String declarations,
+            unlike the String Objects, which contain specific references to objects in the heap. In order to best exemplify this, look at the following example.
+            <br>
+            <br>
+            String a = "I am a String Literal";
+            <br>
+            String b = "I am a String Literal";
+            <br>
+            String c = new String("I am a String Object");
+            <br>
+            String d = new String("I am a String Object");
+            <br>
+            <br>
+            Because Strings a and b are both String Literals with the same value, they are actually referencing the same String Literal in the String Pool. However, because
+            Strings c and d are String Objects, they are referencing two different Strings on the heap, even though they are the same. Thus, it is almost always better to 
+            declare a String using a String Literal than a String Object, to save space in memory.
+            <br>
+            Finally, Strings have the special ability to be combined together using the "+" operator, unlike most objects. Do note that combining a String in this way still
+            creates a new String Literal, because Strings are immutable. For example:
+            <br>
+            String a = "Hello " + "World!";
+            <br>
+            creates a new String Literal that reads "Hello World!" as an addition of the two Strings.
+        </p>
+    </div>
+    <br>
+    <div id="stringsBuilder" class="p-3 center-block mx-auto mainArea">
+        <a name="stringBuilder"></a>
+        <h4 class="text-center fancyTextHeaders">StringBuilders</h4>
+        <br>
+        <p>
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html" target="_blank">StringBuilders</a> have very similar functionality to Strings, but they have a few important differences. 
+        Like Strings, they extend from Object and implement Serializable and CharSequence. Also like Strings, StringBuilders are simply sequences of characters.
+        <br>
+        However, unlike Strings, StringBuilders are mutable. This means that all StringBuilder character strings can be easily changed without having to create a new StringBuilder.
+        As a result, StringBuilders are far better used when a programmer is planning on changing a string.
+        <br>
+        StringBuilders do have one obvious downside. They aren't Thread-Safe.
+        <br>
+        <a href="https://docs.oracle.com/cd/E19455-01/806-5257/6je9h033e/index.html" target="_blank">Thread-Safe</a>: A piece of code is Thread-Safe when multiple threads can access it at once and still function correctly.
+        <br>
+        This means that, where a StringBuilder is quite fast, it sacrifices its ability to be effective in multithreaded enviroments. 
+        <br>
+        It should also be noted that StringBuilders are best used when building or changing a string, not actually storing it. Strings have far more functionality than 
+        both StringBuilders and StringBuffers, as StringBuilders are mainly used for their fast character inserts, replacements, appends, and deletions. 
+        <br>
+        StringBuilders are also stored with a specific capacity, which increases as the character array increases. Strings are often stored as String Literals, as we went over
+        before, which make them more optimal for referencing and storing.
+        </p>
+    </div>
+</div>
+<br>
+<div id="stringsBuffer" class="p-3 center-block mx-auto mainArea">
+    <a name="stringBuffer"></a>
+    <h4 class="text-center fancyTextHeaders">StringBuilders</h4>
+    <br>
+    <p>
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/StringBuffer.html" target="_blank">StringBuffers</a> are almost identical to StringBuilders in functionality. Like their counterparts, they extend from Object and implement Serializable and CharSequence.
+        They are also mutable like StringBuilders.
+        <br>
+        The main, and really only, difference between the two occurs in their speed and Thread-Safety. StringBuffers are Thread-Safe, unlike StringBuilders, making them
+        far more ideal to use in a multithreaded enviroment.
+        <br>
+        However, like each of these different classes, StringBuffers have their downside. They are a deal slower than Strings and StringBuilders. This means that using many
+        StringBuffers can greatly slow down a program in comparison to a program using only Strings or StringBuilders.
+    </p>
+</div>
 </body>
 </html>
