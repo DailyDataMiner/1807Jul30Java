@@ -23,6 +23,7 @@ window.onload = function(){
   $('#enshap').on('click', shaping);
   $('#entersub').on('click', substringing);
   $('#endell').on('click', personing);
+  $('#enbling').on('click', bubbling);
   
 }
 function fib(){
@@ -159,7 +160,26 @@ function substringing(){
     $('#resultsub').html(word.substring(offset,length));
    
 }
+function bubbling(){
+    let lista = $('#bubble').val();
+    let nlista= lista.split(" ");
+    for(var b=0; b< nlista.length; b++) { nlista[b] = +nlista[b]; }    
+        var swap = true;
+                for(var np =1; np < nlista.length && swap; np++) {
+                    swap = false;
+                    for(var i= 0; i < nlista.length - np; i++) {
+                        if(nlista[i] > nlista[i+1]) {
+                            var temp = nlista[i];
+                            nlista[i] = nlista[i + 1];
+                            nlista[i + 1] = temp;
+                            swap = true;        
+                        }
+                    }	
+                }
+       
+                $('#bubleresult').html(nlista.toString());
 
+}
 function Person(name, age) {
     this.name = name;
     this.age = age;
