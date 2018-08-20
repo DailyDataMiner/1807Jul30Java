@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+    
+    <style>
+        h1 {
+            color:blue;
+        
+          
+        }
+        #Pop {
+            color:blue;
+        }
+
+        .Line{
+            text-decoration:underline;
+            color:pink;
+        }
+       
+        #time{
+            position:absolute;
+            top:0;
+            right:0;
+            }
+
+    </style>
+</head>
+<body>
+
+    <h1>HTML Homework Assignment</h1>       <div id="time"> </div>   <!-- Update clock every second -->
+   
+<!-- 1. Fibonacci 
+Define function: fib(n) 
+Return the nth number in the fibonacci sequence. -->
+    <div>
+        <h3>Fibonacci Sequence</h3>
+                 <p>Enter in the Nth value of the Fibonacci Sequence</p>
+                 <input type=number name=fib placeholder="nth" id=nth min="1">
+                 <button id=output type=submit class="btn btn-submit" >Calculate</button>
+                 <input type=number disabled=disabled id=result placeholder=Result>
+                
+    </div>
+<br>
+
+<!-- 3. Reverse String
+Define function: reverseStr(someStr)
+Reverse and return the String. -->
+ <br>
+    <div>
+        <h3>Reverse String (Palindrome)</h3>
+            <input type="text" placeholder="input" id=str>
+            <button id="reverse" type=submit class="btn btn-submit">Reverse Dis String!</button>
+            <input id=reverseResult disabled="disabled" placeholder="Result">
+        </div>
+<br>
+
+<!-- 4. Factorial
+Define function: factorial(someNum)
+Use recursion to compute and return the factorial of someNum. -->
+ 
+<br>
+<div>
+    <h3>Factorial</h3>
+        <input type=number placeholder="n" id=infactorial>
+        <button id="bfactorial" type=submit class="btn btn-submit">Calculate nth factorial</button>
+        <input id=outfactorial disabled="disabled" placeholder="Nth factorial">
+    </div>
+<br>
+
+<!-- 5. Substring
+Define function substring(someStr, length, offset)
+Return the substring contained between offset and (offset + length) inclusively.
+If incorrect input is entered, use the alert function and describe why the input was incorrect. -->
+
+<br>
+<div>
+    <h3>Substring</h3>
+        <input type=text placeholder="text to substring" id=fulltext>
+        <input type=number placeholder="offset" id=inoffset>
+        <button id="boffset" type=submit class="btn btn-submit">Get substring</button>
+        <input id=outoffset disabled="disabled" placeholder="Substring">
+    </div>
+<br>
+
+<!-- 6. Even Number
+Define function: isEven(someNum)
+Return true if even, false if odd.
+Do not use % operator. -->
+
+<br>
+<div>
+    <h3>Is it even?</h3>
+        <input type=number placeholder="value" id=inint>
+        <button id="bint" type=submit class="btn btn-submit">Is it even?</button>
+        <input id=outint disabled="disabled" placeholder="Boolean">
+    </div>
+<br>
+
+<!-- 7. Palindrome
+Define function isPalindrome(someStr)
+Return true if someStr is a palindrome, otherwise return false -->
+
+<br>
+<div>
+    <h3>Is it a palindrome?</h3>
+        <input type=text placeholder="string" id=inpali>
+        <button id="bpali" type=submit class="btn btn-submit">Is it a palindome?</button>
+        <input id=outpali disabled="disabled" placeholder="Boolean">
+    </div>
+<br>
+
+<!-- 10. Delete Element
+Define function deleteElement(someArr)
+Print length
+Delete the third element in the array.
+Print length
+The lengths should be the same. -->
+
+<br>
+<div>
+    <h3>Biggest Number</h3>
+        <input type=number placeholder="Input a number" id=inbn min=0>
+        <button id="bbn" type=submit class="btn btn-submit">Shazam!!!</button>
+        <input id=outbn disabled="disabled" placeholder="Largest Value">
+    </div>
+<br>
+
+
+
+</div>
+<br>
+
+
+   
+   <br>
+   <br>
+  
+ <hr>  
+ <script type="text/javascript" src="js_assignment.js"></script>
+
+</body>
+</html>
