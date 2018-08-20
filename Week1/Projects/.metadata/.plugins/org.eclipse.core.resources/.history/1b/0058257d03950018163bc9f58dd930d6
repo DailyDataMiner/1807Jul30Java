@@ -1,9 +1,0 @@
-package com.revature.practice;
-
-public class Overwatch {
-	
-	private Overwatch healer;
-	
-	private Overwatch dps;
-	private Overwatch tank;
-}

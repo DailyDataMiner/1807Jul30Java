@@ -1,5 +1,9 @@
 INDEX VERSION 1.131+C:\Users\knisp\my_git_repos\1807Jul30Java\Week1\Projects\.metadata\.plugins\org.eclipse.jdt.core
+3754077451.index
+1568520317.index
+335526783.index
 3007894392.index
+1999702056.index
 23606001.index
 1304235118.index
 1362342666.index
@@ -7,6 +11,8 @@ INDEX VERSION 1.131+C:\Users\knisp\my_git_repos\1807Jul30Java\Week1\Projects\.me
 874379615.index
 3515646350.index
 1405541935.index
+3889231930.index
+3237288380.index
 794046174.index
 3877388663.index
 1935137544.index
@@ -16,6 +22,8 @@ INDEX VERSION 1.131+C:\Users\knisp\my_git_repos\1807Jul30Java\Week1\Projects\.me
 3464050.index
 3054510974.index
 856568111.index
+1183106648.index
+3455608921.index
 518020942.index
 1994840330.index
-3754077451.index
+2298163367.index

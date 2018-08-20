@@ -1,4 +1,9 @@
 //org.eclipse.ui.commands/state/org.eclipse.ui.navigator.resources.nested.changeProjectPresentation/org.eclipse.ui.commands.radioState=false
 //org.eclipse.ui.commands/state/org.eclipse.wst.xml.views.XPathView.processor.xpathprocessor/org.eclipse.ui.commands.radioState=xpath10
+ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.pde.genericeditor.target.extension.presentation
+ColorsAndFontsPreferencePage.selectedElement=Corg.eclipse.pde.genericeditor.extension.editor.color.text
 PLUGINS_NOT_ACTIVATED_ON_STARTUP=;org.eclipse.m2e.discovery;
 eclipse.preferences.version=1
+org.eclipse.pde.genericeditor.extension.editor.color.comment=255,255,0
+org.eclipse.pde.genericeditor.extension.editor.color.header=255,255,0
+org.eclipse.pde.genericeditor.extension.editor.color.text=255,255,0
