@@ -79,7 +79,17 @@ join employee e2
 on e1.employeeid = e2.reportsto;
 end;
 --Create a stored procedure that returns the name and company of a customer.
---6.0
+
+--Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+create or replace procedure Delete_Invoice (inv in int)
+as begin
+    delete from invoice where invoiceid = inv;
+end;
+--Create a transaction nested within a stored procedure that inserts a new record in the Customer table 
+create or replace procedure Create_Customer (Cust_ID in number, fname in varchar2, lname in varchar2, comp in varchar2, address in varchar2, city in varchar2, state in varchar2, country varchar2, post in varchar2, phone in varchar2, fax in varchar2, email in varchar2, supportid in int)
+as begin
+    insert into customer values (Cus_ID, fname, lname, comp, address, city, state, country, post,  phone, fax, email, supportid);
+end;
 --Create an after insert trigger on the employee table fired after a new record is inserted into the table.
 create sequence employee_seq;
 create or replace trigger employee_trig
@@ -90,9 +100,20 @@ end;
 --Create an after update trigger on the album table that fires after a row is inserted in the table 
 
 --Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+CREATE OR REPLACE TRIGGER delete_trigger
+before DELETE
+ON ALBUM
+FOR EACH ROW
 
+DECLARE
+    EMP_ID NUMBER;
+BEGIN
+    SELECT EMPLOYEEID INTO EMP_ID
+    FROM DUAL; 
+    
+    INSERT INTO EMPLOYEE_AUDIT (EMPLOYEEID) VALUES (:new.EMPLOYEEID);
+END;    
 /
--- 7.0
 --Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
 select c.firstname, c.lastname, i.invoiceid from customer c
 join invoice i
@@ -114,7 +135,6 @@ join employee e2
 on e1.employeeid = e2.reportsto;
 /
 -- Write a query that connects all 11 tables woth one table from each
---        |         |         |         |         |         |         |                                                           
 Select al.albumid, ar.artistid, c.customerid, e.employeeid, g.genreid, i.invoiceid, il.invoicelineid, m.mediatypeid, p.playlistid, pt.trackid, t.bytes from album al
 full join artist ar
 on al.artistid = ar.artistid
