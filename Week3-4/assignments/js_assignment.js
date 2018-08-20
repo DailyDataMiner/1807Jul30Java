@@ -101,20 +101,24 @@ $("#bpali").on('click', function(){
 //-------------------------------------------------------------------------
 
 function bignum(intval){
-    var intvalstr =  intval.toString;
-    var arr;
-    var temp = intvalstr[0];
-    for (var i = 0; i<intvalstr.length-1; i++){
-        if (temp < intvalstr[i]){
-            temp=intvalstr[i]
-        }
-        
+    var intvalstr =  intval.toString();
+    var arr = [];
+    var after = "";
+    for (var i=0; i<intvalstr.length; i++){
+        arr[i] = intvalstr[i];
     }
+    arr = arr.reverse(arr.sort());
+    for (var j=0; j<arr.length; j++){
+        after += arr[j];
+        console.log(after);
+    }
+    return after;        
 
-    JSON.parse("[" + intval.toString() + "]");
-    
-    console.log(array);
 }
+
+    
+
+
 
 $("#bbn").on('click', function(){
     var num = $('#inbn').val();
