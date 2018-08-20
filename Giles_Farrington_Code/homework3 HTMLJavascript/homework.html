@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homework</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin-left: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='jumbotron'>
+        <h1>Week 3 HTML/JavaScript Homework</h1>
+        <p>-Giles Farrington</p>
+    </div>
+    <br>
+    <br>
+    <div class="fibonacci" id="fib">
+        <h3>Fibonacci</h3>
+        <p>Enter number and the nth number of fibonacci sequence will be returned:
+            <p>
+                <input type="text" id="fibIn" class="form-control col-4" placeholder="number">
+                <button class="btn btn-submit" id="fibNum" onclick="fibonacci(document.getElementById('fibIn').value)">submit </button>
+    </div>
+    <div style="text-align:right;width:100%">
+        <h5>
+            <span id="fibTextOutput" style="display:none;float:left"> Result: &nbsp </span>
+            <span id="fibOutput" style="float:left"></span>
+        </h5>
+    </div>
+
+    <br>
+    <br>
+
+
+    <div class="bubbleSort" id="bub">
+        <h3>Bubble Sort</h3>
+        <p>Enter an unsorted list of numbers(Ex: 2,5,1,3) and sorted array will be returned:</p>
+        <input type="text" id="bubIn" class="form-control col-4" placeholder="array">
+        <button class="btn btn-submit" id="arr" onclick="bubbleSort(document.getElementById('bubIn').value)">submit </button>
+    </div>
+    <div style="text-align:right;width:100%">
+        <h5>
+            <span id="bubTextOutput" style="display:none;float:left"> Result: &nbsp </span>
+            <span id="bubOutput" style="float:left"></span>
+        </h5>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="reverseString" id="rStr">
+        <h3>Reverse String</h3>
+        <p>Enter a string of characters and a reversed string will be returned:</p>
+        <input type="text" id="rStrIn" class="form-control col-4" placeholder="String">
+        <button class="btn btn-submit" id="rStrInput" onclick="reverseString(document.getElementById('rStrIn').value)">submit </button>
+    </div>
+    <div style="text-align:right;width:100%">
+        <h5>
+            <span id="rStrTextOutput" style="display:none;float:left"> Result: &nbsp </span>
+            <span id="rStrOutput" style="float:left"></span>
+        </h5>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="factorial" id="fNum">
+        <h3>Factorial</h3>
+        <p>Enter a number and the factorial will be returned:</p>
+        <input type="text" id="fNumIn" class="form-control col-4" placeholder="Number">
+        <button class="btn btn-submit" id="fNumInput" onclick="factorial(document.getElementById('fNumIn').value)">submit </button>
+    </div>
+    <div style="text-align:right;width:100%">
+        <h5>
+            <span id="fNumTextOutput" style="display:none;float:left"> Result: &nbsp </span>
+            <span id="fNumOutput" style="float:left"></span>
+        </h5>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="subString" id="sString">
+        <h3>Sub-String</h3>
+        <p>Enter a string, length, and subset and the sub string will be returned:</p>
+        <input type="text" id="sStringIn" class="form-control col-4" placeholder="String">
+        <input type="number" id="sStringIn2" class="form-control col-4" placeholder="Number">
+        <input type="number" id="sStringIn3" class="form-control col-4" placeholder="Number">
+        <button class="btn btn-submit" id="sStringInput" onclick="subString(document.getElementById('sStringIn').value, document.getElementById('sStringIn2').value, document.getElementById('sStringIn3').value)">submit </button>
+    </div>
+    <div style="text-align:right;width:100%">
+        <h5>
+            <span id="sStringTextOutput" style="display:none;float:left"> Result: &nbsp </span>
+            <span id="sStringOutput" style="float:left"></span>
+        </h5>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="isEven" id="isE">
+        <h3>Is Even</h3>
+        <p>Enter a number and a true/false value will be returned as to whether it is even or odd:</p>
+        <input type="text" id="isEvenIn" class="form-control col-4" placeholder="number">
+        <button class="btn btn-submit" id="isEvenNum" onclick="isEven(document.getElementById('isEvenIn').value)">submit </button>
+    </div>
+    <div style="text-align:right;width:100%">
+        <h5>
+            <span id="isEvenTextOutput" style="display:none;float:left"> Result: &nbsp </span>
+            <span id="isEvenOutput" style="float:left"></span>
+        </h5>
+    </div>
+    <br>
+    <br>
+
+    <div class="deleteElement" id="dEl">
+        <h3>Delete Element</h3>
+        <p>Enter a list of characters seperated by commas and the 3rd element will be deleted along with the before and after
+            height displayed:</p>
+        <input type="text" id="dElIn" class="form-control col-4" placeholder="list">
+        <button class="btn btn-submit" id="dElList" onclick="deleteElement(document.getElementById('dElIn').value)">submit </button>
+    </div>
+    <div style="text-align:right;width:100%">
+        <h5>
+            <span id="firstLengthTextOutput" style="display:none;float:left">Original Length: &nbsp </span>
+            <span id='length' style="float:left"></span>
+            <span id="delElTextOutput" style="display:none;float:left"> &nbsp Result: &nbsp </span>
+            <span id="delElOutput" style="float:left"></span>
+            <span id="secondLengthTextOutput" style="display:none;float:left">&nbsp New Length: &nbsp </span>
+            <span id='length2' style="float:left"></span>
+        </h5>
+    </div>
+
+    <br>
+    <br>
+    <h3>Define Object Using Constructor</h3>
+    <div id='displayPerson'></div>
+    <br>
+    <br>
+    <h3>Dsiplay Object</h3>
+    <div id='displayObject'></div>
+    <br>
+    <br>
+    <h3>Define Object Using Object Literal</h3>
+    <div id='displayPerson2'></div>
+
+
+
+    <script type="text/javascript" src="homework.js"></script>
+
+</body>
+
+</html>
