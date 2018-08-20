@@ -114,7 +114,7 @@ $(document).ready(function() {
     });
     
     
-/*    5. Substring
+/*  5. Substring
     Define function substring(someStr, length, offset)
     Return the substring contained between offset and (offset + length) inclusively.
     If incorrect input is entered, use the alert function and describe why 
@@ -201,21 +201,93 @@ $(document).ready(function() {
         $('#doSubstring').attr('disabled', false);
     });
     
-
-/*    6. Even Number
+/*  6. Even Number
     Define function: isEven(someNum)
     Return true if even, false if odd.
-    Do not use % operator.
+    Do not use % operator.  */
+    // function isEven(someNum) {
+    //     let divisionResult = someNum / 2;
+        
+    //     console.log(divisionResult);
+        
+    //     // let resultByTwo = divisionResult * 2;
+        
+    //     // console.log(resultByTwo);
+        
+    //     // console.log(( resultByTwo == someNum ));
+        
+    //     return ( (divisionResult * 2) == someNum ) ? true : false;
+    // }
+
+    function isEven(someNum) {
+
+        // Return true if 
+        // n/2 does not result
+        // in a float value.
+        // return ((someNum / 2) * 2 == someNum);
+        let isEven = true;
+         
+        for (var i = 1; i <= someNum; i++) 
+            isEven = !isEven;
+             
+        return isEven;
+    }
+
+    $('#doEvenOdd').click(function() {
+
+        var numberParam = $('#numberParam').val();
+        _isEven = isEven(numberParam);
+        eoResult_elem = $('#evenOddResult');
+        if (_isEven)    eoResult_elem.html('Yes, it\'s even.');
+        else            eoResult_elem.html('No, it\'s odd.');
+
+    });
+
+    $('#numberParam').focus(function() {
+        $(this).val('');
+    });
+
     
+
+/*
     7. Palindrome
     Define function isPalindrome(someStr)
-    Return true if someStr is a palindrome, otherwise return false
-    
+    Return true if someStr is a palindrome, otherwise return false  */
+    function isPalindrome(someStr) {
+
+        if (someStr === undefined) {
+            return false;
+        }
+
+        var left = 0;
+        var right = someStr.length - 1;
+        
+        while (left < right) {
+            if (someStr[left++] !== someStr[right--]) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    $('#doPalindrome').click(function() {
+
+        var palinToBeString = $('#palinToBeString').val();
+        _isPalindrome = isPalindrome(palinToBeString);
+        
+        if (_isPalindrome)    $('#palindromeResult').html('Is a palindrome');
+        else                  $('#palindromeResult').html('Is not a palindrome');
+
+    });
+
+/*    
     8. Shapes
     Define function: printShape(shape, height, character)
     shape is a String and is either "Square", "Triangle", "Diamond".
     height is a Number and is the height of the shape. Assume the number is odd.
-    character is a String that represents the contents of the shape. Assume this String contains just one character.
+    character is a String that represents the contents of the shape. 
+    Assume this String contains just one character.
     Use a switch statement to determine which shape was passed in.
     Use the console.log function to print the desired shape.
     Example for printShape("Square", 3, "%");
@@ -232,25 +304,113 @@ $(document).ready(function() {
     *****
      ***
       *
+                                                                    */
+    function printShape(shape, height, character) {
+        
+    }
     
+/*
     9. Object literal
     Define function traverseObject(someObj)
-    Print every property and it's value.
-    
+    Print every property and it's value.    */
+    function traverseObject(someObj) {
+        
+        let myVar = "";
+        
+        for ( key in someObj ) {
+            myVar += key + ": " + someObj[key] + "<br />";
+        }
+
+        var span = document.createElement('span');
+        span.innerHTML = myVar;
+        $('#objectLiteralResult').append(span);
+        
+    }
+
+    $('#doObjectLiteral').click(function() {
+
+        let objectLiteral = {};
+
+        objectLiteral[$('#objectLit_k1').val()] = $('#objectLit_v1').val();
+        objectLiteral[$('#objectLit_k2').val()] = $('#objectLit_v2').val();
+        objectLiteral[$('#objectLit_k3').val()] = $('#objectLit_v3').val();
+
+        traverseObject(objectLiteral);
+        
+    });
+
+/*
     10. Delete Element
     Define function deleteElement(someArr)
     Print length
     Delete the third element in the array.
     Print length
-    The lengths should be the same.
-    
+    The lengths should be the same.     */
+    function deleteElement(someArr) {
+        
+//      Get the length of the array.
+        let len = someArr.length;
+
+//      "Delete" third element in the array.
+        someArr[2] = "";
+
+//      Get same length from array.
+        let newLen = someArr.length;
+
+        var span = document.createElement('span');
+        span.innerHTML = "Array len: " + len + "<br />";
+        span.innerHTML += "Array len after deleting third element<br />";
+        span.innerHTML += "Array len: " + newLen;
+
+        $('#deletedResult').html(span);
+    }
+
+    $('#doDelete').click(function() {
+        let myArr = ["omar", 28, "omar@mail.com", 1990];
+        deleteElement(myArr);
+    });
+
+    var ex10_array = [];
+    var strAccum = "";
+                //  keyup?
+    $('#arrayInput').keyup(function() {
+
+        let thisValue   = $(this).val();
+        let len         = thisValue.length-1;
+        ex10_array[len] = thisValue;
+        
+        // console.log( (ex10_array[len] == ",") );
+        // console.log(ex10_array);
+
+        ex10_array.forEach(function(value, index) {
+            console.log(index + ": " + value);
+        });
+
+        // console.log(thisValue + (thisValue.search(",")));
+        // console.log(thisValue + (thisValue == ","));
+
+        if (thisValue == ",") {
+
+            console.log('a comma!');
+            // Store thisValue into array
+            ex10_array.push(thisValue);
+
+        }
+        // $('#deletedResult').
+    });
+
+/*
     11. Splice Element
     Define function spliceElement(someArr)
     Print length
     Splice the third element in the array.
     Print length
-    The lengths should be one less than the original length.
-    
+    The lengths should be one less than the original length.    */
+    function spliceElement(someArr) {
+        
+    }
+
+/*    
     12. Defining an object using a constructor
     Define a function Person(name, age)
     The following line should set a Person object to the variable john:
