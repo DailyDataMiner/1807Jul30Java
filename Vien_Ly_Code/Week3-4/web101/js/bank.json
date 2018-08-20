@@ -1,0 +1,65 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "first": "Gin",
+      "last": "Ly",
+      "username": "gl",
+      "password": "password"
+    },
+    {
+      "id": 2,
+      "first": "Isadora",
+      "last": "Savage",
+      "username": "is",
+      "password": "password"
+    },
+    {
+      "id": 3,
+      "first": "Avery",
+      "last": "Ii",
+      "username": "AI",
+      "password": "password"
+    },
+    {
+      "first": "Yeun",
+      "last": "Kami",
+      "username": "YK",
+      "password": "password",
+      "id": 4
+    },
+    {
+      "first": "avery",
+      "last": "fleur",
+      "username": "avie",
+      "password": "password",
+      "id": 5
+    },
+    {
+      "first": "some",
+      "last": "girl",
+      "username": "jj",
+      "password": "password",
+      "id": 6
+    },
+    {
+      "first": "dylan",
+      "last": "asd",
+      "username": "asd",
+      "password": "password",
+      "id": 7
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "balance": 1000,
+      "owner": 1
+    },
+    {
+      "id": 2,
+      "balance": 2000,
+      "owner": 2
+    }
+  ]
+}

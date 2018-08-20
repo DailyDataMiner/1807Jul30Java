@@ -1,28 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>SQL Sublanguages</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
-    <link rel="stylesheet" href="../stylesheets/vendor/bootstrap-4.1.3-dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../stylesheets/css/main.css"/>
-
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../stylesheets/css/main.css" />
 </head>
+
 <body>
     <div class="container">
-        
-        <h3 class="heading">STRUCTURED QUERY LANGUAGE</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </div>
 
-    <script src="../stylesheets/vendor/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <h3 class="heading">STRUCTURED QUERY LANGUAGE</h3>
+            <p class="text-justify">Designed for managing data held in a Relational Database Mangement System (RDBMS). SQL
+                statements are used to perform tasks such as update data on a database, or retrieve data from a database.
+                Some common relational database management systems that use SQL are: Oracle, Sybase, Microsoft SQL Server,
+                Access, Ingres, etc. Although most database systems use SQL, most of them also have their own additional
+                proprietary extensions that are usually only used on their system. However, the standard SQL commands such
+                as "Select", "Insert", "Update", "Delete", "Create", and "Drop" can be used to accomplish almost everything
+                that one needs to do with a database. These commands belong to several SQL sublanguages which will be covered
+                below.</p>
+            <div class="accordion" id="accordionExample">
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                DDL -- Data Definition Language
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Allows a database user to create and restructure database objects, such as the creation or the deletion of a table
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">CREATE</span>
+                                    <pre class="text-white-50 align-middle"><code class="align-middle">CREATE TABLE table_name(
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+    .....
+    columnN datatype,
+    PRIMARY KEY( one or more columns )
+);</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">ALTER</span>
+                                    <pre class="text-white-50"><code>ALTER TABLE table_name
+ADD column_name datatype;</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">DROP</span>
+                                    <pre class="text-white-50"><code>DROP TABLE table_name;</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">TRUNCATE</span>
+                                    <pre class="text-white-50"><code>TRUNCATE TABLE table_name;</code></pre>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="false" aria-controls="collapseTwo">
+                                DML -- Data Manipulation Language
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Manipulate data within objects of a relational database
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">INSERT</span>
+                                    <pre class="text-white-50 align-middle"><code class="align-middle">INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)  
+VALUES (value1, value2, value3,...valueN);</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">UPDATE</span>
+                                    <pre class="text-white-50"><code>UPDATE table_name
+SET column1 = value1, column2 = value2...., columnN = valueN
+WHERE [condition];</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">DELETE</span>
+                                    <pre class="text-white-50"><code>DELETE FROM table_name
+WHERE [condition];</code></pre>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                                DCL -- Data Control Language
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Create objects related to user access and also control the distribution of privileges among users
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">GRANT</span>
+                                    <pre class="text-white-50 align-middle"><code class="align-middle">GRANT privilege-type ON [TABLE] { table-Name | view-Name } TO grantees</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">REVOKE</span>
+                                    <pre class="text-white-50"><code>REVOKE privilege-type ON [ TABLE ] { table-Name | view-Name } FROM grantees</code></pre>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="headingFour">
+                        <h5 class="mb-0">
+                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
+                                aria-expanded="false" aria-controls="collapseFour">
+                                TCL -- Transaction Control Language
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Allow the user to manage database transactions
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">COMMIT</span>
+                                    <pre class="text-white-50 align-middle"><code class="align-middle">INSERT INTO regions VALUES (5, 'Antarctica'); 
+COMMIT
+    COMMENT 'example comment here';</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">ROLLBACK</span>
+                                    <pre class="text-white-50"><code>ROLLBACK TO SAVEPOINT sp1;</code></pre>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">SAVEPOINT</span>
+                                    <pre class="text-white-50"><code>UPDATE employees 
+    SET salary = 7000 
+    WHERE last_name = 'Banda';
+SAVEPOINT banda_sal;
+
+UPDATE employees 
+    SET salary = 12000 
+    WHERE last_name = 'Greene';
+SAVEPOINT greene_sal;</code></pre>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-header" id="Five">
+                        <h5 class="mb-0">
+                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
+                                aria-expanded="false" aria-controls="Five">
+                                DQL -- Data Query Language
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Retrieve data from SQL server
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-dark">
+                                    <span class="font-italic">SELECT</span>
+                                    <pre class="text-white-50 align-middle"><code class="align-middle">SELECT * 
+    FROM employees 
+    WHERE department_id = 30
+    ORDER BY last_name;</code></pre>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <sup class="footnote"><a href="https://docs.oracle.com/en/database/oracle/oracle-database/18/sqlrf/Introduction-to-Oracle-SQL.html#GUID-049B7AE8-11E1-4110-B3E4-D117907D77AC">Oracle SQL Documentation</a></sup>
+    </div>
 </body>
+
 </html>
