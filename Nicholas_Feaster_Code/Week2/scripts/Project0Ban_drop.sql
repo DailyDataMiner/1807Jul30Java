@@ -4,9 +4,10 @@
 -- tables
 DROP TABLE accounts;
 
-DROP TABLE "user";
+DROP TABLE useracc;
 
 DROP TABLE user2account;
 
+Drop trigger u_seq_trig;
 -- End of file.
 

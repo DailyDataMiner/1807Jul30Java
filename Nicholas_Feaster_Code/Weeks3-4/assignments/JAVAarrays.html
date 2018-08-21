@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JAVA Arrays</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</head>
+
+<body background>
+    <div class="jumbotron" id="wrapper">
+        <h1>Arrays</h1>
+    </div>
+    <ul>
+        <li>
+            <p class="text-primary">
+                The JAVA language contains an array class which is used to create Array objects. The class is public and final. The fact
+                that it is final means that no class can extend the Array class. As a result, there are no subclasses of
+                the JAVA standard Array class. However, the Array class is a subclass of the class Object, which means the
+                Array class can use the methods of the Object class.
+            </p>
+        </li>
+        <li>
+            <span> Some of the methods from the Object class are </span>
+            <ol>
+                <li>clone()</li>
+                <li>equals()</li>
+                <li>finalize()</li>
+                <li>getClass()</li>
+                <li>hashCode()</li>
+                <li>toString()</li>
+            </ol>
+        </li>
+        <hr>
+        <li>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            clone()
+                        </td>
+                        <td>
+                            returns a copy of the array
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            equals()
+                        </td>
+                        <td>
+                            returns a boolean that indicates whether or not the arrays are the same
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            finalize()
+                        </td>
+                        <td>
+                            Called by the garbage collector on an object when garbage collection determines that there are no more references to the
+                            object.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            getClass()
+                        </td>
+                        <td>
+                            returns the class of the object at runtime
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hashCode()
+                        </td>
+                        <td>
+                            returns a hash code value for an object
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            toString()
+                        </td>
+                        <td>
+                            returns a string consisting of the name of the class of which the object is an instance, the at-sign character `@', and the
+                            unsigned hexadecimal representation of the hash code of the object
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+        <p>The toString and equals methods are many times overriden.</p>
+        <hr>
+
+        <li>
+            <p class="text-primary">
+                Conceptually, JAVA arrays are a grouping of zero or more objects of a single type. JAVA arrays are indexed so that each object
+                in the array has an associated non-negative number that can be used to return the object from the array.
+                JAVA arrays can hold duplicates meaning that a single array can hold multiple idential objects of the same
+                type. The type of object a JAVA array holds is determined when it is intilaized.
+            </p>
+        </li>
+        <li>
+            <p>
+                A JAVA array is initilized by typing the name of the object (or primitive) type, that the array is to hold, followed by square
+                brackets, a space, and then a name for the array. After the name an equal sign follows , on the right of
+                the equal side are curly braces. Within the curly braces may be either a length for the array, the object
+                which the array is to hold.
+            </p>
+        </li>
+        <hr>
+        <li>
+            <p class="text-primary">
+                JAVA contains multidimensional arrays. In JAVA a multidimensional array is an array of arrays. JAVA arrays can have length
+                zero. One of the most important non-inherited methods of the Array class is the length method. An array's
+                length method returns the length of the arrray as an int value. The last index of an array is one less than
+                its length.
+            </p>
+        </li>
+        <li>
+            <p>
+                Arrays also have getters and setters, which can be used to access and modify array values. Since arrays only contain values
+                of a specific type the getter and setter methods reflect which type would be returned or modified. For example,
+            </p>
+        </li>
+        <hr>
+        <li>
+            <table class="table table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            getInt(Object array, int index)
+                        </td>
+                        <td>
+                            Returns the value of the indexed component in the specified array object, as an int.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            setInt(Object array, int index, int i)
+                        </td>
+                        <td>
+                            Sets the value of the indexed component of the specified array object to the specified int value.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+        <hr>
+    </ul>
+
+</body>
+<footer>
+    <!-- Sources inlcude the official JAVA documentaion by Oracle and the Enthuware Test Studio.-->
+    Sources:
+    <ol>
+        <li>
+            <span> Java™ Platform, Standard Edition 8 API Specification </span>
+        </li>
+        <li>
+            <span> Enthuware Test Studio </span>
+        </li>
+    </ol>
+</footer>
+
+</html>
