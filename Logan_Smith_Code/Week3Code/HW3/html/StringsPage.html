@@ -19,6 +19,7 @@
     background-repeat: repeat;
     background-color: rgba(255,255,255,0.6);
     background-blend-mode: lighten;
+    background-attachment: fixed;
     }
     .newHeader {
         max-width: 1000px;
@@ -39,22 +40,22 @@
     </style>
 </head>
 <body>
-    <div id="introHeader" class="jumbotron p-3 center-block mx-auto newHeader" align="center">
+    <div id="introHeader" class="jumbotron p-3 center-block mx-auto newHeader shadow mb-5 bg-white rounded" align="center">
         <h1 style="font: italic 4em 'Fira Sans', serif;">The Wonder World of Strings</h1>
         <h4 style="font: italic 1.5em 'Fira Sans', serif;">A Guide by Logan Smith</h4>
     </div>
     <br>
-    <div id="tableOfContents" class="p-3 center-block mx-auto mainArea">
+    <div id="tableOfContents" class="p-3 center-block mx-auto mainArea shadow-lg p-3 mb-5 bg-white rounded">
         <h4 class="text-center fancyTextHeaders">Table of Contents</h4>
-        <div class="list-group">
-            <a href="#introduction" class="list-group-item list-group-item-action">Introduction</a>
-            <a href="#strings" class="list-group-item list-group-item-action">Strings</a>
-            <a href="#stringBuilder" class="list-group-item list-group-item-action">String Builders</a>
-            <a href="#stringBuffer" class="list-group-item list-group-item-action disabled">String Builders</a>
+        <div class="list-group" style="background-color:rgba(0, 0, 0, 0);">
+            <a href="#introduction" class="list-group-item list-group-item-action" style="background-color:rgba(255, 255, 255, 0.2);">Introduction</a>
+            <a href="#strings" class="list-group-item list-group-item-action" style="background-color:rgba(255, 255, 255, 0.2);">Strings</a>
+            <a href="#stringBuilder" class="list-group-item list-group-item-action" style="background-color:rgba(255, 255, 255, 0.2);">String Builders</a>
+            <a href="#stringBuffer" class="list-group-item list-group-item-action disabled" style="background-color:rgba(255, 255, 255, 0.2);">String Builders</a>
           </div>
     </div>
     <br>
-    <div id="introduction" class="p-3 center-block mx-auto mainArea">
+    <div id="introduction" class="p-3 center-block mx-auto mainArea shadow-lg p-3 mb-5 bg-white rounded">
         <a name="introduction"></a>
         <h4 class="text-center fancyTextHeaders">Introduction</h4>
         <br>
@@ -68,7 +69,7 @@
         </p>
     </div>
     <br>
-    <div id="strings" class="p-3 center-block mx-auto mainArea">
+    <div id="strings" class="p-3 center-block mx-auto mainArea shadow-lg p-3 mb-5 bg-white rounded">
         <a name="strings"></a>
         <h4 class="text-center fancyTextHeaders">Strings</h4>
         <br>
@@ -119,7 +120,7 @@
         </p>
     </div>
     <br>
-    <div id="stringsBuilder" class="p-3 center-block mx-auto mainArea">
+    <div id="stringsBuilder" class="p-3 center-block mx-auto mainArea shadow-lg p-3 mb-5 bg-white rounded">
         <a name="stringBuilder"></a>
         <h4 class="text-center fancyTextHeaders">StringBuilders</h4>
         <br>
@@ -145,7 +146,7 @@
     </div>
 </div>
 <br>
-<div id="stringsBuffer" class="p-3 center-block mx-auto mainArea">
+<div id="stringsBuffer" class="p-3 center-block mx-auto mainArea shadow-lg p-3 mb-5 bg-white rounded">
     <a name="stringBuffer"></a>
     <h4 class="text-center fancyTextHeaders">StringBuilders</h4>
     <br>
