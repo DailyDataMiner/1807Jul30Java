@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Into to DOM Manipulation</title>
+    
+</head>
+<body>
+    
+    
+    
+    
+    
+  
+<div>
+   <p id="demo" style="color:blue; text-align: right;">Current Time: </p> 
+</div>
+
+
+<script>
+
+
+setInterval(myMove, 5);
+
+function myMove() {
+    var d = new Date();
+    var mytime =  'Current time: ' +d.getDay() + ': ' + d.getHours() + ': ' + d.getMinutes() + ':' + d.getSeconds();
+    document.getElementById("demo").innerHTML = mytime;
+}
+</script>
+
+
+    
+</body>
+</html>

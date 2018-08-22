@@ -1,0 +1,4 @@
+function scopes(cond ) {
+    var 
+
+}
