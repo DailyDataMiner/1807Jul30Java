@@ -9,6 +9,12 @@ import POJOs.Book;
 
 public class BookService {
 
+	public static void main(String[] args) {
+		BookService bs = new BookService();
+		List<Book> books = bs.getAll();
+		System.out.println(books.get(1));
+	}
+	
 	static Dao<Book, Integer> bDao = new BookDAO();
 	
 	public List<Book> getAll() {
