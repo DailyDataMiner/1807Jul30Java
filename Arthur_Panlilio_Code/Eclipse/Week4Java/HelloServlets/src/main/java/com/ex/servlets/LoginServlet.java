@@ -1,0 +1,53 @@
+package com.ex.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.ex.pojos.User;
+import com.ex.service.DummyUserService;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+	
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//REQUEST DISPATCHER! USED FOR FORWARDING
+		req.getRequestDispatcher("login.html").forward(req,resp);
+	}
+
+	static DummyUserService uService = new DummyUserService();
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//functionality to get info from login form
+		
+		String name = req.getParameter("username");
+		String pass = req.getParameter("password");
+		
+		System.out.println("Logging in user: " + name + ";" + pass);
+		
+		User u = uService.getByUsername(name);
+		PrintWriter out = resp.getWriter();
+		if(u==null) {
+			//out.println("Sorry, invalid username");
+			resp.sendRedirect("login");
+		} else if(!u.getPassword().equals(pass)) {
+			out.println("Sorry, invalid password");
+		} else {
+			//valid login getSession() 0 returns current session or
+			//creates new one if none exists
+			HttpSession session = req.getSession();
+			session.setAttribute("user", u);
+			System.out.println(session.getId());
+			resp.sendRedirect("home");
+		}
+	}
+	
+}

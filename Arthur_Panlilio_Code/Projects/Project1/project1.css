@@ -1,0 +1,31 @@
+.navbar {
+    background-color: #2d2d3013;
+    letter-spacing: 4px;
+}
+
+.parallax {
+    /* The image used */
+    background:  url("res/backgrounds/background.jpg");
+
+    /* Set a specific height */
+    min-height: 500px; 
+
+    /* Create the parallax scrolling effect */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.woolen{
+    font-family: woolen;
+    font-size: 50px;
+}
+.old{
+    font-family:old;
+}
+@font-face {
+    font-family: woolen;
+    src: url(res/fonts/Woolen.otf);
+}
+@font-face{
+    font-family: old;
+    src: url(res/fonts/FeENrm28C.otf);
+}

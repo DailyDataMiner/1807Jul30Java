@@ -8,18 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.revature.pojo.User;
 import com.revature.util.ConnectionFactory;
 
-/**
- * The DAO of the User object
- * 
- * @author Arthur Panlilio
- *
- */
 public class UserDAO implements DAO<User, Integer>{
-	
+
 	@Override
 	public List<User> findAll(){
 		List<User> users = new ArrayList<>();
@@ -31,15 +24,15 @@ public class UserDAO implements DAO<User, Integer>{
 			ResultSet rs = statement.executeQuery(query);
 			
 			while(rs.next()) {
-				//iterate through each row
-				User temp = new User();
-				
-				temp.setId(rs.getInt(1));
-				temp.setFirstName(rs.getString(2));
-				temp.setLastName(rs.getString(3));
-				temp.setPassword(rs.getString(4));
-				temp.setUserName(rs.getString(5));
-				users.add(temp);
+				User u = new User();
+				u.setId(rs.getInt(1));
+				u.setUsername(rs.getString(2));
+				u.setPassword(rs.getString(3));
+				u.setFirstname(rs.getString(4));
+				u.setLastname(rs.getString(5));
+				u.setEmail(rs.getString(6));
+				u.setRoleId(rs.getInt(7));
+				users.add(u);
 			}
 			
 		} catch (SQLException e) {
@@ -48,35 +41,7 @@ public class UserDAO implements DAO<User, Integer>{
 		return users;
 	}
 	
-	
-	/**
-	 * Returns a specific User
-	 * 
-	 * @param uName is the username
-	 * @return the user
-	 */
-	public User findOne(String uName){
-		User u = null;
-		ConnectionFactory.getInstance();
-		try(Connection conn = ConnectionFactory.getConnection()){
-			String sql = "SELECT * FROM users WHERE username = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, uName);
-			ResultSet info = ps.executeQuery();
-			while(info.next()) {
-				u = new User();
-				u.setId(info.getInt(1));
-				u.setFirstName(info.getString(2));
-				u.setLastName(info.getString(3));
-				u.setPassword(info.getString(4));
-				u.setUserName(info.getString(5));
-			}
-			
-		} catch (SQLException e) {
-		}
-		return u;
-	}
-	
+
 	@Override
 	public User save(User u) {
 		ConnectionFactory.getInstance();
@@ -84,16 +49,17 @@ public class UserDAO implements DAO<User, Integer>{
 				.getConnection()){
 			//connections automatically commit after tx is complete, set to false to do some sort of validation
 			conn.setAutoCommit(false);					
-			String sql = "INSERT INTO users (firstname, lastname, pwd, username) VALUES (?, ?, ? , ?)";
+			String sql = "INSERT INTO users (username, password, firstname, lastname, email, roleId) VALUES (?, ?, ?, ?, ?, ?)";
 			//code to get back auto-generated PK (other columns can be auto generated too)
-			String[] keys = {"userId"};
-			
+			String[] keys = {"id"};
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
-			ps.setString(1, u.getFirstName());
-			ps.setString(2, u.getLastName());
-			ps.setString(3, u.getPassword());
-			ps.setString(4, u.getUserName());
-
+			ps.setString(1, u.getUsername());
+			ps.setString(2, u.getPassword());
+			ps.setString(3, u.getFirstname());
+			ps.setString(4, u.getLastname());
+			ps.setString(5, u.getEmail());
+			ps.setInt(6,u.getRoleId());
+			
 			//Updates return num rows added/updated/delted
 			//Queries return result sets
 			int numRowsAffect  = ps.executeUpdate();
@@ -106,12 +72,9 @@ public class UserDAO implements DAO<User, Integer>{
 			
 			conn.commit();
 		} catch (SQLException e) {
+			System.out.println(e);
 		}
 		return u;
 	}
-
-
-
-	
 
 }

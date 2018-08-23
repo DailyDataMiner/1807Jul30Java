@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Access Modifiers</title>
+    <title>Java Access Modifiers</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -19,22 +19,49 @@
         <nav class="navbar transparent navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-center">
         <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#pub">Public</a>
+                    <a class="nav-link border" href="#pub">Public</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" href="#prot">Protected</a>
+                        <a class="nav-link border" href="#prot">Protected</a>
                     </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#def">Default</a>
+                    <a class="nav-link border" data-toggle="collapse" href="#collapseExample">Java Access Modifiers in..</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link border" href="#def">Default</a>
                 </li>          
                 <li class="nav-item">
-                    <a class="nav-link" href="#priv">Private</a>
+                    <a class="nav-link border" href="#priv">Private</a>
                 </li>
                 </ul>
+                
+                    <div class="collapse" id="collapseExample">
+                        <div class="bg-dark p-4">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link border" href="#mod">General</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link border" href="#var">Variables</a>
+                                    </li>
+                                <li class="nav-item">
+                                    <a class="nav-link border" href="#met">Methods</a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a class="nav-link border" href="#cls">Classes</a>
+                                </li>          
+                                <li class="nav-item">
+                                    <a class="nav-link border" href="#int">Interfaces</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                
         </nav>
     </div>
+    
 
-    <div  class="row" >
+    <div  class="row" style="margin-top:48px">
         <div class="col-1">
             <h1 class="vertical-text">P U B L I C</h1>
         </div>
@@ -42,7 +69,7 @@
             <h1 class="vertical-text" style="letter-spacing:13px; margin-bottom:-13px;">PROTECTED</h1>
         </div>
        
-        <div id="demo" class="carousel slide col-8" data-ride="carousel">
+        <div id="demo" class="carousel slide col-8"  data-interval="3000"data-ride="carousel">
 
             <!-- Indicators -->
             <ul class="carousel-indicators">
@@ -54,25 +81,27 @@
             <!-- The slideshow -->
             <div class="carousel-inner text-center">
                 <div class="carousel-item active">
-                <img src="abe.jpg" alt="Los Angeles"  class="cara">
-                    <div class="carousel-caption text-right">
-                        <h3 class="lead">Protected is less restrictive than default?!?</h3>
-                        <p class="lead"><i>-Abraham Lincoln 1865</i></p>
+                <img src="goetz.jpg" alt="goetz"  class="cara">
+                    <div class="carousel-caption text-left" style="padding:0px 250px 250px 0px">
+                        <h1 class="lead">"Sometimes abstraction and encapsulation are at odds with performance — 
+                            although not nearly as often as many developers believe — 
+                            but it is always a good practice first to make your code right, and then make it fast."</h1>
+                        <p class="lead"><i>- Brian Goetz, Java Concurrency in Practice</i></p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="sun.jpg" alt="Chicago"  class="cara">
+                    <img src="sun.jpg" alt="tzu"  class="cara">
                     <div class="carousel-caption text-right">
-                        <h3 class="lead">All warfare is based on deception.</h3>
-                        <h3 class="lead">Hence, we set our variables to private</h3>
-                        <p class="lead"><i>-Sun Tzu 470 B.C.</i></p>
+                        <h3 class="lead">"All warfare is based on deception.</h3>
+                        <h3 class="lead">Hence, we set our variables to private."</h3>
+                        <p class="lead"><i>-Sun Tzu, 470 B.C.</i></p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="bug.png" alt="New York" class="cara" >
+                    <img src="bug.png" alt="guy" class="cara" >
                     <div class="carousel-caption text-left" >
-                        <h3 class="lead">The only good public variable is a constant public variable.</h3>
-                        <p class="lead"><i>-Guy from Starship Troopers 23rd Century</i></p>
+                        <h3 class="lead">"The only good public variable is a constant public variable."</h3>
+                        <p class="lead"><i>-Guy from Starship Troopers, 23rd Century</i></p>
                     </div>
                 </div>
             
@@ -96,67 +125,185 @@
     </div>
 
  
-    <div id="main" align="center" >
-        <div align="center" style="background:#112255; opacity: 0.75;">
-
-            <h1 class="strong head" >ACCESS MODIFIERS</h1>
-            <h6 class="col-6 section">Keywords that set the accessibility of variables, methods, and classes are known as Access Modifiers. In the Java language, 
-                there exists four different types of modifiers: Public, Protected, Default, and Private.
-                 A top level class can only use Public and Default while the member level case use any of the 
-                 four. Access modifiers, at least their concept, we're seen as early as 1972 in the Simula 
-                 language in the form of the protected and hidden declarations. Even back in the early days of 
-                 programming, encapsulation and the ability to regulate visibility were crucial in regards to 
-                 security, maintainability, and flexibility.
-                </h6>
-
+    <div id="main" >
+        <div class="text-center" style="background:#112255; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1 class="strong head" id="mod" >JAVA ACCESS MODIFIERS</h1>
+                    <h6 class=" section">Keywords that set the accessibility of variables, methods, and classes are known as Access Modifiers. In the Java language, 
+                        there exists four different types of modifiers: Public, Protected, Default, and Private.
+                        A top level class can only use Public and Default while the member level case use any of the 
+                        four. Access modifiers, at least their concept, we're seen as early as 1972 in the Simula 
+                        language in the form of the protected and hidden declarations. Even back in the early days of 
+                        programming, encapsulation and the ability to regulate visibility were crucial in regards to 
+                        security, maintainability, and flexibility.
+                        </h6>
+                </div>
+                <div class="col-3"></div>
+            </div>
         </div>
-        <div align="center" style="background:#4466aa; opacity: 0.75;">
-
-            <h1 class="strong head" id="pub">PUBLIC</h1>
-            <ul class="col-6 section">
-                <li>Has the widest scope among all access modifiers.</li>
-                <li>Variables and methods can be accessed anywhere.</li>
-                <li>Outside packages still need to import the public class.</li>
-                <li>All public methods and variables from a class are inherited by its subclasses</li>
-                <li>Methods declared public in the superclass must be declared public in the subclass</li>
-                <li>Used rarely for member variables since it violates encapsulation</li>
-            </ul>
+        <div class="text-center" style="background:#4466aa; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1 class="strong head" id="var" >Access Modifiers in Variables</h1>
+                    <h6 class=" section">Member variables inside a class can be declared with or without (default) an
+                        access modifier. Unlike classes, they get access to two more modifiers: <i>private</i> and 
+                        <i>protected</i>. Access modifiers are written out first when a variable is being declared, followed by
+                        the non-access modifier, datatype, then variable name.
+                        </h6>
+                    <img src="accessvariabledecleration.png" style="height:300px; margin-top:-50px" alt="">
+                    <h6 class=" section">Public variables can be accessed anywhere in the program, and thus considered bad
+                        for encapsulation. Only use public when you want a member variable to be easily accessed, such as when
+                        you want to use a constant. In terms of encapsulation, private is the best modifier since it prohibits access
+                        to member variables from outside classes and needs getters and setters to interact with it. One caveat about private
+                        variables is that while they are "inherited" by subclasses, they cannot access them. Protected and default access modifiers
+                        do allow inheritance and access from the subclass, but are less restrictive with protected allowing the local package and 
+                        subclasses outside the package access and default only allowing classes in the local package access. 
+                        </h6>
+                    <img src="accessvariableinheritance.png" style="height:300px; margin:-50px 0px 25px" alt="">
+                </div>
+                <div class="col-3"></div>
+            </div>
         </div>
-        <div align="center" style="background:#6699bb; opacity: 0.75;">
-            <h1 class="strong head"  id="prot">Protected</h1>
-            <ul class="col-6 section">
-                <li>Variables, methods, and constructors can only be accessed from any class within the package or a subclass in another package.</li>
-                <li>Cannot be used on class and interface.</li>
-                <li>Cannot be used on methods and fields in an interface.</li>
-                <li>Methods declared protected in a superclass must be declared protected or public.</li>
-                <li>Protected is less restrictive than default.</li>
-            </ul>
+        <div class="text-center" style="background:#6699bb; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1 class="strong head" id="met" >Access Modifiers in Methods</h1>
+                    <h6 class=" section">Methods are also declared with access modifiers. They can have <i>public, protected, default</i>,
+                        or <i>private</i> access modifiers.
+                        </h6>
+                    <img src="accessmethodsdec.png" style="height:300px; margin-top:-50px" alt="">
+                    <h6 class=" section">Like variables, public methods are accessible from anywhere in the program, while default and 
+                        protected methods are only available inside the local package (default) as well as sub-classes in outside package (protected).
+                        Private methods can only be called within the class and are not accessible from a subclass, unless its through another inherited 
+                        method.
+                        </h6>
+                    <img src="accessmethods.png" style="height:300px; width:600px; margin-top:-50px" alt="">
+                    <h6 class=" section">When overriding an inherited method, the overriden method must have a declared access modifier
+                        <i>less</i> restrictive than the original method. This is because the child class is an instance of the parent and must
+                        present at least the same usable methods. Abstract methods cannot be private since they need to be inherited to be implemented.
+                        </h6>
+                    <img src="accessmethodinher.png" style="height:300px; width:600px; margin-top:-50px" alt="">
+                    <h6 class=" section">Since constructors are methods, they too are declared with access modifiers. Normally, they 
+                        are declared <i>public</i>, but can be declared <i>private</i> to limit instantiation. This is a core concept in 
+                        the singleton design pattern.
+                        </h6>
+                </div>
+                <div class="col-3"></div>
+            </div>
         </div>
-        <div align="center" style="background:#bbcccc; opacity: 0.75;";>
-            <h1 class="strong head"  style="color: rgb(31, 24, 24)" id="def">Default</h1>
-            <ul class="col-6 section"style="color: rgb(31, 24, 24)">
-                <li>Default access modifiers are not explicitly declared for a class, field, or method.</li>
-                <li>Accessible to any other class in the same package.</li>
-                <li>Methods and fields in an interface are public by default.</li>
-                <li>Default is more restrictive than protected.</li>
-            </ul>
+        <div class="text-center" style="background:#bbcccc; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6" style="color:rgb(31, 24, 24)">
+                    <h1 class="strong head" id="cls" >Access Modifiers in Classes</h1>
+                    <h6 class=" section">Classes can only be declared <i>public</i> or <i>default</i>. Public classes can be accessed anywhere
+                        in the program while default classes can only be accessed in the local package. Even if the fields and methods are public, 
+                        an outside package class cannot access those fields and methods in a default class.
+                        </h6>
+                    <img src="pubclass.png" style="height:200px;width:532px; margin-top:-50px" alt="">
+                    <img src="defclass.png" style="height:155px;width:532px; " alt="">
+                    <img src="classoutsidepack.png" style="height:355px;width:732px; margin-bottom:25px" alt="">
+                </div>
+                <div class="col-3"></div>
+            </div>
         </div>
-        <div align="center" style="background:#000000; opacity: 0.75;">
-            <h1 class="strong head"id="priv">Private</h1>
-            <ul class="col-6 section">
-                <li>Methods, variables, and constructors that are private can only be accessed within the class they are in.</li>
-                <li>Class and interface cannot be declared private.</li>
-                <li>Private variables can only be accessed from outside a class via public getter and setter methods inside the class.</li>
-                <li>The private modifier is the main way encapsulation is enforced since it hides data from the outside world.</li>
-                <li>Private methods and fields are not inherited.</li>
-            </ul>
+        <div class="text-center" style="background:#000000; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6" >
+                    <h1 class="strong head" id="int" >Access Modifiers in Interface</h1>
+                    <h6 class=" section">Java interfaces can only be declared default or public. Fields in an interface are 
+                        implicitly public static and cannot be declared private, protected, or default(package). Methods in an 
+                        interface also follow these rules and the <i>default</i> keyword is replaced with <i>Default Methods</i>
+                        which do not have anything to do with access modifiers. 
+                        </h6>
+                    <img src="interfaceAccess.png" style="height:800px;width:732px; margin-top:-50px; margin-bottom:25px" alt="">
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+        <div   style="background:#4466aa; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1 class="strong head" id="pub">PUBLIC</h1>
+                    <ul>
+                        <li>Has the widest scope among all access modifiers.</li>
+                        <li>Variables and methods can be accessed anywhere.</li>
+                        <li>Outside packages still need to import the public class.</li>
+                        <li>All public methods and variables from a class are inherited by its subclasses</li>
+                        <li>Methods declared public in the superclass must be declared public in the subclass</li>
+                        <li>Used rarely for member variables since it violates encapsulation</li>
+                    </ul>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+        <div style="background:#6699bb; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1 class="strong head"  id="prot">Protected</h1>
+                    <ul>
+                        <li>Variables, methods, and constructors can only be accessed from any class within the package or a subclass in another package.</li>
+                        <li>Cannot be used on class and interface.</li>
+                        <li>Cannot be used on methods and fields in an interface.</li>
+                        <li>Methods declared protected in a superclass must be declared protected or public.</li>
+                        <li>Protected is less restrictive than default.</li>
+                    </ul>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+        <div style="background:#bbcccc; opacity: 0.75;";>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1 class="strong head"  style="color: rgb(31, 24, 24)" id="def">Default</h1>
+                    <ul style="color: rgb(31, 24, 24)">
+                        <li>Default access modifiers are not explicitly declared for a class, field, or method.</li>
+                        <li>Accessible to any other class in the same package.</li>
+                        <li>Also known as "package".</li>
+                        <li>Methods and fields in an interface are public by default.</li>
+                        <li>Default is more restrictive than protected.</li>
+                    </ul>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+        <div style="background:#000000; opacity: 0.75;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <h1 class="strong head"id="priv">Private</h1>
+                    <ul>
+                        <li>Methods, variables, and constructors that are private can only be accessed within the class they are in.</li>
+                        <li>Class and interface cannot be declared private.</li>
+                        <li>Private variables can only be accessed from outside a class via public getter and setter methods inside the class.</li>
+                        <li>The private modifier is the main way encapsulation is enforced since it hides data from the outside world.</li>
+                        <li>Private methods and fields are not inherited.</li>
+                    </ul>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:25px">
+            <div class="col-3"></div>
+          
+                <img src="chart.png" alt=""  class="col-6" style="width:50%; height:50%">
+            
+            <div class="col-3"></div>
         </div>
         <footer class="page-footer font-small  pt-4" style="text-shadow:
 		-1px -1px 0 #000,
 		1px -1px 0 #000,
 		-1px 1px 0 #000,
 		1px 1px 0 #000;">
-                <div class="container-fluid text-center text-md-left">
+                <div class="container-fluid text-center text-md-left" style="background:#000000; opacity: 0.75;">
                   <div class="row">
                     <hr class="clearfix w-100 d-md-none pb-3">
                     <div class="col-md-1"></div>
@@ -175,12 +322,15 @@
                           <li>
                             <a href="https://www.tutorialspoint.com/java/java_access_modifiers.htm">https://www.tutorialspoint.com/java/java_access_modifiers.htm</a>
                           </li>
+                          <li>
+                            <a href="https://codepumpkin.com/access-modifiers-in-java/">https://codepumpkin.com/access-modifiers-in-java/</a>
+                          </li>
                         </ul>           
                       </div>
                   </div>
                 </div>
                 <div class="footer-copyright text-center py-3">Made by:
-                  <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Arthur Panlilio</a>
+                  <span> Arthur Panlilio</span>
                 </div>
               </footer>
               <!-- Footer -->
