@@ -1,0 +1,32 @@
+<b>
+  {{ currentTime }}
+</b>
+<br>
+<button [ngClass]="buttonClass" (click)="testBinding()" >Click Me!</button>
+{{ text }}
+
+<input type="text" class="form-control" [(ngModel)]="color">
+<div [style.background-color]="color">
+    {{ text }}  
+</div>
+
+<hr>
+
+<h3><i>Pipes</i></h3>
+<input type="text" [(ngModel)]="pipeText">
+{{ pipeText | uppercase }}
+<hr>
+{{ 100 | sqt }}
+<hr>
+
+<h3><i>To Do list... exploring structural directives</i></h3>
+<input type="text" [(ngModel)]="valueFromUser">
+<button [ngClass]="buttonClass" (click)="addItemToList()">Add To List...</button>
+ <ul>
+   <li *ngFor="let item of itemsArray" (click)="strike(item)" 
+        [ngStyle]="listStyle"
+        [ngClass]="strikeClass">
+     {{ item }}
+   </li>
+ </ul>
+ <hr>
