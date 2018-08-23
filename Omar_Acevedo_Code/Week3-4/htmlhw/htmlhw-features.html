@@ -23,7 +23,7 @@
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" href="htmlhw.html">Home</a>
             <a class="nav-link active" href="htmlhw-features.html">Features</a>
-            <a class="nav-link" href="#">Contact</a>
+            <!-- <a class="nav-link" href="#">Contact</a> -->
           </nav>
         </div>
       </header>
@@ -47,38 +47,91 @@
             </ul>
         </p>
         <p class="lead">
+            <div class="row" style="">
+                    <div class="col-sm-6">
+                      <div class="card bg-dark">
+                        <div class="card-header"><u>IIFE</u></div>
 
-            <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small>3 days ago</small>
+                        <div class="card-body">
+                          <!-- <h5 class="card-title"></h5> -->
+                          <p class="card-text" style="text-align:left;">
+
+                                var myObj = (function() {<br />
+                                &nbsp;&nbsp;var myVar = "a value here";<br />
+                                &nbsp;&nbsp;function myFn() {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;console.log(myVar);<br />
+                                &nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;var myObj = {};<br />
+                                &nbsp;&nbsp;myObj.show = function() {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;myFn();<br />
+                                &nbsp;&nbsp;}<br />
+                                    return myObj;<br />
+                                })();<br />
+                                myObj.show();
+
+                          </p>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small>Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small class="text-muted">3 days ago</small>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="card bg-dark mb-3" style="max-width: 18rem;">
+                        <div class="card-header"><u>Click event</u></div>
+                        <div class="card-body">
+                            <!-- <h5 class="card-title">Light card title</h5> -->
+                            <p class="card-text" style="text-align:left;">
+                                $('#itemElement').click(function() {<br />
+                                    &nbsp;&nbsp;/* Do something here */<br />
+                                });
+                            </p>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small class="text-muted">3 days ago</small>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
-            </div>
+
+                        <div class="card bg-dark mb-3" style="max-width: 18rem;">
+                            <div class="card-header"><u>Java</u></div>
+                            <div class="card-body">
+                                <!-- <h5 class="card-title">Light card title</h5> -->
+                                <p class="card-text" style="text-align:left;">
+                                    new ClassName().callMethod();
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                  </div>
+
 
         </p>
         <!-- <p class="lead">
           <a href="htmlhw-features.html" class="btn btn-lg btn-secondary">Learn more</a>
         </p> -->
+        <hr />
+        <p class="lead">
+            <!-- <a href="htmlhw-features.html" class="btn btn-md btn-secondary">Execute</a> -->
+        </p>
+        <!-- <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"></h5>
+                    <small>Javascript</small>
+                    </div>
+                    <p class="mb-1">
+                        ...
+                    </p>
+                </a>
+
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">Java</small>
+                    </div>
+                    <p class="mb-1">
+
+                    </p>
+                    <small class="text-muted">Donec id elit non mi porta.</small>
+                </a>
+        </div> -->
       </main>
 
       <footer class="mastfoot mt-auto">
@@ -96,6 +149,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>        
+
+    <script src="htmlhw.js"></script>
 
   </body>
 </html>
