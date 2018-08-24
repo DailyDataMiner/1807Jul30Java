@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Maps in Java</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <style>
+        #home, #hash, #tree, #linked {
+            margin-top: 100px;
+            margin-bottom: 100px;
+            margin-right: 150px;
+            margin-left: 80px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Map</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" id="homeNav">What is?<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="hashNav">HashMap</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="treeNav">TreeMap</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="linkedNav">LinkedHashMap</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <h1>Maps</h1>
+    </div>
+    <div id="home">
+        <h3>What are Maps?</h3>
+        <p>
+            A map is an object in Java that assigns keys to values. A map cannot contain duplicate values and each key must map to at most one value.<br>
+            <br>
+            One of the most important things to understand about Maps is that they are <strong>NOT A COLLECTION.</strong> Maps do not inherit from the Collections interface. <br>
+            Instead, maps use two interfaces: Map and SortedMap, and three classes: HashMap, TreeMap, and LinkedHashMap. <br>
+            
+            <br>
+            Here's a diagram showing the hierarchy for the Map construct: <br>
+            <img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/Selection_030.png">
+        </p>
+        <br>
+        <h3>Why/When would you use a Map?</h3>
+        <p>
+            Maps would be used when you need to look up elements by specific keys. Some examples would be:
+            <ul>
+                <li>A map of error codes and their descriptors.</li>
+                <li>A map of zip codes and cities.</li>
+                <li>A map of managers and employees, in which a manager (key) is associated with the different employees (value) he/she manages.</li>
+                <li>A map of classes and students, operating in a similar fashion to the above example.</li>
+            </ul>
+        </p>
+        <br>
+        <h3>Methods of Map</h3>
+        <p>
+            <ol>
+                <li>Object put(Object key, Object value): Inserts an entry.</li>
+                <li>void putAll(Map map): Inserts a map into another map.</li>
+                <li>Object remove(Object key): Deletes an entry containing a specified key.</li>
+                <li>Object get(Object key): Returns the value at the specified key.</li>
+                <li>boolean containsKey(Object key): Searches for the specified key.</li>
+                <li>Set keySet(): Returns the Set view containing all keys.</li>
+                <li>Set entrySet(): Returns the Set view containing all keys and values.</li>
+            </ol>
+        </p>
+    </div>
+    <div id="hash" hidden="true">
+        <p>
+            <h3>HashMap</h3>
+            <strong>HashMap</strong> provides the basic implementation of a map in Java. It's called HashMap because it uses a technique called <strong>Hashing</strong>, <br>
+            which involves converting a large String into a smaller String that represents the same String, which helps with indexing and faster searches. <br>
+            It uses a linked list internally to store its key-value pairs. <br>
+            <br>
+            A few important features: <br>
+            <ul>
+                <li>HashMap is part of java.util.</li>
+                <li>HashMap implements the Cloneable and Serializable interfaces.</li>
+                <li>HashMap does not allow duplicate keys but does allow duplicate values.</li>
+                <li>HashMap allows only one null key, but multiple null values.</li>
+            </ul>
+
+            <figure>
+                <pre class="prettyprint lang-java">
+                    <code>
+        import java.util.HashMap;
+        import java.util.Map;
+            
+        public class GFG
+        {
+            public static void main(String[] args) 
+            {
+                HashMap<String, Integer> map = new HashMap<>();
+                    
+                print(map);
+                map.put("vishal", 10);
+                map.put("sachin", 30);
+                map.put("vaibhav", 20);
+                    
+                System.out.println("Size of map is:- " + map.size());
+                
+                print(map);
+                if (map.containsKey("vishal")) 
+                {
+                    Integer a = map.get("vishal");
+                    System.out.println("value for key \"vishal\" is:- " + a);
+                }
+                    
+                map.clear();
+                print(map);
+            }
+                
+            public static void print(Map<String, Integer> map) 
+            {
+                if (map.isEmpty()) 
+                {
+                    System.out.println("map is empty");
+                }
+                    
+                else
+                {
+                    System.out.println(map);
+                }
+            }
+        }
+                    </code>
+                </pre>
+            </figure>
+        </p>
+    </div>
+    <div id="tree" hidden="true">
+    <p>
+        <h3>TreeMap</h3>
+        <strong>TreeMap</strong> is sorted according to the natural ordering of its keys, or by a Comparator provided at map creation. <br>
+        This provides a more efficient way of sorting and storing key-value pairs.
+        <br>
+        A few important features: <br>
+        <ul>
+            <li>A member of the Java Collections Framework.</li>
+            <li>Does not allow null keys and throws a NullPointerException when one is attempted to be assigned. Null values can be associated with different keys, however.</li>
+        </ul>
+
+        <figure>
+            <pre class="prettyprint lang-java">
+                <code>
+    import java.util.Comparator;
+    import java.util.Map;
+    import java.util.Set;
+    import java.util.TreeMap;
+
+    public class BasicTreeMap {
+        // May be replaced by an external class
+        static class TreeCompare 
+                implements Comparator<String>
+        {
+            /* Compares keys based on the 
+                last word's natural ordering */
+            public int compare(String a, String b)
+            {
+                int i,j,k;
+        
+                //Sorting by surnames
+                i = a.lastIndexOf(' ');
+                j = b.lastIndexOf(' ');
+                k = a.substring(i).compareToIgnoreCase
+                                    (b.substring(j));
+                if(k==0)
+                    return a.compareToIgnoreCase(b);
+                else return k;
+            }
+                
+        }
+        public static void main(String[] args) {
+                
+            BasicTreeMap<String, Double> tm = new
+                    BasicTreeMap<>(new TreeCompare());
+                
+            tm.put("Head First Java", 807.34);
+            tm.put("Java: A Beginners Guide 6th "+
+                    "Edition", 593.05);
+            tm.put("Java: The Complete Reference"+ 
+                        " 9th Edition", 531.31);
+            tm.put("Core Java Volume I_Fundamentals"+
+                    " 9th Edition", 544.34);
+            tm.put("Effective Java 2nd Edition", 373.70);
+        
+            // Values can be null
+            tm.put("Java 8 in action", null);
+        
+            // Last entry with the same key 
+            // reflected in output
+            tm.put("Java 8 in action", 539.65);
+                
+            Set<Map.Entry<String, Double>> set = 
+                tm.entrySet();
+            for(Map.Entry<String,Double> me : set)
+                System.out.println(me.getKey()+": Rs."
+                                    +me.getValue());
+                
+            tm.remove("Core Java Volume I_Fundamentals"+
+                        " 9th Edition");
+            System.out.println("...After removal of "+
+                                "Core Java...");
+            for(Map.Entry<String,Double> me : set)
+                System.out.println(me.getKey()+": Rs."
+                                    +me.getValue());
+                
+        }
+    }                        
+                </code>
+            </pre>
+        </figure>
+    </p>
+    </div>
+    <div id="linked" hidden="true">
+        <p>
+        <h3>LinkedHashMap</h3>
+        <strong>LinkedHashMap</strong> is identical to HashMap with the added feature of maintaining order of elements inserted.
+        <br>
+        A few important features: <br>
+        <ul>
+            <li>Implements Map and extends HashMap.</li>
+            <li>Contains only unique elements.</li>
+            <li>May have only one null key and multiple null values.</li>
+            <li>Maintains insertion order.</li>
+        </ul>
+
+        <figure>
+            <pre class="prettyprint lang-java">
+                <code>
+    import java.util.*;
+
+    public class BasicLinkedHashMap
+    {
+        public static void main(String a[])
+        {
+            LinkedHashMap<String, String> lhm =
+                            new LinkedHashMap<String, String>();
+            lhm.put("one", "practice.geeksforgeeks.org");
+            lhm.put("two", "code.geeksforgeeks.org");
+            lhm.put("four", "quiz.geeksforgeeks.org");
+        
+            // It prints the elements in same order 
+            // as they were inserted    
+            System.out.println(lhm);
+        
+            System.out.println("Getting value for key 'one': "
+                                            + lhm.get("one"));
+            System.out.println("Size of the map: " + lhm.size());
+            System.out.println("Is map empty? " + lhm.isEmpty());
+            System.out.println("Contains key 'two'? "+ 
+                                        lhm.containsKey("two"));
+            System.out.println("Contains value 'practice.geeks"
+            +"forgeeks.org'? "+ lhm.containsValue("practice"+
+            ".geeksforgeeks.org"));
+            System.out.println("delete element 'one': " + 
+                                lhm.remove("one"));
+            System.out.println(lhm);
+        }
+    }
+                </code>
+            </pre>
+        </figure>
+        </p>
+    </div>
+
+    <script type="text/javascript" src="../js/maps.js"></script>
+</body>
+</html>

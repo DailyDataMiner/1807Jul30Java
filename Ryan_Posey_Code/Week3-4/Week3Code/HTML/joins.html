@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SQL Joins</title>
+    <link rel="stylesheet" href="../CSS/joins.css">
+
+</head>
+<body>
+    <div class="page-wrapper">
+        <section class="intro">
+            <h2>Joins in SQL</h2>
+            <div class="preamble">
+                <p>
+                    A SQL join statement is used to combine data or rows from two or more tables based on common fields between them. <br>
+                    To recognize how the result set of a specific join is processed, it's better to visualize each join in a venn diagram, <br>
+                    which I have provided for each important join.
+
+                    In addition, to demonstrate the result sets, let's use these two tables:
+                        <table border="1" cellpadding="5">
+                            <tbody><tr>
+                            <th align="left">customer_id</th>
+                            <th align="left">first_name</th>
+                            <th align="left">last_name</th>
+                            <th align="left">email</th>
+                            <th align="left">address</th>
+                            <th align="left">city</th>
+                            <th align="left">state</th>
+                            <th align="left">zipcode</th>
+                            </tr>
+                            <tr>
+                            <td>1</td>
+                            <td>George</td>
+                            <td>Washington</td>
+                            <td>gwashington@usa.gov</td>
+                            <td>3200 Mt Vernon Hwy</td>
+                            <td>Mount Vernon</td>
+                            <td>VA</td>
+                            <td>22121</td>
+                            </tr>
+                            <tr>
+                            <td>2</td>
+                            <td>John</td>
+                            <td>Adams</td>
+                            <td>jadams@usa.gov</td>
+                            <td>1250 Hancock St</td>
+                            <td>Quincy</td>
+                            <td>MA</td>
+                            <td>02169</td>
+                            </tr>
+                            <tr>
+                            <td>3</td>
+                            <td>Thomas</td>
+                            <td>Jefferson</td>
+                            <td>tjefferson@usa.gov</td>
+                            <td>931 Thomas Jefferson Pkwy</td>
+                            <td>Charlottesville</td>
+                            <td>VA</td>
+                            <td>22902</td>
+                            </tr>
+                            <tr>
+                            <td>4</td>
+                            <td>James</td>
+                            <td>Madison</td>
+                            <td>jmadison@usa.gov</td>
+                            <td>11350 Constitution Hwy</td>
+                            <td>Orange</td>
+                            <td>VA</td>
+                            <td>22960</td>
+                            </tr>
+                            <tr>
+                            <td>5</td>
+                            <td>James</td>
+                            <td>Monroe</td>
+                            <td>jmonroe@usa.gov</td>
+                            <td>2050 James Monroe Parkway</td>
+                            <td>Charlottesville</td>
+                            <td>VA</td>
+                            <td>22902</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <br>
+
+                        <table border="1" cellpadding="5">
+                            <tbody><tr>
+                            <th align="left">order_id</th>
+                            <th align="left">order_date</th>
+                            <th align="left">amount</th>
+                            <th align="left">customer_id</th>
+                            </tr>
+                            <tr>
+                            <td>1</td>
+                            <td>07/04/1776</td>
+                            <td>$234.56</td>
+                            <td>1</td>
+                            </tr>
+                            <tr>
+                            <td>2</td>
+                            <td>03/14/1760</td>
+                            <td>$78.50</td>
+                            <td>3</td>
+                            </tr>
+                            <tr>
+                            <td>3</td>
+                            <td>05/23/1784</td>
+                            <td>$124.00</td>
+                            <td>2</td>
+                            </tr>
+                            <tr>
+                            <td>4</td>
+                            <td>09/03/1790</td>
+                            <td>$65.50</td>
+                            <td>3</td>
+                            </tr>
+                            <tr>
+                            <td>5</td>
+                            <td>07/21/1795</td>
+                            <td>$25.50</td>
+                            <td>10</td>
+                            </tr>
+                            <tr>
+                            <td>6</td>
+                            <td>11/27/1787</td>
+                            <td>$14.40</td>
+                            <td>9</td>
+                            
+                            </tr></tbody>
+                        </table>
+
+                        <br>
+                </p>
+            </div>
+        </section>
+            <div class="participation">
+                <p>
+                    <div class="requirements">
+                        There are four main types of joins: 
+                        <ul>
+                            <li>Inner Join
+                                <ul>
+                                    <li>
+                                        Selects all rows from both tables where values intersect. Only rows that are common in both tables will be returned.
+                                    </li>
+                                    <img src="https://www.codeproject.com/KB/database/Visual_SQL_Joins/INNER_JOIN.png" alt="Inner Join"> <br>
+
+                                    <pre>
+                                        <code>
+                                            select first_name, last_name, order_date, order_amount
+                                            from customers c
+                                            left join orders o
+                                            on c.customer_id = o.customer_id
+                                        </code>
+                                    </pre>
+
+                                    <table border="1" cellpadding="5">
+                                            <tbody><tr>
+                                            <th align="left">first_name</th>
+                                            <th align="left">last_name</th>
+                                            <th align="left">order_date</th>
+                                            <th align="left">order_amount</th>
+                                            </tr><tr>
+                                            <td>George</td>
+                                            <td>Washington</td>
+                                            <td>07/4/1776</td>
+                                            <td>$234.56</td>
+                                            </tr>
+                                            <tr>
+                                            <td>John</td>
+                                            <td>Adams</td>
+                                            <td>05/23/1784</td>
+                                            <td>$124.00</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Thomas</td>
+                                            <td>Jefferson</td>
+                                            <td>03/14/1760</td>
+                                            <td>$78.50</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Thomas</td>
+                                            <td>Jefferson</td>
+                                            <td>09/03/1790</td>
+                                            <td>$65.50</td>
+                                            </tr>
+                                            </tbody></table>
+                                </ul>
+                            </li>
+                            <li>Left Join
+                                <ul>
+                                    <li>
+                                        Selects all rows from the left table and any matching rows from the right table.
+                                    </li>
+                                    <img src="https://www.codeproject.com/KB/database/Visual_SQL_Joins/LEFT_JOIN.png" alt="Left Join">
+
+                                    <pre>
+                                        <code>
+                                            select first_name, last_name, order_date, order_amount
+                                            from customers c
+                                            left join orders o
+                                            on c.customer_id = o.customer_id
+                                            where order_date is NULL
+                                        </code>
+                                    </pre>
+
+                                    <table border="1" cellpadding="5">
+                                            <tbody><tr>
+                                            <th align="left">first_name</th>
+                                            <th align="left">last_name</th>
+                                            <th align="left">order_date</th>
+                                            <th align="left">order_amount</th>
+                                            </tr>
+                                            <tr>
+                                            <td>George
+                                            </td><td>Washington
+                                            </td><td>07/04/1776
+                                            </td><td>$234.56
+                                            </td></tr>
+                                            <tr>
+                                            <td>John
+                                            </td><td>Adams
+                                            </td><td>05/23/1784
+                                            </td><td>$124.00
+                                            </td></tr>
+                                            <tr>
+                                            <td>Thomas
+                                            </td><td>Jefferson
+                                            </td><td>03/14/1760
+                                            </td><td>$78.50
+                                            </td></tr>
+                                            <tr>
+                                            <td>Thomas
+                                            </td><td>Jefferson
+                                            </td><td>09/03/1790
+                                            </td><td>$65.50
+                                            </td></tr>
+                                            <tr>
+                                            <td>James 
+                                            </td><td>Madison
+                                            </td><td>NULL
+                                            </td><td>NULL
+                                            </td></tr>
+                                            <tr>
+                                            <td>James 
+                                            </td><td>Monroe
+                                            </td><td>NULL
+                                            </td><td>NULL
+                                            </td></tr>
+                                            </tbody></table>
+                                </ul>
+                            </li>
+                            <li>Right Join</li>
+                                <ul>
+                                    <li>
+                                        A mirror of left join. Returns all rows from the right table and any matching rows from the left.
+                                    </li>
+                                    <img src="https://www.codeproject.com/KB/database/Visual_SQL_Joins/RIGHT_JOIN.png" alt="Left Join">
+
+                                    <pre>
+                                        <code>
+                                                select first_name, last_name, order_date, order_amount
+                                                from customers c
+                                                right join orders o
+                                                on c.customer_id = o.customer_id
+                                        </code>
+                                    </pre>
+
+                                    <table border="1" cellpadding="5">
+                                            <tbody><tr>
+                                            <th align="left">first_name</th>
+                                            <th align="left">last_name</th>
+                                            <th align="left">order_date</th>
+                                            <th align="left">order_amount</th>
+                                            </tr>
+                                            <tr>
+                                            <td>George</td>
+                                            <td>Washington</td>
+                                            <td>07/04/1776</td>
+                                            <td>$234.56</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Thomas</td>
+                                            <td>Jefferson</td>
+                                            <td>03/14/1760</td>
+                                            <td>$78.50</td>
+                                            </tr>
+                                            <tr>
+                                            <td>John</td>
+                                            <td>Adams</td>
+                                            <td>05/23/1784</td>
+                                            <td>$124.00</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Thomas</td>
+                                            <td>Jefferson</td>
+                                            <td>09/03/1790</td>
+                                            <td>$65.50</td>
+                                            </tr>
+                                            <tr>
+                                            <td>NULL</td>
+                                            <td>NULL</td>
+                                            <td>07/21/1795</td>
+                                            <td>$25.50</td>
+                                            </tr>
+                                            <tr>
+                                            <td>NULL</td>
+                                            <td>NULL</td>
+                                            <td>11/27/1787</td>
+                                            <td>$14.40</td>
+                                            </tr>
+                                            </tbody></table>
+                                </ul>
+                            <li>Full/Outer Join</li>
+                                <ul>
+                                    <li>
+                                        Selects all records from both tables. Duplicate values will be included.
+                                    </li>
+                                    <img src="https://www.codeproject.com/KB/database/Visual_SQL_Joins/FULL_OUTER_JOIN.png" alt="Left Join">
+
+                                    <pre>
+                                        <code>   
+                                            select first_name, last_name, order_date, order_amount
+                                            from customers c
+                                            full join orders o
+                                            on c.customer_id = o.customer_id
+                                        </code>
+                                    </pre>
+
+                                    <table border="1" cellpadding="5">
+                                            <tbody><tr>
+                                            <th align="left">first_name</th>
+                                            <th align="left">last_name</th>
+                                            <th align="left">order_date</th>
+                                            <th align="left">order_amount</th>
+                                            </tr>
+                                            <tr>
+                                            <td>George</td>
+                                            <td>Washington</td>
+                                            <td>07/04/1776</td>
+                                            <td>$234.56</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Thomas</td>
+                                            <td>Jefferson</td>
+                                            <td>03/14/1760</td>
+                                            <td>$78.50</td>
+                                            </tr>
+                                            <tr>
+                                            <td>John</td>
+                                            <td>Adams</td>
+                                            <td>05/23/1784</td>
+                                            <td>$124.00</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Thomas</td>
+                                            <td>Jefferson</td>
+                                            <td>09/03/1790</td>
+                                            <td>$65.50</td>
+                                            </tr>
+                                            <tr>
+                                            <td>NULL</td>
+                                            <td>NULL</td>
+                                            <td>07/21/1795</td>
+                                            <td>$25.50</td>
+                                            </tr>
+                                            <tr>
+                                            <td>NULL</td>
+                                            <td>NULL</td>
+                                            <td>11/27/1787</td>
+                                            <td>$14.40</td>
+                                            </tr>
+                                            <tr>
+                                            <td>James</td>
+                                            <td>Madison</td>
+                                            <td>NULL</td>
+                                            <td>NULL</td>
+                                            </tr>
+                                            <tr>
+                                            <td>James</td>
+                                            <td>Monroe</td>
+                                            <td>NULL</td>
+                                            <td>NULL</td>
+                                            </tr>
+                                            </tbody></table>
+                                </ul>
+                        </ul>
+                    </div>
+                    Further reading: <br>
+                    <a href="https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins">https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins</a> <br>
+                    <a href="https://www.w3schools.com/sql/sql_join.asp">https://www.w3schools.com/sql/sql_join.asp</a> <br>
+                </p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
