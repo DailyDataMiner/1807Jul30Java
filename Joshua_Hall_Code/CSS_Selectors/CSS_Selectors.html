@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Selectors</title>
+    <link rel="stylesheet" href="CSS_Selectors.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div id="boot" class="jumbotron vertical-center">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1>CSS Selectors</h1>
+            <br>
+            <h2>Simple <a href="https://www.w3schools.com/cssref/css_selectors.asp" target="_blank">CSS Selectors</a></h2>
+            <ul>
+                <li>Type Selector</li>
+                <ul>
+                    <li>Applies to all elements of the given type</li>
+                    <li>Syntax is
+                        <b>typename</b>
+                    </li>
+                </ul>
+                <li class="myClass">Class Selector</li>
+                <ul class="myClass">
+                    <li class="myClass">Applies to all elements of the selected class</li>
+                    <li class="myClass">Syntax is
+                        <b>.classname</b>
+                    </li>
+                </ul>
+                <li id="id1">ID Selector</li>
+                <ul id="id2">
+                    <li>Applies to the element with the given ID</li>
+                    <li>Syntax is
+                        <b>#id</b>
+                    </li>
+                </ul>
+                <li>Universal Selector</li>
+                <ul>
+                    <li>Applies to all elements</li>
+                    <li>Can optionally be restricted to a specific
+                        <a href="https://www.w3schools.com/xml/xml_namespaces.asp" target="_blank">namespace</a>
+                    </li>
+                    <li>Namespaces aren't really a thing is HTML, but they do exist in XML</li>
+                    <li>Syntax is
+                        <b>*</b>
+                    </li>
+                </ul>
+            </ul>
+            <h2 title="myTitle">Attribute Selectors</h2>
+            <ul title="myTitle">
+                <li>Applies to elements with the given attribute</li>
+                <li>There are multiple valid syntaxes depending on what you want to do</li>
+                <li>Syntax <b>[attr]</b> applies to all elements with the given attribute</li>
+                <li>Syntax <b>[attr=value]</b> applies to elements where the given attribute has the given value</li>
+                <li>Syntax <b>[attr~=val]</b> applies to elements where the value of the given attribute <b>contains</b>
+                    the <b>word</b> "val"</li>
+                    <li>Syntax <b>[attr*=val]</b> applies to elements where the value of the given attribute <b>contains</b>
+                        the <b>substring</b> "val"</li>
+                <!-- <li>Syntax <b>[attr|=val]</b> applies to elements where the value given attribute <b>starts with</b> "val"</li> -->
+                <li>Syntax <b>[attr^=val]</b> applies to elements where the value of the given attribute <b>starts with</b>
+                    "val"</li>
+                <li>Syntax <b>[attr$=val]</b> applies to elements where the value of the given attribute <b>ends with</b>
+                    "val"</li>
+                
+
+            </ul>
+            <h2>Combinators</h2>
+
+            <ul title="myTitle">
+                <li>General Sibling Combinator</li>
+                <ul>
+                    <li>Syntax is <b>type1 ~ type2</b></li>
+                    <li>Applies to all elements of type2 that come after an element of type1</li>
+                </ul>
+                <li>Adjacent Sibling Combinator</li>
+                <ul>
+                    <li>Syntax is <b>type1 + type2</b></li>
+                    <li>Applies to all elements of type2 that come <b>immediately</b> after an element of type1</li>
+                </ul>
+                <li>Child Combinator</li>
+                <ul>
+                    <li>Syntax is <b>type1 > type2</b></li>
+                    <li>Applies to all type2 elements that are the child of an element of type1</li>
+                </ul>
+                <li>Descendant Combinator</li>
+                <ul>
+                    <li>Syntax is <b>type1 type2</b></li>
+                    <li>Applies to all type2 elements that are inside of an element of type1</li>
+
+                </ul>
+            </ul>
+            <br>
+            <br>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/CSS.3.svg" alt="">
+            </a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+
+</body>
+
+</html>
