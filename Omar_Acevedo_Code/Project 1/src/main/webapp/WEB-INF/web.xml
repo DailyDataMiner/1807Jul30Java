@@ -39,4 +39,19 @@
 		<url-pattern>*.specificView</url-pattern>
 	</servlet-mapping>
 	
+	
+<!-- Just on Reimbursement Servlet, and then filter through types, and/or status? in just here -->
+<!-- 	<servlet>
+		<servlet-name>Reimbursements</servlet-name>
+		<servlet-class>com.ers.servlets.ReimbursementsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Reimbursements</servlet-name>
+		<url-pattern>*.expenses</url-pattern>
+		<url-pattern>*.reimbursements</url-pattern>
+	</servlet-mapping> -->
+	
+	
+	
 </web-app>

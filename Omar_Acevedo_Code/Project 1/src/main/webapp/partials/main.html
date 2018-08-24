@@ -33,7 +33,7 @@
                   <p class="card-text"><h3>Food Expenses</h3>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" onclick="foodExpensesView()">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" onclick="getExpenses('food')">View</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary" onclick="foodExpensesEdit()">Edit</button>
                     </div>
                     <small class="text-muted">9 mins</small>
@@ -48,7 +48,7 @@
                   <p class="card-text"><h3>Office Expenses</h3>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="getExpenses('office')">View</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                     </div>
                     <small class="text-muted">9 mins</small>
