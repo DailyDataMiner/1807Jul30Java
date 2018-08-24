@@ -22,34 +22,44 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container col-7">
 
         <h3 class="heading">STRUCTURED QUERY LANGUAGE</h3>
-            <p class="text-justify">Designed for managing data held in a Relational Database Mangement System (RDBMS). SQL
-                statements are used to perform tasks such as update data on a database, or retrieve data from a database.
-                Some common relational database management systems that use SQL are: Oracle, Sybase, Microsoft SQL Server,
-                Access, Ingres, etc. Although most database systems use SQL, most of them also have their own additional
-                proprietary extensions that are usually only used on their system. However, the standard SQL commands such
-                as "Select", "Insert", "Update", "Delete", "Create", and "Drop" can be used to accomplish almost everything
-                that one needs to do with a database. These commands belong to several SQL sublanguages which will be covered
-                below.</p>
-            <div class="accordion" id="accordionExample">
-                <div class="card bg-dark">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="false" aria-controls="collapseOne">
-                                DDL -- Data Definition Language
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Allows a database user to create and restructure database objects, such as the creation or the deletion of a table
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">CREATE</span>
-                                    <pre class="text-white-50 align-middle"><code class="align-middle">CREATE TABLE table_name(
+        <p class="text-justify">Designed for managing data held in a Relational Database Mangement System (RDBMS). SQL statements
+            are used to perform tasks such as update data on a database, or retrieve data from a database. Some common relational
+            database management systems that use SQL are: Oracle, Sybase, Microsoft SQL Server, Access, Ingres, etc. Although
+            most database systems use SQL, most of them also have their own additional proprietary extensions that are usually
+            only used on their system. However, the standard SQL commands such as "Select", "Insert", "Update", "Delete",
+            "Create", and "Drop" can be used to accomplish almost everything that one needs to do with a database. These
+            commands belong to several SQL sublanguages which will be covered below.
+        </p>
+        <div class="accordion" id="accordionExample">
+            <div class="card bg-dark">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="false" aria-controls="collapseOne">
+                            DDL -- Data Definition Language
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Allows a database user to create and restructure database objects, such as the creation or the deletion of a table
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#createDiagram" role="button"
+                                        aria-expanded="false" aria-controls="createDiagram">
+                                        CREATE
+                                    </a>
+                                </p>
+                                <div class="collapse" id="createDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/CREATE_SYNTAX.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50 align-middle"><code class="align-middle">CREATE TABLE table_name(
     column1 datatype,
     column2 datatype,
     column3 datatype,
@@ -57,108 +67,223 @@
     columnN datatype,
     PRIMARY KEY( one or more columns )
 );</code></pre>
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">ALTER</span>
-                                    <pre class="text-white-50"><code>ALTER TABLE table_name
+                            </li>
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#alterDiagram" role="button" aria-expanded="false"
+                                        aria-controls="alterDiagram">
+                                        ALTER
+                                    </a>
+                                </p>
+                                <div class="collapse" id="alterDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/alter_table.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50"><code>ALTER TABLE table_name
 ADD column_name datatype;</code></pre>
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">DROP</span>
-                                    <pre class="text-white-50"><code>DROP TABLE table_name;</code></pre>
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">TRUNCATE</span>
-                                    <pre class="text-white-50"><code>TRUNCATE TABLE table_name;</code></pre>
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#dropDiagram" role="button" aria-expanded="false"
+                                        aria-controls="dropDiagram">
+                                        DROP
+                                    </a>
+                                </p>
+                                <div class="collapse" id="dropDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/drop_table.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50"><code>DROP TABLE table_name;</code></pre>
+                            </li>
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#truncateDiagram" role="button"
+                                        aria-expanded="false" aria-controls="truncateDiagram">
+                                        TRUNCATE
+                                    </a>
+                                </p>
+                                <div class="collapse" id="truncateDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/truncate_table.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50"><code>TRUNCATE TABLE table_name;</code></pre>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="card bg-dark">
-                    <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
-                                aria-expanded="false" aria-controls="collapseTwo">
-                                DML -- Data Manipulation Language
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Manipulate data within objects of a relational database
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">INSERT</span>
-                                    <pre class="text-white-50 align-middle"><code class="align-middle">INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)  
+            </div>
+            <div class="card bg-dark">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                            DML -- Data Manipulation Language
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Manipulate data within objects of a relational database
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#insertDiagram" role="button"
+                                        aria-expanded="false" aria-controls="insertDiagram">
+                                        INSERT
+                                    </a>
+                                </p>
+                                <div class="collapse" id="insertDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/insert.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50 align-middle"><code class="align-middle">INSERT INTO TABLE_NAME (column1, column2, column3,...columnN)  
 VALUES (value1, value2, value3,...valueN);</code></pre>
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">UPDATE</span>
-                                    <pre class="text-white-50"><code>UPDATE table_name
+                            </li>
+
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#updateDiagram" role="button"
+                                        aria-expanded="false" aria-controls="updateDiagram">
+                                        UPDATE
+                                    </a>
+                                </p>
+                                <div class="collapse" id="updateDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/update.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50"><code>UPDATE table_name
 SET column1 = value1, column2 = value2...., columnN = valueN
 WHERE [condition];</code></pre>
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">DELETE</span>
-                                    <pre class="text-white-50"><code>DELETE FROM table_name
+                            </li>
+
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#deleteDiagram" role="button"
+                                        aria-expanded="false" aria-controls="deleteDiagram">
+                                        DELETE
+                                    </a>
+                                </p>
+                                <div class="collapse" id="deleteDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/delete.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50"><code>DELETE FROM table_name
 WHERE [condition];</code></pre>
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="card bg-dark">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
-                                aria-expanded="false" aria-controls="collapseThree">
-                                DCL -- Data Control Language
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Create objects related to user access and also control the distribution of privileges among users
-                            <ul class="list-group list-group-flush">
+            </div>
+            <div class="card bg-dark">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                            DCL -- Data Control Language
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Create objects related to user access and also control the distribution of privileges among users
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark">
                                 <li class="list-group-item bg-dark">
-                                    <span class="font-italic">GRANT</span>
+                                    <p>
+                                        <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#grantDiagram" role="button" aria-expanded="false"
+                                            aria-controls="grantDiagram">
+                                            GRANT
+                                        </a>
+                                    </p>
+                                    <div class="collapse" id="grantDiagram">
+                                        <div class="card card-body">
+                                            <img src="../resources/img/grant_system_privileges.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                            <img src="../resources/img/grant_object_privileges.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                        </div>
+                                    </div>
                                     <pre class="text-white-50 align-middle"><code class="align-middle">GRANT privilege-type ON [TABLE] { table-Name | view-Name } TO grantees</code></pre>
                                 </li>
                                 <li class="list-group-item bg-dark">
-                                    <span class="font-italic">REVOKE</span>
+                                    <p>
+                                        <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#revokeDiagram" role="button"
+                                            aria-expanded="false" aria-controls="revokeDiagram">
+                                            REVOKE
+                                        </a>
+                                    </p>
+                                    <div class="collapse" id="revokeDiagram">
+                                        <div class="card card-body">
+                                            <img src="../resources/img/revoke_system_privileges.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                            <img src="../resources/img/revoke_object_privileges.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                        </div>
+                                    </div>
                                     <pre class="text-white-50"><code>REVOKE privilege-type ON [ TABLE ] { table-Name | view-Name } FROM grantees</code></pre>
                                 </li>
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
                 </div>
-                <div class="card bg-dark">
-                    <div class="card-header" id="headingFour">
-                        <h5 class="mb-0">
-                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
-                                aria-expanded="false" aria-controls="collapseFour">
-                                TCL -- Transaction Control Language
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Allow the user to manage database transactions
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">COMMIT</span>
-                                    <pre class="text-white-50 align-middle"><code class="align-middle">INSERT INTO regions VALUES (5, 'Antarctica'); 
+            </div>
+            <div class="card bg-dark">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
+                            aria-expanded="false" aria-controls="collapseFour">
+                            TCL -- Transaction Control Language
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Allow the user to manage database transactions
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#commitDiagram" role="button"
+                                        aria-expanded="false" aria-controls="commitDiagram">
+                                        COMMIT
+                                    </a>
+                                </p>
+                                <div class="collapse" id="commitDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/commit.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50 align-middle"><code class="align-middle">INSERT INTO regions VALUES (5, 'Antarctica'); 
 COMMIT
     COMMENT 'example comment here';</code></pre>
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">ROLLBACK</span>
-                                    <pre class="text-white-50"><code>ROLLBACK TO SAVEPOINT sp1;</code></pre>
-                                </li>
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">SAVEPOINT</span>
-                                    <pre class="text-white-50"><code>UPDATE employees 
+                            </li>
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#rollbackDiagram" role="button"
+                                        aria-expanded="false" aria-controls="rollbackDiagram">
+                                        ROLLBACK
+                                    </a>
+                                </p>
+                                <div class="collapse" id="rollbackDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/rollback.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50"><code>ROLLBACK TO SAVEPOINT sp1;</code></pre>
+                            </li>
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#savepointDiagram" role="button"
+                                        aria-expanded="false" aria-controls="savepointDiagram">
+                                        SAVEPOINT
+                                    </a>
+                                </p>
+                                <div class="collapse" id="savepointDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/savepoint.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50"><code>UPDATE employees 
     SET salary = 7000 
     WHERE last_name = 'Banda';
 SAVEPOINT banda_sal;
@@ -167,37 +292,50 @@ UPDATE employees
     SET salary = 12000 
     WHERE last_name = 'Greene';
 SAVEPOINT greene_sal;</code></pre>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-dark">
-                    <div class="card-header" id="Five">
-                        <h5 class="mb-0">
-                            <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
-                                aria-expanded="false" aria-controls="Five">
-                                DQL -- Data Query Language
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Retrieve data from SQL server
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-dark">
-                                    <span class="font-italic">SELECT</span>
-                                    <pre class="text-white-50 align-middle"><code class="align-middle">SELECT * 
-    FROM employees 
-    WHERE department_id = 30
-    ORDER BY last_name;</code></pre>
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <sup class="footnote"><a href="https://docs.oracle.com/en/database/oracle/oracle-database/18/sqlrf/Introduction-to-Oracle-SQL.html#GUID-049B7AE8-11E1-4110-B3E4-D117907D77AC">Oracle SQL Documentation</a></sup>
+            <div class="card bg-dark">
+                <div class="card-header" id="Five">
+                    <h5 class="mb-0">
+                        <button class="btn btn btn-outline-warning col-12 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
+                            aria-expanded="false" aria-controls="Five">
+                            DQL -- Data Query Language
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Retrieve data from SQL server
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark">
+                                <p>
+                                    <a class="font-italic diagram-button btn btn-outline-primary" data-toggle="collapse" href="#selectDiagram" role="button"
+                                        aria-expanded="false" aria-controls="selectDiagram">
+                                        SELECT
+                                    </a>
+                                </p>
+                                <div class="collapse" id="selectDiagram">
+                                    <div class="card card-body">
+                                        <img src="../resources/img/select.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                        <img src="../resources/img/subquery.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                        <img src="../resources/img/query_block.gif" class="mx-auto rounded img-fluid" alt="Responsive image">
+                                    </div>
+                                </div>
+                                <pre class="text-white-50 align-middle"><code class="align-middle">SELECT * 
+    FROM employees 
+    WHERE department_id = 30
+    ORDER BY last_name;</code></pre>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <sup class="footnote"><a href="https://docs.oracle.com/en/database/oracle/oracle-database/18/sqlrf/Introduction-to-Oracle-SQL.html#GUID-049B7AE8-11E1-4110-B3E4-D117907D77AC">Oracle
+                SQL Documentation</a></sup>
     </div>
 </body>
 

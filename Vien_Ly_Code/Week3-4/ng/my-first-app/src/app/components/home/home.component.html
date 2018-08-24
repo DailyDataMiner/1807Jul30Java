@@ -1,0 +1,25 @@
+{{currentTime | date:'medium' | uppercase}}
+<br>
+<button [ngClass]="buttonClass" (click)="testBinding()">Click Me!</button>
+<input type="text" class="form-control" [(ngModel)]="color">
+<div [style.color]="color">
+  {{text}}
+</div>
+
+<hr>
+
+<h3><i>Pipes</i></h3>
+<input type="text" [(ngModel)]="pipeText">
+{{pipeText | uppercase}}
+
+{{100 | squareroot}}
+
+<hr>
+
+<h3><i>todo</i></h3>
+<input type="text" [(ngModel)]="todoItem">
+<button class="btn btn-outline-primary" (click)="addTodo(todoItem)">add</button>
+<br>
+<ul>
+  <li (click)="removeItem(item)" *ngFor="let item of todoItems">{{item}}</li>
+</ul>

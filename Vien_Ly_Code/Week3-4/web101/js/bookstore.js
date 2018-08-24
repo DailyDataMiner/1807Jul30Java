@@ -1,6 +1,7 @@
 window.onload = function() {
     loadGenres();
     document.getElementById("addBook").addEventListener("click", addBook);
+    document.getElementById("getAllBooks").addEventListener("click", getAllBooks);
 }
 
 function loadGenres() {

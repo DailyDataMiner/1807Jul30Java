@@ -1,0 +1,21 @@
+<form (submit)="login()">
+  <label for="username">Username</label>
+  <!-- [] = event binding -->
+  <!-- () = properties binding -->
+  <input type="text" name="username" required [(ngModel)]="username" />
+  <br>
+  <label for="password">Password</label>
+  <input type="text" name="password" required [(ngModel)]="password" />
+  <br>
+  <input type="submit" value="login">
+</form>
+
+<br>
+<br>
+
+<div *ngIf="servletData">
+  {{servletData.username}}
+  {{servletData.firstname}}
+  {{servletData.lastname}}
+  {{servletData.email}}
+</div>
