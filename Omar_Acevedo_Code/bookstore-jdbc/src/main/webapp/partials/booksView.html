@@ -1,0 +1,22 @@
+<div id="booksView">
+	<!-- ( <a id="addBook">Add Book</a> ) -->
+	<div id="bookAddForm">
+		<input type="type" placeholder="ISBN" id="isbn_id">
+		<input type="type" placeholder="Title" id="title_id">
+		<input type="type" placeholder="Price" id="price_id">
+		<input type="type" placeholder="Genre" id="genre_id">
+		<button id="addBookBtn" onclick="addBookAction()">Add Book</button>
+	</div>
+	<table class="table table-sm table-hover table-bordered thead-light">
+	<thead>
+		<tr>
+			<th scope="col">ISBN</th>
+			<th scope="col">Title</th>
+			<th scope="col">Price</th>
+			<th scope="col">Genre</th>
+		</tr>
+	</thead>	
+	<tbody id="bookTable">
+	</tbody>
+	</table>
+</div>

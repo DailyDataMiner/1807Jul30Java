@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   valueToDisplay = '';
   itemsArray: string[] = [];
   strikeClass = '';
+  unstrikeClass = '';
 
   constructor() {
     setInterval( () => this.currentTime = new Date, 1000 );
@@ -33,7 +34,12 @@ export class HomeComponent implements OnInit {
   }
 
   strike(item) {
-    this.strikeClass = 'strikeClass';
+    // this.strikeClass = 'strikeClass';
+    if (this.strikeClass == 'strikeClass') {
+      this.strikeClass = 'unstrikeClass';
+    } else {
+      this.strikeClass = 'strikeClass';
+    }
     // this.itemsArray = this.itemsArray.filter( i => i !== item);
   }
 

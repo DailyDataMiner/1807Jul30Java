@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>project1</display-name>
+	
+	
+	<!-- Comment Index servlet xml part if you're using //@WebServlet("/index") in .class -->
+	<!-- <servlet>
+		<servlet-name>Index</servlet-name>
+		<servlet-class>com.ers.servlets.IndexServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Index</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping> -->
+	
+	<servlet>
+		<servlet-name>HtmlBuilder</servlet-name>
+		<servlet-class>com.ers.servlets.HTMLBuilderServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HtmlBuilder</servlet-name>
+		<url-pattern>*.view</url-pattern>
+	</servlet-mapping>
+	
+	
+<!-- Deal (route) with specific html subpages such as tables/lists, forms, etc... -->
+	<servlet>
+		<servlet-name>SpecificViewBuilder</servlet-name>
+		<servlet-class>com.ers.servlets.SpecificViewsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SpecificViewBuilder</servlet-name>
+		<url-pattern>*.specificView</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

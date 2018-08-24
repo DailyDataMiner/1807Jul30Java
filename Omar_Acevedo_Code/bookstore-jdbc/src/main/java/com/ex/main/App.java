@@ -45,9 +45,9 @@ public class App extends HelperFunctions {
 		
 //	 	Create genre
 //		if ( success = createGenre(genreName) ) {
-			int genreId = createGenre(genreName);
-			print(genreName + ", id: " + genreId + " successfully created. ");
-			success = false;
+//			int genreId = createGenre(genreName);
+//			print(genreName + ", id: " + genreId + " successfully created. ");
+//			success = false;
 //		} else {
 //			print("Uh oh, something occured :(");
 //		}
@@ -64,8 +64,8 @@ public class App extends HelperFunctions {
 		showBooks();
 		
 //		Create book
-		int bookId = createBook(new Book("829-70-41322-30-1", "Highly Effective People", 31.99, genreId, 1));
-		print("Book id: " + bookId + " successfully created.");
+//		int bookId = createBook(new Book("829-70-41322-30-1", "Highly Effective People", 31.99, genreId, 1));
+//		print("Book id: " + bookId + " successfully created.");
 
 	}
 
