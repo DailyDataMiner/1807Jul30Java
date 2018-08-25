@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Four Pillars...</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">The Four Pillars of OOP</span>
+        </nav>
+    </div> -->
+
+    <div class="container mt-2">
+        <div class="jumbotron">
+            <h1 class="display2">The Four Pillars of OOP</h1>
+            <h6>Joel DeVos</h6>
+            <p class="lead">The object-oriented paradigm consists of four major principles: abstraction, encapsulation, polymorphism, and
+                inheritance. They are also known as four pillars of the object-oriented paradigm.
+            </p>
+        </div>
+
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">A Brief Overview...</span>
+
+        </nav>
+
+        <br>
+
+        <div class="card-deck mt-2 text-light">
+            <div class="card bg-secondary">
+                <div class="card-body text-center" id="card1">
+                    <h4 class="card-title">Abstraction
+                        <br>
+
+                    </h4>
+                    <p class="card-text">Abstraction is a process of exposing essential features of an entity by hiding the other irrelevant details.
+                        Abstraction mainly reduces complexity and increases efficiency.</p>
+                    <!-- <input type="text" class="form-control" placeholder="input" id="1inpt"> -->
+                    <a href="#abstraction">
+                        <button class="btn btn-submit btn-success mt-2" id="abstractionButton">More About Abstraction</button>
+                    </a>
+                    <!-- <input type="submit" class="btn btn-submit btn-success mt-2" id="submit1"> -->
+                </div>
+            </div>
+            <div class="card bg-secondary">
+                <div class="card-body text-center" id="card2">
+                    <h4 class="card-title">Encapsulation
+                        <br>
+
+                    </h4>
+                    <p class="card-text">Encapsulation is when you restrict access to your module's internal data and all other implementation
+                        details/mechanism from other modules.</p>
+                    <!-- <input type="text" class="form-control" placeholder="input" id="2inpt"> -->
+                    <a href="#encapsulation">
+                        <button class="btn btn-submit btn-success mt-2" id="encapsulationButton">More About Encapsulation</button>
+                    </a>
+                    <!-- <input type="submit" class="btn btn-submit btn-success mt-2" id="submit2"> -->
+                </div>
+            </div>
+            <div class="card bg-secondary">
+                <div class="card-body text-center" id="card3">
+                    <h4 class="card-title">Polymorphism
+                        <br>
+
+                    </h4>
+                    <p class="card-text">Polymorphism refers to the ability to take multiple forms. It allows us to invoke derived class methods
+                        through a base class reference during run-time.</p>
+                    <!-- <input type="text" class="form-control" placeholder="input" id="3inpt"> -->
+                    <a href="#polymorphism">
+                        <button class="btn btn-submit btn-success mt-2" id="polymorphismButton">More About Polymorphism</button>
+                    </a>
+                    <!-- <input type="submit" class="btn btn-submit btn-success mt-2" id="submit3"> -->
+                </div>
+            </div>
+            <div class="card bg-secondary">
+                <div class="card-body text-center">
+                    <h4 class="card-text">Inheritance
+                        <br>
+
+                    </h4>
+                    <p class="card-text">Inheritance is the concept that a class can extend another class, thus "inheriting" it's methods and
+                        variables. The new class may have some additional properties and functionality.</p>
+                    <!-- <input type="text" class="form-control" placeholder="input" id="4inpt"> -->
+                    <a href="#inheritance">
+                        <button class="btn btn-submit btn-success mt-2" id="inheritanceButton">More About Inheritance</button>
+                    </a>
+                    <!-- <input type="submit" class="btn btn-submit btn-success mt-2" id="submit4"> -->
+                    <br>
+                    <span id="span4"></span>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">Some More Details...</span>
+        </nav>
+
+        <br>
+
+        <div>
+            <a name="abstraction">
+                <h3>1) Abstraction</h3>
+            </a>
+            <p>
+                Abstraction is a process of exposing essential feature of an entity while hiding other irrelevant detail. Why would you want
+                to use abstraction? Abstraction is one of the most important points within any object-oriented language.
+                As we are dealing with a representation of a real object (which names the paradigm), we have to imagine what
+                that object will perform within our system. There are three points that should be taken into consideration
+                in this abstraction.
+                <br>
+                <br> The first point is to give an identity to the object that we create. This identity must be unique within
+                the system so there is no conflict. In most languages, there is the concept of packages (or namespaces).
+                In these languages, the identity of the object can not be repeated within the package, not necessarily the
+                entire system.
+                <br>
+                <br> The second part concerns the object's characteristics. As we know, in the real world every object has elements
+                that define it. Within the object-oriented programming, these characteristic properties are named. For example,
+                the properties of an object "Dog" could be "Size", "Race" and "Age".
+                <br>
+                <br> Finally, the third part is define the actions that the object will perform. These actions, or events, are
+                called methods. These methods can be extremely variable, ranging from "TurnOn()" in a lamp object to "Bark()"
+                in a dog object.
+                <br>
+                <br> Abstraction reduces code complexity and at the same time it makes your aesthetically pleasant.
+                <br>
+            </p>
+        </div>
+
+        <div>
+            <a name="encapsulation">
+                <h3>2) Encapsulation</h3>
+            </a>
+            <p>
+                Encapsulation is one of the main techniques that defines the object-oriented programming. It is one of the elements that
+                add security to the application in an object-oriented programming because of hiding the properties, creating
+                a sort of black box.
+                <br>
+                <br> Most object-oriented languages implement encapsulation based on private property, related to special methods
+                called getters and setters, which will return and set the property value, respectively. This attitude prevents
+                direct access to the object's property by adding another application security layer.
+                <br>
+                <br> To do a parallel with what we see in the real world, we have encapsulation into other elements. For example,
+                when we click the button to connect the television, we do not know what's going on internally. We can then
+                say that the methods that connect the TV are encapsulated.
+                <br>
+
+            </p>
+        </div>
+
+        <div>
+            <a name="polymorphism">
+                <h3>3) Polymorphism</h3>
+            </a>
+            <p>
+                Polymorphism refers to the ability to take into different forms or stages. A subclass can define its own unique behavior
+                and still share the same functionalities or behavior of its parent/base class. Yes, you got it right, subclass
+                can have their own behavior and share some of its behavior from its parent class not the other way around.
+                A parent class cannot have the behavior of its subclass.
+                <br>
+                <br> Another essential point in object-oriented programming is called polymorphism. In nature, we see animals
+                that are capable of changing its shape as needed, and it is this idea that comes polymorphism in object orientation.
+                As we know, the child objects inherit the characteristics and actions of their "ancestors". However, in some
+                cases, it is necessary that the actions for a same method to be different. In other words, the polymorphism
+                consists of changing the inner workings of a method inherited from a parent object.
+                <br>
+                <br> As an example, we have a generic object "Appliance". This object has a method, or action, "TurnOn()". We
+                have two objects, "TV" and "Fridge", which won't be connected in the same way. So you must, for each of the
+                child classes, rewrite method "TurnOn()".
+                <br>
+                <br> Regarding the polymorphism, worth some observations. As this is an issue that is closely connected toinheritance,
+                understandboth together is a good idea. Another point is the fact that the programming languages implement
+                polymorphism in different ways. C#, for example, makes use of virtual method (with the virtual keyword) which
+                can be redeployed (with the override keyword) in the child classes. In Java, only the "@Override" attribute
+                is required.
+                <br>
+                <br> These four pillars are essential in the understanding of any object-oriented language and object orientation
+                as a whole. Each language will implement these pillars in a way, but essentially it's the same. Only the
+                issue of inheritance, as mentioned, which may bring more rapid changes, such as the presence of multiple
+                inheritance. Moreover, encapsulation is also done in different ways in different languages, although the
+                getters and setters are almost ubiquitous.
+                <br>
+
+            </p>
+        </div>
+
+        <div>
+            <a name="inheritance">
+                <h3>4) Inheritance</h3>
+            </a>
+            <p>
+                Code reuse is one of the great advantages of object-oriented programming. Much of this happens as a matter which is known
+                as inheritance. This feature optimizes the production time and the application code lines.
+                <br>
+                <br> To understand this feature, let's imagine a family: a child, for example, is inheriting characteristics
+                from their parents. Parents, in turn, inherit something from grandparents, which means that your child also
+                does, and so on. In object orientation, the question is exactly that. The object down the hierarchy will
+                inherit characteristics of all the objects above it, their "ancestors". The inheritance from the characteristics
+                of the above is considered direct object inheritance, while the others are considered indirect inheritance.
+                For example, in the family, the child inherits the parent directly and indirectly grandfather and great-grandfather.
+                <br>
+                <br> The issue ofinheritancevaries greatly from language to language. In some of them, such as C++, there is
+                the issue ofmultiple inheritance. This essentially means that the object can inherit characteristics of various
+                "ancestors" while directly. In other words, each object can have as many parents needed. Due to problems,
+                this practice was not widespread in most modern languages, using other tricks to create a kind of multiple
+                inheritance.
+                <br>
+                <br> Other object-oriented languages such as C#, bring a base object for everyone else. The object class provides
+                features for all objects in C#, are created by the user or not.
+                <br>
+            </p>
+        </div>
+
+        <br>
+
+        <div class="jumbotron">
+            <h3 class="display2">Sources/Further Reading...</h3>
+            <br>
+            <a href="https://www.codeproject.com/articles/1059863/the-four-pillars-of-object-oriented-design">The Four Pillars of Object Oriented Design (codeproject.com)</a>
+            <br>
+            <a href="http://mrbool.com/the-4-pillars-of-object-oriented-programming-in-java/33900">The Four Pillars in Java (mrbool.com)</a>
+
+        </div>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>
