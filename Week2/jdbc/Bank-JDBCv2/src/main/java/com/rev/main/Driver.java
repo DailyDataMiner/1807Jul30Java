@@ -304,7 +304,7 @@ public class Driver {
 		goback(acname);
 		
 		double amount = 0;
-		1
+		
 		for (Account k : aService.checkAccount(usid)) {
 			if (k.getAccname().equals(acname)) {
 				

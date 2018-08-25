@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+        .thumbnail {
+            padding: 0 0 15px 0;
+            border: 1px solid black;
+            border-radius: 0;
+           
+        }
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 10px;
+
+<head>
+    <meta charset="utf-8">
+    <title>Java: Wrapper Classes</title>
+
+    <link rel="stylesheet" media="screen" href="style.css?v=8may2013">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.csszengarden.com/zengarden.xml">
+    <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans|Frijole|Love+Ya+Like+A+Sister|Mogra|Oleo+Script+Swash+Caps|Ruslan+Display|Seaweed+Script|Capriola"
+        rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Dave Shea">
+    <meta name="description" content="Wrapper Classes in a nutshell.">
+    <meta name="robots" content="all">
+
+
+    <!--[if lt IE 9]>
+	<script src="script/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<!--
+
+
+
+	View source is a feature, not a bug. Thanks for your curiosity and
+	interest in participating!
+
+	Here are the submission guidelines for the new and improved csszengarden.com:
+
+	- CSS3? Of course! Prefix for ALL browsers where necessary.
+	- go responsive; test your layout at multiple screen sizes.
+	- your browser testing baseline: IE9+, recent Chrome/Firefox/Safari, and iOS/Android
+	- Graceful degradation is acceptable, and in fact highly encouraged.
+	- use classes for styling. Don't use ids.
+	- web fonts are cool, just make sure you have a license to share the files. Hosted 
+	  services that are applied via the CSS file (ie. Google Fonts) will work fine, but
+	  most that require custom HTML won't. TypeKit is supported, see the readme on this
+	  page for usage instructions: https://github.com/mezzoblue/csszengarden.com/
+
+	And a few tips on building your CSS file:
+
+	- use :first-child, :last-child and :nth-child to get at non-classed elements
+	- use ::before and ::after to create pseudo-elements for extra styling
+	- use multiple background images to apply as many as you need to any element
+	- use the Kellum Method for image replacement, if still needed. https://goo.gl/GXxdI
+	- don't rely on the extra divs at the bottom. Use ::before and ::after instead.
+<abbr title="Cascading Style Sheets">CSS</abbr>
+		
+-->
+
+<body id="css-zen-garden">
+    <div class="page-wrapper">
+
+        <section class="intro" id="zen-intro">
+            <header role="banner">
+                <h1>Java Wrapper Classes</h1>
+                <h2>Autoboxing and Unboxing for your Convenience!</h2>
+            </header>
+
+            <div class="summary" id="zen-summary" role="article">
+
+                <p>Click here to learn more <a href="https://www.geeksforgeeks.org/wrapper-classes-java/" title="This page's source HTML code, not to be modified.">geeksforgeeks</a>
+            </div>
+
+            <div class="preamble" id="zen-preamble" role="article">
+                <h3>What They Are For</h3>
+                <p>Wrapper classes are used to convert primitives into objects so that they can be used for things such as
+                    arrays and multithreading.
+                <p>They contain utility functions to manipulate or view the object once it has been converted from a
+                        primitive such as valueOf(), toString(), toUpperCase(), toLowerCase(), etc...</p>
+                <p>There are 8 wrapper classes for each of the 8 primitives.</p>
+                <div class="col-sm-4">
+                        <div class="thumbnail">
+                          <img src="Wrapper-Class.png" alt="Paris" width="450" height="300">
+                          <p><strong>Every primitive data type has a corresponding data type</strong></p>
+                        </div>
+                      </div>
+
+
+
+            </div>
+        </section>
+
+        <div class="main supporting" id="zen-supporting" role="main">
+            <div class="explanation" id="zen-explanation" role="article">
+                <h3>So What is This About?</h3>
+                <p>The wrapper classes are part of the java.lang package which is imported by default into all Java programs.</p>
+                <p>AutoBoxing is the automatic conversion of a primitive value into an object of a corresponding wrapper
+                    class.</p>
+                <p>Unboxing is the automatic conversion of an object to it's corresponding primtive type.</p><br>
+                    <div class="col-sm-4">
+                        <div class="thumbnail">
+                          <img src="java_wrapper_instantiate.png" alt="blip" width="400" height="100">
+                          <p>Here is an example of the Integer Wrapper Class</p>
+                        </div>
+                        <br>
+                        <strong>Example: </strong>
+                        <p>List<Integer> li = new ArrayList<>();</p>
+                           <p> for (int i = 1; i < 50; i += 2)</p></50>
+                                <p>li.add(i);</p>
+                      </div>
+            
+                      <p>Although you add the int values as primitive types, rather than Integer objects, to li, the code compiles. Because li is a list of Integer objects, not a list of int values, you may wonder why the Java compiler does not issue a compile-time error. The compiler does not generate an error because it creates an Integer object from i and adds the object to li. Thus, the compiler converts the previous code to the following at runtime.</p>
+              
+                   
+            </div>
+
+            <div class="participation" id="zen-participation" role="article">
+                <h3>Interesting Facts</h3>
+                <p>The Byte, Integer, Double, Short, Long and Float wrapper classes extend the abstract Number class which extends the Object class.</p>
+                <p>Data structures in the Collection framework, such as ArrayList and Vector, store only objects (reference
+                    types) and not primitive types.</p>
+            </div>
+
+            
+
+
+        </div>
+
+
+        <aside class="sidebar" role="complementary">
+            <div class="wrapper">
+
+
+
+                <div class="zen-resources" id="zen-resources">
+                    <h3 class="resources">Resources:</h3>
+                    <ul>
+                        <li class="view-css">
+                            <a href="https://en.wikipedia.org/wiki/Primitive_wrapper_class" title="View the source CSS file of the currently-viewed design.">
+                                Wikipedia </a>
+                        </li>
+                        <li class="css-resources">
+                            <a href="https://www.tutorialspoint.com/java/java_numbers.htm" title="Links to great sites with information on using CSS.">
+                                Numbers </a>
+                        </li>
+                        <li class="zen-faq">
+                            <a href="https://www.w3resource.com/java-tutorial/java-wrapper-classes.php" title="A list of Frequently Asked Questions about the Zen Garden.">
+                                <abbr title="Frequently Asked Questions">W3resource</abbr> </a>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+
+    </div>
+
+    <!--
+
+	These superfluous divs/spans were originally provided as catch-alls to add extra imagery.
+	These days we have full ::before and ::after support, favour using those instead.
+	These only remain for historical design compatibility. They might go away one day.
+		
+-->
+    <div class="extra1" role="presentation"></div>
+    <div class="extra2" role="presentation"></div>
+    <div class="extra3" role="presentation"></div>
+    <div class="extra4" role="presentation"></div>
+    <div class="extra5" role="presentation"></div>
+    <div class="extra6" role="presentation"></div>
+
+</body>
+
+</html>

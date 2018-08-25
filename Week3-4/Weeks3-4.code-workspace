@@ -11,6 +11,18 @@
         },
         {
             "path": "js"
+        },
+        {
+            "path": "Testing"
+        },
+        {
+            "path": "ts"
+        },
+        {
+            "path": "ng"
+        },
+        {
+            "path": "ServletExample"
         }
     ]
 }
