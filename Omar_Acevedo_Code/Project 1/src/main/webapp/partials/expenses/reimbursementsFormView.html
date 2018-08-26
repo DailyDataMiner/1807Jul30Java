@@ -1,10 +1,52 @@
 <form>
-  <div class="form-row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="First name">
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Last name">
+  <div class="form-group row">
+  
+    <label for="staticTicketType" class="col-sm-2 col-form-label">Ticket Type</label>
+    <div class="col-sm-10">
+      <!-- <input type="text" readonly class="form-control-plaintext" id="staticTicketType" value="REIMBURSEMENT"> -->
+      <select class="form-control" id="staticTicketType" readonly>
+	  	<option>REIMBURSEMENT</option>
+	  </select>
     </div>
   </div>
+  
+  <div class="form-group row">
+    <label for="staticTicketStatus" class="col-sm-2 col-form-label">Ticket Status</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="staticTicketStatus" value="OPEN">
+    </div>
+  </div>
+  
+  <hr>
+  
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label">Expense Description</label>
+    <div class="col-sm-10">
+      <!-- <input type="text" class="form-control" id="description" placeholder="Expense description"> -->
+      <textarea class="form-control" id="description" rows="3"></textarea>
+   </div>
+  </div>
+  
+    <div class="form-group row">
+    <label for="amount" class="col-sm-2 col-form-label">Expense Amount</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="amount" placeholder="$">
+    </div>
+    </div>
+        
+	<!-- <div class="form-group row">
+	<label for="receipt" class="col-sm-2 col-form-label">Receipt</label>
+	<div class="col-sm-10">
+	  <input type="file" class="custom-file-input" id="receipt">
+	</div>
+	</div> -->
+	
+	<div class="form-group row">
+	<div class="custom-file">
+  	<input type="file" class="custom-file-input" id="receipt">
+    <label class="custom-file-label" for="receipt">Receipt</label>
+    </div>
+    </div>
+    
+  
 </form>

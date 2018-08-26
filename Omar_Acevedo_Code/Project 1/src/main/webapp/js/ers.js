@@ -6,6 +6,7 @@ window.onload = function() {
 	
 	loadPartials();
 	var gReimbursements;
+	var gType;
 	
 }
 
@@ -31,15 +32,41 @@ function getExpenses(type) {
 
 
 function addExpenses(type) {
+	gType = type;
 	load('reimbursementsFormView');
+}
+
+function addRequest() {
+	console.log('addRequest gType -> ' + gType);
+	
+	let reimbursementObj = {
+			description: $('#description').val(),
+			amount: $('#amount').val(),
+			receipt: $('#receipt').val()
+	};
+	
+	reimbursementObj = JSON.stringify(reimbursementObj);
+	
+	console.log(' --- > ');
+	console.log(reimbursementObj);
+	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			console.log('data response from server -> ');
+			console.log(reimbursementObj);
+//			load('reimbursementsFormView');
+		}
+	}
+	xhr.open('POST', 'reimbursements?type='+gType, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send(reimbursementObj);
+	
 }
 
 function _addExpenses(type) {
 	console.log('addExpenses fn -> ' + type);
 	
-//	let reimbursementObj = {
-//			
-//	};
 	
 //	let bookObj = {
 //			isbn:	$("#isbn_id").val(),

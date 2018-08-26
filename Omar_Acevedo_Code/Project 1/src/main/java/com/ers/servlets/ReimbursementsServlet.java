@@ -1,6 +1,8 @@
 package com.ers.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -18,6 +20,39 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ReimbursementsServlet extends HttpServlet {
 
 	static ReimbursementService rService = new ReimbursementService();
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		ObjectMapper mapper = null;
+		String expenseType = req.getParameter("type");
+		
+		System.out.println("in post method, expenseType: " + expenseType);
+		
+		// Read JSON from client side
+		BufferedReader br = new BufferedReader(new InputStreamReader( req.getInputStream() ));
+		String json = "";
+		
+		if (br != null) {
+			json = br.readLine();
+		}
+		
+		
+		System.out.println("JSON line is -> ");
+		System.out.println(json);
+		
+		mapper = new ObjectMapper();
+		
+		System.out.println(Reimbursement.class);
+		Reimbursement r = mapper.readValue(json, Reimbursement.class);
+		
+		System.out.println(r.toString());
+		
+//		rService = new BookService();
+//		rService.addReimbursementReq(r);
+		
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
