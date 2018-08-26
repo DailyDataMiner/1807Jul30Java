@@ -43,6 +43,7 @@ function addExpenses(type) {
 
 // this will do the action (post request) to (send to the server &) store the data 
 function addRequest() {
+	
 	console.log('addRequest gType -> ' + gType);
 	
 	let reimbursementObj = {
@@ -53,21 +54,25 @@ function addRequest() {
 	};
 	
 	reimbursementObj = JSON.stringify(reimbursementObj);
-	
-	console.log(' --- > ');
-	console.log(reimbursementObj);
-	
+
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
+			
 			console.log('data response from server -> ');
 			console.log(reimbursementObj);
-//			load('reimbursementsFormView');
+		
 		}
 	}
+	
 	xhr.open('POST', 'reimbursements?type='+gType, true);
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.send(reimbursementObj);
+	
+	// Clear form input data
+	$('#description').val('');
+	$('#amount').val('');
+	$('#receipt').val('');
 	
 }
 

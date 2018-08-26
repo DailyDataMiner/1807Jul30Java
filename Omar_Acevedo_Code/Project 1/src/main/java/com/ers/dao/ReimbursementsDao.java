@@ -13,6 +13,8 @@ import java.util.List;
 import com.ers.pojos.Reimbursement;
 import com.ers.utils.ConnectionFactory;
 
+import oracle.jdbc.OracleTypes;
+
 
 public class ReimbursementsDao implements Dao<Reimbursement, Integer> {
 	
@@ -118,31 +120,42 @@ public class ReimbursementsDao implements Dao<Reimbursement, Integer> {
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-// Reimbursement 
-/*	[	ticket_id=0, ticket_status=null, created_on=null, description=qwert, 
- * 		amount=443.0, resolver=null, reimb_type=office, reimb_status=null, receipt=C:\fakepath\README.md]
+			CallableStatement cs = conn.prepareCall("{ call CREATE_TICKET_REIMBURSEMENT( ?, ?, ?, ?, ?, ? ) }");
 			
-*/
-//CREATE_TICKET_REIMBURSEMENT( 2, 'My reimbursement request for office!', 101.99,  'office', null, null);
-			CallableStatement cs = conn.prepareCall("{ CREATE_TICKET_REIMBURSEMENT( ?, ?, ?, ?, ?, ? ) }");
+			System.out.println("-> " + reimbObj.toString());
 			
 			// first param will be current user id
 			// user id must come from obj, which will have (logged) user id who sent the post request
 			cs.setInt(1, 2);
-						
+			
+			
 			// second param will be description
 			cs.setString(2, reimbObj.getDescription());
+			
 			
 			// third param will be amount
 			cs.setDouble(3, reimbObj.getAmount()); // or setInt...?
 			
+			
 			// fourth param will be reimbursement type
 			cs.setString(4, reimbObj.getReimb_type());
 			
+			
 			// fifth param will be reimbursement status
+//			cs.setNull(5, OracleTypes.
+			cs.setString(5, reimbObj.getReimb_status());	// null... right?
 			
 			
 			// sixth param will be receipt
+//			cs.setString(6,	reimbObj.getReceipt());
+//			cs.setString(6, OracleTypes.BLOB);
+//			cs.setString(6, OracleTypes.NULL);
+			cs.setString(6,	null);
+			
+			cs.execute();
+			
+			System.out.println("callablestatement object has been executed");
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
