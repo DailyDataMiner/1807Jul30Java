@@ -40,7 +40,7 @@ public class HTMLBuilderServlet extends HttpServlet {
 				System.out.println("sending main resource");
 				break;
 			
-		
+			
 			case "/project1/footer.view":
 				
 				String footerRsrc = "partials/footer.html";

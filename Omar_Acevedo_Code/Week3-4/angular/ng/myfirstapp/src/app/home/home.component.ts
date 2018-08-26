@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   itemsArray: string[] = [];
   strikeClass = '';
   unstrikeClass = '';
-
+  
   constructor() {
     setInterval( () => this.currentTime = new Date, 1000 );
   }

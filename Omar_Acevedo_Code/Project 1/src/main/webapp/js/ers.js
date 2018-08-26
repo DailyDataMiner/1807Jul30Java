@@ -9,7 +9,6 @@ window.onload = function() {
 }
 
 //Define function events for buttons, ... and such
-
 function getExpenses(type) {
 	console.log('in getExpenses (' + type + ') fn');
 	let xhr = new XMLHttpRequest();
@@ -18,12 +17,38 @@ function getExpenses(type) {
 //			$('#foodExpenseDataGoesHere').html(xhr.responseText);
 //			getActualFoodExpenseData();
 			
-			console.log(xhr.responseText);
+			foodReimbursements = JSON.parse(xhr.responseText);
+			
+			for (var fbRow of foodReimbursements) {
+				addReimbursement(fbRow);
+			}
 		}
 	}
 	xhr.open('GET', 'reimbursements?type='+type, true);
 	xhr.send();
 }
+
+//Add Reimbursement
+function addReimbursement(b) {
+	var row = document.createElement("tr");
+    var cell1 = document.createElement("td");
+    var cell2 = document.createElement("td");
+    var cell3 = document.createElement("td");
+    var cell4 = document.createElement("td");
+    console.log(b);
+    cell1.innerHTML = b.isbn;
+    cell2.innerHTML = b.title;
+    cell3.innerHTML = b.price;
+    cell4.innerHTML = b.genre_id;
+    
+    row.appendChild(cell1);
+    row.appendChild(cell2);
+    row.appendChild(cell3);
+    row.appendChild(cell4);
+    
+    document.getElementById("bookTable").appendChild(row);
+}
+
 //
 //function foodExpensesView() {
 //	console.log('foodExpensesView fn');

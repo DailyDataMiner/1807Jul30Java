@@ -75,24 +75,35 @@ select * from p1_tickets;
 select * from p1_reimbursements;
 desc p1_reimbursement_types;
 desc p1_reimbursement_status;
+select * from p1_users;
 
-select  tickets.ticket_id, tickets.type, tickets.status, tickets.created_on, tickets.created_by,
-          reimbs.name, reimbs.description, reimbs.amount, approved_denied_by, reimbs.approved_denied_on, 
-          (select rtype.REIMBURSEMENT_TYPE_NAME from p1_reimbursement_types rtype where rtype.REIMBURSEMENT_TYPE_ID = reimbs.REIMBURSEMENT_TYPE_ID) as "Rmb Type",
-          (select rstatus.REIMBURSEMENT_STATUS_NAME from p1_reimbursement_status rstatus where rstatus.REIMBURSEMENT_STATUS_ID = reimbs.REIMBURSEMENT_STATUS_ID) as "Rmb Status",
-          reimbs.receipt
-from p1_tickets tickets
-inner join p1_reimbursements reimbs
-on tickets.ticket_id = reimbs.ticket_id;
-
-create or replace view v_tickets_reimbursements as
-    select  tickets.ticket_id, tickets.type, tickets.status, tickets.created_on, tickets.created_by,
-              reimbs.name, reimbs.description, reimbs.amount, approved_denied_by, reimbs.approved_denied_on, 
-              (select rtype.REIMBURSEMENT_TYPE_NAME from p1_reimbursement_types rtype where rtype.REIMBURSEMENT_TYPE_ID = reimbs.REIMBURSEMENT_TYPE_ID) as "Rmb Type",
-              (select rstatus.REIMBURSEMENT_STATUS_NAME from p1_reimbursement_status rstatus where rstatus.REIMBURSEMENT_STATUS_ID = reimbs.REIMBURSEMENT_STATUS_ID) as "Rmb Status",
+    select  tickets.ticket_id, tickets.type as ticket_type, tickets.status as ticket_satus, tickets.created_on, 
+              (select p1_users.username from p1_users where p1_users.user_id = tickets.created_by) as created_by,
+              reimbs.name, reimbs.description, reimbs.amount, 
+              (select p1_users.username from p1_users where p1_users.user_id = reimbs.approved_denied_by) as resolver,
+              reimbs.approved_denied_on, 
+              (select rtype.REIMBURSEMENT_TYPE_NAME from p1_reimbursement_types rtype where rtype.REIMBURSEMENT_TYPE_ID = reimbs.REIMBURSEMENT_TYPE_ID) as reimb_type,
+              (select rstatus.REIMBURSEMENT_STATUS_NAME from p1_reimbursement_status rstatus where rstatus.REIMBURSEMENT_STATUS_ID = reimbs.REIMBURSEMENT_STATUS_ID) as reimb_status,
               reimbs.receipt
     from p1_tickets tickets
     inner join p1_reimbursements reimbs
     on tickets.ticket_id = reimbs.ticket_id;
 
-select * from v_tickets_reimbursements;
+create or replace view v_tickets_reimbursements as
+    select  tickets.ticket_id, tickets.type as ticket_type, tickets.status as ticket_satus, tickets.created_on, 
+              (select p1_users.username from p1_users where p1_users.user_id = tickets.created_by) as created_by,
+              reimbs.name, reimbs.description, reimbs.amount, 
+              (select p1_users.username from p1_users where p1_users.user_id = reimbs.approved_denied_by) as resolver,
+              reimbs.approved_denied_on, 
+              (select rtype.REIMBURSEMENT_TYPE_NAME from p1_reimbursement_types rtype where rtype.REIMBURSEMENT_TYPE_ID = reimbs.REIMBURSEMENT_TYPE_ID) as reimb_type,
+              (select rstatus.REIMBURSEMENT_STATUS_NAME from p1_reimbursement_status rstatus where rstatus.REIMBURSEMENT_STATUS_ID = reimbs.REIMBURSEMENT_STATUS_ID) as reimb_status,
+              reimbs.receipt
+    from p1_tickets tickets
+    inner join p1_reimbursements reimbs
+    on tickets.ticket_id = reimbs.ticket_id;
+
+select
+TICKET_ID, TICKET_SATUS, CREATED_ON, DESCRIPTION, REIMB_TYPE, AMOUNT, REIMB_STATUS, RESOLVER, RECEIPT
+from v_tickets_reimbursements;
+
+desc v_tickets_reimbursements;
