@@ -29,7 +29,7 @@
 	
 	
 <!-- Deal (route) with specific html subpages such as tables/lists, forms, etc... -->
-	<servlet>
+<!-- 	<servlet>
 		<servlet-name>SpecificViewBuilder</servlet-name>
 		<servlet-class>com.ers.servlets.SpecificViewsServlet</servlet-class>
 	</servlet>
@@ -37,7 +37,7 @@
 	<servlet-mapping>
 		<servlet-name>SpecificViewBuilder</servlet-name>
 		<url-pattern>*.specificView</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	
 	
 <!-- Just on Reimbursement Servlet, and then filter through types, and/or status? in just here -->
