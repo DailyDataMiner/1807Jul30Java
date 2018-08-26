@@ -34,7 +34,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" onclick="getExpenses('food')">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="foodExpensesEdit()">Edit</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="addExpenses('food')">Add</button>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -48,8 +48,8 @@
                   <p class="card-text"><h3>Office Expenses</h3>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="getExpenses('office')">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#officeSuppliesModal" onclick="getExpenses('office')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="addExpenses('office')">Edit</button>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -139,6 +139,32 @@
 	      	<!-- foodExpenseDataGoesHere -->
 	      
 	        <div id="foodDataView">...</div>
+	      
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+
+<!-- 	OFFICE SUPPLIES VIEW MODAL -->
+
+	<div class="modal fade" id="officeSuppliesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Tickets/Reimbursement Requests</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<!-- officeExpenseDataGoesHere -->
+	      
+	        <div id="officeDataView">...</div>
 	      
 	      </div>
 	      <div class="modal-footer">

@@ -11,10 +11,10 @@ public class ReimbursementService extends ReimbursementsDao {
 		// TODO Auto-generated method stub
 		return findAll();
 	}
-	
-//	public List<Reimbursement> getAllReimbursements_ofType(type) {
-//		// TODO Auto-generated method stub
-//		return findAll_ofType();
-//	}
+
+	public List<Reimbursement> getAllReimbursements_ofType(String type) {
+		// TODO Auto-generated method stub
+		return findWhereType(type);
+	}
 	
 }

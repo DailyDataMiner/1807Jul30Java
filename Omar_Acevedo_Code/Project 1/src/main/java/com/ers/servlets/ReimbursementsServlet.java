@@ -22,21 +22,23 @@ public class ReimbursementsServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
+		List<Reimbursement> reimbursements = null;
+		ObjectMapper mapper = null;
 		String expenseType = req.getParameter("type");
 		
 //		List<Reimbursement> reimbursements = rService.getAllReimbursements();	// pase type as param
 //		List<Reimbursement> reimbursements = rService.getAllReimbursements(expenseType);
 
 		switch (expenseType) {
+		
 			case "food":
-				
-				List<Reimbursement> reimbursements = rService.getAllReimbursements();	// pase type as param
-//				List<Reimbursement> reimbursements = rService.getAllReimbursements_ofType(expenseType);
+
+//				List<Reimbursement> reimbursements = rService.getAllReimbursements();	// pase type as param
+				reimbursements = rService.getAllReimbursements_ofType(expenseType);
 				
 				if (reimbursements.size() > 0) {
 					
-					ObjectMapper mapper = new ObjectMapper();
+					mapper = new ObjectMapper();
 					String json = mapper.writeValueAsString(reimbursements);
 					
 					PrintWriter pWriter = resp.getWriter();
@@ -45,13 +47,35 @@ public class ReimbursementsServlet extends HttpServlet {
 					pWriter.write(json);
 					
 				} else {
+					System.out.println("reimbursements.size() -> " + reimbursements.size());
 					resp.setStatus(404);
 				}
 				
 				break;
+				
 			case "office":
+				
+				reimbursements = rService.getAllReimbursements_ofType(expenseType);
+				
+				if (reimbursements.size() > 0) {
+					
+					mapper = new ObjectMapper();
+					String json = mapper.writeValueAsString(reimbursements);
+					
+					PrintWriter pWriter = resp.getWriter();
+					
+					resp.setContentType("application/json");
+					pWriter.write(json);
+					
+					
+				} else {
+					System.out.println("reimbursements.size() -> " + reimbursements.size());
+					resp.setStatus(404);
+				}
+				
 				System.out.println("we have a office expense 'view' request! -> use Service");
 				break;
+				
 			default:
 				System.out.println("shit");
 		}

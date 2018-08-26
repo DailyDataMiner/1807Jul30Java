@@ -57,13 +57,21 @@ select * from p1_reimbursement_types;
 -- Reimbursements added second
 --  *sequentially
 -- Create a procedure that would insert in both tables; first, tickets, then reimbursements
-insert into p1_tickets (CREATED_BY, REIMBURSEMENT_ID) values (2, 1);
+insert into p1_tickets (CREATED_BY, REIMBURSEMENT_ID) values (2, 2);
 insert into p1_reimbursements (
     NAME, DESCRIPTION, AMOUNT, CREATED_BY, 
     REIMBURSEMENT_TYPE_ID, REIMBURSEMENT_STATUS_ID, RECEIPT, TICKET_ID)
 values (
     'Meal expense request reimbursement', 'Food was bought and eaten, now I want my money back!', 
     120.53, 2, 1, 1, null, 1
+);
+
+insert into p1_reimbursements (
+    NAME, DESCRIPTION, AMOUNT, CREATED_BY, 
+    REIMBURSEMENT_TYPE_ID, REIMBURSEMENT_STATUS_ID, RECEIPT, TICKET_ID)
+values (
+    'Office Supplies expense request reimbursement', 'Two pens for 7.50 each, ... yes, I want my money back.', 
+    15.00, 2, 5, 1, null, 21
 );
 
 insert into p1_tickets (CREATED_BY, REIMBURSEMENT_ID) values (1, 1);
@@ -73,8 +81,9 @@ insert into p1_tickets (CREATED_BY, REIMBURSEMENT_ID) values (4, 4);
 
 select * from p1_tickets;
 select * from p1_reimbursements;
-desc p1_reimbursement_types;
-desc p1_reimbursement_status;
+select * from v_tickets_reimbursements;
+select * from p1_reimbursement_types;
+select * from p1_reimbursement_status;
 select * from p1_users;
 
     select  tickets.ticket_id, tickets.type as ticket_type, tickets.status as ticket_satus, tickets.created_on, 
@@ -107,3 +116,10 @@ TICKET_ID, TICKET_SATUS, CREATED_ON, DESCRIPTION, REIMB_TYPE, AMOUNT, REIMB_STAT
 from v_tickets_reimbursements;
 
 desc v_tickets_reimbursements;
+
+
+select TICKET_ID, TICKET_SATUS, CREATED_ON, DESCRIPTION, REIMB_TYPE, AMOUNT, REIMB_STATUS, RESOLVER, RECEIPT from v_tickets_reimbursements;
+
+select TICKET_ID, TICKET_SATUS, CREATED_ON, DESCRIPTION, REIMB_TYPE, AMOUNT, REIMB_STATUS, RESOLVER, RECEIPT from v_tickets_reimbursements
+where reimb_type = 'FOOD';
+

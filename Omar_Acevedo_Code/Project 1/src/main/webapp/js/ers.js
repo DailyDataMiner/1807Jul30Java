@@ -5,7 +5,7 @@ window.onload = function() {
 	alert('hello there!');	
 	
 	loadPartials();
-	var foodReimbursements;
+	var gReimbursements;
 	
 }
 
@@ -17,7 +17,8 @@ function getExpenses(type) {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			
 //			We first get the data
-			foodReimbursements = JSON.parse(xhr.responseText);
+			gReimbursements = JSON.parse(xhr.responseText);
+			console.log(gReimbursements);
 			
 //			Then, we get the foodExpenses data table view to put inside modal
 			load('foodDataView');
@@ -29,7 +30,44 @@ function getExpenses(type) {
 }
 
 
-//Add Reimbursement
+
+function addExpenses(type) {
+	console.log('addExpenses fn -> ' + type);
+}
+
+// Load partial pages
+function loadPartials() {
+	
+	load('header');
+	load('main');
+	load('footer');
+	
+}
+
+function load(partialName) {
+	
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			
+			if ($('#'+partialName+'').html() !== undefined) {
+				$('#'+partialName+'').html(xhr.responseText);
+				
+				for (var fbRow of gReimbursements) {
+					generateRows(fbRow);
+				}
+				
+			} else {
+				$(partialName).html(xhr.responseText);
+			}
+		}
+	}
+	xhr.open('GET', partialName+'.view', true);
+	xhr.send();
+	
+}
+
+//Add Reimbursement rows
 function generateRows(b) {
 	
 	var row = document.createElement("tr");
@@ -64,73 +102,4 @@ function generateRows(b) {
     row.appendChild(cell9);
     
     document.getElementById("foodDataViewRows").appendChild(row);
-}
-
-//
-//function foodExpensesView() {
-//	console.log('foodExpensesView fn');
-//	let xhr = new XMLHttpRequest();
-//	xhr.onreadystatechange = function() {
-//		if (xhr.readyState == 4 && xhr.status == 200) {
-//			$('#foodExpenseDataGoesHere').html(xhr.responseText);
-//			
-//			getActualFoodExpenseData();
-//			
-//		}
-//	}
-//	xhr.open('GET', 'foodDataView.specificView', true);
-//	xhr.send();
-//}
-//
-//function getActualFoodExpenseData() {
-//	console.log('getActualFoodExpenseData fn');
-//	let xhr = new XMLHttpRequest();
-//	xhr.onreadystatechange = function() {
-//		if (xhr.readyState == 4 && xhr.status == 200) {
-//			
-//			foodExpenseDataObj = JSON.parse(xhr.responseText);
-//			console.log('foodExpenseDataObj');
-//			console.log(foodExpenseDataObj);
-//			//$('#foodDataView').html();
-//			
-//		}
-//	}
-//	xhr.open('GET', 'foodExpenses', true);	// tickets... ?
-//	xhr.send();
-//}
-
-function foodExpensesEdit() {
-	console.log('foodExpensesEdit fn');
-}
-
-// Load partial pages
-function loadPartials() {
-	
-	load('header');
-	load('main');
-	load('footer');
-	
-}
-
-function load(partialName) {
-	
-	let xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			
-			if ($('#'+partialName+'').html() !== undefined) {
-				$('#'+partialName+'').html(xhr.responseText);
-				
-				for (var fbRow of foodReimbursements) {
-					generateRows(fbRow);
-				}
-				
-			} else {
-				$(partialName).html(xhr.responseText);
-			}
-		}
-	}
-	xhr.open('GET', partialName+'.view', true);
-	xhr.send();
-	
 }

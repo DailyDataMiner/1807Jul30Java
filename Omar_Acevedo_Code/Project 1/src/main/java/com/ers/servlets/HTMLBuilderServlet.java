@@ -58,6 +58,7 @@ public class HTMLBuilderServlet extends HttpServlet {
 				break;
 				
 				
+				
 			default:
 				String errorRsrc = "partials/errorPage.html";
 				RequestDispatcher errorReqDispatcher = req.getRequestDispatcher(errorRsrc);
