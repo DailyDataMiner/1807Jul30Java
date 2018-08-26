@@ -17,4 +17,8 @@ public class ReimbursementService extends ReimbursementsDao {
 		return findWhereType(type);
 	}
 	
+	public void addReimbursement(Reimbursement reimbObj) {
+		save(reimbObj);
+	}
+	
 }

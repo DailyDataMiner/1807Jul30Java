@@ -15,6 +15,10 @@ function getExpenses(type) {
 	console.log('in getExpenses (' + type + ') fn');
 	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
+		
+		console.log('xhr.readyState -> ' + xhr.readyState);
+		console.log('xhr.status -> ' + xhr.status);
+		
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			
 //			We first get the data
@@ -31,17 +35,20 @@ function getExpenses(type) {
 }
 
 
+// this will show the ui form
 function addExpenses(type) {
 	gType = type;
 	load('reimbursementsFormView');
 }
 
+// this will do the action (post request) to (send to the server &) store the data 
 function addRequest() {
 	console.log('addRequest gType -> ' + gType);
 	
 	let reimbursementObj = {
 			description: $('#description').val(),
 			amount: $('#amount').val(),
+			reimb_type: gType,
 			receipt: $('#receipt').val()
 	};
 	

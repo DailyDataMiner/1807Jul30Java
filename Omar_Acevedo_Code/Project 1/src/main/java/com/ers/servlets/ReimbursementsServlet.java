@@ -45,9 +45,13 @@ public class ReimbursementsServlet extends HttpServlet {
 		mapper = new ObjectMapper();
 		
 		System.out.println(Reimbursement.class);
-		Reimbursement r = mapper.readValue(json, Reimbursement.class);
+		Reimbursement reimbObj = mapper.readValue(json, Reimbursement.class);
 		
-		System.out.println(r.toString());
+		System.out.println(reimbObj.toString());
+		
+		rService.addReimbursement(reimbObj);
+		
+		
 		
 //		rService = new BookService();
 //		rService.addReimbursementReq(r);

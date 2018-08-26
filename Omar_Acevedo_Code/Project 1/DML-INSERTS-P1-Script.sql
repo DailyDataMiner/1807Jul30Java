@@ -81,6 +81,7 @@ insert into p1_tickets (CREATED_BY, REIMBURSEMENT_ID) values (4, 4);
 
 select * from p1_tickets;
 select * from p1_reimbursements;
+DESC p1_reimbursements;
 select * from v_tickets_reimbursements;
 select * from p1_reimbursement_types;
 select * from p1_reimbursement_status;
