@@ -21,7 +21,7 @@ function getExpenses(type) {
 			console.log(gReimbursements);
 			
 //			Then, we get the foodExpenses data table view to put inside modal
-			load('foodDataView');
+			load('reimbursementsDataView');
 
 		}
 	}
@@ -30,9 +30,42 @@ function getExpenses(type) {
 }
 
 
-
 function addExpenses(type) {
+	load('reimbursementsFormView');
+}
+
+function _addExpenses(type) {
 	console.log('addExpenses fn -> ' + type);
+	
+//	let reimbursementObj = {
+//			
+//	};
+	
+//	let bookObj = {
+//			isbn:	$("#isbn_id").val(),
+//			title: 	$("#title_id").val(),
+//			price: 	$("#price_id").val(),
+//			genre_id: 	$("#genre_id").val(),
+//			author_id: 1
+//	};
+		
+	reimbursementObj = JSON.stringify(reimbursementObj);
+		
+	console.log(' --- > ');
+	console.log(reimbursementObj);
+	
+	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			console.log('data response from server -> ');
+			console.log(reimbursementObj);
+			load('reimbursementsFormView');
+		}
+	}
+	xhr.open('POST', 'reimbursements?type='+type, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send(reimbursementObj);
 }
 
 // Load partial pages
@@ -49,12 +82,14 @@ function load(partialName) {
 	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			
+						
 			if ($('#'+partialName+'').html() !== undefined) {
 				$('#'+partialName+'').html(xhr.responseText);
 				
-				for (var fbRow of gReimbursements) {
-					generateRows(fbRow);
+				if (partialName == 'reimbursementsDataView') {
+					for (var fbRow of gReimbursements) {
+						generateRows(fbRow);
+					}
 				}
 				
 			} else {
@@ -101,5 +136,5 @@ function generateRows(b) {
     row.appendChild(cell8);
     row.appendChild(cell9);
     
-    document.getElementById("foodDataViewRows").appendChild(row);
+    document.getElementById("reimbursementsDataViewRows").appendChild(row);
 }

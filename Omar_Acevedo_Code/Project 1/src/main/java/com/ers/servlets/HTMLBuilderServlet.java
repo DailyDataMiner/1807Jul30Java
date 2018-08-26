@@ -32,6 +32,7 @@ public class HTMLBuilderServlet extends HttpServlet {
 				System.out.println("sending header resource");
 				break;
 				
+				
 			case "/project1/main.view":
 				
 				String mainRsrc = "partials/main.html";
@@ -49,15 +50,23 @@ public class HTMLBuilderServlet extends HttpServlet {
 				System.out.println("sending footer resource");
 				break;
 				
-			case "/project1/foodDataView.view":
 				
-				String foodExpensesRsrc = "partials/foodExpenses/foodDataView.html";
+			case "/project1/reimbursementsDataView.view":
+				
+				String foodExpensesRsrc = "partials/expenses/reimbursementsDataView.html";
 				RequestDispatcher foodExpReqDispatcher = req.getRequestDispatcher(foodExpensesRsrc);
 				foodExpReqDispatcher.forward(req, resp);
-				System.out.println("sending foodDataView resource");
+				System.out.println("sending office Data View resource");
 				break;
+			
 				
+			case "/project1/reimbursementsFormView.view":
 				
+				String addExpensesRsrc = "partials/expenses/reimbursementsFormView.html";
+				RequestDispatcher addExpReqDispatcher = req.getRequestDispatcher(addExpensesRsrc);
+				addExpReqDispatcher.forward(req, resp);
+				System.out.println("sending reimbursementsFormView resource");
+				break;	
 				
 			default:
 				String errorRsrc = "partials/errorPage.html";

@@ -70,7 +70,7 @@ insert into p1_reimbursements (
     NAME, DESCRIPTION, AMOUNT, CREATED_BY, 
     REIMBURSEMENT_TYPE_ID, REIMBURSEMENT_STATUS_ID, RECEIPT, TICKET_ID)
 values (
-    'Office Supplies expense request reimbursement', 'Two pens for 7.50 each, ... yes, I want my money back.', 
+    'Office Supplies request reimbursement', 'Two pens for 7.50 each, ... yes, I want my money back.', 
     15.00, 2, 5, 1, null, 21
 );
 
