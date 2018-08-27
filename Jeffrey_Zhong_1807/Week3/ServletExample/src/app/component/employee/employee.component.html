@@ -1,0 +1,32 @@
+<h2>
+  EMPLOYEE REIMBURSMENTS
+</h2>>
+<table>
+  <tr>
+    <th>ReimbursementID</th>
+    <th>$Amount</th>
+    <th>Submitted Date</th>
+    <th>Resolved Date</th>
+    <th>Description</th>
+    <th>Receipt</th>
+    <th>ResolverID</th>
+    <th>StatusID</th>
+    <th>TypeID</th>
+  </tr>
+  
+  <tr *ngFor="let stat of rbarray">
+    <td>{{ stat.rbID }}</td>  
+    <td>{{ stat.author }}</td>
+    <td>{{ stat.amount }}</td>
+    <td>{{ stat.submitted }}</td>
+    <td>{{ stat.resolved }}</td>
+    <td>{{ stat.description }}</td>
+    <td>{{ stat.receipt }}</td>
+    <td>{{ stat.resolver }}</td>
+    <td>{{ stat.statusID }}</td>
+    <td>{{ stat.typeID }}</td>
+  </tr>
+
+  <form (submit)="submitReimbursement()">
+    <input type="submit" value="Submit Reimbursement!">
+  </form>
