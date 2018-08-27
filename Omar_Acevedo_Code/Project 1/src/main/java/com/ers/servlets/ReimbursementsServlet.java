@@ -86,7 +86,7 @@ public class ReimbursementsServlet extends HttpServlet {
 					pWriter.write(json);
 					
 				} else {
-					System.out.println("reimbursements.size() -> " + reimbursements.size());
+					System.out.println("reimbursements.size() -> " + reimbursements.size() + ", expenseType: " + expenseType);
 					resp.setStatus(404);
 				}
 				
@@ -100,7 +100,7 @@ public class ReimbursementsServlet extends HttpServlet {
 					
 					mapper = new ObjectMapper();
 					String json = mapper.writeValueAsString(reimbursements);
-					
+
 					PrintWriter pWriter = resp.getWriter();
 					
 					resp.setContentType("application/json");
@@ -108,15 +108,45 @@ public class ReimbursementsServlet extends HttpServlet {
 					
 					
 				} else {
-					System.out.println("reimbursements.size() -> " + reimbursements.size());
+					System.out.println("reimbursements.size() -> " + reimbursements.size() + ", expenseType: " + expenseType);
 					resp.setStatus(404);
 				}
 				
 				System.out.println("we have a office expense 'view' request! -> use Service");
 				break;
+			
+			case "transportation":
+				
+				reimbursements = rService.getAllReimbursements_ofType(expenseType);
+				
+				if (reimbursements.size() > 0) {
+					
+					mapper = new ObjectMapper();
+					String json = mapper.writeValueAsString(reimbursements);
+					
+					PrintWriter pWriter = resp.getWriter();
+					
+					resp.setContentType("application/json");
+					pWriter.write(json);
+					
+				} else {
+					System.out.println("reimbursements.size() -> " + reimbursements.size() + ", expenseType: " + expenseType);
+					resp.setStatus(404);
+					
+					mapper = new ObjectMapper();
+					String json = mapper.writeValueAsString(reimbursements);
+					System.out.println("-> " + json);
+					PrintWriter pWriter = resp.getWriter();
+					
+					resp.setContentType("application/json");
+					pWriter.write(json);
+					
+				}
+				
+				break;
 				
 			default:
-				System.out.println("shit");
+				System.out.println("shit, we don't have " + expenseType + " type expense here");
 		}
 		
 //		switch (req.getRequestURI()) {
