@@ -1,7 +1,14 @@
 package POJOs;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class ReimbStatus {
 
+	public ReimbStatus() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	private int reimbStatusID;
 	private String reimbStatusName;
 	public int getReimbStatusID() {

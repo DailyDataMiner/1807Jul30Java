@@ -1,0 +1,25 @@
+<button (click) = "mytestevent()" class = "btn btn-primary" [ngClass]="buttonClass">Click me!</button>
+{{nothing}}
+
+<input type="text" class = "form-control" [(ngModel)]="color">
+<div [style.background-color]="color">Hello World!</div>
+
+<hr>
+<h3><i>Pipes</i></h3>
+<input [(ngModel)]="pipeText" type="text">
+{{pipeText | uppercase}}
+<br>
+{{currentTime | date: 'medium'}}
+<br>
+{{ 100|sqrt}}
+
+<hr>
+
+<h3>To do list:</h3>
+<br>
+<input type="text" [(ngModel)]="toAdd">
+<button [ngClass]="buttonClass" (click) = "addOne()">Add to list</button>
+<br>
+<ul>
+  <li *ngFor="let toAdd of listToDo" (click)="strike(toAdd)" [ngStyle]="listStyle"> {{toAdd}}</li>
+</ul>

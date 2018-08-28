@@ -44,6 +44,94 @@ ReimbTypeDAO reimbTypeDAO = new ReimbTypeDAO();
 		return Reimbursements;
 	}
 	
+	public List<Reimbursement> findAllByStatus(int statusID) {
+		List<Reimbursement> Reimbursements = new ArrayList<Reimbursement>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "{call get_all_reimbs_by_status(?, ?)}";
+
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2, statusID);
+			cs.execute();
+
+			ResultSet rs = (ResultSet) cs.getObject(1);
+
+			while (rs.next()) {
+				Reimbursement temp = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getBlob(6), userDAO.findOne(rs.getInt(6)), userDAO.findOne(rs.getInt(7)), reimbStatusDAO.findOne(rs.getInt(8)), reimbTypeDAO.findOne(rs.getInt(9)));
+				Reimbursements.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Reimbursements;
+	}
+	
+	public List<Reimbursement> findAllByType(int typeID) {
+		List<Reimbursement> Reimbursements = new ArrayList<Reimbursement>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "{call get_all_reimbs_by_type(?, ?)}";
+
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2, typeID);
+			cs.execute();
+
+			ResultSet rs = (ResultSet) cs.getObject(1);
+
+			while (rs.next()) {
+				Reimbursement temp = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getBlob(6), userDAO.findOne(rs.getInt(6)), userDAO.findOne(rs.getInt(7)), reimbStatusDAO.findOne(rs.getInt(8)), reimbTypeDAO.findOne(rs.getInt(9)));
+				Reimbursements.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Reimbursements;
+	}
+	
+	public List<Reimbursement> findAllByAuthor(int authorID) {
+		List<Reimbursement> Reimbursements = new ArrayList<Reimbursement>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "{call get_all_reimbs_by_author(?, ?)}";
+
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2, authorID);
+			cs.execute();
+
+			ResultSet rs = (ResultSet) cs.getObject(1);
+
+			while (rs.next()) {
+				Reimbursement temp = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getBlob(6), userDAO.findOne(rs.getInt(7)), userDAO.findOne(rs.getInt(8)), reimbStatusDAO.findOne(rs.getInt(9)), reimbTypeDAO.findOne(rs.getInt(10)));
+				Reimbursements.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Reimbursements;
+	}
+	
+	public List<Reimbursement> findAllByResolver(int resolverID) {
+		List<Reimbursement> Reimbursements = new ArrayList<Reimbursement>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "{call get_all_reimbs_by_resolver(?, ?)}";
+
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2, resolverID);
+			cs.execute();
+
+			ResultSet rs = (ResultSet) cs.getObject(1);
+
+			while (rs.next()) {
+				Reimbursement temp = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getBlob(6), userDAO.findOne(rs.getInt(6)), userDAO.findOne(rs.getInt(7)), reimbStatusDAO.findOne(rs.getInt(8)), reimbTypeDAO.findOne(rs.getInt(9)));
+				Reimbursements.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Reimbursements;
+	}
+	
 	/*
 	public List<Reimbursement> findAllFast() {
 		List<Reimbursement> Reimbursements = new ArrayList<Reimbursement>();

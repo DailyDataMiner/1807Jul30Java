@@ -71,7 +71,7 @@
         <h4 class="text-center fancyTextHeaders">Introduction</h4>
         <br>
             Strings are among the most used objects in Java, due to their role of displaying 'legible' information to users and consumers.
-            Generally, a String will represent every word in every sentence, whether displayed to the user, or returned by the user.
+            Generally, a String will represent every word and every sentence, whether displayed to the user, or returned by the user.
             This means that, though Strings are not core Java primitives, their usage is so common that they have special properties to make them more effective.
             <br>
             Here, we will investigate what a String actually is in Java, what makes it unique, and why programmers might use a few of the alternatives.
@@ -111,13 +111,14 @@
             <a name="stringPool"></a>
             <h4 class="text-center fancyTextHeaders">String Literals and the String Pool</h4>
             <br>
-            Strings have a special place in memory is called the String Pool. Though it is on the heap, where all objects are stored, it behaves very differently. The String Pool
-            contains only String Literals. Strings and String Literals aren't quite the same thing. As we've gone over, Strings are objects, not primitives. When 
-            a String object is created, it is stored on the heap, as usual. String Literals are String Objects as well, but they are stored in the String Pool to increase
-            performance. String Literals are also represented by a character string such as "Hello" instead of the normal 'new String()' used for Objects.
+            Strings have a special place in memory called the String Pool. Though it is on the heap, where all objects are stored, it behaves very differently. The String Pool
+            contains a list of immutable String objects that have been placed there through interning. The most common example of this are Strings declared with a String Literal. Strings and String Literals aren't quite the same thing.
+            As we've gone over, Strings are objects, not primitives. When 
+            a String object is created, it is stored on the heap, as usual. String Literals are the sequence of characters that are stored as a String object via interning, which stores the String Object in the String Pool to increase
+            performance. Thus, to use implicit String interning, programmers must declare Strings using their String literals instead of declaring them as objects.
             <br>
-            The differences between the two are pretty confusing, but very important. This is because String Literals in the String Pool can be referenced in new String declarations,
-            unlike the String Objects, which contain specific references to objects in the heap. In order to best exemplify this, look at the following example.
+            The differences between the two are pretty confusing, but very important. This is because String objects in the String Pool can be referenced in new String declarations,
+            unlike String objects with specific references in the heap. In order to best exemplify this, look at the following example.
             <br>
             <br>
             String a = "I am a String Literal";
@@ -129,9 +130,11 @@
             String d = new String("I am a String Object");
             <br>
             <br>
-            Because Strings a and b are both String Literals with the same value, they reference the same String Literal in the String Pool. However, because
+            Because Strings a and b are both String Literals with the same value, they are interned to reference the same String Literal in the String Pool. However, because
             Strings c and d are String Objects, they reference two different Strings on the heap, though they have the same value. Thus, it is almost always better to 
             declare a String using a String Literal than a String Object, to save space in memory.
+            <br>
+            This method of creating references to pre-existing immutable objects is known as a <a href="https://en.wikipedia.org/wiki/Flyweight_pattern" target="_blank">Fly Weight Design Pattern.</a>
     </div>
     <br>
     <div id="stringsBuilder" class="p-3 center-block mx-auto mainArea shadow mb-5 bg-white rounded">
@@ -141,7 +144,7 @@
         Like Strings, they extend from Object and implement Serializable and CharSequence. Also like Strings, StringBuilders are simply sequences of characters.
         <br>
         However, unlike Strings, StringBuilders are mutable. This means that all StringBuilder character strings can be easily changed without having to create a new StringBuilder.
-        As a result, StringBuilders are far better used when a programmer is planning on changing a string.
+        As a result, StringBuilders are far better used when a programmer is planning on changing a String's contents.
         <br>
         StringBuilders do have one obvious downside. They aren't Thread-Safe.
         <br>
@@ -159,7 +162,7 @@
 <br>
 <div id="stringsBuffer" class="p-3 center-block mx-auto mainArea shadow mb-5 bg-white rounded">
     <a name="stringBuffer"></a>
-    <h4 class="text-center fancyTextHeaders">StringBuilders</h4>
+    <h4 class="text-center fancyTextHeaders">StringBuffers</h4>
         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/StringBuffer.html" target="_blank">StringBuffers</a> are almost identical to StringBuilders in functionality. Like their counterparts, they extend from Object and implement Serializable and CharSequence.
         They are also mutable like StringBuilders.
         <br>

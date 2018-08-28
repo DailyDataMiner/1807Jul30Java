@@ -3,8 +3,15 @@ package POJOs;
 import java.sql.Blob;
 import java.sql.Timestamp;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Reimbursement {
 
+	public Reimbursement() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	private int reimbID;
 	private double reimbAmount;
 	private Timestamp reimbSubmitted;

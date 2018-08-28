@@ -16,7 +16,7 @@ import util.ConnectionFactory;
 public class ReimbStatusDAO {
 
 	public List<ReimbStatus> findAll() {
-		List<ReimbStatus> ReimbStatuss = new ArrayList<ReimbStatus>();
+		List<ReimbStatus> ReimbStatuses = new ArrayList<ReimbStatus>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "{call get_all_reimbursement_statuses(?)}";
 
@@ -29,12 +29,12 @@ public class ReimbStatusDAO {
 			while (rs.next()) {
 				ReimbStatus temp = new ReimbStatus(rs.getInt(1), rs.getString(2));
 				// or rs.getString("Name"); Either col num or col name
-				ReimbStatuss.add(temp);
+				ReimbStatuses.add(temp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ReimbStatuss;
+		return ReimbStatuses;
 	}
 
 	public ReimbStatus findOne(Integer id) {

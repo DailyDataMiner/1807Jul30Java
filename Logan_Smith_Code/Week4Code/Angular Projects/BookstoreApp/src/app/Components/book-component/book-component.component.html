@@ -1,0 +1,22 @@
+<h1>Here is your listing of books</h1>
+<div id=booksView>
+    <table class="table table-sm table-hover table-bordered thead-light">
+    <thead>
+    <tr>
+    <th scope="col">ISBN</th>
+    <th scope="col">Title</th>
+    <th scope="col">Price</th>
+    <th scope="col">GenreID</th>
+    </tr>
+    </thead>
+    <tbody id="BookTable">
+      <tr *ngFor="let b of books">
+          <td>{{b.isbn}}</td>
+          <td>{{b.title}}</td>
+          <td>{{b.price}}</td>
+          <td>{{b.genreid}}</td>
+
+      </tr>
+    </tbody>
+    </table>
+    </div>

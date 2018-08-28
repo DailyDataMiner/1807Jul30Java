@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import POJOs.Reimbursement;
 import POJOs.User;
 import oracle.jdbc.OracleTypes;
 import util.ConnectionFactory;
@@ -51,8 +52,30 @@ public class UserDAO {
 			ResultSet rs = (ResultSet) cs.getObject(1);
 
 			while (rs.next()) {
-				User temp = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+				User temp = new User(rs.getString(2));
 				// or rs.getString("Name"); Either col num or col name
+				Users.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Users;
+	}
+	
+	public List<User> findAllByRole(int roleID) {
+		List<User> Users = new ArrayList<User>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "{call get_all_users_by_role_id(?, ?)}";
+
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.setInt(2, roleID);
+			cs.execute();
+
+			ResultSet rs = (ResultSet) cs.getObject(1);
+
+			while (rs.next()) {
+				User temp = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
 				Users.add(temp);
 			}
 		} catch (SQLException e) {
@@ -64,13 +87,14 @@ public class UserDAO {
 	public User findOne(Integer id) {
 		User a = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "select * from ers_user_roles where ers_user_role_id = ?";
+			String sql = "select * from ers_users where ers_users_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				a = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), userRoleDAO.findOne(rs.getInt(7)));
 			}
+			//System.out.println(a);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

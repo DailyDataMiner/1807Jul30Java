@@ -65,3 +65,15 @@ console.log(blockVar);
 //console.log(blockLet);
 //console.log(blockConst);
 }
+
+//var guard = function(a, b) {return a && b;}
+//guard will print a if a is false, will print b if a is true
+//var default = function(a, b){ return a || b; }
+//default will print a if a is tre, will print b if a is false
+
+var currentSession = null;
+var userInfo = {username: 'lsmith', password: 131};
+var getUser = currentSession && userInfo;
+var earlyLeave = 1;
+var regularLeave = 530;
+var timeout = earlyLeave || regularLeave;
