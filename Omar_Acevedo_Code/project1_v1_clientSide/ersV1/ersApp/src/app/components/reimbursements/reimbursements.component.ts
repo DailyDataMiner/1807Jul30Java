@@ -35,4 +35,12 @@ export class ReimbursementsComponent implements OnInit {
     );
   }
 
+  getExpenses(type) {
+    console.log('getExpenses ' + type + ' expenses');
+  }
+  
+  addExpenses(type) {
+    console.log('addExpenses ' + type + ' expenses');
+  }
+
 }
