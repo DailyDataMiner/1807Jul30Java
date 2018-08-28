@@ -29,3 +29,8 @@
     font-family: old;
     src: url(res/fonts/FeENrm28C.otf);
 }
+
+a,
+a label {
+    cursor: pointer;
+}

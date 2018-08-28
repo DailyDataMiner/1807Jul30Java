@@ -1,0 +1,39 @@
+
+<div style="margin-left: 150px">
+  <button data-toggle="collapse" data-target="#addb">Add a Book</button>
+
+  <div id="addb" class="collapse">
+    <form (submit)="addBook()">
+      ISBN:<input type="text" id="isbn" class="form-control col-4" name="isbn" required [(ngModel)]='isbn'>
+      <br> 
+      Title: <input type="text" id="title" name="title"class="form-control col-4"  required [(ngModel)]='title'> 
+      <br> 
+      Price: <input type="number" id="price" class="form-control col-4" name="price"  required [(ngModel)]='price'> 
+      Genre: <input type="number" id="genre" class="col-4 form-control" name="genre"  required [(ngModel)]='genre'>
+        <input type="submit" value="Add book">
+      <hr>
+    </form>
+  </div>
+</div>
+
+<p>
+  Book tables
+</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ISBN</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">Price</th>
+      <th scope="col">Genre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of books">
+      <th>{{b.isbn}}</th>
+      <td>{{b.title}}</td>
+      <td>{{b.price}}</td>
+      <td>{{getGenreById(b.genreId)}}</td>
+    </tr>
+  </tbody>
+</table>

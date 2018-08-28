@@ -18,8 +18,8 @@ public class LoadHomeViewServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		log.trace("I am in the get!");
-		//resp.addHeader("Access-Control-Allow-Origin", "*");
-		//resp.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTION, HEAD");
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+		resp.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTION, HEAD");
 		req.getRequestDispatcher("partials/homeview.html").forward(req, resp);
 	}
 }

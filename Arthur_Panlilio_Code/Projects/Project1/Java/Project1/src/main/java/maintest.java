@@ -1,15 +1,10 @@
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 import com.revature.dao.ReimbursementDAO;
 import com.revature.pojo.Reimbursement;
 import com.revature.pojo.User;
-import com.revature.util.ConnectionFactory;
+import com.revature.service.UserService;
 
 public class maintest {
 
@@ -29,6 +24,13 @@ public class maintest {
 		r.setTypeId(1);
 		re.save(r);
 		System.out.println(re.findAll());
+		UserService uService = new UserService();
+		System.out.println(uService.getAll());
+		User u = new User("fafaga", "abvs", "Brob", "Brobber", "Br@B.com", 1);
+		uService.addUser(u);
+		User a = new User("faea", "abvs", "Brob", "Brobber", "Br@B.com", 1);
+		uService.addUser(a);
+		
 	}
 	
 

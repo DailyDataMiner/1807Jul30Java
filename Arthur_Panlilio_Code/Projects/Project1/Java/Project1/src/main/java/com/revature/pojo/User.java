@@ -2,19 +2,31 @@ package com.revature.pojo;
 
 public class User {
 	
-	int id;
-	String username;
-	String password;
-	String firstname;
-	String lastname;
-	String email;
-	int roleId;
+	private int id;
+	private String username;
+	private String password;
+	private String firstname;
+	private String lastname;
+	private String email;
+	private int roleId;
+	private String role;
 	
 	
+
 
 
 
 	public User() {
+	}
+	
+	public User(String username, String password, String firstname, String lastname, String email, int roleId) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.roleId = roleId;
 	}
 
 
@@ -114,11 +126,24 @@ public class User {
 		this.roleId = roleId;
 	}
 	
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	
 	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", email=" + email + ", roleId=" + roleId + "]";
+				+ ", lastname=" + lastname + ", email=" + email + ", roleId=" + roleId + ",  role=" + role + "]";
 	}
 
 	
