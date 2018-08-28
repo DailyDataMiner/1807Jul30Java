@@ -1,3 +1,39 @@
-<p>
-  reimbursements works!
-</p>
+<div id="">
+	<!-- ( <a id="addBook">Add Book</a> ) -->
+	<table class="table table-sm table-hover table-bordered thead-light">
+	<thead>
+		<tr>
+      <th scope="col">ticket_id</th>
+      <th scope="col">ticket_status</th>
+      <th scope="col">created_on</th>
+      <th scope="col">created_by</th>
+      <th scope="col">name</th>
+      <th scope="col">description</th>
+      <th scope="col">amount</th>
+      <th scope="col">resolver</th>
+      <th scope="col">resolved_on</th>
+      <th scope="col">reimb_type</th>
+      <th scope="col">reimb_status</th>
+      <th scope="col">receipt</th>
+      <th scope="col">reimbursement_id</th>
+		</tr>
+	</thead>	
+	<tbody id="">
+    <tr *ngFor="let r of reimbursementsArr">
+      <th scope="row">{{ r.ticket_id }}</th>
+      <th scope="row">{{ r.ticket_status }}</th>
+      <th scope="row">{{ r.created_on }}</th>
+      <th scope="row">{{ r.created_by }}</th>
+      <th scope="row">{{ r.name }}</th>
+      <th scope="row">{{ r.description }}</th>
+      <th scope="row">{{ r.amount }}</th>
+      <th scope="row">{{ r.resolver }}</th>
+      <th scope="row">{{ r.resolved_on }}</th>
+      <th scope="row">{{ r.reimb_type }}</th>
+      <th scope="row">{{ r.reimb_status }}</th>
+      <th scope="row">{{ r.receipt }}</th>
+      <th scope="row">{{ r.reimbursement_id }}</th>
+    </tr>
+	</tbody>
+	</table>
+</div>

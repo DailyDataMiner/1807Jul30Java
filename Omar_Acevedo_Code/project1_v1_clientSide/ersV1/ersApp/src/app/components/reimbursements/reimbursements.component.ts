@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReimbursementService } from '../../services/reimbursement.service';
+import { Reimbursement } from '../../models/reimbursement.model';
 
 @Component({
   selector: 'app-reimbursements',
@@ -8,6 +9,7 @@ import { ReimbursementService } from '../../services/reimbursement.service';
 })
 export class ReimbursementsComponent implements OnInit {
 
+  reimbursementsArr: Reimbursement[] = [];
   currentClass = "";
 
   constructor(private rService: ReimbursementService) { }
@@ -23,7 +25,11 @@ export class ReimbursementsComponent implements OnInit {
     this.rService.getReimbursements().subscribe(
       reimb => {
         if (reimb !== null) {
-          console.log(reimb);
+          this.reimbursementsArr = reimb;
+          console.log('Reimbursements were loaded.');
+          console.log(this.reimbursementsArr);
+        } else {
+          console.log('Reimbursements were not loaded.');
         }
       }
     );
