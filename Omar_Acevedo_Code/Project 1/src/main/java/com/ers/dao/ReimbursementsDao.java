@@ -31,7 +31,7 @@ public class ReimbursementsDao implements Dao<Reimbursement, Integer> {
 			
 			
 			String selectTickReimb_sql 	= "select ";
-				   selectTickReimb_sql  +=  "TICKET_ID, TICKET_SATUS, CREATED_ON, " +
+				   selectTickReimb_sql  +=  "TICKET_ID, TICKET_STATUS, CREATED_ON, " +
 						   					"DESCRIPTION, REIMB_TYPE, AMOUNT, REIMB_STATUS, " +
 						   					"RESOLVER, RECEIPT ";
 				   selectTickReimb_sql  += "from v_tickets_reimbursements";
@@ -44,7 +44,7 @@ public class ReimbursementsDao implements Dao<Reimbursement, Integer> {
 				
 				reimbursements.add(new Reimbursement(
 										results.getInt("TICKET_ID"),
-										results.getString("TICKET_SATUS"),
+										results.getString("TICKET_STATUS"),
 										results.getString("CREATED_ON"), 	// getDate...?
 										results.getString("DESCRIPTION"),
 										results.getString("REIMB_TYPE"),
@@ -74,7 +74,7 @@ public class ReimbursementsDao implements Dao<Reimbursement, Integer> {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
 			String sql 	= "select ";
-				   sql  +=  "TICKET_ID, TICKET_SATUS, CREATED_ON, " +
+				   sql  +=  "TICKET_ID, TICKET_STATUS, CREATED_ON, " +
 		   					"DESCRIPTION, REIMB_TYPE, AMOUNT, REIMB_STATUS, " +
 		   					"RESOLVER, RECEIPT ";
 				   sql  += "from v_tickets_reimbursements ";
@@ -93,7 +93,7 @@ public class ReimbursementsDao implements Dao<Reimbursement, Integer> {
 		   while (results.next()) {
 				reimbursements.add(new Reimbursement(
 										results.getInt("TICKET_ID"),
-										results.getString("TICKET_SATUS"),
+										results.getString("TICKET_STATUS"),
 										results.getString("CREATED_ON"), 	// getDate...?
 										results.getString("DESCRIPTION"),
 										results.getString("REIMB_TYPE"),

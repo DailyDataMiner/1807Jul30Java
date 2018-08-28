@@ -69,7 +69,7 @@ public class ReimbursementsServlet extends HttpServlet {
 //		List<Reimbursement> reimbursements = rService.getAllReimbursements();	// pase type as param
 //		List<Reimbursement> reimbursements = rService.getAllReimbursements(expenseType);
 
-		switch (expenseType) {
+		switch (expenseType) { // case ""  --> if type is empty, means we want all reimbs (from manager)
 		
 			case "food":
 
