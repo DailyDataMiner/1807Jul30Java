@@ -27,6 +27,7 @@ public class ReimbursementServlets extends HttpServlet {
 		
 		List<Reimbursement> reimbList = rService.findAll();
 		String json = "";
+	
 		
 		if (reimbList.size() > 0) {
 			
