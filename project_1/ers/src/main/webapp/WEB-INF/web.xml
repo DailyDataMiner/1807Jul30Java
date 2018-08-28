@@ -3,7 +3,7 @@
   <display-name>ERS Application</display-name>
 <servlet>
 	<servlet-name>FrontController</servlet-name>
-	<servlet-class>com.ex.servlets.LoadViewsServlet</servlet-class>
+	<servlet-class>com.revature.servlets.LoadViewsServlet</servlet-class>
 	<load-on-startup>1</load-on-startup>
 </servlet>
 <servlet-mapping>

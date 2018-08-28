@@ -1,5 +1,4 @@
 window.onload = function(){
-    loadHomeView();
     $('#signIn').on('click',loadHomeView);
 
 }
