@@ -9,17 +9,27 @@ public class UserInformation {
 	private String firstname;
 	private String lastname;
 	private String email;
+	private String role;
 	
 	public UserInformation() {
 		super();
 	}
 
-	public UserInformation(String username, String firstname, String lastname, String email) {
+	public UserInformation(String username, String firstname, String lastname, String email, String role) {
 		super();
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
+		this.role = role;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getUsername() {

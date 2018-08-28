@@ -70,6 +70,4 @@ public class User {
 		return "User [username=" + username + ", password=" + password + "]";
 	}
 
-	
-	
 }

@@ -7,11 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { AuthService } from './services/auth.service';
+import { GetusersComponent } from './component/getusers/getusers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    GetusersComponent
   ],
   imports: [
     BrowserModule,

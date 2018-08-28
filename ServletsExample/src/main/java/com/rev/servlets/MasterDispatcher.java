@@ -12,8 +12,8 @@ public class MasterDispatcher {
 	public static Object process(HttpServletRequest request, HttpServletResponse response) {
 		
 		switch(request.getRequestURI()) {
-		case "/ServletsExample/login.ng":
-			return UserService.login(request, response);
+		case "/ServletsExample/login.ng": // if you get this request, 
+			return UserService.login(request, response); // return the output of this function
 		
 		default:
 			return "not yet implemented";
