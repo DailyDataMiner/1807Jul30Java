@@ -23,6 +23,7 @@ public class ServletDispatcher extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("Hello there from the doGet");
 		
 		ObjectMapper mapper = new ObjectMapper();
 		

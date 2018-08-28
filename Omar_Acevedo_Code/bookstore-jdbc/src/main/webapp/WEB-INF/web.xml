@@ -5,12 +5,26 @@
 	version="3.1">
 	<display-name>bookstore-jdbc</display-name>
 
+	<!-- Filter -->
+<!-- 	<filter>
+		<filter-name>CorsFilter</filter-name>
+		<display-name>CorsFilter</display-name>
+		<description></description>
+		<filter-class>com.ex.servlets.CorsFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CorsFilter</filter-name>
+		<servlet-name>ServletDispatcher</servlet-name>
+	</filter-mapping> -->
+
+	<!-- Front Controller Design Pattern -->
 	<servlet>
 		<servlet-name>FrontController</servlet-name>
 		<servlet-class>com.ex.servlets.LoadViewsServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>FrontController</servlet-name>
 		<url-pattern>*.view</url-pattern>

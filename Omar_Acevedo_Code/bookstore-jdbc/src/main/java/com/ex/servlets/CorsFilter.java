@@ -1,4 +1,4 @@
-package com.ex.servlet;
+package com.ex.servlets;
 
 import java.io.IOException;
 
@@ -12,24 +12,19 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet Filter implementation class CorsFilter
- */
-//@WebFilter("*")
+@WebFilter("*")
 public class CorsFilter implements Filter {
 
-
-    public CorsFilter() {
-        // TODO Auto-generated constructor stub
-    }
-
-
-	public void destroy() {
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
+		
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		
@@ -44,11 +39,15 @@ public class CorsFilter implements Filter {
 		
 		// What filters on the request to the Servlet
 		chain.doFilter(httpRequest, httpResponse);
+		
 	}
 
-	
-	public void init(FilterConfig fConfig) throws ServletException {
+	@Override
+	public void destroy() {
 		// TODO Auto-generated method stub
+		
 	}
-
+	
+	
+	
 }

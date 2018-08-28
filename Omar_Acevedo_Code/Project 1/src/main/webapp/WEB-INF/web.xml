@@ -5,8 +5,8 @@
 	version="3.1">
 	<display-name>project1</display-name>
 	
-	
-	<!-- Comment Index servlet xml part if you're using //@WebServlet("/index") in .class -->
+
+<!-- Comment Index servlet xml part if you're using //@WebServlet("/index") in .class -->
 	<!-- <servlet>
 		<servlet-name>Index</servlet-name>
 		<servlet-class>com.ers.servlets.IndexServlet</servlet-class>
@@ -17,6 +17,7 @@
 		<url-pattern>/index</url-pattern>
 	</servlet-mapping> -->
 	
+<!-- Front Controller Design Pattern -->
 	<servlet>
 		<servlet-name>HtmlBuilder</servlet-name>
 		<servlet-class>com.ers.servlets.HTMLBuilderServlet</servlet-class>
