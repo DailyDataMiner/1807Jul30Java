@@ -6,6 +6,6 @@ import java.util.List;
 public interface Dao<T, I extends Serializable> {
 	
 	List<T> readAll();
-	
+	public void create(T obj);
 	
 }

@@ -173,7 +173,46 @@
 	      <div class="modal-body">
 	      	<!-- foodExpenseDataGoesHere -->
 	      
-	        <div id="reimbursementsDataView">...</div>
+	        <div id="reimbursementsDataView">
+
+              <table class="table table-sm table-hover table-bordered thead-light">
+              <!-- <table class="table table-sm table-hover table-bordered thead-light"> -->
+                  <thead>
+                    <!-- <tr> -->
+                     <tr>
+                     <th scope="col" colspan=3><u>Tickets</u></th>
+                     <th scope="col" colspan=5><u>Reimbursements</u></th>
+                     </tr>
+
+                     <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Created On</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Resolver</th>
+                      <th scope="col">Receipt</th>
+                     </tr>
+                    <!-- </tr> -->
+                  </thead>
+                  <tbody id="reimbursementsDataViewRows">
+                    <tr *ngFor="let r of reimbursementsArr">
+                      <th scope="row">{{ r.ticket_id }}</th>
+                      <th scope="row">{{ r.ticket_status }}</th>
+                      <th scope="row">{{ r.created_on }}</th>
+                      <th scope="row">{{ r.description }}</th>
+                      <th scope="row">{{ r.reimb_type }}</th>
+                      <th scope="row">{{ r.amount }}</th>
+                      <th scope="row">{{ r.reimb_status }}</th>
+                      <th scope="row">{{ r.resolver }}</th>
+                      <th scope="row">{{ r.Receipt }}</th>
+                    </tr>
+                  </tbody>
+                </table>
+
+          </div>
 	      
 	      </div>
 	      <div class="modal-footer">
@@ -198,55 +237,68 @@
 	      </div>
 	      <div class="modal-body">
 	      
-	        <div id="reimbursementsFormView">...</div>
+	        <div id="reimbursementsFormView">
+
+              <!-- <form (submit)="addReimbursement()"> -->
+                  <div class="form-group row">
+                  
+                    <label for="staticTicketType" class="col-sm-2 col-form-label">Ticket Type</label>
+                    <div class="col-sm-10">
+                      <!-- <input type="text" readonly class="form-control-plaintext" id="staticTicketType" value="REIMBURSEMENT"> -->
+                      <select class="form-control" id="staticTicketType" readonly>
+                      <option>REIMBURSEMENT</option>
+                    </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <label for="staticTicketStatus" class="col-sm-2 col-form-label">Ticket Status</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="staticTicketStatus" value="OPEN">
+                    </div>
+                  </div>
+                  
+                  <hr>
+                  
+                  <div class="form-group row">
+                    <label for="description" class="col-sm-2 col-form-label">Expense Description</label>
+                    <div class="col-sm-10">
+                      <!-- <input type="text" class="form-control" id="description" placeholder="Expense description"> -->
+                      <textarea class="form-control" id="description" rows="3" name='description' [(ngModel)]='description'></textarea>
+                   </div>
+                  </div>
+                  
+                    <div class="form-group row">
+                    <label for="amount" class="col-sm-2 col-form-label">Expense Amount</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="amount" placeholder="$" name='amount' [(ngModel)]='amount'>
+                    </div>
+                    </div>
+                        
+                  <!-- <div class="form-group row">
+                  <label for="receipt" class="col-sm-2 col-form-label">Receipt</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="custom-file-input" id="receipt">
+                  </div>
+                  </div> -->
+                  
+                  <div class="form-group row">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="receipt" name='receipt' [(ngModel)]="receipt">
+                    <label class="custom-file-label" for="receipt">Receipt</label>
+                    </div>
+                    </div>
+                    
+                  
+                <!-- </form> -->
+
+          </div>
 	      
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" onclick="addRequest()">Add Request</button>
+	        <button type="button" class="btn btn-primary" (click)="addReimbursement()">Add Request</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-
-<hr>
-
-<div id="">
-	<!-- ( <a id="addBook">Add Book</a> ) -->
-	<table class="table table-sm table-hover table-bordered thead-light">
-	<thead>
-		<tr>
-      <th scope="col">ticket_id</th>
-      <th scope="col">ticket_status</th>
-      <th scope="col">created_on</th>
-      <th scope="col">created_by</th>
-      <th scope="col">name</th>
-      <th scope="col">description</th>
-      <th scope="col">amount</th>
-      <th scope="col">resolver</th>
-      <th scope="col">resolved_on</th>
-      <th scope="col">reimb_type</th>
-      <th scope="col">reimb_status</th>
-      <th scope="col">receipt</th>
-      <th scope="col">reimbursement_id</th>
-		</tr>
-	</thead>	
-	<tbody id="">
-    <tr *ngFor="let r of reimbursementsArr">
-      <th scope="row">{{ r.ticket_id }}</th>
-      <th scope="row">{{ r.ticket_status }}</th>
-      <th scope="row">{{ r.created_on }}</th>
-      <th scope="row">{{ r.created_by }}</th>
-      <th scope="row">{{ r.name }}</th>
-      <th scope="row">{{ r.description }}</th>
-      <th scope="row">{{ r.amount }}</th>
-      <th scope="row">{{ r.resolver }}</th>
-      <th scope="row">{{ r.resolved_on }}</th>
-      <th scope="row">{{ r.reimb_type }}</th>
-      <th scope="row">{{ r.reimb_status }}</th>
-      <th scope="row">{{ r.receipt }}</th>
-      <th scope="row">{{ r.reimbursement_id }}</th>
-    </tr>
-	</tbody>
-	</table>
-</div>

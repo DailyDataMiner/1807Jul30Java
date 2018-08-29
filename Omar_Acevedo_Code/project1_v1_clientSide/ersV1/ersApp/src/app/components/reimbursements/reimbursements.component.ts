@@ -12,15 +12,21 @@ export class ReimbursementsComponent implements OnInit {
   reimbursementsArr: Reimbursement[] = [];
   currentClass = "";
 
+  description: string;
+  amount: number;
+  reimb_type: string;
+  receipt: string;
+
   constructor(private rService: ReimbursementService) { }
 
   ngOnInit() {
     this.currentClass = "active";
 
-    this.findReimbursements();
-
+    // this.findReimbursements();
+    
   }
-
+  
+// try the aws s3 thing to store images (image link)
   findReimbursements() {
     this.rService.getReimbursements().subscribe(
       reimb => {
@@ -37,10 +43,29 @@ export class ReimbursementsComponent implements OnInit {
 
   getExpenses(type) {
     console.log('getExpenses ' + type + ' expenses');
+    this.findReimbursements();
   }
   
   addExpenses(type) {
     console.log('addExpenses ' + type + ' expenses');
+  }
+  addReimbursement() {
+    console.log("add");
+
+    console.log(this.description);
+    console.log(this.amount);
+    console.log(this.reimb_type);
+    this.reimb_type = "food";
+    console.log(this.receipt);
+    console.log('-----');
+    
+    this.rService.postReimbursement(this.description, this.amount, this.reimb_type, this.receipt).subscribe(
+      rData => {
+        console.log('rData -> ');
+        console.log(rData);
+      }
+    );
+
   }
 
 }

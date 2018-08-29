@@ -1,6 +1,8 @@
 package com.ers.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -27,7 +29,6 @@ public class ReimbursementServlets extends HttpServlet {
 		
 		List<Reimbursement> reimbList = rService.findAll();
 		String json = "";
-	
 		
 		if (reimbList.size() > 0) {
 			
@@ -51,7 +52,23 @@ public class ReimbursementServlets extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		System.out.println("This is post data!");
 		
+		String json = "";
+		ObjectMapper mapper = null;
+		BufferedReader br = new BufferedReader(new InputStreamReader( req.getInputStream() ));
+		
+		if (br != null) {
+			json = br.readLine();
+		}
+		
+		System.out.println(json);
+		
+		mapper = new ObjectMapper();
+		
+		Reimbursement reimbObj = mapper.readValue(json, Reimbursement.class);
+		
+		rService.save(reimbObj);
 		
 	}
 	

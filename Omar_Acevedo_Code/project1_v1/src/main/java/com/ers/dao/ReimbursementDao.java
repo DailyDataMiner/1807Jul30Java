@@ -1,5 +1,6 @@
 package com.ers.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,6 +53,54 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 		}
 		
 		return reimbList;
+	}
+
+	@Override
+	public void create(Reimbursement reimbObj) {
+		
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			
+			CallableStatement cs = conn.prepareCall("{ call CREATE_TICKET_REIMBURSEMENT( ?, ?, ?, ?, ?, ? ) }");
+			
+			System.out.println("-> " + reimbObj.toString());
+			
+			// first param will be current user id
+			// user id must come from obj, which will have (logged) user id who sent the post request
+			cs.setInt(1, 2);
+			
+			
+			// second param will be description
+			cs.setString(2, reimbObj.getDescription());
+			
+			
+			// third param will be amount
+			cs.setDouble(3, reimbObj.getAmount()); // or setInt...?
+			
+			
+			// fourth param will be reimbursement type
+			cs.setString(4, reimbObj.getReimb_type());
+			
+			
+			// fifth param will be reimbursement status
+//			cs.setNull(5, OracleTypes.
+			cs.setString(5, reimbObj.getReimb_status());	// null... right?
+			
+			
+			// sixth param will be receipt
+//			cs.setString(6,	reimbObj.getReceipt());
+//			cs.setString(6, OracleTypes.BLOB);
+//			cs.setString(6, OracleTypes.NULL);
+			cs.setString(6,	null);
+			
+			cs.execute();
+			
+			System.out.println("callablestatement object has been executed");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

@@ -24,4 +24,9 @@ export class ReimbursementService {
     return this.http.get<Reimbursement[]>("http://localhost:8080/project1_v1/reimbursements");
   }
 
+  public postReimbursement(description: string, amount: number, reimb_type: string, receipt: string): Observable<any> {
+    return this.http.post<any>("http://localhost:8080/project1_v1/reimbursements", 
+                                {description: description, amount: amount, reimb_type: reimb_type, receipt: receipt});
+  }
+
 }

@@ -39,7 +39,6 @@ public class ReimbursementsServlet extends HttpServlet {
 			json = br.readLine();
 		}
 		
-		
 		System.out.println("JSON line is -> ");
 		System.out.println(json);
 		
@@ -51,8 +50,6 @@ public class ReimbursementsServlet extends HttpServlet {
 		System.out.println(reimbObj.toString());
 		
 		rService.addReimbursement(reimbObj);
-		
-		
 		
 //		rService = new BookService();
 //		rService.addReimbursementReq(r);
