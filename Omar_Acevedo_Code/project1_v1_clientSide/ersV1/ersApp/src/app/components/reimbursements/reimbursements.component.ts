@@ -11,6 +11,9 @@ export class ReimbursementsComponent implements OnInit {
 
   reimbursementsArr: Reimbursement[] = [];
   currentClass = "";
+  foodTicketCount: number = 0;
+  officeTicketCount: number = 0;
+  transportationTicketCount: number = 0;
 
   description: string;
   amount: number;
@@ -22,33 +25,52 @@ export class ReimbursementsComponent implements OnInit {
   ngOnInit() {
     this.currentClass = "active";
 
-    // this.findReimbursements();
-    
+    // # of tickets to show at init on each expense type block, ... still a work in progress
+    // this.findReimbursements('food');
+    // this.findReimbursements('office');
+    // this.findReimbursements('transportation');
+    // this.foodTicketCount = this.findReimbursements('food');
+    // this.officeTicketCount = this.findReimbursements('office');
+    // this.ticketCount = this.reimbursementsArr.length;
   }
   
+  getTicketCount(type) {
+    // this.ticketCount = 10;
+    return 10;
+    // return
+  }
+
 // try the aws s3 thing to store images (image link)
-  findReimbursements(type: string) {
+  findReimbursements(type: string): number {
     this.rService.getReimbursements().subscribe(
       reimb => {
         if (reimb !== null) {
 
           this.reimbursementsArr = reimb.filter(function(element, index, array) {
             
-            type = (type == 'office') ? 'office supplies' : type;
-            return (element.reimb_type.toUpperCase() == type.toUpperCase());
+            type = (type.toLowerCase() == 'office') ? 'office supplies' : type;
+            return (element.reimb_type.toUpperCase() == type.toUpperCase()) || (type == '');
 
           });
 
+          
+          // this.foodTicketCount = this.reimbursementsArr.length;
+          // this.officeTicketCount = this.reimbursementsArr.length;
+          // this.transportationTicketCount = this.reimbursementsArr.length;
+          // return this.reimbursementsArr.length;
+          
         } else {
           console.log('Reimbursements were not loaded.');
         }
       }
     );
+    return this.reimbursementsArr.length;
   }
 
   getExpenses(type) {
     console.log('getExpenses ' + type + ' fn');
     this.findReimbursements(type);
+    this.reimb_type = type;
   }
   
   passTypeOfExpense(type) {

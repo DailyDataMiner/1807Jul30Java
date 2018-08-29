@@ -22,10 +22,10 @@
               <p class="card-text"><b>Food Expenses</b></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('food')">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('Food')">View</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addExpenseModal" (click)="passTypeOfExpense('Food')">Add</button>
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">{{ foodTicketCount }} tickets</small>
               </div>
             </div>
           </div>
@@ -37,10 +37,10 @@
               <p class="card-text"><b>Office Expenses</b></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('office')">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('Office')">View</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addExpenseModal" (click)="passTypeOfExpense('Office')">Add</button>
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">{{ officeTicketCount }} tickets</small>
               </div>
             </div>
           </div>
@@ -53,10 +53,10 @@
               <p class="card-text"><b>Transportation Expenses</b></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('transportation')">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('Transportation')">View</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addExpenseModal" (click)="passTypeOfExpense('Transportation')">Add</button>
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">{{ transportationTicketCount }} Tickets</small>
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@
 	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalCenterTitle">Tickets/Reimbursement Requests (typenamegoeshere)</h5>
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Tickets/Reimbursement Requests ( {{ reimb_type }} )</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
@@ -231,7 +231,7 @@
 	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Tickets/Reimbursement Form ({{ reimb_type }})</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Tickets/Reimbursement Form ( {{ reimb_type }} )</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
