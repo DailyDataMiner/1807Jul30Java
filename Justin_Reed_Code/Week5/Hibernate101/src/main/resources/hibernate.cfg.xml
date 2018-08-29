@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dilarecy">
+			org.hibernate.dialect.Oracle10Dialect
+		</property>
+		<property name="diver_class">
+			oracle.jdbc.driver.OrcaleDriver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:oracle:thin:@homedemordb01.c5epqivvqhgl.us-east-2.rds.amazonaws.com:1521/ORCL
+		</property>
+		<property name="hibernate.connection.username">homedemoRDB01</property>
+		<property name="hibernate.connection.password">demohomeRDB01</property>
+		<property name="show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		
+		<mapping class="com.ex.pojos.Bear"/>
+	</session-factory>
+	
+</hibernate-configuration>

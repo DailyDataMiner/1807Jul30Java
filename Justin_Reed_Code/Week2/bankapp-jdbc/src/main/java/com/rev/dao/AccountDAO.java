@@ -126,10 +126,22 @@ public class AccountDAO implements Dao<Account ,Integer >{
 					total = balance;
 					System.out.println("You cannot withdraw that much\n"+
 					"Your Balance is "+balance);
-				}
+				}else
+					System.out.println("Your balance is: "+total);
+				
+				
 				
 			}else {
 			total = (balance + usrInput);
+			if (total > Double.MAX_VALUE ) {
+				total = balance;
+				System.out.println("You cannot deposit that much\n"+
+				"Your Balance is "+balance);
+			}else
+				System.out.println("Your balance is: "+total);
+				
+				
+			
 			
 			}
 			

@@ -9,14 +9,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionFactory {
-	/*
-	 * Class used to establish a connection with DB
-	 * Uses *lazy* singleton design pattern as to return 
-	 * 		same single connection each time one is
-	 * 		requested. 
-	 * In order to establish a connection, we need 4 
-	 * things: Driver, URL(location of DB), username, pw
-	 */
 
 	private static ConnectionFactory cf = null;
 	private static Boolean build = true;
@@ -27,16 +19,22 @@ public class ConnectionFactory {
 	
 	public static synchronized ConnectionFactory getInstance() {
 		if(build) cf = new ConnectionFactory();
+		
 		return cf;
 	}
 	
+	// need a cf to make connection:
 	public Connection getConnection() {
-		Connection conn = null; // will instantiate in a try block
+		Connection conn = null;
+		
 		Properties prop = new Properties();
-		String path = "C:/Users/Genesis/my_git_repos/1807Jul30Java/Week2/jdbc/bookstore-jdbc/src/main/resources/application.properties";
+		
+		String path = "C:/Users/just1_000/my_git_repos/1807Jul30Java/Week2/jdbc/bookstore-jdbc/main/resources/application.properties";
+
 		try {
 			prop.load(new FileReader(path));
 			Class.forName(prop.getProperty("driver")); //prop.getproperty("Driver") is returning oracle.jdbc.driver.OracleDriver
+		
 			/* The DriverManager provides a basic service for managing a 
 			 * set of JDBC drivers. As part of its initialization, the 
 			 * DriverManager class will attempt to load the driver classes
@@ -58,6 +56,5 @@ public class ConnectionFactory {
 		}
 		
 		return conn;
-	
 	}
 }

@@ -27,7 +27,7 @@ public class App {
 		 * should NOT interact directly with DAO layer!
 		 * only the service layer
 		 */
-		System.out.println("WELCOME User!\n"
+		System.out.println("WELCOME to Municipal Credit Union! Banking Application\n"
 				+ "What would you Like to do?");
 		menu1();
 	}
@@ -125,7 +125,9 @@ public class App {
 		AccountDAO accountDao = new AccountDAO();
 		accountDao.save(acc);
 		
-		
+		System.out.println("Your account ID is displayed above, please remember it for all transactions ");
+		System.out.println("Would you like to make a transaction? \n");
+		menu2();
 		
 
 
@@ -163,7 +165,7 @@ public class App {
 			option = Integer.parseInt(scanner.nextLine());
 		}
 		catch(NumberFormatException e) {
-			System.out.println("Sorry, you must enter a valid number:)");
+			
 			menu2();
 		}
 		
@@ -178,7 +180,7 @@ public class App {
 			DepositToAccount();
 			break;
 		case 4:
-			BalanceInquiry();
+			LogOut();
 			break;
 		default:
 			System.out.println("Sorry Please enter a Valid number");
@@ -199,7 +201,9 @@ public class App {
 	}
 
 	private static void WithdrawFromAccount() {
-		System.out.println("Withdraw from Checkings or Savings: ");
+		System.out.println("Withdraw from Checkings or Savings: \n"
+				+ "Checkings(Input 1)\n"
+				+ "Savings (Input 2)\n");
 		int accDeposite = scanner.nextInt();
 		
 		System.out.println("Enter your Account Number: ");
@@ -214,6 +218,8 @@ public class App {
 		AccountDAO aDao = new AccountDAO();
 
 		aDao.update(withdraw, depositeAmt,1);
+		System.out.println("Would you like to make another Transaction?");
+		menu2();
 		
 		
 		
@@ -221,7 +227,9 @@ public class App {
 	}
 
 	private static void DepositToAccount() {
-		System.out.println("Deposit to Checkings or Savings: ");
+		System.out.println("Deposit to Checkings or Savings: \n"
+				+ "Checkings(Input 1)\n"
+				+ "Savings (Input 2)\n");
 		int accDeposite = scanner.nextInt();
 		
 		System.out.println("Enter your Account Number: ");
@@ -236,6 +244,8 @@ public class App {
 		AccountDAO aDao = new AccountDAO();
 
 		aDao.update(withdraw, depositeAmt,2);
+		System.out.println("Would you like to make another Transaction?");
+		menu2();
 		
 	}
 
