@@ -22,9 +22,11 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 		temp.setAmount(6969);
 		temp.setTypeID(2);
 		temp.setDescription("test5");
-
-		rd.save(temp);
-
+		temp.setResolver(2);
+		temp.setRbID(35);
+		rd.ApproveReimbursement(temp);
+		rd.DenyReimbursement(temp);
+		System.out.println("start");
 	}
 
 	@Override
@@ -57,6 +59,43 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 			e.printStackTrace();
 		}
 		return reimbursements;
+	}
+	public Reimbursement ApproveReimbursement(Reimbursement obj) {
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+			conn.setAutoCommit(false);
+			String query = "{call approveReimbursement(?,?)}";
+
+			CallableStatement cs = conn.prepareCall(query);
+			cs.setInt(1, obj.getRbID());
+			cs.setDouble(2, obj.getResolver());
+			cs.executeUpdate();
+			conn.commit();
+			System.out.println("sent");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+	
+	public Reimbursement DenyReimbursement(Reimbursement obj) {
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+			conn.setAutoCommit(false);
+			String query = "{call denyReimbursement(?,?)}";
+
+			CallableStatement cs = conn.prepareCall(query);
+			cs.setInt(1, obj.getRbID());
+			cs.setDouble(2, obj.getResolver());
+			cs.executeUpdate();
+			conn.commit();
+			System.out.println("sent");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return obj;
 	}
 
 	public List<Reimbursement> findOne(int empid) {

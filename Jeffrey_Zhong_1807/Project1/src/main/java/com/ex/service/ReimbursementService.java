@@ -56,7 +56,29 @@ public class ReimbursementService {
 
 		rd.save(reimbursements);
 		return reimbursements;
-
+	}
+	
+	public static Reimbursement approveReimbursement(HttpServletRequest request, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		Reimbursement reimbursements = null;
+		try {
+			reimbursements = mapper.readValue(request.getReader(), Reimbursement.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		rd.ApproveReimbursement(reimbursements);
+		return reimbursements;
+	}
+	public static Reimbursement denyReimbursement(HttpServletRequest request, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		Reimbursement reimbursements = null;
+		try {
+			reimbursements = mapper.readValue(request.getReader(), Reimbursement.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		rd.DenyReimbursement(reimbursements);
+		return reimbursements;
 	}
 
 }
