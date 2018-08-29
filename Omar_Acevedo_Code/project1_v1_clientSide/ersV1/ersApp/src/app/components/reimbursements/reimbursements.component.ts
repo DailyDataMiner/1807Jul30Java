@@ -47,28 +47,27 @@ export class ReimbursementsComponent implements OnInit {
   }
 
   getExpenses(type) {
-    console.log('getExpenses ' + type + ' expenses');
+    console.log('getExpenses ' + type + ' fn');
     this.findReimbursements(type);
   }
   
   passTypeOfExpense(type) {
-    console.log('addExpenses ' + type + ' expenses');
+    console.log('passTypeOfExpense ' + type + ' fn');
     this.reimb_type = type;
   }
-  addReimbursement() {
-    console.log("add");
 
-    console.log(this.description);
-    console.log(this.amount);
-    console.log(this.reimb_type);
-    // this.reimb_type = "food";
-    console.log(this.receipt);
-    console.log('-----');
-    
+  addReimbursement() {
+    console.log("addReimbursement fn");
+   
     this.rService.postReimbursement(this.description, this.amount, this.reimb_type, this.receipt).subscribe(
       rData => {
         console.log('rData -> ');
         console.log(rData);
+
+        this.description = '';
+        this.amount = 0; 
+        this.receipt = '';
+
       }
     );
 
