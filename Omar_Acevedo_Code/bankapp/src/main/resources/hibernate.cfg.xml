@@ -23,15 +23,11 @@
 		<property name="hibernate.connection.password">Odeveca28</property>
 
 		<property name="show_sql">true</property>
-		<!-- <property name="hibernate.hbm2ddl.auto">create</property> -->
 		<property name="hibernate.hbm2ddl.auto">create</property>
 
 		<!-- Tell hibernate where to find classes configured w annotations. -->
-		<mapping class="com.ex.pojos.Bear" />
-		<mapping class="com.ex.pojos.Cave" />
-		<mapping class="com.ex.pojos.Honey" />
-		
-		<mapping resource="Person.hbm.xml" />
+		<mapping class="com.ex.models.Account" />
+		<mapping class="com.ex.models.User" />
 
 	</session-factory>
 

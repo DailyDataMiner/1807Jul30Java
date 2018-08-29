@@ -1,6 +1,7 @@
 package com.ers.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ers.pojos.User;
+import com.ers.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet("/login")
@@ -19,6 +21,7 @@ public class LoginServlet extends HttpServlet {
 
 		User user = null;
 		ObjectMapper mapper = new ObjectMapper();
+		UserService uService = new UserService();
 		
 		System.out.println(" ---> " + req.getRequestURI());
 		
@@ -29,11 +32,35 @@ public class LoginServlet extends HttpServlet {
 				case "/project1_v1/login":
 					
 					user = mapper.readValue(req.getReader(), User.class);
-					System.out.println("User -> " + user.toString());
 					
-					//return UserService.login(request, response);
+					User authorizedUser = uService.getUserInfo(user.getUsername());
+					
+					
+					if (uService.getHashValue(user).equals(authorizedUser.getPassword())) {
+						
+						String json = "";
+						json = mapper.writeValueAsString(authorizedUser);
+						
+						PrintWriter pWriter = resp.getWriter();
+
+						resp.setContentType("application/json");
+						pWriter.write(json);
+						
+					} else {
+						String json = "";
+						
+						PrintWriter pWriter = resp.getWriter();
+
+						resp.setContentType("application/json");
+						pWriter.write("{'response':'invalid credentials'}");
+						
+					}
 					
 				default:
+					PrintWriter pWriter = resp.getWriter();
+
+//					resp.setContentType("application/json");
+					pWriter.write("Oh, hey... what's up?");
 					System.out.println("defaulted;");
 		
 			}
@@ -42,8 +69,6 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("in io exception");
 			e.printStackTrace();
 		}
-		
-//		response.getWriter().write(mapper.writeValueAsString(MasterDispatcher.process(request, response)));
 		
 	}
 	
