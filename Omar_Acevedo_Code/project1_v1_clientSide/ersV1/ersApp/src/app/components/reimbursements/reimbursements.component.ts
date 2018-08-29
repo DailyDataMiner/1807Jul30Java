@@ -27,13 +27,18 @@ export class ReimbursementsComponent implements OnInit {
   }
   
 // try the aws s3 thing to store images (image link)
-  findReimbursements() {
+  findReimbursements(type: string) {
     this.rService.getReimbursements().subscribe(
       reimb => {
         if (reimb !== null) {
-          this.reimbursementsArr = reimb;
-          console.log('Reimbursements were loaded.');
-          console.log(this.reimbursementsArr);
+
+          this.reimbursementsArr = reimb.filter(function(element, index, array) {
+            
+            type = (type == 'office') ? 'office supplies' : type;
+            return (element.reimb_type.toUpperCase() == type.toUpperCase());
+
+          });
+
         } else {
           console.log('Reimbursements were not loaded.');
         }
@@ -43,11 +48,12 @@ export class ReimbursementsComponent implements OnInit {
 
   getExpenses(type) {
     console.log('getExpenses ' + type + ' expenses');
-    this.findReimbursements();
+    this.findReimbursements(type);
   }
   
-  addExpenses(type) {
+  passTypeOfExpense(type) {
     console.log('addExpenses ' + type + ' expenses');
+    this.reimb_type = type;
   }
   addReimbursement() {
     console.log("add");
@@ -55,7 +61,7 @@ export class ReimbursementsComponent implements OnInit {
     console.log(this.description);
     console.log(this.amount);
     console.log(this.reimb_type);
-    this.reimb_type = "food";
+    // this.reimb_type = "food";
     console.log(this.receipt);
     console.log('-----');
     
