@@ -9,13 +9,15 @@ import { HomeComponent } from './components/home/home.component';
 import { ReimbursementsComponent } from './components/reimbursements/reimbursements.component';
 import { ReimbursementService } from './services/reimbursement.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { LoginauthComponent } from './components/loginauth/loginauth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    ReimbursementsComponent
+    ReimbursementsComponent,
+    LoginauthComponent
   ],
   imports: [
     BrowserModule,
