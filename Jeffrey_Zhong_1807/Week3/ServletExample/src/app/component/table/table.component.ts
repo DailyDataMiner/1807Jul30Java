@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Time } from '../../../../node_modules/@angular/common';
 import { AuthService } from '../../auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router'; 
+
 
 @Component({
   selector: 'app-table',
@@ -21,8 +24,69 @@ export class TableComponent implements OnInit {
   private typeID: number;
   public rbarray: any[];
   servletData: any;
+  id: number;
+  private sub: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
+
+  approve(rbID:number, resolverID:number ){
+    this.authService.approveReimbursement( rbID, resolverID).subscribe(
+      data => {
+          console.log(data);
+          this.getAllReimbursement();
+   })
+  };
+
+  deny(rbID:number, resolverID:number ){
+    this.authService.denyReimbursement( rbID, resolverID).subscribe(
+      data => {
+          console.log(data);
+          this.getAllReimbursement();
+   })
+  };
+
+  convertTypeID(tid : number){
+    if(tid == 1){
+      return 'Lodging';
+    }
+    else if(tid == 2){
+      return 'Travel';
+    }
+    else if(tid == 3){
+      return 'Food';
+    }
+    else if(tid == 4){
+      return 'Certification';
+    }
+    else if(tid == 5){
+      return 'Maternity Leave';
+    }
+    else {
+      return 'No type';
+    }
+  }
+
+  convertStatusID(tid : number){
+    if(tid == 1){
+      return 'Pending';
+    }
+    else if(tid == 2){
+      return 'Approved';
+    }
+    else if(tid == 3){
+      return 'Denied';
+    }
+    else if(tid == 4){
+      return 'Revised';
+    }
+    else {
+      return 'No status';
+    }
+  }
+
+
+
+
 
   getAllReimbursement() {
     this.authService.getAllReimbursement().subscribe(
@@ -52,9 +116,17 @@ export class TableComponent implements OnInit {
     );
   }
 
+  testing(id:number){
+    console.log(id);
+  }
+
 
   ngOnInit() {
-    this.getAllReimbursement();
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['servletEmpID']; // (+) converts string 'id' to a number
+      this.getAllReimbursement();
+    })
+
     }
 
  

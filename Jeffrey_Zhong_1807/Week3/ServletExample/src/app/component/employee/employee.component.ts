@@ -36,24 +36,16 @@ export class EmployeeComponent implements OnInit {
   servletData: any;
   id: number;
   private sub: any;
+  private type: string;
 
+
+
+  
   submitReimbursement(){
-  this.authService.submitReimbursement(1,100,2,'testfromAnguler').subscribe(
+  this.authService.submitReimbursement(this.id,this.amount,this.convertType(this.type),this.description).subscribe(
     data => {
-      
-      this.rbarray = data
-        this.rbID= data.rbID;
-        this.amount= data.amount;
-        this.submitted= data.submitted;
-        this.resolved= data.resolved;
-        this.description= data.description;
-        this.receipt= data.receipt;
-        this.author= data.author;
-        this.resolver= data.resolver;
-        this.statusID= data.statusID;
-        this.typeID= data.typeID;
-        console.log('submitted');
-        console.log(this.rbarray);
+        console.log(data);
+        this.getReimbursement();
  })
 };
 
@@ -87,9 +79,69 @@ export class EmployeeComponent implements OnInit {
     );
   }
 
+  convertType(type : String){
+    console.log('converting');
+    if(type == 'Lodging'){
+      return 1;
+    }
+    else if(type == 'Travel'){
+      return 2;
+    }
+    else if(type == 'Food'){
+      return 3;
+    }
+    else if(type == 'Certification'){
+      return 4;
+    }
+    else
+      return 5;
+  }
+
+  convertTypeID(tid : number){
+    if(tid == 1){
+      return 'Lodging';
+    }
+    else if(tid == 2){
+      return 'Travel';
+    }
+    else if(tid == 3){
+      return 'Food';
+    }
+    else if(tid == 4){
+      return 'Certification';
+    }
+    else if(tid == 5){
+      return 'Maternity Leave';
+    }
+    else {
+      return 'No type';
+    }
+  }
+
+  convertStatusID(tid : number){
+    if(tid == 1){
+      return 'Pending';
+    }
+    else if(tid == 2){
+      return 'Approved';
+    }
+    else if(tid == 3){
+      return 'Denied';
+    }
+    else if(tid == 4){
+      return 'Revised';
+    }
+    else {
+      return 'No status';
+    }
+  }
+   
+    
+  
+
 
   ngOnInit() {
- 
+
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['servletEmpID']; // (+) converts string 'id' to a number
       this.getReimbursement();

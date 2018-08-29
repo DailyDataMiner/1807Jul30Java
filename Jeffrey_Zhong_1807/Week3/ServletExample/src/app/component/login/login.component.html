@@ -1,15 +1,36 @@
-<form (submit)="login()" >
+<!-- <form (submit)="login()" >
   <label for="username">Username</label>
   <input type="text" id="username" name="username" required [(ngModel)]='username' /> <br>
   <label for="password">Password</label>
   <input type="password" id="password" name="password" required [(ngModel)]='password' ><br>
   <input  type="submit" value="Log In!">
-</form>
-<!-- 
-<br><br>
-{{ servletUsername }}
-{{ servletFirst }}
-{{ servletLast }}
-{{ servletEmail }}
-{{ servletEmpID }}
-{{ servletroleID }} -->
+</form> -->
+
+
+
+
+
+<div class="container">
+  <div class="wrapper">
+    <form (submit)="login()" name="Login_Form" class="form-signin">
+      <h3 class="form-signin-heading">Employee Reimbursement</h3>
+      <hr class="colorgraph">
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-user"></i>
+        </span>
+        <input type="text" [(ngModel)]='username' class="form-control" name="Username" placeholder="Username" required="" autofocus=""
+        />
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-lock"></i>
+        </span>
+        <input type="password" [(ngModel)]='password' class="form-control" name="Password" placeholder="Password" required="" />
+      </div>
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" id="submit" type="submit">Login</button>
+    </form>
+  </div>
+</div>

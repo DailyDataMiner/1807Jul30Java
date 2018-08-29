@@ -17,6 +17,12 @@ export class AuthService {
     return this.http.post<any>("http://localhost:8082/Project1/getReimbursement.ng", {empID: empID});
   }
   submitReimbursement(author: number, amount: number, typeid: number, description: string): Observable<any> {
-    return this.http.post<any>("http://localhost:8082/Project1/submitReimbursement.ng", {author: author, amount: amount, typeid: typeid, description: description});
+    return this.http.post<any>("http://localhost:8082/Project1/submitReimbursement.ng", {author: author, amount: amount, typeID: typeid, description: description});
+  }
+  approveReimbursement(rbID: number, resolver: number): Observable<any> {
+    return this.http.post<any>("http://localhost:8082/Project1/approveReimbursement.ng", {rbID: rbID, resolver: resolver });
+  }
+  denyReimbursement(rbID: number, resolver: number): Observable<any> {
+    return this.http.post<any>("http://localhost:8082/Project1/denyReimbursement.ng", {rbID: rbID, resolver: resolver });
   }
 }

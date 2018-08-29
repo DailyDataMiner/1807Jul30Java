@@ -1,0 +1,12 @@
+.modal { 
+    margin: auto 0;
+    margin-top: 200px;
+    padding: 10rem 0;
+    overflow-y:auto;
+    box-sizing: border-box;
+  }
+  .overlay{ 
+    padding: 4rem 0;
+    overflow-y:auto;
+    box-sizing: border-box;
+  }

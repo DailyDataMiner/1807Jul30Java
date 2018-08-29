@@ -2,39 +2,45 @@
   Finance Manager
 </h2>
 
-
-<table>
-  <tr>
-    <th>ReimbursementID</th>
-    <th>EmployeeID</th>
-    <th>$Amount</th>
-    <th>Submitted Date</th>
-    <th>Resolved Date</th>
-    <th>Description</th>
-    <th>Receipt</th>
-    <th>ResolverID</th>
-    <th>StatusID</th>
-    <th>TypeID</th>
-  </tr>
-
- 
-  
+<div>
+<table  dt-options="controller.options"  datatable="ng" class="table  table-bordered table-striped table-hover table-responsive">
+  <thead class="thead-dark">
+    <tr>
+      <th>ReimbursementID</th>
+      <th>EmployeeID</th>
+      <th>$Amount</th>
+      <th>Submitted Date</th>
+      <th>Resolved Date</th>
+      <th>Description</th>
+      <th>Receipt</th>
+      <th>ResolverID</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
 
   <tr *ngFor="let stat of rbarray">
-    <td>{{ stat.rbID }}</td>  
+    <td>{{ stat.rbID }}</td>
     <td>{{ stat.author }}</td>
-    <td>{{ stat.amount }}</td>
-    <td>{{ stat.submitted }}</td>
-    <td>{{ stat.resolved }}</td>
+    <td>{{ stat.amount | currency }}</td>
+    <td>{{ stat.submitted | date: 'medium' }}</td>
+    <td>{{ stat.resolved | date: 'medium' }}</td>
     <td>{{ stat.description }}</td>
     <td>{{ stat.receipt }}</td>
     <td>{{ stat.resolver }}</td>
-    <td>{{ stat.statusID }}</td>
-    <td>{{ stat.typeID }}</td>
+    <td>{{ convertTypeID(stat.typeID) }}</td>
+    <td>{{ convertStatusID(stat.statusID) }}</td>
+    <td>
+      <button class="btn btn-success " (click)="approve(stat.rbID,this.id)">Approve</button>
+      <button class="btn btn-danger" style="width:78px;margin-top: 5px" (click)="deny(stat.rbID,this.id)">Deny</button>
+    </td>
+
   </tr>
+</table>
 
-  <!-- <form (submit)="getAllReimbursement()">
-    <input type="submit" value="Get Reimbursements!">
+
+<!-- <h1>1515</h1>
+  <form (submit)="convertTypeID(1)">
+    <input type="submit" value="test">
   </form> -->
-
-  
