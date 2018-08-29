@@ -21,7 +21,6 @@ public class Reimb{
 	public Reimb(double amount, Timestamp submitted, Timestamp resolved, String description,
 			Blob receipt, int author, int resolver, int statusid, int typeid) {
 		super();
-
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
@@ -33,6 +32,7 @@ public class Reimb{
 		this.typeid = typeid;
 	}
 	
+	//mainly used for retrieval into object
 	public Reimb(int id, double amount, Timestamp submitted, Timestamp resolved, String description,
 			Blob receipt, int author, int resolver, int statusid, int typeid) {
 		super();

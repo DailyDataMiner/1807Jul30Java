@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { SquarerootPipe } from './pipes/squareroot.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { BookstoreService } from './services/bookstore.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,11 @@ exports:[]
     /*Modules whose classes are needed by classes within this current module
 
     */
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [], //providers - services(@Injectable)
+  providers: [BookstoreService], //providers - services(@Injectable)
   //Refers to the root component which is the main view of the angular app
   bootstrap: [AppComponent]
 })

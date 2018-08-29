@@ -1,55 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>helloservlets</display-name>
+  <display-name>reimbursement</display-name>
+
+
+<servlet>
+	<servlet-name>FrontController</servlet-name>
+	<servlet-class>com.rev.servlets.LoadViewsServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+	<servlet-name>FrontController</servlet-name>
+	<url-pattern>*.view</url-pattern>
+</servlet-mapping>
   
-  <!-- Web.xml aka deployment Descriptor 
-  is the file with which we configure our web apps
-  Here, we indicate which url-patters (endpoints)
-  will send requests to respective servlets and 
-  configure other details like parameters and when to initialize our servlets -->
-  
-  <context-param>
-  	<param-name>Bio</param-name>
-  	<param-value>Genesis Bonds is cool. She is a trainer
-  	here at Revature</param-value>
-  	
-  </context-param>
-  
-  <servlet>
-  	<servlet-name>HS</servlet-name>
-  	<servlet-class>com.rev.servlets.HelloServlet </servlet-class>
-  	<load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>HS</servlet-name>
-  	<url-pattern>/anything</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-  <servlet-name>HelloHttp</servlet-name>
-  <servlet-class>com.rev.servlets.HelloHttpServlet</servlet-class>
-  <init-param>
-  	<param-name>info</param-name>
-  	<param-value>Servlets are awesome</param-value>
-  
-  </init-param>
-  <load-on-startup>1</load-on-startup>
-  </servlet>
-  
-   <servlet-mapping>
-  	<servlet-name>HelloHttp</servlet-name>
-  	<url-pattern>/not</url-pattern>
-  </servlet-mapping>
-  
-  
-  
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
 </web-app>

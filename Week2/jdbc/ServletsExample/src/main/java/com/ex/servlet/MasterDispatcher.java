@@ -10,7 +10,7 @@ public class MasterDispatcher {
 
 	private MasterDispatcher() {}
 	
-	public static UserInfo process(HttpServletRequest req, HttpServletResponse res) {
+	public static Object process(HttpServletRequest req, HttpServletResponse res) {
 		switch(req.getRequestURI()) {
 		case "/ServletsExample/login.ng":
 			return UserService.login(req,res);
@@ -18,8 +18,9 @@ public class MasterDispatcher {
 		
 		
 
-			
+		default: 
+			return "not yet implemented";
 		}
-		return null;
+		
 	}
 }

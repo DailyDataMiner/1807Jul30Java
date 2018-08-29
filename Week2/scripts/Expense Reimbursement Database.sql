@@ -106,13 +106,33 @@ commit;
 
 -------------------------Populate the Database with Dummy Data----------------
 select * from ers_reimbursement;
-select * from ERS_REIMBURSEMENT
-full join ERS_REIMBURSEMENT_TYPE 
-on ERS_REIMBURSEMENT.REIMB_TYPE_ID=ERS_REIMBURSEMENT_TYPE.REIMB_TYPE_id
-where ERS_REIMBURSEMENT.REIMB_TYPE_ID is null or ERS_REIMBURSEMENT_TYPE.REIMB_TYPE_id is null;
 
+select * from ERS_REIMBURSEMENT
+join ERS_REIMBURSEMENT_TYPE 
+on ERS_REIMBURSEMENT.REIMB_TYPE_ID=ERS_REIMBURSEMENT_TYPE.REIMB_TYPE_id
+right join ERS_reimbursement_status
+on ERS_REIMBURSEMENT.REIMB_STATUS_ID = ERS_REIMBURSEMENT_status.REIMB_STATUS_ID;
+
+select * from ers_reimbursement
+join ers_reimbursement_type 
+on ers_reimbursement_type.REIMB_TYPE_ID = ers_reimbursement.REIMB_TYPE_ID
+where ers_reimbursement_type.REIMB_TYPE_ID is null;
+
+select * from ers_reimbursement
+minus
+select * from ers_reimbursement_type;
 
 select * from ERS_REIMBURSEMENT
 union
 select reimb_type from ERS_REIMBURSEMENT_TYPE;
+
+select * from Ers_Reimbursement where reimb_author = 1;
+select * from Ers_Reimbursement;
+update ers_reimbursement 
+
+  set reimb_status_id = 2,
+      reimb_resolver = 1
+  
+where
+  reimb_id = 1;
 

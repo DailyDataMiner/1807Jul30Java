@@ -41,10 +41,11 @@ public class KorsFilter implements Filter {
 		
 		httpResponse.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 		httpResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS");
-		httpResponse.addHeader("Access-Controll-Allow-Headers", "Content-Type");
+		httpResponse.addHeader("Access-Control-Allow-Headers", "Content-Type");
 		
 		if (httpRequest.getMethod().equals("Options"))
 			httpResponse.setStatus(202);
+
 
 		//What filters the request servlett
 		chain.doFilter(httpRequest, httpResponse);

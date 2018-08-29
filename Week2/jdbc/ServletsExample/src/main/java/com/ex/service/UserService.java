@@ -21,7 +21,7 @@ public class UserService {
 	
 	public static UserInfo login(HttpServletRequest req, HttpServletResponse res) {
 		ObjectMapper mapper = new ObjectMapper();
-		String json = null;
+//		String json = null;
 		User user = null;
 		try {
 			user = mapper.readValue(req.getReader(), User.class);
