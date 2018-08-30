@@ -35,12 +35,13 @@ ReimbTypeDAO reimbTypeDAO = new ReimbTypeDAO();
 			ResultSet rs = (ResultSet) cs.getObject(1);
 
 			while (rs.next()) {
-				Reimbursement temp = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getBlob(6), userDAO.findOne(rs.getInt(6)), userDAO.findOne(rs.getInt(7)), reimbStatusDAO.findOne(rs.getInt(8)), reimbTypeDAO.findOne(rs.getInt(9)));
+				Reimbursement temp = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getBlob(6), userDAO.findOne(rs.getInt(7)), userDAO.findOne(rs.getInt(8)), reimbStatusDAO.findOne(rs.getInt(9)), reimbTypeDAO.findOne(rs.getInt(10)));
 				Reimbursements.add(temp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println(Reimbursements);
 		return Reimbursements;
 	}
 	
@@ -158,7 +159,7 @@ ReimbTypeDAO reimbTypeDAO = new ReimbTypeDAO();
 	public Reimbursement findOne(Integer id) {
 		Reimbursement a = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "select * from reimb_id where ers_reimbursement = ?";
+			String sql = "select * from ers_reimbursement where reimb_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -175,7 +176,7 @@ ReimbTypeDAO reimbTypeDAO = new ReimbTypeDAO();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 			conn.setAutoCommit(false);
-			String sql = "{call insert_reimbursement(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+			String sql = "{call insert_reimbursement(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
 			CallableStatement cs = conn.prepareCall(sql);
 			cs.setDouble(1, obj.getReimbAmount());
@@ -183,10 +184,30 @@ ReimbTypeDAO reimbTypeDAO = new ReimbTypeDAO();
 			cs.setTimestamp(3, obj.getReimbResolved());
 			cs.setString(4, obj.getReimbDesc());
 			cs.setBlob(5, obj.getReimbReceipt());
+			if (obj.getReimbAuthor() != null) {
 			cs.setInt(6, obj.getReimbAuthor().getUserID());
+			}
+			else {
+			cs.setNull(6, java.sql.Types.BIGINT);
+			}
+			if (obj.getReimbResolver() != null) {
 			cs.setInt(7, obj.getReimbResolver().getUserID());
+			}
+			else {
+			cs.setNull(7, java.sql.Types.BIGINT);
+			}
+			if (obj.getReimbStatus() != null) {
 			cs.setInt(8, obj.getReimbStatus().getReimbStatusID());
+			}
+			else {
+			cs.setNull(8, java.sql.Types.BIGINT);
+			}
+			if (obj.getReimbType() != null) {
 			cs.setInt(9, obj.getReimbType().getReimbTypeID());
+			}
+			else {
+			cs.setNull(9, java.sql.Types.BIGINT);
+			}
 			int rows = cs.executeUpdate();
 
 			if (rows != 0) {
@@ -208,7 +229,7 @@ ReimbTypeDAO reimbTypeDAO = new ReimbTypeDAO();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 			conn.setAutoCommit(false);
 			String sql = "{call update_reimb_resolved(?, ?, ?, ?)}";
-
+			System.out.println("This user: " + obj.getReimbResolver().getUserID());
 			CallableStatement cs = conn.prepareCall(sql);
 			cs.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
 			cs.setInt(2, obj.getReimbResolver().getUserID());

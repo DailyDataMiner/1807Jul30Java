@@ -12,6 +12,8 @@ import { UserpageComponent } from './components/userpage/userpage.component';
 import { UserreimbService } from './services/userreimb.service';
 import { DataService } from './services/data.service';
 import { EdituserpageComponent } from './components/edituserpage/edituserpage.component';
+import { AdminpageComponent } from './components/adminpage/adminpage.component';
+import { ViewUsersPageComponent } from './components/view-users-page/view-users-page.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { EdituserpageComponent } from './components/edituserpage/edituserpage.co
     LoginComponent,
     NavbarComponent,
     UserpageComponent,
-    EdituserpageComponent
+    EdituserpageComponent,
+    AdminpageComponent,
+    ViewUsersPageComponent
   ],
   imports: [
     BrowserModule,

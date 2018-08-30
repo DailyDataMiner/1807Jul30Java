@@ -8,15 +8,18 @@ import POJOs.ReimbType;
 public class ReimbTypeService {
 	static ReimbTypeDAO rtDao = new ReimbTypeDAO();
 
-	public List<ReimbType> getAll() {
+	public static List<ReimbType> getAll() {
 		return rtDao.findAll();
 	}
 
-	public ReimbType getOne(int input) {
+	public static ReimbType getOne(int input) {
 		return rtDao.findOne(input);
 	}
+	public static ReimbType getByTypeName(String input) {
+		return rtDao.findByTypeName(input);
+	}
 
-	public ReimbType saveReimbType(ReimbType a) {
+	public static ReimbType saveReimbType(ReimbType a) {
 		return rtDao.save(a);
 	}
 }

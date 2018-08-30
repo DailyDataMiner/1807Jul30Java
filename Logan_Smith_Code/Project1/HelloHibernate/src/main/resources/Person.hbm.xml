@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.ex.pojos.Person" table="PEOPLE">
+<id name="id" type="int" column="P_ID">
+<generator class="native"></generator>
+</id>
+<property name="firstname" type="string" column="first_name"></property>
+<property name="lastname" type="string" column="last_name"></property>
+</class>
+</hibernate-mapping>

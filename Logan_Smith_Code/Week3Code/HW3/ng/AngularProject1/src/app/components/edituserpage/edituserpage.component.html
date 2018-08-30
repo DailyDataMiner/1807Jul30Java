@@ -1,3 +1,4 @@
+<div>
 <h1>User Information</h1>
 Username: <input type="text" [(ngModel)]="username">
 <br>
@@ -9,3 +10,16 @@ Email: <input type="text" [(ngModel)]="email">
 <br>
 <input type="submit" class="btn btn-primary" value="Update" (click)="update()">
 <input type="submit" class="btn btn-primary" value="Back" (click)="toBack()">
+</div>
+<br>
+<br>
+<div>
+<h1>Set New Password</h1>
+Current Password: <input type="password" [(ngModel)]="password">
+<br>
+New Password: <input type="password" [(ngModel)]="ipassword1">
+<br>
+Confirm New Password: <input type="password" [(ngModel)]="ipassword2">
+<br>
+<input type="submit" class="btn btn-primary" value="Update Password" (click)="updatePassword()">
+</div>

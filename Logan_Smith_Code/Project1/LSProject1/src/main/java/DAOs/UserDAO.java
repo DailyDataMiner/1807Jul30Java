@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import POJOs.Reimbursement;
 import POJOs.User;
 import oracle.jdbc.OracleTypes;
 import util.ConnectionFactory;
@@ -38,6 +37,23 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return Users;
+	}
+	
+	public static String getPasswordHash(User user) {
+		int index = 0;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			PreparedStatement cs = conn.prepareStatement("select get_user_hash(?,?) as HASH from dual");
+			cs.setString(++index, user.getUsername());
+			cs.setString(++index, user.getPassword());
+			ResultSet rs = cs.executeQuery();
+			if (rs.next())
+			return rs.getString("HASH");
+		}
+		catch (SQLException sql) {
+			System.err.println("SQL state: " + sql.getSQLState());
+			System.err.println("Error code: " + sql.getErrorCode());
+		}
+		return null;
 	}
 	
 	public List<User> findAllUsernames() {
@@ -75,7 +91,7 @@ public class UserDAO {
 			ResultSet rs = (ResultSet) cs.getObject(1);
 
 			while (rs.next()) {
-				User temp = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+				User temp = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), userRoleDAO.findOne(rs.getInt(7)));
 				Users.add(temp);
 			}
 		} catch (SQLException e) {
@@ -105,10 +121,10 @@ public class UserDAO {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 			conn.setAutoCommit(false);
-			String sql = "{call insert_user_roles(?, ?, ?, ?, ?, ?)}";
+			String sql = "{call insert_user(?, ?, ?, ?, ?, ?)}";
 
 			CallableStatement cs = conn.prepareCall(sql);
-			cs.setString(1, obj.getUsername());
+			cs.setString(1, obj.getUsername().toLowerCase());
 			cs.setString(2, obj.getPassword());
 			cs.setString(3, obj.getFirstname());
 			cs.setString(4, obj.getLastname());
@@ -137,7 +153,7 @@ public class UserDAO {
 			String sql = "{call update_username(?, ?)}";
 
 			CallableStatement cs = conn.prepareCall(sql);
-			cs.setString(1, obj.getUsername());
+			cs.setString(1, obj.getUsername().toLowerCase());
 			cs.setInt(2, obj.getUserID());
 			int rows = cs.executeUpdate();
 

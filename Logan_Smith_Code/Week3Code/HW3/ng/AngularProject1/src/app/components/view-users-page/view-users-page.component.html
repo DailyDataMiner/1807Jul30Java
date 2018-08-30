@@ -1,0 +1,65 @@
+<h1>Welcome {{data.user.firstname}}</h1>
+<div>
+    <input type="submit" class="btn btn-primary" value="Back" (click)="back()">
+</div>
+<h1>Here are the Users</h1>
+<div id="reimbView" class="col-3 offset-7 position-fixed" *ngIf="data.viewUser != null">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>{{data.viewUser.id}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Username</th>
+                    <td>{{data.viewUser.username}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">First Name</th>
+                    <td>{{data.viewUser.firstname}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last Name</th>
+                    <td>{{data.viewUser.lastname}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{data.viewUser.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" class="btn btn-primary" value="Promote" (click)="promoteUser()">
+    </div>
+<input type="submit" class="btn btn-primary" value="Add User" (click)="toggleToAdd()">
+<div *ngIf="toAddToggle == true" class="col-7">
+    <form (submit)="addUser()">
+        Username:<input type="text" class="form-control col-5" placeholder="Enter Username" id="iusername" name="iusername" [(ngModel)]="iusername">
+        Password:<input type="text" class="form-control col-5" placeholder="Enter Default Password" id="ipassword" name="ipassword" [(ngModel)]="ipassword">
+        Email:<input type="text" class="form-control col-5" placeholder="Enter Email Address" id="iemail" name="iemail" [(ngModel)]="iemail">
+        <br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+</div>
+<br>
+<div class="row">
+    <div id=reimbsView class="col-7">
+        <table class="table table-sm table-hover table-bordered thead-light">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th>
+                </tr>
+            </thead>
+            <tbody id="BookTable">
+                <tr *ngFor="let u of data.users; let i = index" (click)="setViewUser(i)">
+                    <td>{{u.id}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.firstname}}</td>
+                    <td>{{u.lastname}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

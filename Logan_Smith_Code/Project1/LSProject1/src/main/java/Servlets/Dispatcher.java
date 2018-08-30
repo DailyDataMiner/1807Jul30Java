@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @WebServlet("/*")
 public class Dispatcher extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
     public Dispatcher() {
         super();
     }
@@ -27,6 +28,8 @@ public class Dispatcher extends HttpServlet {
 		resp.setContentType("application/json");
 		ObjectMapper mapper = new ObjectMapper();
 		PrintWriter out = resp.getWriter();
+		HttpSession session = req.getSession();
+		System.out.println(session.getId());
 		out.write(mapper.writeValueAsString(MasterDispatcher.process(req, resp)));
 	}
 	@Override

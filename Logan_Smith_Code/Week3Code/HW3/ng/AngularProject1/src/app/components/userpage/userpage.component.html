@@ -1,29 +1,81 @@
 <h1>Welcome {{data.user.firstname}}</h1>
 <div>
     <input type="submit" class="btn btn-primary" value="User Page" (click)="editUser()">
+    <input type="submit" class="btn btn-primary" value="Logout" (click)="logout()">
 </div>
 <h1>Here are your reimbursements</h1>
-<div id=booksView>
-    <table class="table table-sm table-hover table-bordered thead-light">
-    <thead>
-    <tr>
-    <th scope="col">ID</th>
-    <th scope="col">Amount</th>
-    <th scope="col">Status</th>
-    <th scope="col">Type</th>
-    <th scope="col">Submitted</th>
-    <th scope="col">Resolved</th>
-    </tr>
-    </thead>
-    <tbody id="BookTable">
-      <tr *ngFor="let r of data.reimbs">
-          <td>{{r.id}}</td>
-          <td>{{r.amount}}</td>
-          <td>{{r.status}}</td>
-          <td>{{r.type}}</td>
-          <td>{{r.submitted}}</td>
-          <td>{{r.resolved}}</td>
-      </tr>
-    </tbody>
-    </table>
+<div id="reimbView" class="col-3 offset-7 position-fixed" *ngIf="data.currentReimb != null">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>{{data.currentReimb.id}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Amount</th>
+                    <td>${{data.currentReimb.amount}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Status</th>
+                    <td>{{data.currentReimb.status}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Type</th>
+                    <td>{{data.currentReimb.type}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Submitted</th>
+                    <td>{{data.currentReimb.submitted}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Resolved</th>
+                    <td>{{data.currentReimb.resolved}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Desc</th>
+                    <td>{{data.currentReimb.desc}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Resolver</th>
+                    <td>{{data.currentReimb.resolver}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+<input type="submit" class="btn btn-primary" value="Add Reimbursement" (click)="toggleAdd()">
+<div *ngIf="toAddToggle == true" class="col-7">
+    <form (submit)="addReimb()">
+        Amount:<input type="number" class="form-control col-2" placeholder="Enter Amount" id="iamount" name="iamount" [(ngModel)]="iamount">
+        Type:<input type="text" class="form-control col-2" placeholder="Enter Type" id="itype" name="itype" [(ngModel)]="itype">
+        Desc:<input type="text" class="form-control col-5" placeholder="Enter Description" id="idesc" name="idesc" [(ngModel)]="idesc">
+        <br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+</div>
+<br>
+<div class="row">
+    <div id=booksView class="col-7">
+        <table class="table table-sm table-hover table-bordered thead-light">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Submitted</th>
+                    <th scope="col">Resolved</th>
+                </tr>
+            </thead>
+            <tbody id="BookTable">
+                <tr *ngFor="let r of data.reimbs; let i = index" (click)="setCurrentReimb(i)">
+                    <td>{{r.id}}</td>
+                    <td>{{r.amount}}</td>
+                    <td>{{r.status}}</td>
+                    <td>{{r.type}}</td>
+                    <td>{{r.submitted}}</td>
+                    <td>{{r.resolved}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

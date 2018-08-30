@@ -37,16 +37,20 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data);
         if (data != null) {
-        this.servletUserID = Number.parseInt(data.userID);
-        this.servletUsername = data.username;
-        this.servletFirstName = data.firstname;
-        this.servletLastName = data.lastname;
-        this.servletEmail = data.email;
-        this.servletUserRole = data.userRole.userRoleName;
-        this.dataService.setUser([this.servletUserID, this.servletUsername, this.servletFirstName, this.servletLastName, this.servletEmail, this.servletUserRole
-        ]);
-
-        this.router.navigate(['/userPage']);
+          this.servletUserID = Number.parseInt(data.userID);
+          this.servletUsername = data.username;
+          this.servletFirstName = data.firstname;
+          this.servletLastName = data.lastname;
+          this.servletEmail = data.email;
+          this.servletUserRole = data.userRole.userRoleName;
+          this.dataService.setUser([this.servletUserID, this.servletUsername, this.servletFirstName, this.servletLastName, this.servletEmail, this.servletUserRole
+          ]);
+          if (this.dataService.user.role == "Associate") {
+            this.router.navigate(['/userPage']);
+          }
+          else if (this.dataService.user.role == "Admin") {
+            this.router.navigate(['/adminPage']);
+          }
         }
       }
     );

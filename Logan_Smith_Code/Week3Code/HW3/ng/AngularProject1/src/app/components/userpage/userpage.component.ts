@@ -13,9 +13,18 @@ export class UserpageComponent implements OnInit {
   constructor(private urService: UserreimbService, private data: DataService, private router: Router) { }
 
   ngOnInit() {
+    if (this.data.user == null) {
+      this.router.navigate(['/']);
+    }
+    else {
     this.getReimbs();
+    }
   }
+  toAddToggle:boolean = false;
 
+  iamount:number;
+  itype:string;
+  idesc:string;
 
   getReimbs() {
     this.urService.getReimbsbyUserID(this.data.user.id).subscribe(
@@ -48,6 +57,32 @@ export class UserpageComponent implements OnInit {
 
   editUser() {
     this.router.navigate(['/edituser']);
+  }
+  setCurrentReimb(i: number) {
+    this.data.setCurrentReimb(i);
+  }
+  toggleAdd() {
+    this.toAddToggle=!this.toAddToggle;
+  }
+  addReimb() {
+
+    this.urService.postReimb(this.iamount, this.itype, this.idesc).subscribe(
+      d => {
+        console.log(d);
+        if (d != null) {
+        this.iamount = 0;
+        this.itype = "";
+        this.idesc = "";
+        this.toggleAdd();
+        this.getReimbs();
+        }
+      }
+    );
+  }
+
+  logout() {
+    this.data.clear();
+    this.router.navigate(['/loginPage']);
   }
 
 }

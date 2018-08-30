@@ -52,6 +52,21 @@ public class ReimbTypeDAO {
 		}
 		return a;
 	}
+	public ReimbType findByTypeName(String id) {
+		ReimbType a = null;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "select * from ers_reimbursement_type where reimb_type = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				a = new ReimbType(rs.getInt(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
+	}
 
 	public ReimbType save(ReimbType obj) {
 

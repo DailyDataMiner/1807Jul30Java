@@ -52,6 +52,22 @@ public class ReimbStatusDAO {
 		}
 		return a;
 	}
+	
+	public ReimbStatus findByStatusName(String id) {
+		ReimbStatus a = null;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "select * from ers_reimbursement_status where reimb_status = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				a = new ReimbStatus(rs.getInt(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
+	}
 
 	public ReimbStatus save(ReimbStatus obj) {
 

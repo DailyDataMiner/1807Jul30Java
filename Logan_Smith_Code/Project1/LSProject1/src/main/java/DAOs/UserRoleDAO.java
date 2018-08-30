@@ -52,6 +52,22 @@ public class UserRoleDAO {
 		}
 		return a;
 	}
+	
+	public UserRole findByRoleName(String id) {
+		UserRole a = null;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "select * from ers_user_roles where user_role = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				a = new UserRole(rs.getInt(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
+	}
 
 	public UserRole save(UserRole obj) {
 

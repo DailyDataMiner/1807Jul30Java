@@ -15,4 +15,8 @@ export class UserreimbService {
     console.log("userID" + this.data.getUser().getUserID());
     return this.http.post<any[]>('http://localhost:8084/LSProject1/userPage.ng', this.data.getUser().getUserID());
 }
+  postReimb(iamount:number, itype:string, idesc:string) {
+    let iuserid: number = this.data.user.id;
+    return this.http.post<any[]>('http://localhost:8084/LSProject1/newReimb.ng', {reimbAmount: iamount, reimbDesc: idesc, reimbAuthor: iuserid, reimbType: itype});
+  }
 }
