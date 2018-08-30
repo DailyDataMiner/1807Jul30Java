@@ -20,9 +20,9 @@ public class UserDao {
 //			System.out.println(u);
 //		}
 		
-//		System.out.println(findUserByUsername("JohnSmith"));
+		System.out.println(findUserByUsername("JohnSmith"));
 		
-		System.out.println(findForLogin("JohnSmith", "password"));
+//		System.out.println(findForLogin("JohnSmith", "password"));
 		
 		
 	}
@@ -98,7 +98,7 @@ public class UserDao {
 		User u = null;
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "select * from ers_users where userid = ?";
+			String sql = "select * from ers_users where username = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			ResultSet info = ps.executeQuery();
@@ -152,7 +152,7 @@ public class UserDao {
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			
-			String sql = "insert into ers_users (username, password, firstname, lastname, email, roleid) values (?, ?, ?, ?, ?, ?)";
+			String sql = "insert into ers_users (username, password, firstname, lastname, email, roleid) values (?, ?, ?, ?, ?, 'User')";
 			
 			String[] keys = { "userid" };
 
@@ -163,7 +163,7 @@ public class UserDao {
 			ps.setString(3, obj.getFirstname());
 			ps.setString(4, obj.getLastname());
 			ps.setString(5, obj.getEmail());
-			ps.setString(6, obj.getRoleid());
+//			ps.setString(6, obj.getRoleid());
 			
 			ps.executeUpdate();
 

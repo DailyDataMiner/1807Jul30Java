@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
+import { RouterModule, Router } from '@angular/router';
 
 
 @Component({
@@ -14,28 +15,16 @@ export class LoginComponent implements OnInit {
   private password: string;
   show = false;
   hidden = false;
-  
-  // private servletUsername: string;
-  // private servletFirst: string;
-  // private servletLast: string;
-  // private servletEmail: string;
-  // private servletRole: string;
 
-  // private rid: number;
-  // private amount: number;
-  // private sdate: Date;
-  // private rdate: Date;
-  // private info: String;
-  // private recpt: Blob;
-  // private resolver: string;
-  // private status: number;
-  // private type: number;
-
-  user: User;
+  // user: User;
 
   servletData: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private route: RouterModule,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -43,21 +32,32 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.username == null || this.password == null) {
       alert('please enter in something.');
-    } else {
+    } 
+    else {
+
       this.hidden = !this.hidden;
       this.show = !this.show;
 
       this.authService.login(this.username, this.password).subscribe(
         data => {
           console.log(data);
-          this.user = data;
-          console.log("(for testing) the username of data is " + data.username);
-        }
-      );
-    }
-  }
+          this.authService.loggedInUser = data;
 
-  create() {
+          this.authService.isLoggedIn = true;
+          this.router.navigate(['userinfo']);
+
+          // if (data != null) {
+            // this.authService.isLoggedIn = true;
+          //   this.router.navigate(['userinfo']);
+          // }
+
+          // console.log("(for testing) the username of data is " + data.username);
+          // console.log("for testing: also the email of this user is: " + this.authService.loggedInUser.email);
+        }
+
+      );
+
+    }
 
   }
 

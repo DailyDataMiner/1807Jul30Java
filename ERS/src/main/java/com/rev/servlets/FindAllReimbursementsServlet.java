@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rev.dao.UserDao;
-import com.rev.pojos.User;
+import com.rev.dao.ReimbursementDao;
+import com.rev.pojos.Reimbursement;
 
-@WebServlet("/findallusers")
-public class FindAllUsersServlet extends HttpServlet {
+@WebServlet("/findallreimbursements")
+public class FindAllReimbursementsServlet extends HttpServlet {
 
-	List<User> UserList = UserDao.findAllUsers();
+	List<Reimbursement> ReimbursementList = ReimbursementDao.findAllReimbursements();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,9 +25,9 @@ public class FindAllUsersServlet extends HttpServlet {
 		response.setContentType("application/json");
 
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(UserList);
+		String json = mapper.writeValueAsString(ReimbursementList);
 
 		response.getWriter().write(json);
 	}
-
+	
 }
