@@ -44,6 +44,28 @@ public class ReimbursementService {
 		return rd.findAll();
 
 	}
+	public static List<Reimbursement> getAllReimbursementOrder(HttpServletRequest request, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		Reimbursement reimbursements = null;
+		try {
+			reimbursements = mapper.readValue(request.getReader(), Reimbursement.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return rd.findAllOrder(reimbursements.getDescription());
+
+	}
+	public static List<Reimbursement> getReimbursementOrder(HttpServletRequest request, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		Employee employee = null;
+		try {
+			employee = mapper.readValue(request.getReader(), Employee.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return (rd.findOneOrder(employee.getEmpID(),employee.getLastname()));
+
+	}
 
 	public static Reimbursement submitReimbursement(HttpServletRequest request, HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();

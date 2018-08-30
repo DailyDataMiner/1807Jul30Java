@@ -60,6 +60,38 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 		}
 		return reimbursements;
 	}
+	
+	public List<Reimbursement> findAllOrder(String order) {
+		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+			String query = "select * from Reimbursement Order by " + order;
+
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+
+			while (rs.next()) {
+				Reimbursement temp = new Reimbursement();
+				temp.setRbID(rs.getInt(1));
+				temp.setAmount(rs.getDouble(2));
+				temp.setSubmitted(rs.getTimestamp(3));
+				temp.setResolved(rs.getTimestamp(4));
+				temp.setDescription(rs.getString(5));
+				temp.setReceipt(rs.getBlob(6));
+				temp.setAuthor(rs.getInt(7));
+				temp.setResolver(rs.getInt(8));
+				temp.setStatusID(rs.getInt(9));
+				temp.setTypeID(rs.getInt(10));
+				reimbursements.add(temp);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return reimbursements;
+	}
+	
 	public Reimbursement ApproveReimbursement(Reimbursement obj) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
@@ -102,6 +134,37 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
 			String query = "select * from Reimbursement WHERE REIMB_AUTHOR = " + empid;
+
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+
+			while (rs.next()) {
+				Reimbursement temp = new Reimbursement();
+				temp.setRbID(rs.getInt(1));
+				temp.setAmount(rs.getDouble(2));
+				temp.setSubmitted(rs.getTimestamp(3));
+				temp.setResolved(rs.getTimestamp(4));
+				temp.setDescription(rs.getString(5));
+				temp.setReceipt(rs.getBlob(6));
+				temp.setAuthor(rs.getInt(7));
+				temp.setResolver(rs.getInt(8));
+				temp.setStatusID(rs.getInt(9));
+				temp.setTypeID(rs.getInt(10));
+				reimbursements.add(temp);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return reimbursements;
+	}
+	
+	public List<Reimbursement> findOneOrder(int empid, String order) {
+		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+			String query = "select * from Reimbursement WHERE REIMB_AUTHOR = "+ empid +" ORDER BY " + order;
 
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(query);

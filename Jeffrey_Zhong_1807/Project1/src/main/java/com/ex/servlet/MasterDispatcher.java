@@ -25,6 +25,10 @@ public class MasterDispatcher {
 			return  ReimbursementService.approveReimbursement(request,response);
 		case "/Project1/denyReimbursement.ng":
 			return  ReimbursementService.denyReimbursement(request,response);
+		case "/Project1/getReimbursementOrder.ng":
+			return  ReimbursementService.getReimbursementOrder(request,response);
+		case "/Project1/getAllReimbursementOrder.ng":
+			return  ReimbursementService.getAllReimbursementOrder(request,response);
 		default:
 			return "not yet implemented";
 		}
