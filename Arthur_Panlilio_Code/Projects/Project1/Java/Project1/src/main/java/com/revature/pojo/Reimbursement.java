@@ -6,30 +6,49 @@ import java.util.Arrays;
 
 public class Reimbursement {
 	
-	int id;
-	double amount;
-	LocalDate submitted;
-	LocalDate resolved;
-	String Description;
-	Blob receipt;
-	int author;
-	int resolver;
-	int statusId;
-	int typeId;
+	private int id;
+	private double amount;
+	private LocalDate submitted;
+	private LocalDate resolved;
+	private String description;
+	private String response;
+	private int author;
+	private int resolver;
+	private int statusId;
+	private int typeId;
 	
+	private User authorData;
+	private User resolverData;
+	private String status;
+	private String type;
+	
+	
+
 	public Reimbursement() {
 		
 	}
 
-	public Reimbursement(int id, double amount, LocalDate submitted, LocalDate resolved, String description,
-			Blob receipt, int author, int resolver, int statusId, int typeId) {
+
+
+	public Reimbursement(int id, double amount, LocalDate submitted, String description, int author, int statusId,
+			int typeId) {
+		super();
+		this.id = id;
+		this.amount = amount;
+		this.submitted = submitted;
+		this.description = description;
+		this.author = author;
+		this.statusId = statusId;
+		this.typeId = typeId;
+	}
+
+	public Reimbursement(int id, double amount, LocalDate submitted, LocalDate resolved, String description, int author, int resolver, int statusId, int typeId) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
-		Description = description;
-		this.receipt = receipt;
+		this.description = description;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -69,20 +88,13 @@ public class Reimbursement {
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
-	public Blob getReceipt() {
-		return receipt;
-	}
-
-	public void setReceipt(Blob receipt) {
-		this.receipt = receipt;
-	}
 
 	public int getAuthor() {
 		return author;
@@ -115,11 +127,68 @@ public class Reimbursement {
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
+	
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
+	}
+	
+	
+	public User getAuthorData() {
+		return authorData;
+	}
+
+
+
+	public void setAuthorData(User authorData) {
+		this.authorData = authorData;
+	}
+
+
+
+	public User getResolverData() {
+		return resolverData;
+	}
+
+
+
+	public void setResolverData(User resolverData) {
+		this.resolverData = resolverData;
+	}
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
-				+ ", Description=" + Description + ", receipt=" + receipt + ", author=" + author
+				+ ", Description=" + description  + ", author=" + author
 				+ ", resolver=" + resolver + ", statusId=" + statusId + ", typeId=" + typeId + "]";
 	}
 

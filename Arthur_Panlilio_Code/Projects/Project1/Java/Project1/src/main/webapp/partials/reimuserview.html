@@ -1,0 +1,71 @@
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-7">
+                <div style="width:35%; margin: 50px 0px 0px -150px">
+                    <table id="myTable" class="table-bordered table-hover" style>
+                        <thead>
+                            <tr>
+                                <th class="site_name">ID</th>
+                                <th>Amount</th>
+                                <th>Submitted</th>
+                                <th>Response</th>
+                                <th>Author</th>
+                                <th>Resolver</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Resolved</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>           
+                    </table>
+                </div>
+            </div>
+            <div class="col-5 text-center">
+                <div id="rView">
+                    <div id="paper" class="container text-center disabled paper" hidden="true">
+                       
+                        <img src="res/images/paper.png" style="width:550px; height:850px;" alt="" class="paperBody">
+                        <img src ="" id="seal" class="seal" alt="">
+                        <button id="paperCloseButton" class="paperCloseButton">x</button>
+                        <button id="paperApproveButton" class="paperApproveButton">Approve</button>
+                        <button id="paperDenyButton" class="paperDenyButton">Deny</button>
+                       
+                        <div class="mHeader">
+                            <h1 class="lead" style="font-size:15px;">REIMBURSEMENT REQUEST <span id="reID"></span></h1>
+                            <h6>from</h6>
+                            <h5><span id="reName"></span> <i>alias</i> <span id="reUName"></span></h5>
+                            <h6> on the <span id="reDate" style="font-size:18px"> 16th of June 1942</span> </h6>
+                            <h6>to the sum of $<span id="reAmount" style="font-size:30px"></span> </h6>
+                        </div>
+                        <div class="mBody dyn-height text-left" id="reDescription" >
+                            
+                        </div>
+                        <div class="mSigs text-left">
+                            <p id="userSign"></p>
+                            <p id="mngrSign"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="rResponse" class="rResponse disabled" hidden="true">
+                    <div id="paperResponse" class="container text-center disabled paperResonse" >
+                        <img src="res/images/paper.png" style="width:550px; height:350px;" alt="" class="paperResponseBody">
+                        <span id="responseHolder" hidden="true"> 
+                            <span id="responseBody" class="dyn-height responseBody disabled" style="width:450px; height:225px;">
+                           </span>
+                           <span id="responseSign" class="responseSign"></span>
+                        </span>
+                        <span id="responseStuff" class="disabled" hidden="true">
+                            <textarea type="text" id="responseInput" style="width:450px; height:225px;" class="responseInput"> </textarea>
+                            <button id="submitResponseButton" class="submitResponseButton">Submit</button>
+                        </span>
+                        
+                    </div >
+                </div>
+            </div>
+        </div>
+    </div>

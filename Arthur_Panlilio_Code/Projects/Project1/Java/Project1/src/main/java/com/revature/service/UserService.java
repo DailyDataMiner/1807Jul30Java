@@ -24,6 +24,13 @@ public class UserService {
 		return u;
 	}
 	
+	public User find(int id) {
+		User u = uDao.findOne(id);
+		if(u!=null)
+			u.setRole(getRole(u));
+		return u;
+	}
+	
 	public boolean checkLogin(String username, String password) {
 		User u = uDao.findOne(username);
 		return u.getPassword().equals(password);

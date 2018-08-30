@@ -83,6 +83,32 @@ public class UserDAO implements DAO<User, Integer>{
 		}
 		return u;
 	}
+	
+	public User findOne(int id){
+		User u = null;
+		ConnectionFactory.getInstance();
+		try(Connection conn = ConnectionFactory.getConnection()){
+			String sql = "SELECT * FROM users WHERE id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet info = ps.executeQuery();
+			while(info.next()) {
+				u = new User();
+				u.setId(info.getInt(1));
+				u.setUsername(info.getString(2));
+				u.setPassword(info.getString(3));
+				u.setFirstname(info.getString(4));
+				u.setLastname(info.getString(5));
+				u.setEmail(info.getString(6));
+				u.setRoleId(info.getInt(7));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
+	
 	@Override
 	public User save(User u) {
 		ConnectionFactory.getInstance();

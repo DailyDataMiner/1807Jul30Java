@@ -3,16 +3,182 @@
     letter-spacing: 4px;
 }
 
+.paperCloseButton{
+    position: absolute;
+    top: 40px;
+    left: 580px;
+    background-color:transparent;
+    opacity: .8;
+   
+}
+
+.paperApproveButton{
+    font-family: woolen;
+    font-size:25px;
+    position: absolute;
+    top: 760px;
+    left: 410px;
+    background-color:transparent;
+    opacity: .8;
+}
+
+
+.paperDenyButton{
+    font-family: woolen;
+    font-size:25px;
+    position: absolute;
+    top: 760px;
+    left: 510px;
+    background-color:transparent;
+    opacity: .8;
+}
+
+.submitResponseButton{
+    font-family: woolen;
+    font-size:25px;
+    position: absolute;
+    top: 1130px;
+    left: 330px;
+    background-color:transparent;
+    opacity: .8;
+}
+
+.seal{
+    position: absolute;
+    top: 630px;
+    left: 350px;
+    width:250px;
+    height:200px;
+    opacity: .4;
+}
+
+
+.paperBody{
+    position: absolute;
+    top: 0%;
+    left: 18%;
+    width: 100%;
+    opacity:.8;
+}
+
+.paperResponseBody{
+    position: absolute;
+    top: 850px;
+    left: 18%;
+    width: 100%;
+    opacity:.8;
+}
+
+.responseInput{
+    position: absolute;
+    background-image: url("res/backgrounds/background.jpg");
+    top: 900px;
+    left: 29%;
+    width: 100%;
+    vertical-align: top;
+    text-align: left;
+    opacity:.8;
+}
+
+.responseBody{
+    position: absolute;
+    top: 900px;
+    left: 29%;
+    width: 100%;
+    vertical-align: top;
+    text-align: left;
+    opacity:.8;
+}
+.responseSign{
+    font-family: woolen;
+    font-size:25px;
+    position: absolute;
+    top: 1140px;
+    left: 135px;
+    width: 100%;
+    vertical-align: top;
+    text-align: left;
+    opacity:.8;
+}
+
+.mHeader{
+    position: absolute;
+    top: 60px;
+    left: 130px;
+    width: 100%;
+    opacity:.8;
+}
+.mBody{
+    position: absolute;
+    top: 230px;
+    left: 130px;
+    width: 100%;
+    opacity:.8;
+}
+
+.mSigs{
+    font-family: 'Herr Von Muellerhoff', cursive;
+    font-size:50px;
+    position: absolute;
+    top: 650px;
+    left: 140px;
+    width: 100%;
+    opacity: .8;
+}
+
+/* width */
+.paper ::-webkit-scrollbar  {
+    width: 10px;
+}
+textarea ::-webkit-scrollbar  {
+    width: 10px;
+}
+/* Track */
+.paper ::-webkit-scrollbar-track, textarea ::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 5px grey; 
+    background: #d8d29e; 
+}
+
+textarea ::-webkit-scrollbar-track{ 
+    box-shadow: inset 0 0 5px grey; 
+    background: #d8d29e; 
+}
+
+/* Handle */
+.paper ::-webkit-scrollbar-thumb, textarea  ::-webkit-scrollbar-thumb {
+    background: rgba(87, 57, 22, 0.548); 
+}
+textarea ::-webkit-scrollbar-thumb {
+    background: rgba(87, 57, 22, 0.548); 
+}
+
+/* Handle on hover */
+.paper ::-webkit-scrollbar-thumb:hover, textarea  ::-webkit-scrollbar-thumb:hover{
+    background: rgba(87, 57, 22, 0.651); 
+}
+textarea ::-webkit-scrollbar-thumb:hover{
+    background: rgba(87, 57, 22, 0.651); 
+}
+
+.dyn-height {
+    max-height:420px;
+    width: 100%;;
+    overflow-y:auto;
+}
+
 .parallax {
     /* The image used */
     background:  url("res/backgrounds/background.jpg");
 
     /* Set a specific height */
     min-height: 500px; 
-
+    height: 100%;
+    width: 100%;
     /* Create the parallax scrolling effect */
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
+
+    
 }
 .woolen{
     font-family: woolen;
@@ -34,3 +200,7 @@ a,
 a label {
     cursor: pointer;
 }
+table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td {
+    border:2px solid rgba(0, 0, 0, 0.336);
+  }
+

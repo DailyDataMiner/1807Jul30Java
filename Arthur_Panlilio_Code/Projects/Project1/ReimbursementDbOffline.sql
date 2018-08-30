@@ -19,6 +19,16 @@ CREATE TABLE reimbursements (
     REFERENCES reimbursementType(id)
 );
 
+TRUNCATE table reimbursements;
+ALTER TABLE reimbursements
+DROP COLUMN receipt;
+ALTER TABLE reimbursements
+ADD response varchar2(256);
+ALTER TABLE reimbursements
+MODIFY description varchar2(4000);
+ALTER TABLE reimbursements
+MODIFY response varchar2(4000);
+
 CREATE TABLE users (
   id number(10) PRIMARY KEY,
   username varchar2(50) not null unique,
@@ -133,5 +143,24 @@ INSERT INTO users (username,password,firstname,lastname,email,roleid)VALUES('brr
 commit;
 
 INSERT INTO reimbursementstatus VALUES (1,'Pending');
+INSERT INTO reimbursementstatus VALUES (2, 'Denied');
+InSERT INTO reimbursementstatus VALUES (3, 'Approved');
+
 INSERT INTO reimbursementtype VALUES (1, 'Travel');
 
+SELECT type FROM reimbursementstatus WHERE id = 1;
+
+
+CREATE OR REPLACE PROCEDURE UpdateRe(rId number, resId number, status number, newDate Date, theResponse varchar2)
+IS 
+BEGIN
+UPDATE reimbursements SET resolver = resId, statusId = status, resolved = newDate, response = theResponse WHERE id=rId;
+END;
+/
+
+Exec UpdateRe(5, 34, 3, (TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')), 'wafawfwa');
+
+UPDATE reimbursements SET resolver = 34, statusId = 2, resolved = (TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')), response = 'a' WHERE id=6;
+commit;
+
+unlock reimbursements

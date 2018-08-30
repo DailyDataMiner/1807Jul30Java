@@ -69,8 +69,8 @@ public class LoadViewServlet extends HttpServlet {
 				return "aboutview";
 			case "/Project1/register.view":
 				return "registerview";
-			case "/BookStore/author.view":
-				return "authorview";
+			case "/Project1/reimuser.view":
+				return "reimuserview";
 			default:
 				return "oopsview";
 		}

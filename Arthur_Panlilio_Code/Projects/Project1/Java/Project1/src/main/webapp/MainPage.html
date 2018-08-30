@@ -10,10 +10,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
-    
-    
     <script type="text/javascript" src="js/mainPage.js"></script>
     <link rel="stylesheet" href="project1.css">
+
+
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="DataTable.css">
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+
     
 </head>
 <body class="parallax old" >
@@ -24,6 +28,7 @@
         <a class="nav-item nav-link" >History</a>
         <a class="nav-item nav-link" >Location</a>
         <a class="nav-item nav-link" >Contact</a>
+        <a class="nav-item nav-link disabled" id="navItemViewReim" hidden="true"></a>
         <a class="nav-item nav-link disabled" id="navItemProfile" hidden="true"></a>
         <a class="nav-item nav-link disabled" id="navItem" hidden="true"></a>
         <a class="nav-item nav-link disabled" id="navItemReg" hidden="true"></a>
@@ -31,10 +36,7 @@
     </div>
 </nav>
 
-
 <div id="view"></div>
-
-
 
 
     

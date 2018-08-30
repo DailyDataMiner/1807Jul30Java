@@ -12,24 +12,17 @@ public class maintest {
 		ReimbursementDAO re = new ReimbursementDAO();
 
 		Reimbursement r = new Reimbursement();
-		r.setAmount(50.12);
-		r.setAuthor(3);
-		r.setDescription("Bought a cow to impress client");
+		r.setAmount(523.21);
+		r.setAuthor(4);
+		r.setDescription("aewhwh");
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		LocalDate now = LocalDate.now();
-		r.setResolved(LocalDate.now());
-		r.setResolver(2);
+		//r.setResolver(2);
 		r.setStatusId(1);
 		r.setSubmitted(LocalDate.now());
 		r.setTypeId(1);
 		re.save(r);
-		System.out.println(re.findAll());
-		UserService uService = new UserService();
-		System.out.println(uService.getAll());
-		User u = new User("fafaga", "abvs", "Brob", "Brobber", "Br@B.com", 1);
-		uService.addUser(u);
-		User a = new User("faea", "abvs", "Brob", "Brobber", "Br@B.com", 1);
-		uService.addUser(a);
+
 		
 	}
 	
