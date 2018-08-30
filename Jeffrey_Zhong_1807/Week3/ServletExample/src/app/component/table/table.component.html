@@ -6,16 +6,17 @@
 <table  dt-options="controller.options"  datatable="ng" class="table  table-bordered table-striped table-hover table-responsive">
   <thead class="thead-dark">
     <tr>
-      <th>ReimbursementID</th>
-      <th>EmployeeID</th>
-      <th>$Amount</th>
-      <th>Submitted Date</th>
-      <th>Resolved Date</th>
-      <th>Description</th>
-      <th>Receipt</th>
-      <th>ResolverID</th>
-      <th>Type</th>
-      <th>Status</th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_ID')">ReimbursementID</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_AUTHOR')">EmployeeID</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_AMOUNT')">$Amount</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_SUBMITTED')">Submitted Date</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RESOLVED')">Resolved Date</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_DESCRIPTION')">Description</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RECEIPT')">Receipt</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RESOLVER')">ResolverID</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_TYPE_ID')">Type</a></th>
+      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_STATUS_ID')">Status</a></th>
+     
       <th></th>
     </tr>
   </thead>

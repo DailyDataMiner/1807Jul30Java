@@ -25,4 +25,10 @@ export class AuthService {
   denyReimbursement(rbID: number, resolver: number): Observable<any> {
     return this.http.post<any>("http://localhost:8082/Project1/denyReimbursement.ng", {rbID: rbID, resolver: resolver });
   }
+  getReimbursementOrder(empID: number, lastname: string): Observable<any> {
+    return this.http.post<any>("http://localhost:8082/Project1/getReimbursementOrder.ng", {empID: empID, lastname: lastname });
+  }
+  getAllReimbursementOrder(description: string): Observable<any> {
+    return this.http.post<any>("http://localhost:8082/Project1/getAllReimbursementOrder.ng", {description: description});
+  }
 }

@@ -29,6 +29,30 @@ export class TableComponent implements OnInit {
 
   constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
+  getAllReimbursementOrder(order:string) {
+    this.authService.getAllReimbursementOrder(order).subscribe(
+      data => {
+        
+        this.rbarray = data
+          this.rbID= data.rbID;
+          this.amount= data.amount;
+          this.submitted= data.submitted;
+          this.resolved= data.resolved;
+          this.description= data.description;
+          this.receipt= data.receipt;
+          this.author= data.author;
+          this.resolver= data.resolver;
+          this.statusID= data.statusID;
+          this.typeID= data.typeID;
+         
+  
+          console.log(this.rbarray);
+        
+      }
+    );
+  }
+
+
   approve(rbID:number, resolverID:number ){
     this.authService.approveReimbursement( rbID, resolverID).subscribe(
       data => {

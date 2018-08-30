@@ -39,7 +39,7 @@ export class EmployeeComponent implements OnInit {
   private type: string;
 
 
-
+  
   
   submitReimbursement(){
   this.authService.submitReimbursement(this.id,this.amount,this.convertType(this.type),this.description).subscribe(
@@ -48,7 +48,28 @@ export class EmployeeComponent implements OnInit {
         this.getReimbursement();
  })
 };
+getReimbursementOrder(order:string) {
+  this.authService.getReimbursementOrder(this.id,order).subscribe(
+    data => {
+      
+      this.rbarray = data
+        this.rbID= data.rbID;
+        this.amount= data.amount;
+        this.submitted= data.submitted;
+        this.resolved= data.resolved;
+        this.description= data.description;
+        this.receipt= data.receipt;
+        this.author= data.author;
+        this.resolver= data.resolver;
+        this.statusID= data.statusID;
+        this.typeID= data.typeID;
+       
 
+        console.log(this.rbarray);
+      
+    }
+  );
+}
   getReimbursement() {
     this.authService.getReimbursement(this.id).subscribe(
       data => {
