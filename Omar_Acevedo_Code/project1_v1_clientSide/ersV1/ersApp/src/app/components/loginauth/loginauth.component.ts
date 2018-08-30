@@ -13,6 +13,7 @@ export class LoginauthComponent implements OnInit {
   private password: string;
   public loggedUserId: number;
   public loggedUserName: string;
+  private user_role_name: string;
 
   constructor(private router: Router, private loginAuthService: LoginauthService) { }
 
@@ -31,6 +32,7 @@ export class LoginauthComponent implements OnInit {
 
             this.loggedUserId = loginData.user_id;
             this.loggedUserName = loginData.username;
+            this.user_role_name = loginData.user_role_name;
 
             if (loginData.user_role_id == 10) { // Normal employee
 
@@ -44,7 +46,8 @@ export class LoginauthComponent implements OnInit {
 
               this.router.navigate(['/reimbursementManager', {
                 loggedUserId: this.loggedUserId, 
-                loggedUserName: this.loggedUserName 
+                loggedUserName: this.loggedUserName,
+                user_role_name: this.user_role_name
               }]);
               
             }

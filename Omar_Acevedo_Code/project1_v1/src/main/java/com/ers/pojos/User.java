@@ -9,6 +9,7 @@ public class User {
 	private String lastname;
 	private String email;
 	private int user_role_id;
+	private String user_role_name;
 	private int reports_to;
 	
 	public User() {}
@@ -20,12 +21,13 @@ public class User {
 		this.password = password;
 	}
 	
-	public User(int user_id, String username, String password, int user_role_id) {
+	public User(int user_id, String username, String password, int user_role_id, String user_role_name) {
 		super();
 		this.user_id = user_id;
 		this.username = username;
 		this.password = password;
 		this.user_role_id = user_role_id;
+		this.user_role_name = user_role_name;
 	}
 
 	public User(int user_id, String username, String password, String firstname, String lastname, String email,
@@ -39,6 +41,14 @@ public class User {
 		this.email = email;
 		this.user_role_id = user_role_id;
 		this.reports_to = reports_to;
+	}
+
+	public String getUser_role_name() {
+		return user_role_name;
+	}
+
+	public void setUser_role_name(String user_role_name) {
+		this.user_role_name = user_role_name;
 	}
 
 	public int getUser_id() {
@@ -109,7 +119,7 @@ public class User {
 	public String toString() {
 		return "User [user_id=" + user_id + ", username=" + username + ", password=" + password + ", firstname="
 				+ firstname + ", lastname=" + lastname + ", email=" + email + ", user_role_id=" + user_role_id
-				+ ", reports_to=" + reports_to + "]";
+				+ ", user_role_name=" + user_role_name + ", reports_to=" + reports_to + "]";
 	}
-	
+
 }

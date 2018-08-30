@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { SearchEmployeePipe } from './pipes/search-employee.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -20,7 +21,8 @@ import { ReimbManagerComponent } from './components/reimb-manager/reimb-manager.
     HomeComponent,
     ReimbursementsComponent,
     LoginauthComponent,
-    ReimbManagerComponent
+    ReimbManagerComponent,
+    SearchEmployeePipe
   ],
   imports: [
     BrowserModule,
