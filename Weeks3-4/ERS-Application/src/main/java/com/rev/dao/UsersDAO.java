@@ -40,19 +40,25 @@ public class UsersDAO implements Dao<Users, Integer> {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public Object findOneID(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public Users findOneID(Integer id) {
+		Users u = null;
+		try(Connection conn = ConnectionFactory
+				.getInstance().getConnection()){
+			String sql = "select * from ERS_Users where User_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet info = ps.executeQuery();
+			while(info.next()) {
+			u = new Users();
+			u.setUsersID(info.getInt(1));
+			u.setFirstName(info.getString(2));
+			}
+			// more code
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return u;
 	}
 
 	public Users findOne(Integer id) {
@@ -60,22 +66,23 @@ public class UsersDAO implements Dao<Users, Integer> {
 		return null;
 	}
 
-	public Users save(Users obj) {
+	public Users save(Users b) {
 		try(Connection conn = ConnectionFactory.getInstance()
 				.getConnection()){
 			conn.setAutoCommit(false);
-			String sql = "Insert Into ERS_Users(first_Name,last_Name,email,user_Name, pass_word) values(?,?,?,?,?)"; 
+			String sql = "Insert into ERS_USERS(ERS_USERNAME, ERS_PASSWORD, USER_FIRST_NAME,"
+					+ "USER_LAST_NAME,USER_EMAIL) values (?,?,?,?,?)"; 
 			
 			
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			
-			ps.setString(1, obj.getFirstName());
-			ps.setString(2, obj.getLastName());
-			ps.setString(3, obj.getEmail());
-			ps.setString(4, obj.getUsername());
-			ps.setString(5, obj.getPassword());
+			ps.setString(1, b.getUsername());
+			ps.setString(2, b.getPassword());
+			ps.setString(3, b.getFirstName());
+			ps.setString(4, b.getLastName());
+			ps.setString(5, b.getEmail());
 			
 			
 			
@@ -83,7 +90,7 @@ public class UsersDAO implements Dao<Users, Integer> {
 			//QUERIES return result sets
 			int numRowsAffected = ps.executeUpdate();
 			
-			System.out.println("Welcome "+ obj.getFirstName());
+			
 				conn.commit();
 			
 		} catch (SQLException e) {
@@ -93,22 +100,47 @@ public class UsersDAO implements Dao<Users, Integer> {
 		
 	}
 
-	public Object update(Object obj) {
+	public Users update(Users obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object insert(Object obj) {
+	public Users insert(Users obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void delete(Object obj) {
+	public void delete(Users obj) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	
 
-	
+	public Users findOneID(Users obj) {
+		Users u = null;
+		try(Connection conn = ConnectionFactory
+				.getInstance().getConnection()){
+			String sql = "select * from ERS_Users where username = ? AND password = ?" ;
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, obj.getUsername());
+			ps.setString(2, obj.getPassword());
+			ResultSet info = ps.executeQuery();
+			while(info.next()) {
+			u = new Users();
+			u.setUsersID(info.getInt(1));
+			u.setFirstName(info.getString(2));
+			u.setLastName(info.getString(3));
+			u.setEmail(info.getString(4));
+			u.setUsername(info.getString(5));
+			u.setPassword(info.getString(6));
+			}
+			// more code
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
+
+		
 }

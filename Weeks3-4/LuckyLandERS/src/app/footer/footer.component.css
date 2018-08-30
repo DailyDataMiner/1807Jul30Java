@@ -1,0 +1,9 @@
+div#fixedfooter {
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:rgb(158, 28, 158);
+	padding:8px;
+}
