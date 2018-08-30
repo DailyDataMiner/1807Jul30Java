@@ -10,7 +10,8 @@ export class LoginauthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>("", {});
+    return this.http.post<any>("http://localhost:8080/project1_v1/login", 
+                              {username: username, password: password});
   }
 
 }

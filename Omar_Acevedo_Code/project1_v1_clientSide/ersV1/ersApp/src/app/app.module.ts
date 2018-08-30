@@ -10,6 +10,7 @@ import { ReimbursementsComponent } from './components/reimbursements/reimburseme
 import { ReimbursementService } from './services/reimbursement.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LoginauthComponent } from './components/loginauth/loginauth.component';
+import { LoginauthService } from './services/loginauth/loginauth.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoginauthComponent } from './components/loginauth/loginauth.component';
     FormsModule
   ],
   providers: [
-    ReimbursementService
+    ReimbursementService,
+    LoginauthService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReimbursementService } from '../../services/reimbursement.service';
 import { Reimbursement } from '../../models/reimbursement.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reimbursements',
@@ -8,6 +9,10 @@ import { Reimbursement } from '../../models/reimbursement.model';
   styleUrls: ['./reimbursements.component.css']
 })
 export class ReimbursementsComponent implements OnInit {
+
+  private loggedUserId: number;
+  private loggedUserName: string;
+  private sub: any;
 
   reimbursementsArr: Reimbursement[] = [];
   currentClass = "";
@@ -20,10 +25,21 @@ export class ReimbursementsComponent implements OnInit {
   reimb_type: string;
   receipt: string;
 
-  constructor(private rService: ReimbursementService) { }
+  constructor(private rService: ReimbursementService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.currentClass = "active";
+
+    this.sub = this.route.params.subscribe(
+      params => {
+                  this.loggedUserId = +params['loggedUserId']; // (+) converts string 'loggedUserId' to a number
+                  this.loggedUserName = params['loggedUserName'];
+                  // In a real app: dispatch action to load the details here.
+      });
+   
+    console.log("loggedUserId -> " + this.loggedUserId);
+    console.log("loggedUserName -> " + this.loggedUserName);
+
 
     // # of tickets to show at init on each expense type block, ... still a work in progress
     // this.findReimbursements('food');
@@ -32,6 +48,7 @@ export class ReimbursementsComponent implements OnInit {
     // this.foodTicketCount = this.findReimbursements('food');
     // this.officeTicketCount = this.findReimbursements('office');
     // this.ticketCount = this.reimbursementsArr.length;
+    
   }
   
   getTicketCount(type) {
@@ -41,6 +58,8 @@ export class ReimbursementsComponent implements OnInit {
   }
 
 // try the aws s3 thing to store images (image link)
+
+// This function is called by getExpenses fn
   findReimbursements(type: string): number {
     this.rService.getReimbursements().subscribe(
       reimb => {
@@ -53,7 +72,6 @@ export class ReimbursementsComponent implements OnInit {
 
           });
 
-          
           // this.foodTicketCount = this.reimbursementsArr.length;
           // this.officeTicketCount = this.reimbursementsArr.length;
           // this.transportationTicketCount = this.reimbursementsArr.length;
@@ -67,6 +85,7 @@ export class ReimbursementsComponent implements OnInit {
     return this.reimbursementsArr.length;
   }
 
+  // Called by click event on html [ "View" button ]
   getExpenses(type) {
     console.log('getExpenses ' + type + ' fn');
     this.findReimbursements(type);

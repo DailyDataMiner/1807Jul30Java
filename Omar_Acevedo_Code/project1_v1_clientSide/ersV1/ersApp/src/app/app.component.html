@@ -1,3 +1,8 @@
-<app-navbar></app-navbar>
 
-<router-outlet></router-outlet>
+<span *ngIf="canLogin()">
+
+    <app-navbar></app-navbar>
+    
+    <router-outlet></router-outlet>
+
+</span>

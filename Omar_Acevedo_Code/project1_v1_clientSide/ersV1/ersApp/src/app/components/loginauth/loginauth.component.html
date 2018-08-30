@@ -1,6 +1,14 @@
-<p>
-  loginauth works!
-</p>
 <form (submit)="doLogin()">
+
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username" required [(ngModel)]='username'>
+  
+  <br>
+  
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" required [(ngModel)]='password'>
+  <br>
+  
   <input type="submit" value="Log In" />
+
 </form>

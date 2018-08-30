@@ -57,10 +57,10 @@ public class LoginServlet extends HttpServlet {
 					}
 					
 				default:
-					PrintWriter pWriter = resp.getWriter();
+//					PrintWriter pWriter = resp.getWriter();
 
 //					resp.setContentType("application/json");
-					pWriter.write("Oh, hey... what's up?");
+//					pWriter.write("Oh, hey... what's up?");
 					System.out.println("defaulted;");
 		
 			}
