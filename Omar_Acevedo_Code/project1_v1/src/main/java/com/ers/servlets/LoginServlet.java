@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 					
 					User authorizedUser = uService.getUserInfo(user.getUsername());
 					
-					
 					if (uService.getHashValue(user).equals(authorizedUser.getPassword())) {
 						
 						String json = "";

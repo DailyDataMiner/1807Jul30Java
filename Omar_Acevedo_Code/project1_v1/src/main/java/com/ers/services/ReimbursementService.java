@@ -9,6 +9,9 @@ public class ReimbursementService extends ReimbursementDao {
 
 	public List<Reimbursement> findAll() { return readAll(); }
 	
-	public void save(Reimbursement reimbObj) { create(reimbObj); }
+	public void save(Reimbursement reimbObj) { 
+		System.out.println("in service -> " + reimbObj.toString());
+		create(reimbObj); 
+	}
 	
 }

@@ -11,6 +11,7 @@ import { ReimbursementService } from './services/reimbursement.service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LoginauthComponent } from './components/loginauth/loginauth.component';
 import { LoginauthService } from './services/loginauth/loginauth.service';
+import { ReimbManagerComponent } from './components/reimb-manager/reimb-manager.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginauthService } from './services/loginauth/loginauth.service';
     NavbarComponent,
     HomeComponent,
     ReimbursementsComponent,
-    LoginauthComponent
+    LoginauthComponent,
+    ReimbManagerComponent
   ],
   imports: [
     BrowserModule,

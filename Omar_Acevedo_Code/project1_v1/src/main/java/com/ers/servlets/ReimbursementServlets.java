@@ -43,7 +43,7 @@ public class ReimbursementServlets extends HttpServlet {
 		}
 		
 		System.out.println("req.getRequestURI() -> " + req.getRequestURI());
-		PrintWriter pw = resp.getWriter();
+//		PrintWriter pw = resp.getWriter();
 //		pw.write("hello\n");
 //		pw.write("hello again!\n");
 		
@@ -51,6 +51,8 @@ public class ReimbursementServlets extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		rService = new ReimbursementService();
 		
 		System.out.println("This is post data!");
 		
@@ -67,6 +69,8 @@ public class ReimbursementServlets extends HttpServlet {
 		mapper = new ObjectMapper();
 		
 		Reimbursement reimbObj = mapper.readValue(json, Reimbursement.class);
+		
+		System.out.println(reimbObj.toString());
 		
 		rService.save(reimbObj);
 		

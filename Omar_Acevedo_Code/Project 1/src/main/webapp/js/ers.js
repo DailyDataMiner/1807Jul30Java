@@ -65,8 +65,8 @@ function addRequest() {
 		}
 	}
 	
-	xhr.open('POST', 'reimbursements?type='+gType, true);
 	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.open('POST', 'reimbursements?type='+gType, true);
 	xhr.send(reimbursementObj);
 	
 	// Clear form input data

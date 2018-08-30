@@ -32,11 +32,23 @@ export class LoginauthComponent implements OnInit {
             this.loggedUserId = loginData.user_id;
             this.loggedUserName = loginData.username;
 
-            // this.router.navigate(['/home']);
-            this.router.navigate(['/reimbursements', {
-                                             loggedUserId: this.loggedUserId, 
-                                             loggedUserName: this.loggedUserName 
-                                            }]);
+            if (loginData.user_role_id == 10) { // Normal employee
+
+              // this.router.navigate(['/home']);
+              this.router.navigate(['/reimbursements', {
+                                                          loggedUserId: this.loggedUserId, 
+                                                          loggedUserName: this.loggedUserName 
+              }]);
+              
+            } else {
+
+              this.router.navigate(['/reimbursementManager', {
+                loggedUserId: this.loggedUserId, 
+                loggedUserName: this.loggedUserName 
+              }]);
+              
+            }
+              
         } else {
           this.router.navigate(['/login']);
         }

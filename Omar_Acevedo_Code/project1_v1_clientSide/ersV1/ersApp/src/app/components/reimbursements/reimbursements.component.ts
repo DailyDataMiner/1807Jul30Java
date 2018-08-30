@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReimbursementsComponent implements OnInit {
 
-  private loggedUserId: number;
-  private loggedUserName: string;
+  public loggedUserId: number;
+  public loggedUserName: string;
   private sub: any;
 
   reimbursementsArr: Reimbursement[] = [];
@@ -60,15 +60,26 @@ export class ReimbursementsComponent implements OnInit {
 // try the aws s3 thing to store images (image link)
 
 // This function is called by getExpenses fn
-  findReimbursements(type: string): number {
+  findReimbursements(type: string, loggedUserName: string): number {
     this.rService.getReimbursements().subscribe(
       reimb => {
         if (reimb !== null) {
 
           this.reimbursementsArr = reimb.filter(function(element, index, array) {
             
+            console.log(element);
+            console.log(loggedUserName.toLowerCase());
+            // console.log(element.created_byId);
             type = (type.toLowerCase() == 'office') ? 'office supplies' : type;
-            return (element.reimb_type.toUpperCase() == type.toUpperCase()) || (type == '');
+            
+            if (  ( element.reimb_type.toUpperCase() == type.toUpperCase() ) && 
+                  ( element.created_by.toLowerCase() == loggedUserName.toLowerCase() ) ) {
+                    return true;
+            } else {
+              return false;
+            }
+
+            // return (element.reimb_type.toUpperCase() == type.toUpperCase()) || (type == '');
 
           });
 
@@ -88,7 +99,7 @@ export class ReimbursementsComponent implements OnInit {
   // Called by click event on html [ "View" button ]
   getExpenses(type) {
     console.log('getExpenses ' + type + ' fn');
-    this.findReimbursements(type);
+    this.findReimbursements(type, this.loggedUserName);
     this.reimb_type = type;
   }
   
@@ -100,11 +111,11 @@ export class ReimbursementsComponent implements OnInit {
   addReimbursement() {
     console.log("addReimbursement fn");
    
-    this.rService.postReimbursement(this.description, this.amount, this.reimb_type, this.receipt).subscribe(
+    this.rService.postReimbursement(this.description, this.amount, this.reimb_type, this.receipt, this.loggedUserId).subscribe(
       rData => {
         console.log('rData -> ');
         console.log(rData);
-
+        
         this.description = '';
         this.amount = 0; 
         this.receipt = '';

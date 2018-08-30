@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Revature ERS</title>
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Fixed navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      <div id="view" class="jumbotron">
+        <h1>Navbar example</h1>
+        <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
+        <a class="btn btn-lg btn-primary" href="../../components/navbar/" id="signIn" role="button">Sign In »</a>
+      </div>
+    </main>
+
+
+
+
+<div id="homeView">
+	<!-- ( <a id="addBook">Add Book</a> ) -->
+	<div id="bookAddForm">
+		<input type="type" placeholder="First Name" id="first_name">
+		<input type="type" placeholder="Last Name" id="last_name">
+		<input type="type" placeholder="Reimbursement Amount" id="cash">
+		<input type="type" placeholder="Description" id="description">
+		
+		<button id="addRequestBtn" onclick="addTicketAction()">Add Ticket</button>
+	</div>
+	<table class="table table-sm table-hover table-bordered thead-light">
+	<thead>
+		<tr>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">Amount</th>
+			<th scope="col">Submit Date</th>
+			<th scope="col">Resolution Date</th>
+			<th scope="col">Description</th>
+			<th scope="col">Status</th>
+			
+		</tr>
+	</thead>	
+	<tbody id="ticketTable">
+	</tbody>
+	</table>
+</div>
+
+
+
+ 
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</body>
+</html>

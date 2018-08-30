@@ -21,7 +21,7 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
 			String sql 	= "select ";
-				   sql  +=  "TICKET_ID, TICKET_STATUS, CREATED_ON, " +
+				   sql  +=  "TICKET_ID, TICKET_STATUS, CREATED_BY, CREATED_BY_ID, CREATED_ON, " +
 		   					"DESCRIPTION, REIMB_TYPE, AMOUNT, REIMB_STATUS, " +
 		   					"RESOLVER, RECEIPT ";
 				   sql  += "from v_tickets_reimbursements";
@@ -36,11 +36,13 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 					   sqlResult.getInt("TICKET_ID"),
 					   sqlResult.getString("TICKET_STATUS"),
 					   sqlResult.getString("CREATED_ON"), 	// getDate...?
+					   sqlResult.getString("CREATED_BY"),
+					   sqlResult.getInt("CREATED_BY_ID"),
 					   sqlResult.getString("DESCRIPTION"),
-					   sqlResult.getString("REIMB_TYPE"),
 					   sqlResult.getDouble("AMOUNT"),
-					   sqlResult.getString("REIMB_STATUS"),
 					   sqlResult.getString("RESOLVER"),
+					   sqlResult.getString("REIMB_TYPE"),
+					   sqlResult.getString("REIMB_STATUS"),
 					   null
 //					   sqlResult.getBlob("RECEIPT").toString()		// blob or string?
 					));
@@ -66,7 +68,8 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 			
 			// first param will be current user id
 			// user id must come from obj, which will have (logged) user id who sent the post request
-			cs.setInt(1, 2);
+//			cs.setInt(1, 2);
+			cs.setInt(1, reimbObj.getCreated_by_id());
 			
 			
 			// second param will be description

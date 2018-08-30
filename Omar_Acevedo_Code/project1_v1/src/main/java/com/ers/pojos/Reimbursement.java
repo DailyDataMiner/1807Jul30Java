@@ -5,7 +5,8 @@ public class Reimbursement {
 	private int ticket_id;
 	private String ticket_status;
 	private String created_on;	// date
-	private String created_by;	// date
+	private String created_by;	// 
+	private int created_by_id;
 	private String name;
 	private String description;	
 	private double amount;
@@ -19,29 +20,37 @@ public class Reimbursement {
 	public Reimbursement() {
 		super();
 	}
-
-	public Reimbursement(int ticket_id, String ticket_status, String created_on, String description, String reimb_type,
-			double amount, String reimb_status, String resolver, String receipt) {
+	
+	public Reimbursement(int ticket_id, String ticket_status, String created_on, String created_by, int created_by_id,
+			String description, double amount, String resolver, String reimb_type, String reimb_status,
+			String receipt) {
 		super();
 		this.ticket_id = ticket_id;
 		this.ticket_status = ticket_status;
 		this.created_on = created_on;
+		this.created_by = created_by;
+//		this.created_by_id = created_by_id;
+		this.created_by_id = 12;
 		this.description = description;
-		this.reimb_type = reimb_type;
 		this.amount = amount;
 		this.resolver = resolver;
+		this.reimb_type = reimb_type;
 		this.reimb_status = reimb_status;
 		this.receipt = receipt;
 	}
 
-	public Reimbursement(int ticket_id, String ticket_status, String created_on, String created_by, String name,
-			String description, double amount, String resolver, String resolved_on, String reimb_type,
+
+
+	public Reimbursement(int ticket_id, String ticket_status, String created_on, String created_by, int created_by_id,
+			String name, String description, double amount, String resolver, String resolved_on, String reimb_type,
 			String reimb_status, String receipt, int reimbursement_id) {
 		super();
 		this.ticket_id = ticket_id;
 		this.ticket_status = ticket_status;
 		this.created_on = created_on;
 		this.created_by = created_by;
+//		this.created_by_id = created_by_id;
+		this.created_by_id = 44;
 		this.name = name;
 		this.description = description;
 		this.amount = amount;
@@ -83,6 +92,14 @@ public class Reimbursement {
 
 	public void setCreated_by(String created_by) {
 		this.created_by = created_by;
+	}
+
+	public int getCreated_by_id() {
+		return created_by_id;
+	}
+
+	public void setCreated_by_id(int created_by_id) {
+		this.created_by_id = created_by_id;
 	}
 
 	public String getName() {
@@ -160,10 +177,28 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [ticket_id=" + ticket_id + ", ticket_status=" + ticket_status + ", created_on="
-				+ created_on + ", created_by=" + created_by + ", name=" + name + ", description=" + description
-				+ ", amount=" + amount + ", resolver=" + resolver + ", resolved_on=" + resolved_on + ", reimb_type="
-				+ reimb_type + ", reimb_status=" + reimb_status + ", receipt=" + receipt + ", reimbursement_id="
-				+ reimbursement_id + "]";
+				+ created_on + ", created_by=" + created_by + ", created_by_id=" + created_by_id + ", name=" + name
+				+ ", description=" + description + ", amount=" + amount + ", resolver=" + resolver + ", resolved_on="
+				+ resolved_on + ", reimb_type=" + reimb_type + ", reimb_status=" + reimb_status + ", receipt=" + receipt
+				+ ", reimbursement_id=" + reimbursement_id + "]";
 	}
+
+	/*public Reimbursement(int ticket_id, String ticket_status, String created_by, int created_by_id, String created_on, String description, String reimb_type,
+			double amount, String reimb_status, String resolver, String receipt) {
+		super();
+		this.ticket_id = ticket_id;
+		this.ticket_status = ticket_status;
+		this.created_by = created_by;
+		this.created_by_id = created_by_id;
+		this.created_on = created_on;
+		this.description = description;
+		this.reimb_type = reimb_type;
+		this.amount = amount;
+		this.resolver = resolver;
+		this.reimb_status = reimb_status;
+		this.receipt = receipt;
+	}*/
+
 	
+
 }

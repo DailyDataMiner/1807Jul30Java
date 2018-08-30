@@ -47,7 +47,7 @@ public class UserDaoImplementation implements UserDao<User> {
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
-			PreparedStatement stmt = conn.prepareStatement("select user_id, username, password from p1_users where username = ?");
+			PreparedStatement stmt = conn.prepareStatement("select user_id, username, password, user_role_id from p1_users where username = ?");
 			
 			stmt.setString(++index, username);
 			ResultSet rs = stmt.executeQuery();
@@ -55,8 +55,8 @@ public class UserDaoImplementation implements UserDao<User> {
 			System.out.println("We are in getUser: username -> " + username);
 			
 			if (rs.next()) {
-				System.out.println(rs.getInt(1) + ", " + rs.getString(2) + ", " + rs.getString(3));
-				return new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+				System.out.println(rs.getInt(1) + ", " + rs.getString(2) + ", " + rs.getString(3) + ", " +rs.getInt(4));
+				return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
 			}
 			
 		} catch (SQLException sql) {
