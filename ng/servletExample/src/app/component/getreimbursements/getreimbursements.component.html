@@ -5,11 +5,12 @@
 </div> -->
 
 
-<button (click)="getReimbursements()" class="btn btn-primary ml-1" id="createBtn">
-    <span class="oi oi-plus"></span> Show All Reimbursements</button>
+<!-- <button (click)="getReimbursements()" class="btn btn-primary ml-1" id="createBtn">
+    <span class="oi oi-plus"></span> Show All Reimbursements</button> -->
 
-<button (click)="goBack()" class="btn btn-primary ml-1" id="createBtn">
-    <span class="oi oi-plus"></span>Go Back</button>
+<button (click)="goBack()" class="btn btn-secondary" id="createBtn">Go Back
+    <!-- <span class="oi oi-plus"></span> -->
+</button>
 
 
 <!-- <div class="container col-sm"> -->
@@ -24,7 +25,7 @@
              -->
             <th scope="col">Description</th>
             <th scope="col">Submitted By</th>
-            <th scope="col">Resolved By</th>
+            <!-- <th scope="col">Resolved By</th> -->
             <th scope="col">Status</th>
             <th scope="col">Type</th>
             <th scope="col">Approve</th>
@@ -41,11 +42,15 @@
             -->
             <td>{{ r.reimbDescription }}</td>
             <td>{{ r.reimbAuthor }}</td>
-            <td>{{ r.reimbResolver }}</td>
+            <!-- <td>{{ r.reimbResolver }}</td> -->
             <td>{{ r.reimbStatusId }}</td>
             <td>{{ r.reimbTypeId }}</td>
-            <td><button (click)="approveRequest({})" class="btn btn-primary ml-1">Approve</button></td>
-            <td><button (click)="denyRequest()" class="btn btn-primary ml-1">Deny</button></td>
+            <td>
+                <button (click)="approveRequest(r.reimbId)" class="btn btn-primary ml-1">Approve</button>
+            </td>
+            <td>
+                <button (click)="denyRequest(r.reimbId)" class="btn btn-primary ml-1">Deny</button>
+            </td>
         </tr>
     </tbody>
 </table>

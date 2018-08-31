@@ -21,14 +21,17 @@ public class ReimbursementDao {
 //			System.out.println(r);
 //		}
 
-		List<Reimbursement> reimbursements = findReimbursementsByUsername("JohnSmith");
-		for(Reimbursement r : reimbursements) {
-			System.out.println(r);
-		}
+//		List<Reimbursement> reimbursements = findReimbursementsByUsername("JohnSmith");
+//		for(Reimbursement r : reimbursements) {
+//			System.out.println(r);
+//		}
 		
 //		System.out.println(findReimbursementsByUsername("JohnSmith"));
 
 //		System.out.println(findForLogin("JohnSmith", "password"));
+		
+		approveRequest(4);
+		denyRequest(5);
 
 	}
 
@@ -217,7 +220,7 @@ public class ReimbursementDao {
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "insert into ers_reimbursements (reimbAmount, reimbDescription, reimbAuthor, reimbResolver, reimbStatusId, reimbTypeId) values(?, ?, ?, 'admin', 'unresolved', ?)";
+			String sql = "insert into ers_reimbursements (reimbAmount, reimbDescription, reimbAuthor, reimbResolver, reimbStatusId, reimbTypeId) values(?, ?, ?, 'admin', 'pending', ?)";
 
 			String[] keys = { "reimbId" };
 
@@ -240,4 +243,33 @@ public class ReimbursementDao {
 		}
 		return obj;
 	}
+	
+	public static void approveRequest(int reimbId) {
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "update ers_reimbursements set reimbStatusId = 'Approved' where reimbId = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, reimbId);
+			ResultSet info = ps.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void denyRequest(int reimbId) {
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "update ers_reimbursements set reimbStatusId = 'Denied' where reimbId = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, reimbId);
+			ResultSet info = ps.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

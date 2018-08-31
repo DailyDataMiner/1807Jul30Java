@@ -16,8 +16,6 @@ export class LoginComponent implements OnInit {
   show = false;
   hidden = false;
 
-  // user: User;
-
   servletData: any;
 
   constructor(
@@ -32,7 +30,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.username == null || this.password == null) {
       alert('please enter in something.');
-    } 
+    }
     else {
 
       this.hidden = !this.hidden;
@@ -43,16 +41,11 @@ export class LoginComponent implements OnInit {
           console.log(data);
           this.authService.loggedInUser = data;
 
-          this.authService.isLoggedIn = true;
-          this.router.navigate(['userinfo']);
+          if (data != null) {
+            this.authService.isLoggedIn = true;
+            this.router.navigate(['userinfo']);
+          }
 
-          // if (data != null) {
-            // this.authService.isLoggedIn = true;
-          //   this.router.navigate(['userinfo']);
-          // }
-
-          // console.log("(for testing) the username of data is " + data.username);
-          // console.log("for testing: also the email of this user is: " + this.authService.loggedInUser.email);
         }
 
       );

@@ -22,13 +22,11 @@ export class UserinfoComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.authService.loggedInUser.username === 'JackJones') {
+    if (this.authService.loggedInUser.roleid === 'Admin') {
       this.isAdmin = true;
     }
     this.allUsers();
 
-    // console.log("Printing user to be logged in: ");
-    // console.log(this.authService.loggedInUser.username); // FOR TESTING BUT DOESN'T WORK
   }
 
   allUsers() {

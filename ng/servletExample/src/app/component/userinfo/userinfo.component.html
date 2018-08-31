@@ -23,28 +23,28 @@
   </table>
 </div>
 
-<button class="btn btn-primary ml-2" (click)="createReimbursement()">Open New Request
-  <span class="oi oi-people"></span>
+<button class="btn btn-secondary" (click)="createReimbursement()">Open New Request
+  <span class=""></span>
 </button> 
 
-<button class="btn btn-primary ml-2" (click)="viewUserReimbursements()">View Your Requests
-    <span class="oi oi-people"></span>
+<button class="btn btn-secondary" (click)="viewUserReimbursements()">View Your Requests
+    <span class=""></span>
   </button> 
 
-<button *ngIf="isAdmin" (click)="allUsers()" class="btn btn-success">All Users
-  <span class="oi oi-people"></span>
+<button *ngIf="isAdmin" (click)="allUsers()" class="btn btn-secondary">All Users
+  <span class=""></span>
 </button>
 
-<button *ngIf="isAdmin" class="btn btn-primary ml-2" (click)="createUser()" id="createBtn">Add new user
-  <span class="oi oi-person"></span>
+<button *ngIf="isAdmin" class="btn btn-secondary" (click)="createUser()" id="createBtn">Add new user
+  <span class=""></span>
 </button>
 
-<button *ngIf="isAdmin" class="btn btn-primary ml-2" (click)="goToReimbursements()" id="createBtn">Go To Reimbursements
-  <span class="oi oi-person"></span>
+<button *ngIf="isAdmin" class="btn btn-secondary" (click)="goToReimbursements()" id="createBtn">Go To Reimbursements
+  <span class=""></span>
 </button>
 
-<button class="btn btn-primary ml-2" (click)="logout()">Log Out
-  <span class="oi oi-people"></span>
+<button class="btn btn-secondary" (click)="logout()">Log Out
+  <span class=""></span>
 </button>
 
 <table class="table table-striped table-light mt-2" *ngIf="isAdmin">

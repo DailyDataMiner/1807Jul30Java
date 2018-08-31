@@ -1,6 +1,6 @@
-<button (click)="getUsersReimbursements()" class="btn btn-success">Get 'Em</button>
+<!-- <button (click)="getUsersReimbursements()" class="btn btn-secondary">Get 'Em</button> -->
 
-<button (click)="goBack()" class="btn btn-primary ml-1">Go Back</button>
+<button (click)="goBack()" class="btn btn-secondary">Go Back</button>
 
 <table class="table table-striped table-light mt-2">
     <thead>
@@ -13,7 +13,9 @@
              -->
             <th scope="col">Description</th>
             <th scope="col">Submitted By</th>
-            <th scope="col">Resolved By</th>
+            <!-- 
+            <th scope="col">Resolved By</th> 
+            -->
             <th scope="col">Status</th>
             <th scope="col">Type</th>
         </tr>
@@ -28,7 +30,9 @@
             -->
             <td>{{ r.reimbDescription }}</td>
             <td>{{ r.reimbAuthor }}</td>
-            <td>{{ r.reimbResolver }}</td>
+            <!-- 
+            <td>{{ r.reimbResolver }}</td> 
+            -->
             <td>{{ r.reimbStatusId }}</td>
             <td>{{ r.reimbTypeId }}</td>
         </tr>

@@ -11,6 +11,7 @@ import { Reimbursement } from '../models/reimbursement.model';
 export class AuthService {
   loggedInUser: User;
   allUsers: User[] = [];
+  reimbursement: Reimbursement;
   allReimbursements: Reimbursement[] = [];
   allUsersReimbursements: Reimbursement[] = [];
 
@@ -38,9 +39,16 @@ export class AuthService {
     return this.http.post<User>("http://localhost:8081/ERS//createnewuser", {username: username, password: password, firstname: firstname, lastname: lastname, email: email});
   }
 
-  // this.reimbAmount, this.reimbDescription, this.reimbTypeId, this.authService.loggedInUser.username
   createNewReimbursement(reimbAmount: number, reimbDescription: string, reimbTypeId: string, reimbAuthor: string) {
     return this.http.post<Reimbursement>("http://localhost:8081/ERS//createnewreimbursement", {reimbAmount: reimbAmount, reimbDescription: reimbDescription, reimbTypeId: reimbTypeId, reimbAuthor: reimbAuthor});
-
   }
+
+  approveRequest(reimbId: number) {
+    return this.http.post<Reimbursement>("http://localhost:8081/ERS//approverequest", {reimbId: reimbId});
+  }
+
+  denyRequest(reimbId: number) {
+    return this.http.post<Reimbursement>("http://localhost:8081/ERS//denyrequest", {reimbId: reimbId});
+  }
+
 }

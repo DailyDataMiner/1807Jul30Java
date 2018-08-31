@@ -13,6 +13,8 @@ export class GetreimbursementsComponent implements OnInit {
   show = false;
   hidden = false;
   reimbursements: Reimbursement[] = [];
+  reimbId: number;
+
 
   servletData: any;
 
@@ -23,6 +25,7 @@ export class GetreimbursementsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getReimbursements();
   }
 
   getReimbursements() {
@@ -46,8 +49,30 @@ export class GetreimbursementsComponent implements OnInit {
     this.router.navigate(['userinfo']);
   }
 
-  resolveReimbursement() {
+   approveRequest(reimbId: number) {
+    console.log(reimbId)
+    this.authService.approveRequest(reimbId).subscribe(
+      data => {
 
+      console.log(data);
+
+      this.authService.isLoggedIn = true; // JUST IN CASE
+      this.router.navigate(['userinfo']);
+
+    });
+  }
+
+  denyRequest(reimbId: number) {
+    console.log(reimbId)
+    this.authService.denyRequest(reimbId).subscribe(
+      data => {
+
+      console.log(data);
+
+      this.authService.isLoggedIn = true; // JUST IN CASE
+      this.router.navigate(['userinfo']);
+
+    });
   }
 
 }

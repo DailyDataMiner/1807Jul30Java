@@ -1,53 +1,15 @@
-<div [hidden]="hidden">
-  <!-- <h3 class="text-center">Welcome</h3> -->
-  <h5 class="text-center">Please log in....</h5>
+<!-- <div [hidden]="hidden"> -->
+<h1 class="text-center">Employee Reimbursement System</h1>
+
+<br>
+
+<h2 class="text-center">Please log in...</h2>
 
 <input class="form-control col-4 offset-4 mb-1" type="text" placeholder="username" name="username" required [(ngModel)]='username'/>
 
 <input class="form-control col-4 offset-4 mb-1" type="password" placeholder="password" name="password" required [(ngModel)]='password'/>
 
-<button (click)="login()" class="btn btn-success">Login
-    <span class="oi oi-account-login"></span>
-</button>
-</div>
-
-<!-- 
-<div class="jumbotron" style="text-align:center">
-    <h3 class="text-center">Welcome</h3>
-    <h5 class="text-center">Please log in.</h5>
-
-    <input class="form-control col-4 offset-4 mb-1" type="text" placeholder="username" name="username" required [(ngModel)]='username'/>
-
-    <input class="form-control col-4 offset-4 mb-1" type="password" placeholder="password" name="password" required [(ngModel)]='password'/>
-
-    <button (click)="login()" class="btn btn-success">Login
-        <span class="oi oi-account-login"></span>
-    </button>
-</div> 
--->
+<button (click)="login()" class="btn btn-secondary">Login</button>
+<!-- </div> -->
 
 <br>
-
-<!-- <div class="container col-sm" *ngIf="show">
-    <h4>Welcome {{ authService.loggedInUser.firstname + "!" }}</h4>
-    <table class="table table-striped table-light mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Username</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ authService.loggedInUser.username }}</td>
-                <td>{{ authService.loggedInUser.firstname }}</td>
-                <td>{{ authService.loggedInUser.lastname }}</td>
-                <td>{{ authService.loggedInUser.email }}</td>
-                <td>{{ authService.loggedInUser.roleid }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div> -->
