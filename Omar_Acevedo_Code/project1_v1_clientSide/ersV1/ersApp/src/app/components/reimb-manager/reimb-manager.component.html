@@ -4,7 +4,9 @@
   <section class="text-center">
     <div class="container">
       <!-- <h1 class="jumbotron-heading">Expense Reimbursement System</h1> -->
-      <h1 class="">Expense Reimbursement System (Manager Section)</h1>
+      <h1 class="" style="font-family: Charter-Roman;
+      font-size: 40px;padding:10px;
+      color: rgba(38,41,58,.8);">Expense Reimbursement System (Manager Section)</h1>
       <!-- <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
       <p>
         <a href="#" class="btn btn-primary my-2">Main call to action</a>
@@ -13,15 +15,18 @@
     </div>
   </section>
   <div style="border: 1px solid gray">
-    <p>Welcome {{ loggedUserName }} &nbsp; Your id is: <b>{{ loggedUserId }}</b><br>{{ user_role_name }}</p>
+    <p style="font-family: Charter-Roman;
+    font-size: 20px;padding:10px;
+    color: rgba(38,41,58,.8);text-align: center;">Welcome <b>{{ loggedUserName }}</b> &nbsp;<br>- {{ user_role_name }} -</p>
   </div>
   
   <div class="album py-5 bg-light" style="border:0px solid red;">
     <div class="container" style="border:0px solid black;margin-left:4%;width:955px;">
-      <div id="searchbar" style="border:1px solid gray;padding:10px;">
+      <div id="searchbar" style="border:1px solid gray;padding:10px;margin-bottom: 13px;
+                                  border-radius: 4px;box-shadow: 2px 1px 2px darkgrey;">
         <span style="display: table;margin:0 auto;">
-        <input type="text" [(ngModel)]="employeeSearch" placeholder="search by employee name" style="width: 105%;" />
-        Qty: #
+        <input type="text" [(ngModel)]="employeeSearch" placeholder="search by employee name" style="width: 125%;" />
+        <!-- Qty: # -->
         </span>
       </div>
       <div id="reimbursementsDataView" style="border:0px solid gray">
@@ -69,6 +74,7 @@
                   </select> -->
 <!-- https://stackoverflow.com/questions/36659854/angular-2-binding-within-binding-interpolation-within-event -->
                   <select class="form-control" (change)="updateReimbStatus($event, r.ticket_id)" style="width: 116px;">
+                      <option>-Status-</option>
                       <option [value]="status.id" *ngFor="let status of reimbStatus" 
                               [ngValue]="status" [selected]="status.id == r.reimb_status">
                         {{ status.name }}
