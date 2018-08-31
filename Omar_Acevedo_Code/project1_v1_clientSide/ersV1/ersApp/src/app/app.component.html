@@ -1,8 +1,18 @@
 
-<span *ngIf="canLogin()">
+<!-- <span *ngIf="canLogin()"> -->
+<div *ngIf="isLoggedIn; else loggedOut">
 
     <app-navbar></app-navbar>
-    
+
     <router-outlet></router-outlet>
 
-</span>
+    <app-loginauth></app-loginauth>
+<!-- </span> -->
+
+  Welcome back, friend.
+</div>
+
+<ng-template #loggedOut>
+  Please friend, login.
+  <app-loginauth></app-loginauth>
+</ng-template>

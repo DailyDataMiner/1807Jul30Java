@@ -16,8 +16,8 @@
     <p>Welcome {{ loggedUserName }} &nbsp; Your id is: <b>{{ loggedUserId }}</b><br>{{ user_role_name }}</p>
   </div>
   
-  <div class="album py-5 bg-light">
-    <div class="container">
+  <div class="album py-5 bg-light" style="border:0px solid red;">
+    <div class="container" style="border:0px solid black;margin-left:4%;width:955px;">
       <div id="searchbar" style="border:1px solid gray;padding:10px;">
         <span style="display: table;margin:0 auto;">
         <input type="text" [(ngModel)]="employeeSearch" placeholder="search by employee name" style="width: 105%;" />
@@ -26,7 +26,7 @@
       </div>
       <div id="reimbursementsDataView" style="border:0px solid gray">
 
-        <table class="table table-sm table-hover table-bordered thead-light">
+        <table class="table table-lg table-hover table-bordered thead-light">
         <!-- <table class="table table-sm table-hover table-bordered thead-light"> -->
             <thead>
               <!-- <tr> -->

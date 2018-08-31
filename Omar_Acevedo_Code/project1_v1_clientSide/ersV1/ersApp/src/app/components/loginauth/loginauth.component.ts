@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginauthService } from '../../services/loginauth/loginauth.service';
 import { Router } from '../../../../node_modules/@angular/router';
+import { AppComponent } from '../../app.component';
+
 
 @Component({
   selector: 'app-loginauth',
@@ -15,7 +17,8 @@ export class LoginauthComponent implements OnInit {
   public loggedUserName: string;
   private user_role_name: string;
 
-  constructor(private router: Router, private loginAuthService: LoginauthService) { }
+  constructor(private router: Router, private loginAuthService: LoginauthService,
+              private appComponent: AppComponent) { }
 
   ngOnInit() {
   }
@@ -36,6 +39,8 @@ export class LoginauthComponent implements OnInit {
 
             if (loginData.user_role_id == 10) { // Normal employee
 
+              // this.appComponent.isLoggedIn = true;
+
               // this.router.navigate(['/home']);
               this.router.navigate(['/reimbursements', {
                                                           loggedUserId: this.loggedUserId, 
@@ -43,6 +48,8 @@ export class LoginauthComponent implements OnInit {
               }]);
               
             } else {
+
+              // this.appComponent.isLoggedIn = true;
 
               this.router.navigate(['/reimbursementManager', {
                 loggedUserId: this.loggedUserId, 

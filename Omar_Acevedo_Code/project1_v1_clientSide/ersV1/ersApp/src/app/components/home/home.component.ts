@@ -4,6 +4,7 @@ import { Router } from '../../../../node_modules/@angular/router';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +23,12 @@ export class HomeComponent implements OnInit {
   // constructor(private loginauthComponent: LoginauthComponent) { }
   constructor(
     // private service: HeroService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appComponent: AppComponent
   ) {}
 
   ngOnInit() {
+
     // this.username = this.loginauthComponent.loggedUserName;
 
     this.sub = this.route.params.subscribe(

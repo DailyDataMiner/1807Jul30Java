@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReimbursementService } from '../../services/reimbursement.service';
 import { Reimbursement } from '../../models/reimbursement.model';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-reimbursements',
@@ -25,12 +26,14 @@ export class ReimbursementsComponent implements OnInit {
   reimb_type: string;
   receipt: string;
 
-  constructor(private rService: ReimbursementService, private route: ActivatedRoute) { }
+  constructor(private rService: ReimbursementService, private route: ActivatedRoute,
+    private appComponent: AppComponent) { }
 
   ngOnInit() {
+
     this.currentClass = "active";
 
-    this.sub = this.route.params.subscribe(
+    this.route.params.subscribe(
       params => {
                   this.loggedUserId = +params['loggedUserId']; // (+) converts string 'loggedUserId' to a number
                   this.loggedUserName = params['loggedUserName'];
@@ -61,6 +64,7 @@ export class ReimbursementsComponent implements OnInit {
 
 // This function is called by getExpenses fn
   findReimbursements(type: string, loggedUserName: string): number {
+    
     this.rService.getReimbursements().subscribe(
       reimb => {
         if (reimb !== null) {
