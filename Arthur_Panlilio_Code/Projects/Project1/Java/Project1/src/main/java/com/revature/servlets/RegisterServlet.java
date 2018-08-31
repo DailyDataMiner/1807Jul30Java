@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.pojo.User;
 import com.revature.service.UserService;
@@ -18,6 +20,7 @@ import com.revature.service.UserService;
 @WebServlet("/Register")
 public class RegisterServlet extends HttpServlet {
 	
+	private static Logger log = Logger.getLogger(RegisterServlet.class);
 	UserService uService = new UserService();
 	
 	@Override
@@ -32,7 +35,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		User u = mapper.readValue(json, User.class);
-		System.out.println("in servlet" + u.toString());
+		log.trace("In post of Register Servlet");
 		User u2 = uService.addUser(u);
 		PrintWriter writer = resp.getWriter();
 		if(u2==null) {

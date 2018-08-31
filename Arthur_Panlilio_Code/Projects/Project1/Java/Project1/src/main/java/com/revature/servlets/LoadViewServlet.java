@@ -3,6 +3,7 @@ package com.revature.servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +17,11 @@ import com.revature.pojo.User;
  * One servlet. load many views
  * 
  */
+
+@WebServlet("/*view")
 public class LoadViewServlet extends HttpServlet {
 	
-
+	private static Logger log = Logger.getLogger(LoadViewServlet.class);
 	
 	@Override
 	public void init() throws ServletException {
@@ -28,17 +31,14 @@ public class LoadViewServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("IN VIEW");
+
 		String resource = "partials/" + process(req,resp) + ".html";
-		System.out.println("resource: " + resource);
+		log.trace("in the get of loadviewservlet resource: " + resource);
 		req.getRequestDispatcher(resource).forward(req,resp);
 		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	}
 	
-	static String process(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println(req.getRequestURI());
-      
-        
+	static String process(HttpServletRequest req, HttpServletResponse resp) {        
 		switch(req.getRequestURI()) {
 			case "/Project1/test.view":
 				return "testview";
@@ -50,7 +50,6 @@ public class LoadViewServlet extends HttpServlet {
 	        	}
 			case "/Project1/login.view":
 				if(req.getSession(false)==null) {
-		        	System.out.println("no session");
 		        	return "loginview";
 		        //} else if(req.getSession(false).getAttribute("user") == null) {
 		        	//return "loginview";
@@ -71,6 +70,10 @@ public class LoadViewServlet extends HttpServlet {
 				return "registerview";
 			case "/Project1/reimuser.view":
 				return "reimuserview";
+			case "/Project1/submit.view":
+				return "submitview";
+			case "/Project1/contact.view":
+				return "contactview";
 			default:
 				return "oopsview";
 		}

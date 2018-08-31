@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reimbursement</title>
+    <title>The Reimbursement Company</title>
+    <link rel="icon" href="res/images/crest.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -13,12 +14,22 @@
     <script type="text/javascript" src="js/mainPage.js"></script>
     <link rel="stylesheet" href="project1.css">
 
+    <script type="text/javascript" src="js/clock.js"></script>
 
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+   
+    <!--http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js-->
+    <script type="text/javascript" charset="utf8" src="js/datatable.js"></script>
     <link rel="stylesheet" type="text/css" href="DataTable.css">
     <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
 
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+
+
 </head>
 <body class="parallax old" >
 <nav class="navbar navbar-expand-lg navbar-light">
@@ -26,9 +37,9 @@
         <div class="navbar-nav">
         <a class="nav-item nav-link" id="about">About</a>
         <a class="nav-item nav-link" >History</a>
-        <a class="nav-item nav-link" >Location</a>
-        <a class="nav-item nav-link" >Contact</a>
+        <a class="nav-item nav-link" id="contact">Contact</a>
         <a class="nav-item nav-link disabled" id="navItemViewReim" hidden="true"></a>
+        <a class="nav-item nav-link disabled" id="navItemSubmitReim" hidden="true"></a>
         <a class="nav-item nav-link disabled" id="navItemProfile" hidden="true"></a>
         <a class="nav-item nav-link disabled" id="navItem" hidden="true"></a>
         <a class="nav-item nav-link disabled" id="navItemReg" hidden="true"></a>
@@ -36,9 +47,68 @@
     </div>
 </nav>
 
+
+
 <div id="view"></div>
 
+<!-- Modal -->
+<div id="regModal" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content"style="background-image:url(res/images/paper.png);background-position: center; " >
+        <div class="modal-header" >
+          <button type="button" class="close" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body" >
+          <h2>Registration twas succesful.</h2>
+        </div>
+        <div class="modal-footer">
+          <button id="regModalClose" type="button" data-dismiss="modal" style="background-color:transparent">Carry on.</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Modal -->
+<div id="subModal" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content"style="background-image:url(res/images/paper.png);background-position: center; " >
+        <div class="modal-header" >
+          <button type="button" class="close" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body" >
+          <h2>Reimbursement twas Submitted Successfully.</h2>
+        </div>
+        <div class="modal-footer">
+          <button id="regModalClose" type="button" data-dismiss="modal" style="background-color:transparent">Proceed.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+<div id="upModal" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content"style="background-image:url(res/images/paper.png);background-position: center; " >
+        <div class="modal-header" >
+          <button type="button" class="close" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body" >
+          <h2>Reimbursement Processed.</h2>
+        </div>
+        <div class="modal-footer">
+          <button id="regModalClose" type="button" data-dismiss="modal" style="background-color:transparent">Cheers.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+   
+
+
+  
     
 </body>
 </html>

@@ -4,15 +4,18 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.ex.pojos.Author;
 import com.ex.pojos.Book;
 import com.ex.pojos.Genre;
 import com.ex.service.AuthorService;
 import com.ex.service.BookService;
 import com.ex.service.GenreService;
+import com.ex.servlet.LoadViewsServlet;
 
 public class App {
-
+	private static Logger log = Logger.getLogger(App.class);
 	static Scanner scanner = new Scanner(System.in);
 	static AuthorService aService = new AuthorService();
 	static GenreService gService = new GenreService();
@@ -30,6 +33,7 @@ public class App {
 	}
 	
 	static void menu() {
+		log.trace("A");
 		System.out.println("--------------------------------Main Menu----------------\n"
 				+ "1. View/Update Books\n"
 				+ "2. View/Update Genres\n"

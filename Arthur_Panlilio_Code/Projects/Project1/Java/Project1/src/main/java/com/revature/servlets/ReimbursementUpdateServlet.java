@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.pojo.Reimbursement;
 import com.revature.pojo.User;
@@ -22,6 +24,7 @@ import com.revature.service.UserService;
 public class ReimbursementUpdateServlet extends HttpServlet {
 	
 	ReimbursementService rService = new ReimbursementService();
+	private static Logger log = Logger.getLogger(ReimbursementUpdateServlet.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,13 +33,9 @@ public class ReimbursementUpdateServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("IN UPDATE");
-		System.out.println(req.getReader());
+		log.trace("in the post of ReimbursementUpdateServlet");
 		ObjectMapper mapper = new ObjectMapper();
 		reUpdateInfo info = mapper.readValue(req.getReader(), reUpdateInfo.class);
-		reUpdateInfo a = new reUpdateInfo();
-		System.out.println(info.toString());
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		LocalDate now = LocalDate.now();
 		rService.update(info.getId(), info.getrId(), info.getStatus(),now , info.getResponse());
 	}

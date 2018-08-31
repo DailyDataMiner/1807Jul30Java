@@ -163,4 +163,17 @@ Exec UpdateRe(5, 34, 3, (TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')
 UPDATE reimbursements SET resolver = 34, statusId = 2, resolved = (TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')), response = 'a' WHERE id=6;
 commit;
 
-unlock reimbursements
+unlock reimbursements;
+
+DROP TRIGGER reimbursementtype_seq_trig;
+DELETE from reimbursementtype where id > 1;
+
+
+
+ALTER TABLE reimbursementtype
+MODIFY type varchar2(25);
+INSERT INTO reimbursementtype VALUES (2, 'Lodging');
+INSERT INTO reimbursementtype VALUES (3, 'Food');
+INSERT INTO reimbursementtype VALUES (4, 'Unfortunate Incident');
+INSERT INTO reimbursementtype VALUES (5, 'Plunder');
+INSERT INTO reimbursementtype VALUES (6, 'Other');

@@ -28,6 +28,15 @@ public class Reimbursement {
 		
 	}
 
+	
+
+	public Reimbursement(double amount, String response, int typeId) {
+		super();
+		this.amount = amount;
+		this.response = response;
+		this.typeId = typeId;
+	}
+
 
 
 	public Reimbursement(int id, double amount, LocalDate submitted, String description, int author, int statusId,

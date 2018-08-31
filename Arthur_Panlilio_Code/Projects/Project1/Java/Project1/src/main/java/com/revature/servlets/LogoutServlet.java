@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.pojo.User;
 import com.revature.service.UserService;
@@ -22,9 +24,10 @@ import com.revature.service.UserService;
 @WebServlet("/Logout")
 public class LogoutServlet extends HttpServlet{
 	
+	private static Logger log = Logger.getLogger(LogoutServlet.class);
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("do get LOGOUT");
+		log.trace("in the get of LogoutServlet");
 		if(req.getSession(false)!=null)
 			req.getSession(false).removeAttribute("user");
 		req.getSession().invalidate();
@@ -34,6 +37,7 @@ public class LogoutServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		log.trace("in the post of LogoutServlet");
 		PrintWriter writer = resp.getWriter();
 		if(req.getSession(false)==null) {
 			writer.append("in");

@@ -26,13 +26,24 @@ public class ReimbursementService {
 		return r;
 	}
 	
+	public List<Reimbursement> getByAuthorId(int id){
+		List<Reimbursement> reimbursements =  rDao.findByAuthorId(id);
+		for(Reimbursement r: reimbursements) {
+			r = appendInfo(r);
+		}
+		return reimbursements;
+		
+	}
+	
 	public void update(int rId, int resId, int status, LocalDate newDate, String response) {
+		newDate = getRealDate(newDate);
 		rDao.Update(rId, resId, status, newDate, response);
 	}
 
 	
 	
 	public Reimbursement addReimbursement(Reimbursement r) {
+		r.setSubmitted(getRealDate(r.getSubmitted()));
 		return appendInfo(rDao.save(r));
 	}
 	
@@ -49,9 +60,23 @@ public class ReimbursementService {
 			r.setResolverData(uu);
 		}
 		
-		r.setType(rDao.findType(r.getTypeId()));
-		r.setStatus(rDao.findStatus(r.getStatusId()));	
+		//r.setType(rDao.findType(r.getTypeId()));
+		//r.setStatus(rDao.findStatus(r.getStatusId()));	
 		return r;
+	}
+
+	public List<Reimbursement> getAllPending() {
+		List<Reimbursement> reimbursements =  rDao.findAllStatus(1);
+		for(Reimbursement r: reimbursements) {
+			r = appendInfo(r);
+		}
+		return reimbursements;
+	}
+	
+	public LocalDate getRealDate(LocalDate fakeDate) {	
+		LocalDate realDate = fakeDate.minusYears(260);
+		return realDate;
+		
 	}
 
 }

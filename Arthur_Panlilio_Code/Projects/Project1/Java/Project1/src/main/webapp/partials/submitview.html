@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-4">
+        <form id="reForm">
+            <div class="form-group" style="margin: 100px; width:100%">
+                <h1 class="text-center">Reimbursement Submission Form</h1>
+                <br>
+                <input type="number" min="0.00" max="999999.00" step="0.01" placeholder="Amount" id="amountReSub"  name="amountReSub" class="form-control justify-content-center"required>             
+                <label for="typeReSub"style="margin-top:15px">Type of Reimbursement</label>
+                <select id="typeReSub">
+                    <option value="1">Travel</option>
+                    <option value="2">Lodging</option>
+                    <option value="3">Food</option>
+                    <option value="4">Unfortunate Incident</option>
+                    <option value="5">Plunder</option>
+                    <option value="6">Other</option>
+                </select>
+                <br>
+                <label for="idRespSub" style="margin-top:25px">Reason for Reimbursement:</label>
+                <textarea type="text" id="reRespSub" style="width:450px; height:225px;" class="reRespSub"> </textarea>
+                <div style="padding:10px" class="text-center">
+                    <button type="button" class="old" id="reSubmitButton" style="color:rgb(68, 7, 7);font-size:15px; border-radius:15px; width:175px; background-image:url(res/images/wax.jpg)" >Submit Reimbursement Form</button>
+                </div>
+                <div style="color:red" hidden="true" id="registerError"></div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

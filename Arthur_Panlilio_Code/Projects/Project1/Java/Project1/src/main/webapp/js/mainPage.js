@@ -1,22 +1,39 @@
 var cook;
 
+
 window.onload=function(){
 	//loadHomeView();
+	$('#login').off()
 	$('#login').on('click', login);
+	$('#about').off();
 	$('#about').on('click', showAbout);
+	$('#contact').off();
+	$('#contact').on('click', showContact);
+	$('#navItem').off();
 	$('#navItem').on('click', logout);
-	console.log("cookie " + getCookie('log'));
+	console.log('onload');
 	cook = getCookieState();
 	loadInitDefaultView();
+
+}
+
+function showContact(){
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			$('#view').html(xhr.responseText)
+		}
+	}
+	xhr.open('GET','contact.view',true);
+	xhr.send();
 }
 
 
-
-
+//Login
 function login(){
     let uname = $('#username').val();
     let pword = $('#password').val();
-    console.log(`The username is: ${uname}, and the password is: ${pword}`);
+    console.log('login');
     var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 
@@ -40,11 +57,12 @@ function login(){
 	xhr.send(JSON.stringify({ "Username": uname, Password: pword }));
 }
 
+//login is valid
 function validLog(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			
+			$('#logout').off();
 			$('#logout').on('click',logout);
 			logInorOut();
 			populateUserInfo();
@@ -56,6 +74,7 @@ function validLog(){
 	xhr.send();
 }
 
+//populates the users info
 function populateUserInfo(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
@@ -64,12 +83,11 @@ function populateUserInfo(){
 			let name = (user.firstname + " " + user.lastname);
 			let uname = user.username;
 			let email = user.email;
-			let role = user.role;
+			let role = user.roleId;
 			document.cookie = "log = " + role;
 			cook = getCookieState();
-			console.log('cookie in the validlog ' + getCookie('log'));
+			console.log('populating profile');
 			if(getCookie('log') != null && getCookie('log') != '0'){
-				console.log("profile loaddd");
 				$('#view').html(cook);
 			} else {
 				$('#view').html(xhr.responseText);
@@ -77,16 +95,16 @@ function populateUserInfo(){
 			turnOnViewLink(role);
 
 			$('#fullnameInfo').html(name);
-			$('#usernameInfo').html('<i>alias</i> ' + uname);
-			$('#emailInfo').html('<i>Letter Address</i> ' + email);
-			$('#roleInfo').html('<i>'+role+'<i>');
+			$('#usernameInfo').html(uname);
+			$('#emailInfo').html( email);
+			
 		}
 	}
 	xhr.open('GET','user',true);
 	xhr.send();
 }
 
-
+//shows about page
 function showAbout(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
@@ -99,15 +117,18 @@ function showAbout(){
 	xhr.send();
 }
 
+//logs out
 function logout(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
 			html = '';
 			$('#view').html(xhr.responseText);
-			console.log("logging out" + xhr.responseText);
+			console.log("logging out");
+			$('#login').off();
 			$('#login').on('click', login);	
 			setNavItem('Login');
+			$('#registerLink').off();
 			$('#registerLink').on('click', showRegister);
 			turnOnProfileLink(false);
 			turnOnViewLink('0');
@@ -126,13 +147,15 @@ function loadInitDefaultView(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log(xhr.responseText)
+			console.log('loading default view')
 			if(getCookie('log') != null){
 				$('#view').html(cook);
 			} else {
 				$('#view').html(xhr.responseText);
 			}
+			$('#login').off();
 			$('#login').on('click', login);
+			$('#logout').off();
 			$('#logout').on('click', logout);
 			logInorOut();		
 		}
@@ -149,7 +172,8 @@ function logInorOut(){
 			let resp = xhr.responseText;
 			if(resp=='in'){
 				turnOnProfileLink(false);
-				setNavItem('Login');	
+				setNavItem('Login');
+				$('#registerLink').off();	
 				$('#registerLink').on('click', showRegister);			
 			} else {
 				setNavItem('Logout')
@@ -165,12 +189,13 @@ function logInorOut(){
 }
 
 function showRegister(){
-	console.log("AAAAA");
+	console.log("showing register");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
 			$('#view').html(xhr.responseText);
 			$('form').submit(false);
+			$('#register').off();
 			$('#register').on('click', registerButton);
 
 		}
@@ -207,7 +232,7 @@ function registerButton(){
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4 ){
 				if(xhr.responseText=='valid'){
-					alert("Registered.");
+					$('#regModal').modal();
 					logout()
 				} else {
 					$('#usernameReg').val("");
@@ -231,11 +256,6 @@ function isValidEmailAddress(emailAddress) {
 
 
 function viewReimEmployee(){
-	
-}
-
-function viewReimManager(){
-	console.log("viewreimManager");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
@@ -249,15 +269,43 @@ function viewReimManager(){
 
 }
 
-function populateReim(){
+
+function viewReimManager(pen){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			let reims = JSON.parse(xhr.responseText);
-			let show = xhr.responseText.substring(1, xhr.responseText.length-1);
+			$('#view').html(xhr.responseText);
+			if(pen==5){
+				pendingReim(pen);
+			} else{
+				populateReim();
+			}
+		}
 		
-			getCurrUser(String(xhr.responseText));
-			
+	}
+	xhr.open("Get","reimuser.view",true);
+	xhr.send();
+
+}
+
+
+function pendingReim(pen){
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){	
+			getCurrUser(String(xhr.responseText), pen);			
+		}
+		
+	}
+	xhr.open("Get","reimbursementPending",true);
+	xhr.send();
+}
+
+function populateReim(){
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){	
+			getCurrUser(String(xhr.responseText));			
 		}
 		
 	}
@@ -265,51 +313,119 @@ function populateReim(){
 	xhr.send();
 }
 
-function getCurrUser(view){
+function getCurrUser(view, pen){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){	
-			showReim(view, JSON.parse(String(xhr.responseText)));			
+			showReim(view, JSON.parse(String(xhr.responseText)), pen);			
 		}		
 	}
 	xhr.open("Get","user",true);
 	xhr.send();
 }
 
-function showReim(views, user){
-	console.log(user);
-	var oTable = $("#myTable").dataTable({
+function showReim(views, user, pen){
+	if(user.roleId == 1){
+		$('#viewAllRe').attr('hidden','true');
+		$('#viewAllRe').addClass('disabled');
+		$('#viewAllRe').off();
+	 } else {
+		if(pen != 5){
+			$('#viewAllRe').html('<u>view pending reimbursements</u>')
+			$('#viewAllRe').removeAttr('hidden');
+			$('#viewAllRe').removeClass('disabled');
+			$('#viewAllRe').off();
+			$('#viewAllRe').on('click', function(){
+				viewReimManager(5);
+			})
+		} else {
+			$('#viewAllRe').html('<u>view all reimbursements</u>')
+			$('#viewAllRe').removeAttr('hidden');
+			$('#viewAllRe').removeClass('disabled');
+			$('#viewAllRe').off();
+			$('#viewAllRe').on('click', function(){
+				viewReimManager(false);
+			})
+		}
+
+	 }
+	 if(views==''){
+		 return;
+	 }
+	var oTable = $("#myTable").DataTable({
 		aaData:JSON.parse(views),
 			aoColumns: [
 			{ mData: "id" },
-			{ mData: "amount" },
-			{ mData: "submitted", mRender:function(data, type, full, meta){
-				return data.year+ data.month + data.dayOfMonth;
+			{ mData: "amount", "sType": "numeric", mRender:function(data, type){
+				if(type == 'sort') return data;
+				let money = convert(data);
+				let m = '';
+				if(money.po > 0){
+					m += '£'+money.po+" ";
+				}
+				if(money.cr > 0){
+					m += 'cr'+money.cr+" ";
+				}
+				if(money.sh > 0){
+					m +='s'+money.sh+" ";
+				}
+				if(money.pe > 0){
+					m += 'd'+money.pe;
+				}
+				return (m.length > 6) ? m.substring(0, 6) + "...": m;
+			} },
+			{ mData: "authorData",mRender:function(data){
+				return data.username;
+			 }  },
+			 { mData: "typeId",mRender:function(data){
+				switch(data){
+					case 1:
+						return "Travel";
+					case 2:
+						return "Lodging";
+					case 3:
+						return "Food";
+					case 4:
+						return "Unfortunate Incident";
+					case 5:
+						return "Plunder";
+					case 6:
+						return "Other";
+					default:
+						return "?";
+				}
+			 } },
+			 { mData: "description", mRender:function(data){
+				if(data != null){
+					return (data.length > 6) ? data.substring(0, 6) + "...": data ;
+				} else {
+					return 'N/A';
+				}
+			} },
+			{ mData: "submitted","sType": "date-uk2" , mRender:function(data, type, full, meta){
+				return data.dayOfMonth+'-'+data.monthValue+'-'+data.year;
+			 } },
+			 { mData: "statusId",mRender:function(data){
+				return (data == 1) ? "Pending" : (data == 2) ?  "Denied": "Approved";
 			 } },
 			{ mData: "response", mRender:function(data){
-				return (data == null) ? "N/A": (data.length > 25) ? data.substring(0, 25) + "...": data;
+				return (data == null) ? "N/A": (data.length > 6) ? data.substring(0, 6) + "...": data;
 			 }},
-			{ mData: "authorData",mRender:function(data){
-				return data.firstname + " "+ data.lastname;
-			 }  },
+			
 			{ mData: "resolverData",mRender:function(data){
-				return (data != null) ? data.firstname + " " + data.lastname : "N/A";
+				return (data != null) ? data.username : "N/A";
 			 } },
-			{ mData: "status" },
-			{ mData: "type" },
-			{ mData: "description", mRender:function(data){
-				console.log("LENGTH: "  + data.length);
-				return (data.length > 25) ? data.substring(0, 25) + "...": data ;
-			} },
-			{ mData: "resolved", mRender:function(data){
-				return (data != null) ?  data.year+ data.month + data.dayOfMonth: "N/A" ;
+				
+			{ mData: "resolved","sType": "date-uk2", mRender:function(data){
+				return (data != null) ?  data.dayOfMonth+'-'+data.monthValue+'-'+data.year: "N/A" ;
 			} }
 		],
 		"aoColumnDefs":
-		 [{ "bVisible": false, "aTargets": [3] , "bSearchable": false}]
+		 [{ "bVisible": false, "aTargets": [7] , "bSearchable": false}]
 	  });
 	$('#myTable').on('click', 'tbody tr', function(){
 		var oData = oTable.fnGetData(this);
+		var rowId = oTable.attr("id");
 		showPaper(oData);
 		$('#paperCloseButton').on('click', function(){
 			$('#paper').addClass('disabled');
@@ -319,22 +435,27 @@ function showReim(views, user){
 		})
 		if(oData.statusId == 1){
 			$('#seal').attr('src','');
-			showResponseInput(false);
-			disableButtons(false);
-			$('#paperApproveButton').on('click', function(){
-				$('#mngrSign').html(user.firstname+user.lastname);
+			if(user.roleId==2){			
+				showResponseInput(false);
+				disableButtons(false);
+				$('#paperApproveButton').on('click', function(){
+					$('#mngrSign').html(user.firstname+user.lastname);
+					disableButtons(true);
+					showResponseInput(true, oData.id, user.id, 3, 1, null, null, oData, rowId, oTable);
+					$('#seal').attr('src','res/images/approvedSeal.png');
+				});
+				$('#paperDenyButton').on('click', function(){
+					$('#mngrSign').html(user.firstname+user.lastname);
+					disableButtons(true);
+					showResponseInput(true, oData.id, user.id, 2, 1, null, null, oData, rowId, oTable);
+					$('#seal').attr('src','res/images/deniedSeal.png');
+				});
+			} else {
+				showResponseInput(false);
 				disableButtons(true);
-				showResponseInput(true, oData.id, user.id, 3, 1);
-				$('#seal').attr('src','res/images/approvedSeal.png');
-			});
-			$('#paperDenyButton').on('click', function(){
-				$('#mngrSign').html(user.firstname+user.lastname);
-				disableButtons(true);
-				showResponseInput(true, oData.id, user.id, 2, 1);
-				$('#seal').attr('src','res/images/deniedSeal.png');
-			});
+			}
 		} else {
-			showResponseInput(true, null, null, null, oData.statusId, oData.response, oData.resolverData);
+			showResponseInput(true, null, null, null, oData.statusId, oData.response, oData.resolverData, oData, rowId, oTable);
 			disableButtons(true);
 			$('#mngrSign').html(oData.resolverData.firstname+oData.resolverData.lastname);
 	
@@ -361,16 +482,14 @@ function disableButtons(x){
 	}
 }
 
-function showResponseInput(x, re, us, status, stat, resp, resol){
+function showResponseInput(x, re, us, status, stat, resp, resol, oData, rowId, oTable){
 	if(x){
 		$('#submitResponseButton').off()
-		$('#submitResponseButton').on('click', function(){submitResponse(re, us, status)});
+		$('#submitResponseButton').on('click', function(){submitResponse(re, us, status, oData, rowId, oTable )});
 		$('#rResponse').removeAttr('hidden');
 		$('#rResponse').removeClass('disabled');
 		$('#responseInput').val('');
-		console.log(stat);
 		if(stat == 1){
-			console.log("show buttons");
 			$('#responseStuff').removeAttr('hidden');
 			$('#responseStuff').removeClass('disabled');
 			$('#responseHolder').attr('hidden', 'true');
@@ -379,7 +498,6 @@ function showResponseInput(x, re, us, status, stat, resp, resol){
 			$('#responseSign').html('');
 		}
 		if(stat > 1){
-			console.log("hide buttons");
 			$('#responseStuff').attr('hidden', 'true');
 			$('#responseStuff').addClass('disabled');
 			$('#responseHolder').removeAttr('hidden');
@@ -400,7 +518,7 @@ function showResponseInput(x, re, us, status, stat, resp, resol){
 	}
 }
 
-function submitResponse(rId, uId, stat){
+function submitResponse(rId, uId, stat, oData, rowId, oTable){
 	console.log('submit');
 	var xhr = new XMLHttpRequest();
 	res = $('#responseInput').val();
@@ -412,6 +530,7 @@ function submitResponse(rId, uId, stat){
 	}
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
+			$('#upModal').modal();
 			viewReimManager();
 		}
 		
@@ -425,11 +544,27 @@ function showPaper(oData){
 	$('#paper').removeAttr('hidden');
 	$('#paper').removeClass('disabled');
 	$('#reID').html(oData.id);
+	$('#reEmail').html(oData.email);
 	$('#reName').html(oData.authorData.firstname + " " + oData.authorData.lastname);
 	$('#reUName').html(oData.authorData.username);
 	$('#reDate').html(oData.submitted.dayOfMonth +"" + getNumberEnder(oData.submitted.dayOfMonth) + 
 	 "  of " + formatString(String(oData.submitted.month)) + " " + oData.submitted.year);
-	$('#reAmount').html(oData.amount);
+
+	 let money = convert(oData.amount);
+				let m = '';
+				if(money.po > 0){
+					m += '£'+money.po + " ";
+				}
+				if(money.cr > 0){
+					m += 'cr'+money.cr + " ";
+				}
+				if(money.sh > 0){
+					m +='s'+money.sh + " ";
+				}
+				if(money.pe > 0){
+					m += 'd'+money.pe;
+				}
+	$('#reAmount').html(m);
 	$('#reDescription').html(oData.description);
 	$('#userSign').html(oData.authorData.firstname + oData.authorData.lastname);
 	if(oData.resolver != null){
@@ -447,15 +582,14 @@ function setNavItem(set){
 }
 
 function turnOnProfileLink(enable){
-	console.log('turnonProfleLink');
 	if(enable==true){
 		console.log('enable');
 		$('#navItemProfile').html('Profile');
 		$('#navItemProfile').removeAttr('hidden');
 		$('#navItemProfile').removeClass('disabled');
+		$('#navItemProfile').off();
 		$('#navItemProfile').on('click', validLog);
 	} else {
-		console.log('disable');
 		$('#navItemProfile').html('');
 		$('#navItemProfile').attr('hidden', 'true');
 		$('#navItemProfile').addClass('disabled');
@@ -465,25 +599,35 @@ function turnOnProfileLink(enable){
 
 
 function turnOnViewLink(lvl){
-	console.log('turnonViews ' + lvl);
 
 
 	switch(lvl) {
-		case'Employee':
+		case 1:
 			console.log('enableEmployeeview');
 			$('#navItemViewReim').html('My Reimbursements');
 			$('#navItemViewReim').removeAttr('hidden');
-			$('#navItemViewReim').removeClass('disabled');
+			$('#navItemViewReim').removeClass('disabled');		
 			$('#navItemViewReim').off();
 			$('#navItemViewReim').on('click', viewReimEmployee);
+
+			$('#navItemSubmitReim').removeAttr('hidden');
+			$('#navItemSubmitReim').html('Submit Reimbursement')
+			$('#navItemSubmitReim').removeClass('disabled');
+			$('#navItemSubmitReim').off();
+			$('#navItemSubmitReim').on('click', viewReimSubmit);
 			break;
-		case 'FinanceManager':
+		case 2:
 			console.log('enableManagerView');
 			$('#navItemViewReim').html('View Reimbursements');
 			$('#navItemViewReim').removeAttr('hidden');
-			$('#navItemViewReim').removeClass('disabled');
+			$('#navItemViewReim').removeClass('disabled');			
 			$('#navItemViewReim').off();
 			$('#navItemViewReim').on('click', viewReimManager);
+
+			$('#navItemSubmitReim').attr('hidden', 'true');
+			$('#navItemSubmitReim').html('')
+			$('#navItemSubmitReim').addClass('disabled');
+			$('#navItemSubmitReim').off();
 			break;
 		default:
 			console.log('disable');
@@ -492,11 +636,52 @@ function turnOnViewLink(lvl){
 			$('#navItemViewReim').addClass('disabled');
 			$('#navItemViewReim').off();
 			$('#navItemViewReim').off('click', viewReimEmployee);
+
+			$('#navItemSubmitReim').attr('hidden', 'true');
+			$('#navItemSubmitReim').html('')
+			$('#navItemSubmitReim').addClass('disabled');
+			$('#navItemSubmitReim').off();
 		}
 	}
 
+function viewReimSubmit(){
+	console.log("SubmitView");
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			$('#view').html(xhr.responseText);
+			$('#reSubmitButton').off();
+			$('#reSubmitButton').on('click',reimSubmit);
+		}
+		
+	}
+	xhr.open("Get","submit.view",true);
+	xhr.send();
+}
 
-
+function reimSubmit(){
+	if($('#amountReSub').val() > 0){
+		let amt = $('#amountReSub').val();
+		let typ = $('#typeReSub').val();
+		let desc = $('#reRespSub').val();
+		var reim = {
+				amount: amt,
+				typeId: typ,
+				description: desc
+		};
+		var xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status == 200){
+				$('#subModal').modal();
+				viewReimEmployee();
+			}
+			
+		}
+		xhr.open("POST","reimbursement",true);
+		xhr.send(JSON.stringify(reim));
+	}
+}
 
 function getCookie(a) {
     var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
@@ -565,38 +750,100 @@ function getCookieState(){
 		'        '+
 		'    </div>'+
 		'</div>';
-	} else if (getCookie('log') == 'Employee'){
-		path = '<div class="text-center align-center" style="padding:50px">'+
-		'    <div class="container" style="margin-top:60px">'+
+	} else if (getCookie('log') == 1){
+		path = '<div class="containter">'+
+			'        <div class="row">'+
+			'            <div class="col-3"></div>'+
+			'            <div class="col-6 align-center text-center">'+
+			'              <div  style="padding-top:25px"><h1 style="font-size:80px">GREETINGS</h1></div>'+
+			'              <h1 id="usernameInfo"></h1>'+
+			'          </div>'+
+			'          <div class="col-3"></div>'+
+			'      </div>'+
+			'  </div>'+
+			''+
+			'<div class="container">'+
+			'        <div class="row">'+
+			'            <div class="col-5">'+
+			'                <div style="padding:50px">'+
+			'                    <div class="container" style="margin-top:60px">'+
+			'                        <div class="row">  '+
+			'							<div class="col-12">' +
+			'                            <h1 id="fullnameInfo"></h1>'+
+			'							 <br>'+
+			'                            <h1><span id="roleInfo">Privateer</span></h1>'+
+			'							 <br>'+
+			'                            <h1><span id="emailInfo"></span> </h1>'+
+			'								</div>' +
+			'    '+
+			'                        </div>'+
+			'                    </div>'+
+			'                </div>'+
+			'            </div>'+
+			''+
+			'                <div class="container" style="position:absolute; top:-180px; left: 18px">'+
+			'                    <img class="pocketwatch" id="face" src="res/images/pocketwatch2.png" alt="">'+
+			'                    <img id="hourHand" src="res/images/hourhand.png" alt="" style="transform-origin: 50% 100%; position: absolute;'+
+			'                    top: 476px;'+
+			'                    left: 1281px;">'+
+			'                    <img id="minuteHand" src="res/images/smallhand.png" alt="" style="transform-origin: 50% 100%; position: absolute;'+
+			'                    top: 430px;'+
+			'                    left: 1276px;">'+
+			'                    <img id="secondHand" src="res/images/smallesthand.png" alt="" style="transform-origin: 50% 100%; position: absolute;'+
+			'                    top: 459px;'+
+			'                    left: 1275.2px;">'+
+			'            </div>'+
+			'        '+
+			'        </div>'+
+			'    </div>';
+	} else if (getCookie('log') ==  2){
+		path = '<div class="containter">'+
 		'        <div class="row">'+
-		'            <div class="col-2"></div>'+
-		'            <div class="col-8">'+
-		'                <h1 id="fullnameInfo"></h1>'+
-		'                <h5><span id="usernameInfo"></span> </h5>'+
-		'                <h3><span id="emailInfo"></span></h3>'+
-		'                <h5 id="roleInfo"></h5>'+
+		'            <div class="col-3"></div>'+
+		'            <div class="col-6 align-center text-center">'+
+		'              <div  style="padding-top:25px"><h1 style="font-size:80px">GREETINGS</h1></div>'+
+		'              <h1 id="usernameInfo"></h1>'+
+		'          </div>'+
+		'          <div class="col-3"></div>'+
+		'      </div>'+
+		'  </div>'+
+		''+
+		'<div class="container">'+
+		'        <div class="row">'+
+		'            <div class="col-5">'+
+		'                <div style="padding:50px">'+
+		'                    <div class="container" style="margin-top:60px">'+
+		'                        <div class="row">  '+
+		'							<div class="col-12">' +
+		'                            <h1 id="fullnameInfo"></h1>'+
+		'							 <br>'+
+		'                            <h1><span id="roleInfo">Financier</span></h1>'+
+		'                            <h1><span id="emailInfo"></span> </h1>'+
+		'							 <br>'+
+		'							</div>' +
+		'    '+
+		'                        </div>'+
+		'                    </div>'+
+		'                </div>'+
 		'            </div>'+
-		'            <div class="col-2"></div>'+
+		''+
+		'                <div class="container" style="position:absolute; top:-180px; left: 18px">'+
+		'                    <img class="pocketwatch" id="face" src="res/images/pocketwatch2.png" alt="">'+
+		'                    <img id="hourHand" src="res/images/hourhand.png" alt="" style="transform-origin: 50% 100%; position: absolute;'+
+		'                    top: 476px;'+
+		'                    left: 1281px;">'+
+		'                    <img id="minuteHand" src="res/images/smallhand.png" alt="" style="transform-origin: 50% 100%; position: absolute;'+
+		'                    top: 430px;'+
+		'                    left: 1276px;">'+
+		'                    <img id="secondHand" src="res/images/smallesthand.png" alt="" style="transform-origin: 50% 100%; position: absolute;'+
+		'                    top: 459px;'+
+		'                    left: 1275.2px;">'+
+		'            </div>'+
+		'        '+
 		'        </div>'+
-		'    </div>'+
-		'</div>';
-	
-
-	} else if (getCookie('log') == 'FinanceManager'){
-		path = '<div class="text-center align-center" style="padding:50px">'+
-		'    <div class="container" style="margin-top:60px">'+
-		'        <div class="row">'+
-		'            <div class="col-2"></div>'+
-		'            <div class="col-8">'+
-		'                <h1 id="fullnameInfo"></h1>'+
-		'                <h5><span id="usernameInfo"></span> </h5>'+
-		'                <h3><span id="emailInfo"></span></h3>'+
-		'                <h5 id="roleInfo"></h5>'+
-		'            </div><h1>I AM A MANAGER</h1>'+
-		'            <div class="col-2"></div>'+
-		'        </div>'+
-		'    </div>'+
-		'</div>';
+		'    </div>';
+			
+		
 	
 
 	}
@@ -604,3 +851,30 @@ function getCookieState(){
 
 	return path;
 }
+
+function convert(num){
+	let pennies = num * 1.2;
+	let pounds = 0;
+	let crowns = 0;
+	let shillings = 0;
+	if(pennies >= 240){
+	  pounds = Math.floor(pennies/240);
+	  pennies = pennies%256;
+	} 
+	if(pennies >= 60){
+	  crowns = Math.floor(pennies/60);
+	  pennies = pennies%60;
+	}
+	if(pennies >= 12) {
+	  shillings = Math.floor(pennies/12);
+	  pennies = pennies%12;
+	}
+	var money = {
+	  po : pounds,
+	  cr : crowns,
+	  sh : shillings,
+	  pe : Math.floor(pennies)
+	};
+	return money;
+  
+  }

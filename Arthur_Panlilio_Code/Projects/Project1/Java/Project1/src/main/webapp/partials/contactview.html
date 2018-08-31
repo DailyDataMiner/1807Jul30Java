@@ -1,0 +1,46 @@
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-12 align-center text-center">
+            <h1>Our office in Reston</h1>
+        </div>
+    </div>
+
+</div>
+<br>
+<img src="res/images/worldmap.jpg" style="position: absolute;
+left: 0%;
+top: 13%;
+width:100%;
+opacity:.1;
+transform-origin: 50% 50%;
+z-index: -1;" alt="">
+<div class="container">
+        <div class="row">
+            <div class="col-12 align-center">
+                    <div id="mapid"></div>
+            </div>
+        </div>
+    
+    </div>
+
+
+
+<script>
+    var mymap = L.map('mapid').setView([53.326056, 0.101726
+
+], 13);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 18,
+  id: 'mapbox.streets',
+  accessToken: 'sk.eyJ1IjoiZXhnZW5lcmUiLCJhIjoiY2psaGo0cmh5MDM0YTNxbGFzM2hpMzgyciJ9.dsZXrvpcj82biJShGnhFKg'
+}).addTo(mymap);
+var marker = L.marker([53.326056, 0.101726]).addTo(mymap);
+</script>

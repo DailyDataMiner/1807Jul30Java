@@ -57,6 +57,38 @@ public class ReimbursementDAO implements DAO<Reimbursement, Integer>{
 		return reimbursements;
 	}
 	
+	public List<Reimbursement> findByAuthorId(int id){
+		List<Reimbursement> reimbursements = new ArrayList<>();
+		System.out.println("ID " + id );
+		ConnectionFactory.getInstance();
+		try(Connection conn = ConnectionFactory.getConnection()){
+			String sql = "SELECT * FROM reimbursements WHERE author = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Reimbursement r = new Reimbursement();
+				r.setId(rs.getInt(1));
+				r.setAmount(rs.getDouble(2));
+				r.setSubmitted(rs.getDate(3).toLocalDate());
+				if(rs.getDate(4) != null) {
+					r.setResolved(rs.getDate(4).toLocalDate());
+				}
+				r.setDescription(rs.getString(5));
+				r.setAuthor(rs.getInt(6));
+				r.setResolver(rs.getInt(7));
+				r.setStatusId(rs.getInt(8));
+				r.setTypeId(rs.getInt(9));
+				r.setResponse(rs.getString(10));
+				reimbursements.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reimbursements;
+	}
+	
 	public Reimbursement findOne(int id){
 		Reimbursement r = null;
 		ConnectionFactory.getInstance();
@@ -181,6 +213,37 @@ public class ReimbursementDAO implements DAO<Reimbursement, Integer>{
 			e.printStackTrace();
 		}
 		return status;
+	}
+
+	public List<Reimbursement> findAllStatus(int status) {
+		List<Reimbursement> reimbursements = new ArrayList<>();
+		ConnectionFactory.getInstance();
+		try(Connection conn = ConnectionFactory.getConnection()){
+			String sql = "SELECT * FROM reimbursements WHERE statusId = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, status);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Reimbursement r = new Reimbursement();
+				r.setId(rs.getInt(1));
+				r.setAmount(rs.getDouble(2));
+				r.setSubmitted(rs.getDate(3).toLocalDate());
+				if(rs.getDate(4) != null) {
+					r.setResolved(rs.getDate(4).toLocalDate());
+				}
+				r.setDescription(rs.getString(5));
+				r.setAuthor(rs.getInt(6));
+				r.setResolver(rs.getInt(7));
+				r.setStatusId(rs.getInt(8));
+				r.setTypeId(rs.getInt(9));
+				r.setResponse(rs.getString(10));
+				reimbursements.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reimbursements;
 	}
 
 

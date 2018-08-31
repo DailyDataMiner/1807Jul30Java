@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.pojo.User;
 import com.revature.service.UserService;
@@ -23,11 +25,10 @@ import com.revature.service.UserService;
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet{
 	
+	private static Logger log = Logger.getLogger(LoginServlet.class);
 	UserService uService = new UserService();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//REQUEST DISPATCHER! USED FOR FORWARDING
-		//resp.sendRedirect("Login.html");
 	}
 
 	
@@ -39,9 +40,8 @@ public class LoginServlet extends HttpServlet{
 
 		String name = ss[1].replace("\"", "");
 		String pass = ss[3].replace("\"", "");
-		//req.getRequestDispatcher("project1.html").forward(req,resp);
-		System.out.println(req.getRequestURI());
-		System.out.println("Logging in user: " + name + ";" + pass);
+
+		log.trace("Logging in user: " + name + ";" + pass);
 		
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet{
 		if(u == null) {
 			writer.append("invalid");
 			writer.flush();
-		} else if (u.getPassword().equals(pass)) {
+		} else if (uService.checkLogin(pass, u)) {
 			 HttpSession oldSession = req.getSession(false);
 	            if (oldSession != null) {
 	                oldSession.invalidate();
@@ -62,8 +62,7 @@ public class LoginServlet extends HttpServlet{
 	            //generate a new session
 	            HttpSession newSession = req.getSession(true);
 	            newSession.setAttribute("user", u);
-	            System.out.println(((User) req.getSession().getAttribute("user")).getFirstname());
-				System.out.println(req.getSession());
+
 				writer.append("valid");
 				writer.flush();
 			

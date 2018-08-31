@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.pojo.User;
 import com.revature.service.UserService;
@@ -17,9 +19,11 @@ import com.revature.service.UserService;
 public class UserServlet extends HttpServlet {
 	
 	UserService uService = new UserService();
+	private static Logger log = Logger.getLogger(User.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		log.trace("In the get of user servlet");
 		User u = (User) req.getSession().getAttribute("user");
 		if(u!=null) {
 			ObjectMapper mapper = new ObjectMapper();

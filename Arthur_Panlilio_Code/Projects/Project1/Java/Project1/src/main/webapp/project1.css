@@ -3,6 +3,20 @@
     letter-spacing: 4px;
 }
 
+.pocketwatch{
+    position: absolute;
+    top: 425px;
+    left: 1195px;
+    width:200px;
+    height:200px;
+}
+
+.pocketwatchface{
+    position: absolute;
+    top: 450px;
+    left: 1195px;
+}
+
 .paperCloseButton{
     position: absolute;
     top: 40px;
@@ -75,6 +89,13 @@
     top: 900px;
     left: 29%;
     width: 100%;
+    vertical-align: top;
+    text-align: left;
+    opacity:.8;
+}
+
+.reRespSub{
+    width: 80%;
     vertical-align: top;
     text-align: left;
     opacity:.8;
@@ -204,3 +225,8 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td {
     border:2px solid rgba(0, 0, 0, 0.336);
   }
 
+  #mapid {
+    margin-left:180px;
+    height: 380px;
+     width: 70%
+    }
