@@ -33,8 +33,8 @@ public class LoginServlet extends HttpServlet {
 					
 					user = mapper.readValue(req.getReader(), User.class);
 					
-					User authorizedUser = uService.getUserInfo(user.getUsername());
-					
+					User authorizedUser = uService.getUser(user.getUsername());
+					System.out.println("---> " + authorizedUser.toString());
 					if (uService.getHashValue(user).equals(authorizedUser.getPassword())) {
 						
 						String json = "";

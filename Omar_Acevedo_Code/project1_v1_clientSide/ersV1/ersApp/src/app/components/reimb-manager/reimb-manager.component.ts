@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { ReimbursementService } from '../../services/reimbursement.service';
 import { ActivatedRoute } from '@angular/router';
 import { Reimbursement } from '../../models/reimbursement.model';
+import { LoginauthService } from '../../services/loginauth/loginauth.service';
 
 @Component({
   selector: 'app-reimb-manager',
@@ -38,15 +39,17 @@ export class ReimbManagerComponent implements OnInit {
    
   constructor(private rService: ReimbursementService, 
               private route: ActivatedRoute,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private loginAuthService: LoginauthService) { }
 
 
 /*
   - Update reimbursment Status
   Function to handle select element's change event */
   updateReimbStatus (event: any, ticket_id: any) {
-
+    
     this.selectedStatusId = event.target.value;
+    // this.loginAuthService.currentLoggedInId
 
     // do a post request
     this.rService.updateReimbursementStatus(this.selectedStatusId, ticket_id, this.loggedUserId).subscribe(

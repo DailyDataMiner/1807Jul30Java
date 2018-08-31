@@ -57,7 +57,7 @@
                 <th scope="row">{{ r.created_by }}</th>
                 <th scope="row">{{ r.description }}</th>
                 <th scope="row">{{ r.reimb_type }}</th>
-                <th scope="row">{{ r.amount }}</th>
+                <th scope="row">{{ r.amount | currency }}</th>
                 <!-- <th scope="row">{{ r.reimb_status }}</th> -->
                 <th scope="row">
 
@@ -68,8 +68,9 @@
                     <option value=1>PENDING</option>
                   </select> -->
 <!-- https://stackoverflow.com/questions/36659854/angular-2-binding-within-binding-interpolation-within-event -->
-                  <select class="form-control" (change)="updateReimbStatus($event, r.ticket_id)">
-                      <option [value]="status.id" *ngFor="let status of reimbStatus">
+                  <select class="form-control" (change)="updateReimbStatus($event, r.ticket_id)" style="width: 116px;">
+                      <option [value]="status.id" *ngFor="let status of reimbStatus" 
+                              [ngValue]="status" [selected]="status.id == r.reimb_status">
                         {{ status.name }}
                       </option>
                     </select>             

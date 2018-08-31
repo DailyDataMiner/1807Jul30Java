@@ -1,5 +1,7 @@
 package com.ers.services;
 
+import java.util.List;
+
 import com.ers.dao.UserDaoImplementation;
 import com.ers.pojos.User;
 
@@ -9,6 +11,11 @@ public class UserService extends UserDaoImplementation {
 		return getUserPW_hash(usrObj);
 	}
 	
-//	public User 
+	public User getUser(String username) {
+		return getUserInfo(username);
+	}
 	
+	public List<User> getAllUsers() {
+		return getUsers();
+	}
 }

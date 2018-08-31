@@ -7,7 +7,7 @@ import { Observable } from '../../../../node_modules/rxjs';
 })
 export class LoginauthService {
 
-
+  public currentLoggedInId: number;
 
   constructor(private http: HttpClient) { }
 

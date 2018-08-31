@@ -5,8 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.ers.pojos.Reimbursement;
 import com.ers.pojos.User;
 import com.ers.utils.ConnectionFactory;
 
@@ -69,6 +73,43 @@ public class UserDaoImplementation implements UserDao<User> {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public List<User> getUsers() {
+		
+		List<User> usersList = new ArrayList<User>();
+		
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			
+			
+		   String sql = "SELECT ";
+		   		  sql += "USER_ID, USERNAME, FIRSTNAME, LASTNAME, EMAIL, ROLENAME, USER_ROLE_ID ";
+		   		  sql += "FROM v_user_information";
+		   
+		   Statement sqlStmt = conn.createStatement();
+		   ResultSet sqlResult = sqlStmt.executeQuery(sql);
+		   
+		   while (sqlResult.next()) {
+			   
+			   usersList.add(new User(
+					   sqlResult.getInt("USER_ID"),
+					   sqlResult.getString("USERNAME"),
+					   sqlResult.getString("FIRSTNAME"),
+					   sqlResult.getString("LASTNAME"),
+					   sqlResult.getString("EMAIL"),
+					   sqlResult.getInt("USER_ROLE_ID"),
+					   sqlResult.getString("ROLENAME")
+					   ));
+			   
+		   }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return usersList;
 	}
 
 }

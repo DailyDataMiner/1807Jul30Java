@@ -34,9 +34,6 @@ export class ReimbursementService {
   }
 
   public updateReimbursementStatus(reimb_status: string, ticket_id: number, resolver: number): Observable<any> {
-    console.log("reimb_status -> " + reimb_status);
-    console.log("ticket_id -> " + ticket_id);
-    console.log("resolver -> " + resolver);
     return this.http.post<any>("http://localhost:8080/project1_v1/reimbursements",
                             {action: 'updateStatus', reimb_status: reimb_status, ticket_id: ticket_id, resolver: resolver});
   }

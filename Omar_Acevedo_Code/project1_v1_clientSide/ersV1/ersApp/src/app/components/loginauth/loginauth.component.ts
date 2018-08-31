@@ -16,6 +16,8 @@ export class LoginauthComponent implements OnInit {
   public loggedUserId: number;
   public loggedUserName: string;
   private user_role_name: string;
+  submitted: boolean = false;
+  invalidLogin: boolean = false;
 
   constructor(private router: Router, private loginAuthService: LoginauthService,
               private appComponent: AppComponent) { }
@@ -25,10 +27,11 @@ export class LoginauthComponent implements OnInit {
 
 // on submit
   doLogin() {
-    
+    this.submitted = true;
     this.loginAuthService.login(this.username, this.password).subscribe(
       loginData => {
 
+        console.log("loginData");
         console.log(loginData);
         
         if (loginData.user_id > 0) {
@@ -40,6 +43,7 @@ export class LoginauthComponent implements OnInit {
             if (loginData.user_role_id == 10) { // Normal employee
 
               // this.appComponent.isLoggedIn = true;
+              this.loginAuthService.currentLoggedInId = this.loggedUserId;
 
               // this.router.navigate(['/home']);
               this.router.navigate(['/reimbursements', {
@@ -50,7 +54,8 @@ export class LoginauthComponent implements OnInit {
             } else {
 
               // this.appComponent.isLoggedIn = true;
-
+              this.loginAuthService.currentLoggedInId = this.loggedUserId;
+              
               this.router.navigate(['/reimbursementManager', {
                 loggedUserId: this.loggedUserId, 
                 loggedUserName: this.loggedUserName,
@@ -60,7 +65,8 @@ export class LoginauthComponent implements OnInit {
             }
               
         } else {
-          this.router.navigate(['/login']);
+          this.invalidLogin = true;
+          // this.router.navigate(['/login']);
         }
 
         // return true;

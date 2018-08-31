@@ -3,6 +3,7 @@ import { ReimbursementService } from '../../services/reimbursement.service';
 import { Reimbursement } from '../../models/reimbursement.model';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from '../../app.component';
+import { LoginauthService } from '../../services/loginauth/loginauth.service';
 
 @Component({
   selector: 'app-reimbursements',
@@ -27,7 +28,7 @@ export class ReimbursementsComponent implements OnInit {
   receipt: string;
 
   constructor(private rService: ReimbursementService, private route: ActivatedRoute,
-    private appComponent: AppComponent) { }
+    private appComponent: AppComponent, private loginAuthSrv: LoginauthService) { }
 
   ngOnInit() {
 
@@ -39,7 +40,10 @@ export class ReimbursementsComponent implements OnInit {
                   this.loggedUserName = params['loggedUserName'];
                   // In a real app: dispatch action to load the details here.
       });
-   
+    
+    // this.loggedUserId = this.loginAuthSrv.currentLoggedInId;
+    
+    // console.log(this.loginAuthSrv.currentLoggedInId);
     console.log("loggedUserId -> " + this.loggedUserId);
     console.log("loggedUserName -> " + this.loggedUserName);
 

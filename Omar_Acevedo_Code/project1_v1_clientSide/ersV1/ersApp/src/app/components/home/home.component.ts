@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AppComponent } from '../../app.component';
+import { LoginauthService } from '../../services/loginauth/loginauth.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
   constructor(
     // private service: HeroService,
     private route: ActivatedRoute,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private loginAuthSrv: LoginauthService
   ) {}
 
   ngOnInit() {

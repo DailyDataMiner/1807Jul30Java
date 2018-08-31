@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginauthService } from '../../services/loginauth/loginauth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,10 +10,11 @@ export class NavbarComponent implements OnInit {
 
   currentClass = "";
 
-  constructor() { }
+  constructor(private loginAuthSrv: LoginauthService) { }
 
   ngOnInit() {
     this.currentClass = "active";
+    
   }
 
 }
