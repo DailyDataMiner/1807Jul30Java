@@ -14,7 +14,7 @@ import com.rev.util.ConnectionUtil;
 
 public class ReimbursementDao {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 
 //		List<Reimbursement> reimbursements = findAllReimbursements();
 //		for(Reimbursement r : reimbursements) {
@@ -25,20 +25,22 @@ public class ReimbursementDao {
 //		for(Reimbursement r : reimbursements) {
 //			System.out.println(r);
 //		}
-		
+
 //		System.out.println(findReimbursementsByUsername("JohnSmith"));
 
 //		System.out.println(findForLogin("JohnSmith", "password"));
-		
-		approveRequest(4);
-		denyRequest(5);
+
+//		approveRequest(4);
+//		denyRequest(5);
 
 	}
 
-	public static List<Reimbursement> findAllReimbursements() {
+	public static List<Reimbursement> findAllReimbursements() throws SQLException {
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
 
-		try (Connection conn = ConnectionUtil.getConnection()) {
+//		try (
+				Connection conn = ConnectionUtil.getConnection();
+//				) {
 			String query = "select * from ers_reimbursements";
 
 			Statement statement = conn.createStatement();
@@ -75,53 +77,21 @@ public class ReimbursementDao {
 
 				reimbursements.add(temp);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return reimbursements;
-	}
-
-//	public static Reimbursement findReimbursementsByUserid(int userid) {
-//		Reimbursement r = null;
-//		try (Connection conn = ConnectionUtil.getConnection()) {
-//
-//			String sql = "select * from ers_reimbursements where reimbAuthor = ?";
-//			PreparedStatement ps = conn.prepareStatement(sql);
-//			ps.setInt(1, userid);
-//			ResultSet info = ps.executeQuery();
-//
-//			while (info.next()) {
-//				r = new Reimbursement();
-//
-//				r.setReimbId(info.getInt(1));
-//				r.setReimbAmount(info.getDouble(2));
-//				r.setReimbSubmitted(info.getString(3));
-//				r.setReimbResolved(info.getString(4));
-//				r.setReimbDescription(info.getString(5));
-//				r.setReimbAuthor(info.getString(6));
-//				r.setReimbResolver(info.getString(7));
-//				r.setReimbStatusId(info.getString(8));
-//				r.setReimbTypeId(info.getString(9));
-//
-//			}
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
-//		return r;
-//	}
+		return reimbursements;
+	}
 
 	public static List<Reimbursement> findReimbursementsByUsername(String username) {
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "select * from ers_reimbursements where reimbAuthor = ?";
-			
+
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			ResultSet info = ps.executeQuery();
-
-//			Statement statement = conn.createStatement();
-//			ResultSet rs = statement.executeQuery(sql);
 
 			while (info.next()) {
 				Reimbursement temp = new Reimbursement();
@@ -160,62 +130,6 @@ public class ReimbursementDao {
 		return reimbursements;
 	}
 
-	
-//	public static List<Reimbursement> findReimbursementsByUsername(String username) {
-//		List<Reimbursement> r = new ArrayList<Reimbursement>();
-//		try (Connection conn = ConnectionUtil.getConnection()) {
-//
-//			String sql = "select * from ers_reimbursements where reimbAuthor = ?";
-//			PreparedStatement ps = conn.prepareStatement(sql);
-//			ps.setString(1, username);
-//			ResultSet info = ps.executeQuery();
-//
-//			while (info.next()) {
-//
-//				r.setReimbId(info.getInt(1));
-//				r.setReimbAmount(info.getDouble(2));
-//				r.setReimbSubmitted(info.getString(3));
-//				r.setReimbResolved(info.getString(4));
-//				r.setReimbDescription(info.getString(5));
-//				r.setReimbAuthor(info.getString(6));
-//				r.setReimbResolver(info.getString(7));
-//				r.setReimbStatusId(info.getString(8));
-//				r.setReimbTypeId(info.getString(9));
-//
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return r;
-//	}
-
-	public static User findForLogin(String username, String password) {
-		User u = null;
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "select * from ers_users where username = ? and password = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ResultSet info = ps.executeQuery();
-
-			while (info.next()) {
-				u = new User();
-
-				u.setUserid(info.getInt(1));
-				u.setUsername(info.getString(2));
-				u.setPassword(info.getString(3));
-				u.setFirstname(info.getString(4));
-				u.setLastname(info.getString(5));
-				u.setEmail(info.getString(6));
-				u.setRoleid(info.getString(7));
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return u;
-	}
-
 	public static Reimbursement saveNewReimbursement(Reimbursement obj) {
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
@@ -243,33 +157,37 @@ public class ReimbursementDao {
 		}
 		return obj;
 	}
-	
-	public static void approveRequest(int reimbId) {
-		
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "update ers_reimbursements set reimbStatusId = 'Approved' where reimbId = ?";
-			
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, reimbId);
-			ResultSet info = ps.executeQuery();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
+	public static void approveRequest(int reimbId) throws SQLException {
+
+//		try (
+		Connection conn = ConnectionUtil.getConnection();
+//				) {
+		String sql = "update ers_reimbursements set reimbStatusId = 'Approved' where reimbId = ?";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, reimbId);
+		ResultSet info = ps.executeQuery();
+
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
-	
-	public static void denyRequest(int reimbId) {
-		
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "update ers_reimbursements set reimbStatusId = 'Denied' where reimbId = ?";
-			
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, reimbId);
-			ResultSet info = ps.executeQuery();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
+	public static void denyRequest(int reimbId) throws SQLException {
+
+//		try (
+		Connection conn = ConnectionUtil.getConnection();
+//				) {
+		String sql = "update ers_reimbursements set reimbStatusId = 'Denied' where reimbId = ?";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, reimbId);
+		ResultSet info = ps.executeQuery();
+
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
-	
+
 }

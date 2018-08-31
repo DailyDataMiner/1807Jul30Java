@@ -1,6 +1,7 @@
 package com.rev.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,18 +17,30 @@ import com.rev.pojos.User;
 @WebServlet("/findallusers")
 public class FindAllUsersServlet extends HttpServlet {
 
-	List<User> UserList = UserDao.findAllUsers();
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("application/json");
+		try {
+			List<User> UserList = UserDao.findAllUsers();
 
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(UserList);
+			response.setContentType("application/json");
 
-		response.getWriter().write(json);
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(UserList);
+
+			response.getWriter().write(json);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

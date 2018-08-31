@@ -20,17 +20,19 @@ public class UserDao {
 //			System.out.println(u);
 //		}
 		
-		System.out.println(findUserByUsername("JohnSmith"));
+//		System.out.println(findUserByUsername("JohnSmith"));
 		
 //		System.out.println(findForLogin("JohnSmith", "password"));
 		
 		
 	}
 	
-	public static List<User> findAllUsers() {
+	public static List<User> findAllUsers() throws SQLException {
 		List<User> users = new ArrayList<User>();
 		
-		try (Connection conn = ConnectionUtil.getConnection()) {
+//		try (
+				Connection conn = ConnectionUtil.getConnection();
+//						) {
 			String query = "select * from ers_users";
 
 			Statement statement = conn.createStatement();
@@ -61,9 +63,9 @@ public class UserDao {
 
 				users.add(temp);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		return users;		
 	}
 	
@@ -94,9 +96,11 @@ public class UserDao {
 		return u;
 	}
 	
-	public static User findUserByUsername(String username) {
+	public static User findUserByUsername(String username) throws SQLException {
 		User u = null;
-		try (Connection conn = ConnectionUtil.getConnection()) {
+//		try (
+				Connection conn = ConnectionUtil.getConnection();
+//				) {
 
 			String sql = "select * from ers_users where username = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -115,15 +119,17 @@ public class UserDao {
 				u.setRoleid(info.getString(7));
 				
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		return u;
 	}
 	
-	public static User findForLogin(String username, String password) {
+	public static User findForLogin(String username, String password) throws SQLException {
 		User u = null;
-		try (Connection conn = ConnectionUtil.getConnection()) {
+//		try (
+				Connection conn = ConnectionUtil.getConnection();
+//				) {
 			String sql = "select * from ers_users where username = ? and password = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
@@ -142,15 +148,17 @@ public class UserDao {
 				u.setRoleid(info.getString(7));
 				
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		return u;
 	}
 	
-	public static User saveNewUser(User obj) {
+	public static User saveNewUser(User obj) throws SQLException {
 
-		try (Connection conn = ConnectionUtil.getConnection()) {
+//		try (
+				Connection conn = ConnectionUtil.getConnection();
+//				) {
 			
 			String sql = "insert into ers_users (username, password, firstname, lastname, email, roleid) values (?, ?, ?, ?, ?, 'User')";
 			
@@ -172,10 +180,10 @@ public class UserDao {
 			while (pk.next()) {
 				obj.setUserid(pk.getInt(1));
 			}
-		}
-		catch (SQLException e) {
-			return null;
-		}
+//		}
+//		catch (SQLException e) {
+//			return null;
+//		}
 		return obj;
 	}
 			

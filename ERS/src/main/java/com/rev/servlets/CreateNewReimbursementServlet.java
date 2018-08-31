@@ -1,6 +1,7 @@
 package com.rev.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,31 +17,30 @@ import com.rev.pojos.User;
 
 @WebServlet("/createnewreimbursement")
 public class CreateNewReimbursementServlet extends HttpServlet {
-	
-	//this needs to take in prefilled reimbursements fields and save a reimbursement
-	
+
+	// this needs to take in prefilled reimbursements fields and save a
+	// reimbursement
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		ObjectMapper mapper = new ObjectMapper();
-		Reimbursement reimbursement = new Reimbursement();
+//		try {
+			ObjectMapper mapper = new ObjectMapper();
+			Reimbursement reimbursement = new Reimbursement();
 
-//		user.setUsername("JohnSmith");
-//		user.setPassword("password");
-
-		try {
 			reimbursement = mapper.readValue(request.getReader(), Reimbursement.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-		ReimbursementDao.saveNewReimbursement(reimbursement);
+			ReimbursementDao.saveNewReimbursement(reimbursement);
 
-		response.setContentType("application/json");
+			response.setContentType("application/json");
 
-		response.getWriter().write(mapper.writeValueAsString(reimbursement));
-		
+			response.getWriter().write(mapper.writeValueAsString(reimbursement));
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+
 	}
 
 	@Override
@@ -50,19 +50,5 @@ public class CreateNewReimbursementServlet extends HttpServlet {
 		doGet(request, response);
 
 	}
-	
-	public static void main(String[] args) {
-		Reimbursement reimbursement = new Reimbursement();
 
-		reimbursement.setReimbAmount(889.90);
-		reimbursement.setReimbDescription("Business trip to Portland in July");
-		reimbursement.setReimbAuthor("JohnSmith");
-		reimbursement.setReimbTypeId("Travel");
-
-//		Reimbursement r = 
-				ReimbursementDao.saveNewReimbursement(reimbursement);
-
-//		System.out.println(reimbursement.toString());
-	}
-	
 }

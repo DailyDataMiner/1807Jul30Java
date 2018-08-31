@@ -1,6 +1,7 @@
 package com.rev.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,37 +18,40 @@ import com.rev.pojos.User;
 
 @WebServlet("/findusersreimbursements")
 public class FindUsersReimbursements extends HttpServlet {
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ObjectMapper mapper = new ObjectMapper();
-		User user = new User();
-		
 		try {
+			ObjectMapper mapper = new ObjectMapper();
+			User user = new User();
+
 			user = mapper.readValue(request.getReader(), User.class);
+
+			User u = UserDao.findUserByUsername(user.getUsername());
+
+			List<Reimbursement> ReimbursementList = ReimbursementDao.findReimbursementsByUsername(u.getUsername());
+
+			response.setContentType("application/json");
+
+			String json = mapper.writeValueAsString(ReimbursementList);
+
+			response.getWriter().write(json);
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-			
-		User u = UserDao.findUserByUsername(user.getUsername());
-		
-		List<Reimbursement> ReimbursementList = ReimbursementDao.findReimbursementsByUsername(u.getUsername());
 
-		response.setContentType("application/json");
-
-		String json = mapper.writeValueAsString(ReimbursementList);
-
-		response.getWriter().write(json);
-		
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		doGet(request, response);
-	
+
 	}
 
 }

@@ -18,6 +18,7 @@ export class GetusersComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.getUsers();
   }
 
   getUsers() {
