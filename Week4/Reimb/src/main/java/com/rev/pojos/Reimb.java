@@ -17,7 +17,25 @@ public class Reimb{
 	private int typeid;
 	
 	public Reimb() {}
+
+	public Reimb(double amount, String description,
+			Blob receipt, int author, int typeid) {
+		super();
+		this.amount = amount;
+		this.description = description;
+		this.receipt = receipt;
+		this.author = author;
+		this.typeid = typeid;
+	}
 	
+	public Reimb(double amount, String description,
+			int author, int typeid) {
+		super();
+		this.amount = amount;
+		this.description = description;
+		this.author = author;
+		this.typeid = typeid;
+	}
 	public Reimb(double amount, Timestamp submitted, Timestamp resolved, String description,
 			Blob receipt, int author, int resolver, int statusid, int typeid) {
 		super();
@@ -26,6 +44,19 @@ public class Reimb{
 		this.resolved = resolved;
 		this.description = description;
 		this.receipt = receipt;
+		this.author = author;
+		this.resolver = resolver;
+		this.statusid = statusid;
+		this.typeid = typeid;
+	}
+	
+	public Reimb(double amount, Timestamp submitted, Timestamp resolved, String description,
+			int author, int resolver, int statusid, int typeid) {
+		super();
+		this.amount = amount;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.description = description;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusid = statusid;

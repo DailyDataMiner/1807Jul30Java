@@ -17,12 +17,30 @@ public class ReimbService {
 	}
 	
 	//Employee can add a Reimb request
-	public void addR (double amount, Timestamp submitted, Timestamp resolved, String Description, Blob Receipt, int author, int resolver, int statusid, int typeid) {
-		rDao.addReimb(amount, submitted, resolved, Description, Receipt, author, resolver, statusid, typeid);
+	public void addR (double amount, String description, Blob receipt, int author, int typeid) {
+		rDao.addReimb(amount, description, receipt, author, typeid);
 	}
 	
-	//Manager can view all
+	//Employee can add a Reimb request w/o blob
+		public void addR (double amount, String description, int author, int typeid) {
+			rDao.addReimb(amount, description, author, typeid);
+		}
+	
+	//Finance Manager can view all
 	public List<Reimb> getAll(){
 		return rDao.findAll();
 	}
+	
+	//Manager wants to filter by Status
+	public List<Reimb> findByStatus(int statusid){
+		return rDao.findAllByStatus(statusid);
+	}
+	
+	//Manager wants to update ticket status
+	public void updateTicket(int statusid, int resolverid, int reimbid) {
+		rDao.update(statusid, resolverid, reimbid);
+	}
+	
+	
+	
 }

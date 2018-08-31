@@ -16,6 +16,8 @@ public class ReimbDao {
 
 	// check for singular user info based on author id from current session which is
 	// reimb_author (Employee)
+
+	
 	public List<Reimb> checkAcc(int userid){
 		List<Reimb> user = new ArrayList<Reimb>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
@@ -28,7 +30,7 @@ public class ReimbDao {
 				
 				Reimb temp = new Reimb();
 				temp.setId (info.getInt(1));
-				temp.setAmount(info.getInt(2));
+				temp.setAmount(info.getDouble(2));
 				temp.setSubmitted(info.getTimestamp(3));
 				temp.setResolved(info.getTimestamp(4));
 				temp.setDescription(info.getString(5));
@@ -45,50 +47,98 @@ public class ReimbDao {
 			}
 		return user;
 	}
+	
+	
 
 	//add a reimbursement (Employee)
-	public void addReimb(double amount, Timestamp submitted, Timestamp resolved, String Description, Blob Receipt, int author, int resolver, int statusid, int typeid) {
-		Reimb r = new Reimb(amount, submitted, resolved, Description, Receipt,  author,  resolver,  statusid,  typeid);
+	public void addReimb(double amount,String description, Blob receipt, int author, int typeid) {
+		Reimb r = new Reimb(amount, description, receipt, author, typeid);
+		Timestamp time = new Timestamp(System.currentTimeMillis());
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
 			String sql = "Insert into Ers_Reimbursement ("
 					+ "reimb_amount, "
 					+ "reimb_submitted, "
-					+ "reimb_resolved, "
-					+ "reimb_descripton, "
+					+ "reimb_description, "
 					+ "reimb_receipt, "
 					+ "reimb_author, "
-					+ "reimb_resolver, "
 					+ "reimb_status_id, "
-					+ "reimb_type_id) values (?,?,?,?,?,?,?,?,?)";
+					+ "reimb_type_id) values (?,?,?,?,?,?,?)";
+		
 			conn.setAutoCommit(false);
-			String[] key = { "REIMB_ID"};
-			PreparedStatement ps = conn.prepareStatement(sql);
+			String[] key = {"REIMB_ID"};
 			
+			PreparedStatement ps = conn.prepareStatement(sql, key);
+		
 			ps.setDouble(1, r.getAmount());
-			ps.setTimestamp(2, r.getSubmitted());
-			ps.setTimestamp(3, r.getResolved());
-			ps.setString(4,r.getDescription());
-			ps.setBlob(5, r.getReceipt());
-			ps.setInt(6, r.getAuthor());
-			ps.setInt(7, r.getResolver());
-			ps.setInt(8, r.getStatusid());
-			ps.setInt(9, r.getTypeid());
+			ps.setTimestamp(2, time);
+			ps.setString(3,r.getDescription());
+			ps.setBlob(4, r.getReceipt());
+			ps.setInt(5, r.getAuthor());
+			ps.setInt(6, 1);
+			ps.setInt(7, r.getTypeid());
+			
 			
 			int rowsUpdated = ps.executeUpdate();
 			if (rowsUpdated > 0) {
 				
 				ResultSet pk = ps.getGeneratedKeys();
-				
+			
 				while(pk.next()) {
-					r.setId(1);
+					r.setId(pk.getInt(1));
+					
+					
 				}
 			} conn.commit();
+			System.out.println("Adding Reimbursement...");
 			} catch (SQLException e) {
 				e.printStackTrace();
 		}
 	
 	
 	}
+	
+	//add a reimbursement (Employee) with no blob
+		public void addReimb(double amount, String description, int author, int typeid) {
+			Reimb r = new Reimb(amount, description, author, typeid);
+			Timestamp time = new Timestamp(System.currentTimeMillis());
+			try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+				String sql = "Insert into Ers_Reimbursement ("
+						+ "reimb_amount, "
+						+ "reimb_submitted, "
+						+ "reimb_description, "
+						+ "reimb_author, "
+						+ "reimb_status_id, "
+						+ "reimb_type_id) values (?,?,?,?,?,?)";
+			
+				conn.setAutoCommit(false);
+				String[] key = {"REIMB_ID"};
+				
+				PreparedStatement ps = conn.prepareStatement(sql, key);
+			
+				ps.setDouble(1, r.getAmount());
+				ps.setTimestamp(2, time);
+				ps.setString(3,r.getDescription());
+				ps.setInt(4, r.getAuthor());
+				ps.setInt(5, 1);
+				ps.setInt(6, r.getTypeid());
+				
+				
+				int rowsUpdated = ps.executeUpdate();
+				if (rowsUpdated > 0) {
+					
+					ResultSet pk = ps.getGeneratedKeys();
+				
+					while(pk.next()) {
+						r.setId(pk.getInt(1));
+						
+						
+					}
+				} conn.commit();
+				System.out.println("Adding Reimbursement...");
+				} catch (SQLException e) {
+					e.printStackTrace();
+			}
+		}
 	
 	//Finance Manager can see all accounts
 	public List<Reimb> findAll(){
@@ -102,7 +152,7 @@ public class ReimbDao {
 				
 				Reimb temp = new Reimb();
 				temp.setId (info.getInt(1));
-				temp.setAmount(info.getInt(2));
+				temp.setAmount(info.getDouble(2));
 				temp.setSubmitted(info.getTimestamp(3));
 				temp.setResolved(info.getTimestamp(4));
 				temp.setDescription(info.getString(5));
@@ -135,7 +185,7 @@ public class ReimbDao {
 				
 				Reimb temp = new Reimb();
 				temp.setId (info.getInt(1));
-				temp.setAmount(info.getInt(2));
+				temp.setAmount(info.getDouble(2));
 				temp.setSubmitted(info.getTimestamp(3));
 				temp.setResolved(info.getTimestamp(4));
 				temp.setDescription(info.getString(5));
@@ -156,15 +206,19 @@ public class ReimbDao {
 
 	//Finance Manager wants to change ticket status by Update using new reimb_status_id, reimb_id, and reimb_resolver 
 	public void update( int statusid, int resolverid, int reimbid) {
+		
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "Update Ers_Reimbursement set reimb_status_id = ?, reimb_resolver = ? where reimb_id = ?";
+			String sql = "Update Ers_Reimbursement set reimb_status_id = ?, reimb_resolver = ?, reimb_resolved = ?  where reimb_id = ?";
 			
 			conn.setAutoCommit(false);
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, statusid);
 			ps.setInt(2, resolverid);
-			ps.setInt(3, reimbid);
+			ps.setTimestamp(3, time);
+			ps.setInt(4, reimbid);
 		
 			
 			ps.executeUpdate();
@@ -190,10 +244,12 @@ public class ReimbDao {
 	//Test stuff here
 	public static void main(String[] args) {
 		ReimbDao test = new ReimbDao();
+		
 		System.out.println(test.findAll());
 		System.out.println(test.checkAcc(1));
 		System.out.println(test.findAllByStatus(1));
 		test.update(3,1,1);
+		test.addReimb(9.25,"Just for Testing", null , 1, 2);
 
 	}
 }
