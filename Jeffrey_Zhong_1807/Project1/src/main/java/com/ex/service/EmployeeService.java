@@ -1,6 +1,7 @@
 package com.ex.service;
 //import java.human.emotion.sadness
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,5 +33,17 @@ public class EmployeeService {
 			return employeeDao.findOneEmp(employee.getUsername());
 		return null;
 	}	
+	
+	public static List<Employee> getAllEmployee(HttpServletRequest request, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			mapper.readValue(request.getReader(), Employee.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return employeeDao.findAll();
+
+	}
 }
 

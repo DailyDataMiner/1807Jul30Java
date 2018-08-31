@@ -33,7 +33,7 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 	public List<Reimbursement> findAll() {
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
-			String query = "select * from Reimbursement";
+			String query = "select * from Reimbursement order by REIMB_ID";
 
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(query);

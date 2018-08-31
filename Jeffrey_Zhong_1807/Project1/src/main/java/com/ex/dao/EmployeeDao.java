@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ex.pojos.Employee;
@@ -14,7 +16,32 @@ public class EmployeeDao implements Dao<Employee, Integer> {
 
 	@Override
 	public List<Employee> findAll() {
-		return null;
+		
+		List<Employee> employee = new ArrayList<Employee>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection();) {
+			String query = "select * from Employee";
+
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+
+			while (rs.next()) {
+				Employee temp = new Employee();
+				temp.setEmpID(rs.getInt(1));
+				temp.setUsername(rs.getString(2));
+				temp.setPassword(rs.getString(3));
+				temp.setFirstname(rs.getString(4));
+				temp.setLastname(rs.getString(5));
+				temp.setEmail(rs.getString(6));
+				temp.setRoleID(rs.getInt(7));
+				employee.add(temp);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return employee;
 	}
 
 	@Override
