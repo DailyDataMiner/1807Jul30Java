@@ -1,5 +1,7 @@
 package com.zero.main;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,7 +17,7 @@ public class App {
 	static AccountService aService = new AccountService();
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Revature Bank!\n"
+		System.out.println("***Welcome to Revature Bank!***\n"
 				+ "How may we help you today?");
 		menu();
 	}
@@ -54,7 +56,7 @@ public class App {
 	static void newSession(User session) {
 		System.out.print("--------------------\n"
 				+ "1) List Accounts\n"
-				+ "2) Create Account\n"
+				+ "2) Create Banking Account\n"
 				+ "3) Logout\n"
 				+ "Please select an option: ");
 		int option = 0;
@@ -123,7 +125,7 @@ public class App {
 		double amount = Double.parseDouble(scanner.nextLine());
 		
 		Account temp = aService.getAccount(accountID);
-		if(temp.getBalance() > amount) {
+		if(temp.getBalance() >= amount) {
 			Account updated = new Account(temp.getId(), temp.getType(), temp.getBalance()-amount, temp.getUserid());
 			
 			aService.updateAccount(updated);
@@ -250,8 +252,9 @@ public class App {
 		System.out.println("Current Accounts");
 		List<Account> accounts = aService.listAccounts(id);
 		int listNumber = 1;
+		NumberFormat formatter = new DecimalFormat("#0.00");
 		for(Account a : accounts) {
-			System.out.println(listNumber + ") Account Type: " + a.getType() + " -- Account Balance: $" + a.getBalance());
+			System.out.println(listNumber + ") Account Type: " + a.getType() + " -- Account Balance: $" + formatter.format(a.getBalance()));
 			listNumber++;
 		}
 	}
@@ -260,7 +263,7 @@ public class App {
 		System.out.print("Please enter the type of account you wish to create (Checking, Savings, or Credit): ");
 		String inType = scanner.nextLine();
 		
-		Account newAccount = new Account(inType, 50.00, userID);
+		Account newAccount = new Account(inType, 1000.00, userID);
 		
 		List<Account> accounts = aService.listAccounts(userID);
 		boolean exists = false;
@@ -274,14 +277,15 @@ public class App {
 		if(exists == false) {
 			aService.addAccount(newAccount);
 			
-			System.out.println("Account successfully created. Revature Bank has generously deposited $50.00\n"
+			NumberFormat formatter = new DecimalFormat("#0.00");
+			System.out.println("Account successfully created. Revature Bank has generously deposited $1000.00\n"
 					+ "into your new account as our way of saying thanks for banking with us.");
 			System.out.println("Your new account is as follows:\n"
 					+ "Account type: " + newAccount.getType() + "\n"
-							+ "Account Balance: $" + newAccount.getBalance());
+							+ "Account Balance: $" + formatter.format(newAccount.getBalance()));
 		}
 		else {
-			System.out.println("Banking Account already exists. Returning to login page: ");
+			System.out.println("Banking Account already exists. Returning to login page.");
 		}
 		newSession(uService.getUser(userID));
 	}
