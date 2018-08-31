@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ReimbursementService } from '../../services/reimbursement.service';
 import { ActivatedRoute } from '@angular/router';
 import { Reimbursement } from '../../models/reimbursement.model';
+// import { FormGroup } from '../../../../node_modules/@angular/forms';
+// import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-reimb-manager',
@@ -20,9 +23,47 @@ export class ReimbManagerComponent implements OnInit {
   // this.employeeSearch = "hola";
   
   reimbursementsArr: Reimbursement[] = [];
+  selectedStatusId: string = "";
   
-  constructor(private rService: ReimbursementService, private route: ActivatedRoute) { }
+  // countryForm: FormGroup;
+  // countries = ['USA', 'Canada', 'Uk'];
+  reimbStatus = [{
+    id: '2',
+    name: 'APPROVED'
+   },
+   {
+    id: '3',
+    name: 'DENIED',
+    code: 'CAD'
+   },
+   {
+    id: '1',
+    name: 'PENDING'
+   }];
+
+   
+  constructor(private rService: ReimbursementService, 
+              private route: ActivatedRoute,
+              private fb: FormBuilder) { }
   
+  //event handler for the select element's change event
+  updateReimbStatus (event: any, ticket_id: any) {
+
+    //update reimbursment
+    this.selectedStatusId = event.target.value;
+
+    console.log(this.selectedStatusId);
+    console.log("ticket id -> " + ticket_id);
+
+    // do a post request
+    this.rService.updateReimbursementStatus(this.selectedStatusId, ticket_id, this.loggedUserId).subscribe(
+      rStatus => {
+        console.log('------>' + rStatus);
+      }
+    );
+
+  }
+
   ngOnInit() {
 
     this.sub = this.route.params.subscribe(
@@ -32,12 +73,21 @@ export class ReimbManagerComponent implements OnInit {
                   this.user_role_name = params['user_role_name'];
                   // In a real app: dispatch action to load the details here.
       });
-   
+      
     console.log("loggedUserId -> " + this.loggedUserId);
     console.log("loggedUserName -> " + this.loggedUserName);
     console.log("user_role_name -> " + this.user_role_name);
 
     this.findReimbursements('', '');
+
+    // do the select part, for the status of the reimbursements
+    // this.countryForm = this.fb.group({
+    //   countryControl: ['Canada']
+    // });
+
+    // this.countryForm = this.fb.group({
+    //   countryControl: [this.countries[1]]
+    // });
 
   }
 

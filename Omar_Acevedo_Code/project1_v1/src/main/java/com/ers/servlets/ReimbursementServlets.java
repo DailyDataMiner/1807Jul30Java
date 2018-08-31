@@ -48,7 +48,16 @@ public class ReimbursementServlets extends HttpServlet {
 //		pw.write("hello again!\n");
 		
 	}
-	
+	public static void main(String[] args) {
+		String json = "";
+		json = "{action:updateStatus}";
+		System.out.println(json.contains("updateStatus"));
+		if (json.split(":")[1] == "updateStatus}" ) {
+			System.out.println("let's update!");
+		} else {
+			System.out.println("...");
+		}
+	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -64,15 +73,21 @@ public class ReimbursementServlets extends HttpServlet {
 			json = br.readLine();
 		}
 		
-		System.out.println(json);
-		
+		System.out.println("json string -> " + json);
+
 		mapper = new ObjectMapper();
 		
-		Reimbursement reimbObj = mapper.readValue(json, Reimbursement.class);
-		
-		System.out.println(reimbObj.toString());
-		
-		rService.save(reimbObj);
+		if (json.contains("updateStatus")) {
+			System.out.println("let's update!");
+			Reimbursement reimbObj = mapper.readValue(json, Reimbursement.class);
+			System.out.println(reimbObj.toString());
+			rService.update(reimbObj);
+		} else {
+			System.out.println("let's do something else!");
+			Reimbursement reimbObj = mapper.readValue(json, Reimbursement.class);
+			System.out.println(reimbObj.toString());
+			rService.save(reimbObj);
+		}
 		
 	}
 	

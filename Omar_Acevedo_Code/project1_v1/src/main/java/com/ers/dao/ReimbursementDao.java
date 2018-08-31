@@ -106,4 +106,38 @@ public class ReimbursementDao implements Dao<Reimbursement, Integer> {
 		
 	}
 
+	@Override
+	public void update(Reimbursement reimbObj) {
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			
+			CallableStatement cs = conn.prepareCall("{ call UPDATE_TICKET_REIMBURSEMENT( ?, ?, ? ) }");
+			
+//			reimb_status: reimb_status, ticket_id: ticket_id, resolver: resolver}
+			
+			
+			System.out.println("-> " + reimbObj.toString());
+			
+			// first param will be reimbursement status id
+			cs.setInt(1, Integer.parseInt(reimbObj.getReimb_status()));
+			
+			
+			// second param will be ticket id
+			cs.setInt(2, reimbObj.getTicket_id());
+			
+			
+			// third param will be resolver
+			cs.setInt(3, Integer.parseInt(reimbObj.getResolver()));
+			
+			
+			cs.execute();
+			
+			System.out.println("callablestatement UPDATE_TICKET_REIMBURSEMENT object has been executed");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

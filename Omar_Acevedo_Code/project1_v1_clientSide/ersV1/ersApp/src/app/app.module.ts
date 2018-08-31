@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SearchEmployeePipe } from './pipes/search-employee.pipe';
@@ -28,11 +28,14 @@ import { ReimbManagerComponent } from './components/reimb-manager/reimb-manager.
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule//,
+    // FormBuilder
+    // FormGroup
   ],
   providers: [
     ReimbursementService,
-    LoginauthService
+    LoginauthService,
+    FormBuilder
   ],
   bootstrap: [AppComponent]
 })

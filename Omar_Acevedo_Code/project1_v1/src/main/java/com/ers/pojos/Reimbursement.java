@@ -16,6 +16,8 @@ public class Reimbursement {
 	private String reimb_status;
 	private String receipt;		// blob?
 	private int reimbursement_id;
+	private String action;
+	
 	
 	public Reimbursement() {
 		super();
@@ -60,6 +62,14 @@ public class Reimbursement {
 		this.reimb_status = reimb_status;
 		this.receipt = receipt;
 		this.reimbursement_id = reimbursement_id;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 
 	public int getTicket_id() {
