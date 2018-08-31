@@ -1,0 +1,11 @@
+.info {
+    font-family: Charter-Roman;
+    font-size: 20px;
+    color: rgba(38,41,58,.8);
+    text-align: center;
+}
+
+.info-table {
+    font-family: Charter-Roman;
+    color: rgba(38,41,58,.8);
+}

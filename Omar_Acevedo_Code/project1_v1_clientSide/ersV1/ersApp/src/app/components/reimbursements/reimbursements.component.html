@@ -13,9 +13,9 @@
     </div>
   </section>
   <div style="border: 1px solid gray">
-    <p style="font-family: Charter-Roman;
-    font-size: 20px;
-    color: rgba(38,41,58,.8);text-align: center;">Welcome <b>{{ loggedUserName }}</b> &nbsp;</p>
+    <p class="info">Welcome <b>{{ loggedUserName }}</b> &nbsp;</p>
+    <p class="info">In the following three sections you can start viewing and adding your ticket expenses.<br>
+    Each ticket, will be qualified as a "request for reimbursement" which will have to be approved or denied by a Finance Manager.</p>
   </div>
   
   <div class="album py-5 bg-light">
@@ -32,7 +32,7 @@
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('Food')" >View</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addExpenseModal" (click)="passTypeOfExpense('Food')">Add</button>
                 </div>
-                <small class="text-muted">{{ foodTicketCount }} tickets</small>
+                <!-- <small class="text-muted">{{ foodTicketCount }} tickets</small> -->
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('Office')">View</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addExpenseModal" (click)="passTypeOfExpense('Office')">Add</button>
                 </div>
-                <small class="text-muted">{{ officeTicketCount }} tickets</small>
+                <!-- <small class="text-muted">{{ officeTicketCount }} tickets</small> -->
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter" (click)="getExpenses('Transportation')">View</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addExpenseModal" (click)="passTypeOfExpense('Transportation')">Add</button>
                 </div>
-                <small class="text-muted">{{ transportationTicketCount }} Tickets</small>
+                <!-- <small class="text-muted">{{ transportationTicketCount }} Tickets</small> -->
               </div>
             </div>
           </div>
@@ -176,9 +176,9 @@
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-	    <div class="modal-content">
+	    <div class="modal-content" style="width: 110% !important;">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalCenterTitle">Tickets/Reimbursement Requests ( {{ reimb_type }} )</h5>
+	        <h5 class="modal-title" id="exampleModalCenterTitle" class="info">Tickets/Reimbursement Requests ( {{ reimb_type }} )</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
@@ -186,18 +186,18 @@
 	      <div class="modal-body">
 	      	<!-- foodExpenseDataGoesHere -->
 	      
-	        <div id="reimbursementsDataView">
+	        <div id="reimbursementsDataView" class="info-table">
 
               <table class="table table-sm table-hover table-bordered thead-light">
               <!-- <table class="table table-sm table-hover table-bordered thead-light"> -->
                   <thead>
                     <!-- <tr> -->
                      <tr>
-                     <th scope="col" colspan=3><u>Tickets</u></th>
-                     <th scope="col" colspan=6><u>Reimbursements</u></th>
+                     <th scope="col" colspan=3 style="background-color:#e8e8e8;"><u>Tickets</u></th>
+                     <th scope="col" colspan=6 style="background-color:#e8e8e8;"><u>Reimbursements</u></th>
                      </tr>
 
-                     <tr>
+                     <tr style="background-color: #f7f7f7;">
                       <th scope="col">#</th>
                       <th scope="col">Status</th>
                       <th scope="col">Created On</th>
@@ -217,7 +217,7 @@
                       <th scope="row">{{ r.created_on }}</th>
                       <th scope="row">{{ r.description }}</th>
                       <th scope="row">{{ r.reimb_type }}</th>
-                      <th scope="row">{{ r.amount }}</th>
+                      <th scope="row">{{ r.amount | currency }}</th>
                       <th scope="row">{{ r.reimb_status }}</th>
                       <th scope="row">{{ r.resolver }}</th>
                       <th scope="row">{{ r.Receipt }}</th>
