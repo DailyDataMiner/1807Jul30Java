@@ -19,8 +19,10 @@ public class LoadViewsServlet extends HttpServlet{
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+				
 		String resource = "partials/" + process(req, resp) + ".html";
-		
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+
 		req.getRequestDispatcher(resource).forward(req, resp);
 	}
 	
@@ -28,14 +30,18 @@ public class LoadViewsServlet extends HttpServlet{
 		log.info("Request Sent to: " + req.getRequestURI());
 		log.info("Path: " + req.getPathInfo());
 		switch(req.getRequestURI()) {
+		case "/ers/ticket.view":
+			return "ticketView";
 		case "/ers/home.view":
 			return "homeView";
-		case "/ers/user.view":
-			return "userView";
+		case "/ers/login.view":
+			return "loginView";
+
 		default:
 			return "errorView";
-				
 		}
+				
+		
 	}
 	
 }

@@ -14,6 +14,16 @@ import java.util.List;
 
 public class DaoUser implements Dao<User, Integer> {
 
+	public static void main(String[] args) {
+		DaoUser usr = new DaoUser();
+		
+		List<User> users = usr.getAll();
+		for(User x : users) {
+			System.out.println(x);
+		}
+		
+	}
+	
 	@Override
 	public List<User> getAll() {
 		List<User> users = new ArrayList<User>();
@@ -33,6 +43,8 @@ public class DaoUser implements Dao<User, Integer> {
 				temp.setLastName(rs.getString(5));
 				temp.setEmail(rs.getString(6));
 				temp.setRoleId(rs.getInt(7));
+				users.add(temp);
+				
 			}
 			
 		} catch(SQLException e) {
@@ -42,32 +54,8 @@ public class DaoUser implements Dao<User, Integer> {
 		return users;
 	}
 
-	@Override
-	public User findOne(Integer id) {
-		User user = new User();
-		
-		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-			
-			String sql = "select * from ers_users where ers_username = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
-			ResultSet info = ps.executeQuery();
-			
-			while(info.next()) {
-				user.setUserId(info.getInt(1));
-				user.setUserName(info.getString(2));
-				user.setPassword(info.getString(3));
-				user.setFirstName(info.getString(4));
-				user.setLastName(info.getString(5));
-				user.setEmail(info.getString(6));
-				user.setRoleId(info.getInt(7));	
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();	
-		}
-		
-		return user;
-	}
+	
+
 
 	@Override
 	public User save(User obj) {
@@ -119,6 +107,68 @@ public class DaoUser implements Dao<User, Integer> {
 	public boolean isUnique(User obj) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public User findPw(User obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public User findOne(String usr) {
+		User temp = new User();
+		
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String sql = "select * from ers_users where id= ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, usr);
+			ResultSet info= ps.executeQuery();
+			
+			while(info.next()) {
+				temp.setUserId(info.getInt(1));
+				temp.setUserName(info.getString(2));
+				temp.setPassword(info.getString(3));
+				temp.setFirstName(info.getString(4));
+				temp.setLastName(info.getString(5));
+				temp.setEmail(info.getString(6));
+				temp.setRoleId(info.getInt(7));
+			}
+		} catch(SQLException e) {
+				e.printStackTrace();
+			
+		}
+		return temp;
+	}
+
+	@Override
+	public User insert(User obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(User obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public User findOne(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public User findOne(User obj) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

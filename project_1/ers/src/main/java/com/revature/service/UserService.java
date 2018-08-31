@@ -14,10 +14,13 @@ public class UserService {
 	public List<User> getAllUsers(){
 		return daouser.getAll();
 	}
-
+	
 	public User addUser(User u) {
 		return daouser.save(u);
 	}
 	
+	public User getOneUser(String s) {
+		return daouser.findOne(s);
+	}
 	
 }
