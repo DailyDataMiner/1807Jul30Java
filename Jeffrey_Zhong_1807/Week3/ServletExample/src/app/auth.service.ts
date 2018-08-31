@@ -31,4 +31,7 @@ export class AuthService {
   getAllReimbursementOrder(description: string): Observable<any> {
     return this.http.post<any>("http://localhost:8082/Project1/getAllReimbursementOrder.ng", {description: description});
   }
+  getAllEmployee(): Observable<any> {
+    return this.http.post<any>("http://localhost:8082/Project1/getAllEmployee.ng", {});
+  }
 }

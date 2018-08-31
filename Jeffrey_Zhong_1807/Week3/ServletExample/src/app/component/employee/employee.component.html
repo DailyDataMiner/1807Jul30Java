@@ -1,93 +1,118 @@
-<h2>
-  EMPLOYEE REIMBURSMENTS
-</h2>
-
-<table dt-options="controller.options" datatable="ng" class="table  table-bordered table-striped table-hover table-responsive">
-  <thead class="thead-dark">
-    <tr>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_ID')">ReimbursementID</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_AMOUNT')">Amount</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_SUBMITTED')">Submitted Date</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_RESOLVED')">Resolved Date</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_DESCRIPTION')">Description</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_RECEIPT')">Receipt</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_RESOLVER')">ResolverID</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_TYPE_ID')">Type</a></th>
-      <th><a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_STATUS_ID')">Status</a></th>
-    </tr>
-  </thead>
-
-  <tr *ngFor="let stat of rbarray">
-    <td>{{ stat.rbID }}</td>
-    <td>{{ stat.amount | currency }}</td>
-    <td>{{ stat.submitted | date: 'medium' }}
-      <td>{{ stat.resolved | date: 'medium' }}</td>
-      <td>{{ stat.description }}</td>
-      <td>{{ stat.receipt }}</td>
-      <td>{{ stat.resolver }}</td>
-      <td>{{ convertTypeID(stat.typeID) }}</td>
-      <td>{{ convertStatusID(stat.statusID) }}</td>
-
-  </tr>
-</table>
-
-
-
-<!-- Button trigger modal-->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCart">Launch modal</button>
-
-<!-- Modal: modalCart -->
-<div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 300px" role="document">
-    <div class="modal-content" >
-      <!--Header-->
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Reimbursement Submit Form</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <!--Body-->
-      <div class="modal-body">
-        <form (submit)="submitReimbursement()">
-          <div class="form-group">
-            <label for="sel1">Select type of reimbursement:</label>
-            <select style="height:30px" class="custom-select" placeholder="type of reimbursement" class="form-control" id="sel1" required [(ngModel)]='type'
-              name='type'>
-              <option>Lodging</option>
-              <option>Travel</option>
-              <option>Food</option>
-              <option>Certification</option>
-              <option>Maternity Leave</option>
-            </select>
-          </div>
-          <label for="amount">Enter Amount:</label>
-          <input type="number" placeholder="$0.00" class="form-control" id="amount" name="amount" required="" autofocus="" [(ngModel)]='amount'>
-          <br>
-          <label for="description">Enter Description:</label>
-          <input placeholder="(Optional)" class="form-control" type="text" id="description" name="description" autofocus="" [(ngModel)]='description'>
-          <br>
-          <button class="btn btn-primary " type="submit" value="Submit Reimbursement!">Submit</button>
-             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <!-- <input class="btn btn-success " type="submit" value="Submit Reimbursement!" data-dismiss="modal"> -->
-        </form>
-      </div>
-
+<div class="container">
+    
+      <h2 style="display:flex;flex-direction:row;justify-content: space-between;">
+          <span style="float: left;">Welcome {{ getEmployeeByID(id) }}</span>
+          <span style="float: center;" ><b>EMPLOYEE</b></span>
+        <span style="float: center;"><button  class="btn btn-warning " (click)="logout()">Logout</button></span>
+      </h2>
+    
+    <div style="text-align:center;">
+      <table name="table" id="table" class="table table-bordered table-striped table-hover table-responsive">
+        <thead class="table-secondary">
+          <tr>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_ID')">ReimbursementID</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_AMOUNT')">Amount</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_SUBMITTED')">Submitted Date</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_RESOLVED')">Resolved Date</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_DESCRIPTION')">Description</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_RECEIPT')">Receipt</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_RESOLVER')">ResolverID</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_TYPE_ID')">Type</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getReimbursementOrder('REIMB_STATUS_ID')">Status</a>
+            </th>
+          </tr>
+        </thead>
+        <tr *ngFor="let stat of rbarray">
+          <td>{{ stat.rbID }}</td>
+          <td>{{ stat.amount | currency }}</td>
+          <td>{{ stat.submitted | date: 'medium' }}
+            <td>{{ stat.resolved | date: 'medium' }}</td>
+            <td id="desc">{{ stat.description }}</td>
+            <td>{{ stat.receipt }}</td>
+            <td>{{ stat.resolver }}</td>
+            <td>{{ convertTypeID(stat.typeID) }}</td>
+            <td>{{ convertStatusID(stat.statusID) }}</td>
+        </tr>
+      </table>
     </div>
-    <!--Footer-->
-    <!-- <div class="modal-footer">
+
+
+
+    <!-- Button trigger modal-->
+    <div style="margin-left:500px;margin-bottom: 30px">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCart">Submit New Reimbursement </button>
+    </div>
+    <!-- Modal: modalCart -->
+    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="width: 300px" role="document">
+        <div class="modal-content">
+          <!--Header-->
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Reimbursement Submit Form</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <!--Body-->
+          <div class="modal-body">
+            <form (submit)="submitReimbursement()">
+              <div class="form-group">
+                <label for="sel1">Select type of reimbursement:</label>
+                <select style="height:30px" class="custom-select" placeholder="type of reimbursement" class="form-control" id="sel1" required
+                  [(ngModel)]='type' name='type'>
+                  <option>Lodging</option>
+                  <option>Travel</option>
+                  <option>Food</option>
+                  <option>Certification</option>
+                  <option>Maternity Leave</option>
+                </select>
+              </div>
+              <label for="amount">Enter Amount:</label>
+              <input type="number" placeholder="$0.00" class="form-control" id="amount" name="amount" required="" autofocus="" [(ngModel)]='amount'>
+              <br>
+              <label for="description">Enter Description:</label>
+              <input placeholder="(Optional)" class="form-control" type="text" id="description" name="description" autofocus="" [(ngModel)]='description'>
+              <br>
+              <button class="btn btn-primary " type="submit" value="Submit Reimbursement!">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <!-- <input class="btn btn-success " type="submit" value="Submit Reimbursement!" data-dismiss="modal"> -->
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <!--Footer-->
+      <!-- <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
       <button class="btn btn-primary">Checkout</button>
     </div>
 
   </div>
 </div> -->
-<!-- Modal: modalCart -->
+      <!-- Modal: modalCart -->
 
 
 
-<br>
-<!-- <div class="jumbotron">
+
+      <!-- <div class="jumbotron">
   <form (submit)="submitReimbursement()" >
     <div class="form-group">
       <label for="sel1">Select type of reimbursement:</label>

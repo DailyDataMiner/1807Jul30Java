@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Time } from '../../../../node_modules/@angular/common';
 import { AuthService } from '../../auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,66 +23,115 @@ export class TableComponent implements OnInit {
   private statusID: number;
   private typeID: number;
   public rbarray: any[];
+  public employee: any[]
   servletData: any;
   id: number;
   private sub: any;
+  private orderbool: boolean;
+  private length: number;
 
   constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
-  getAllReimbursementOrder(order:string) {
-    this.authService.getAllReimbursementOrder(order).subscribe(
-      data => {
-        
-        this.rbarray = data
-          this.rbID= data.rbID;
-          this.amount= data.amount;
-          this.submitted= data.submitted;
-          this.resolved= data.resolved;
-          this.description= data.description;
-          this.receipt= data.receipt;
-          this.author= data.author;
-          this.resolver= data.resolver;
-          this.statusID= data.statusID;
-          this.typeID= data.typeID;
-         
-  
-          console.log(this.rbarray);
-        
+  getEmployee(){
+    this.authService.getAllEmployee().subscribe(
+      data => { 
+        this.employee = data;
+        length = this.employee.length;
+
+        console.log(this.employee);
+      })
+  }
+
+  getEmployeeByID(idd :number){
+    for(let i = 0; i< length; i++){
+      if(this.employee[i].empID == idd){
+        return this.employee[i].firstname + ' ' + this.employee[i].lastname;
       }
-    );
+    }
+  
   }
 
 
-  approve(rbID:number, resolverID:number ){
-    this.authService.approveReimbursement( rbID, resolverID).subscribe(
+  getAllReimbursementOrder(order: string) {
+    if (this.orderbool) {
+      this.authService.getAllReimbursementOrder(order).subscribe(
+        data => {
+
+          this.rbarray = data
+          this.rbID = data.rbID;
+          this.amount = data.amount;
+          this.submitted = data.submitted;
+          this.resolved = data.resolved;
+          this.description = data.description;
+          this.receipt = data.receipt;
+          this.author = data.author;
+          this.resolver = data.resolver;
+          this.statusID = data.statusID;
+          this.typeID = data.typeID;
+
+          this.orderbool = false;
+
+         
+
+        }
+      );
+    }
+    else {
+      this.authService.getAllReimbursementOrder(order + " desc").subscribe(
+        data => {
+
+          this.rbarray = data
+          this.rbID = data.rbID;
+          this.amount = data.amount;
+          this.submitted = data.submitted;
+          this.resolved = data.resolved;
+          this.description = data.description;
+          this.receipt = data.receipt;
+          this.author = data.author;
+          this.resolver = data.resolver;
+          this.statusID = data.statusID;
+          this.typeID = data.typeID;
+
+          this.orderbool = true;
+        }
+
+      );
+
+    }
+  }
+
+  logout() {
+    this.router.navigateByUrl('login');
+  }
+
+  approve(rbID: number, resolverID: number) {
+    this.authService.approveReimbursement(rbID, resolverID).subscribe(
       data => {
-          console.log(data);
-          this.getAllReimbursement();
-   })
+        this.getAllReimbursement();
+      })
   };
 
-  deny(rbID:number, resolverID:number ){
-    this.authService.denyReimbursement( rbID, resolverID).subscribe(
+  deny(rbID: number, resolverID: number) {
+    this.authService.denyReimbursement(rbID, resolverID).subscribe(
       data => {
-          console.log(data);
-          this.getAllReimbursement();
-   })
+        this.getAllReimbursement();
+      })
   };
 
-  convertTypeID(tid : number){
-    if(tid == 1){
+  convertTypeID(tid: number) {
+    if (tid == 1) {
       return 'Lodging';
     }
-    else if(tid == 2){
+    else if (tid == 2) {
       return 'Travel';
     }
-    else if(tid == 3){
+    else if (tid == 3) {
       return 'Food';
     }
-    else if(tid == 4){
+    else if (tid == 4) {
       return 'Certification';
     }
-    else if(tid == 5){
+    else if (tid == 5) {
       return 'Maternity Leave';
     }
     else {
@@ -90,17 +139,17 @@ export class TableComponent implements OnInit {
     }
   }
 
-  convertStatusID(tid : number){
-    if(tid == 1){
+  convertStatusID(tid: number) {
+    if (tid == 1) {
       return 'Pending';
     }
-    else if(tid == 2){
+    else if (tid == 2) {
       return 'Approved';
     }
-    else if(tid == 3){
+    else if (tid == 3) {
       return 'Denied';
     }
-    else if(tid == 4){
+    else if (tid == 4) {
       return 'Revised';
     }
     else {
@@ -115,20 +164,20 @@ export class TableComponent implements OnInit {
   getAllReimbursement() {
     this.authService.getAllReimbursement().subscribe(
       data => {
-        
+
         this.rbarray = data
-          this.rbID= data.rbID;
-          this.amount= data.amount;
-          this.submitted= data.submitted;
-          this.resolved= data.resolved;
-          this.description= data.description;
-          this.receipt= data.receipt;
-          this.author= data.author;
-          this.resolver= data.resolver;
-          this.statusID= data.statusID;
-          this.typeID= data.typeID;
-          // console.log(this.rbarray)
-        
+        this.rbID = data.rbID;
+        this.amount = data.amount;
+        this.submitted = data.submitted;
+        this.resolved = data.resolved;
+        this.description = data.description;
+        this.receipt = data.receipt;
+        this.author = data.author;
+        this.resolver = data.resolver;
+        this.statusID = data.statusID;
+        this.typeID = data.typeID;
+        // console.log(this.rbarray)
+
         // this.rbID = data.rbID
         // this.servletFirst = data.firstname;
         // this.servletLast = data.lastname;
@@ -140,7 +189,7 @@ export class TableComponent implements OnInit {
     );
   }
 
-  testing(id:number){
+  testing(id: number) {
     console.log(id);
   }
 
@@ -149,10 +198,11 @@ export class TableComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['servletEmpID']; // (+) converts string 'id' to a number
       this.getAllReimbursement();
+      this.getEmployee();
     })
 
-    }
+  }
 
- 
+
 
 }

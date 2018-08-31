@@ -1,47 +1,70 @@
-<h2>
-  Finance Manager
-</h2>
+<div class="container">
+  <div>
+      <h2 style="display:flex;flex-direction:row;justify-content: space-between;">
+      <span style="float: left;">Welcome {{ getEmployeeByID(id) }}</span>
+       <span style="float: center;" ><b>FINANCE MANAGER</b></span>
+     <span style="float: right;" > <button style="margin-left: 0px" class="btn btn-warning " (click)="logout()">Logout</button></span>
+      </h2>
+    </div>
+    <div style="text-align:center;">
+      <table class="table table-bordered table-striped table-hover table-responsive">
+        <thead class="table-secondary">
+          <tr>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_ID')">ReimbursementID</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_AUTHOR')">EmployeeID</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_AUTHOR')">Name</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_AMOUNT')">$Amount</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_SUBMITTED')">Submitted Date</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RESOLVED')">Resolved Date</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_DESCRIPTION')">Description</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RECEIPT')">Receipt</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RESOLVER')">ResolverID</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_TYPE_ID')">Type</a>
+            </th>
+            <th>
+              <a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_STATUS_ID')">Status</a>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
 
-<div>
-<table  dt-options="controller.options"  datatable="ng" class="table  table-bordered table-striped table-hover table-responsive">
-  <thead class="thead-dark">
-    <tr>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_ID')">ReimbursementID</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_AUTHOR')">EmployeeID</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_AMOUNT')">$Amount</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_SUBMITTED')">Submitted Date</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RESOLVED')">Resolved Date</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_DESCRIPTION')">Description</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RECEIPT')">Receipt</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_RESOLVER')">ResolverID</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_TYPE_ID')">Type</a></th>
-      <th><a href="javascript:void(0);" (click)="getAllReimbursementOrder('REIMB_STATUS_ID')">Status</a></th>
-     
-      <th></th>
-    </tr>
-  </thead>
+        <tr *ngFor="let stat of rbarray">
+          <td>{{ stat.rbID }}</td>
+          <td>{{ stat.author }}</td>
+          <td>{{ getEmployeeByID(stat.author) }}</td>
+          <td>{{ stat.amount | currency }}</td>
+          <td>{{ stat.submitted | date: 'medium' }}</td>
+          <td>{{ stat.resolved | date: 'medium' }}</td>
+          <td>{{ stat.description }}</td>
+          <td>{{ stat.receipt }}</td>
+          <td>{{ stat.resolver }}</td>
+          <td>{{ convertTypeID(stat.typeID) }}</td>
+          <td>{{ convertStatusID(stat.statusID) }}</td>
+          <td>
+            <button class="btn btn-success " (click)="approve(stat.rbID,this.id)">Approve</button>
+            <br>
+            <button class="btn btn-danger" style="width:78px;margin-top: 5px" (click)="deny(stat.rbID,this.id)">Deny</button>
+          </td>
 
-  <tr *ngFor="let stat of rbarray">
-    <td>{{ stat.rbID }}</td>
-    <td>{{ stat.author }}</td>
-    <td>{{ stat.amount | currency }}</td>
-    <td>{{ stat.submitted | date: 'medium' }}</td>
-    <td>{{ stat.resolved | date: 'medium' }}</td>
-    <td>{{ stat.description }}</td>
-    <td>{{ stat.receipt }}</td>
-    <td>{{ stat.resolver }}</td>
-    <td>{{ convertTypeID(stat.typeID) }}</td>
-    <td>{{ convertStatusID(stat.statusID) }}</td>
-    <td>
-      <button class="btn btn-success " (click)="approve(stat.rbID,this.id)">Approve</button>
-      <button class="btn btn-danger" style="width:78px;margin-top: 5px" (click)="deny(stat.rbID,this.id)">Deny</button>
-    </td>
-
-  </tr>
-</table>
-
-
-<!-- <h1>1515</h1>
-  <form (submit)="convertTypeID(1)">
-    <input type="submit" value="test">
-  </form> -->
+        </tr>
+      </table>
+    </div>
