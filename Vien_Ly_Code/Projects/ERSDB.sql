@@ -27,6 +27,7 @@ CREATE TABLE Ers_Users
   User_Role_Id NUMBER(10, 0) NOT NULL REFERENCES Ers_User_Roles(Ers_User_Role_Id)
 );
 
+
 CREATE TABLE Ers_Reimbursement_Status
 (
   Ers_Status_Id NUMBER(10, 0) PRIMARY KEY,
@@ -107,6 +108,33 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE get_reimbursement_details(target_id IN NUMBER, cp OUT SYS_REFCURSOR)
+AS
+BEGIN
+  OPEN cp FOR
+    SELECT 
+      ri.reimb_id as id,
+      ri.reimb_amount as amount,
+      ri.reimb_submitted as submittedTime,
+      ri.reimb_resolved as resolvedTime,
+      ri.reimb_description as description,
+      ri.reimb_receipt as receipt,
+      author.ers_username as authorUsername,
+      author.User_first_name as authorFirstName,
+      author.user_last_name as authorLastName,
+      resolver.ers_username as resolverUsername,
+      resolver.user_first_name as resolverFirstName,
+      resolver.user_last_name as resolverLastName,
+      rs.Ers_Status as status,
+      rt.Ers_Type as typee
+    FROM ers_reimbursements ri
+    INNER JOIN Ers_Reimbursement_Status rs ON ri.reimb_status_id = rs.Ers_Status_Id 
+    INNER JOIN Ers_Reimbursement_Type rt ON ri.reimb_type_id = rt.Ers_Type_Id 
+    INNER JOIN Ers_Users author on ri.reimb_author = author.ers_user_id 
+    LEFT JOIN Ers_Users resolver on ri.reimb_resolver = resolver.ers_user_id
+    WHERE reimb_id = target_id;
+END;
+/
 
 /*******************************************************************************
    Set Up Lookup Tables
@@ -138,77 +166,20 @@ VALUES(2, 'APPROVED');
 INSERT INTO Ers_Reimbursement_Status(Ers_Status_Id, Ers_Status)
 VALUES(3, 'DENIED');
 
-SELECT * FROM Ers_User_Roles;
-SELECT * FROM Ers_Reimbursement_Type;
-SELECT * FROM Ers_Reimbursement_Status;
 
-/*******************************************************************************
-   Test Entries
-********************************************************************************/
-INSERT INTO ERS_USERS(Ers_User_Id, Ers_Username, Ers_Pwd_Hash, Ers_Pwd_Salt, User_First_Name, User_Last_name, User_Email, User_Role_Id)
-VALUES(1, 'gin', 'a', 'a', 'gin', 'ly', 'gin@ly.com', 2);
-
-INSERT INTO ERS_USERS(Ers_User_Id, Ers_Username, Ers_Pwd_Hash, Ers_Pwd_Salt, User_First_Name, User_Last_name, User_Email, User_Role_Id)
-VALUES(5, 'isa', 'b', 'b', 'isa', 'svg', 'isa@svg.com', 1);
-
-INSERT INTO ERS_USERS(Ers_User_Id, Ers_Username, Ers_Pwd_Hash, Ers_Pwd_Salt, User_First_Name, User_Last_name, User_Email, User_Role_Id)
-VALUES(5, 'avie', 'c', 'c', 'avery', 'marillier', 'avie@marillier.com', 1);
-
-INSERT INTO Ers_Reimbursements(Reimb_Id, Reimb_Amount, Reimb_Submitted, Reimb_Author, Reimb_Status_Id, Reimb_Type_Id)
-VALUES(1111, 24.50, CURRENT_TIMESTAMP, 7, 1, 1);
-
-INSERT INTO Ers_Reimbursements(Reimb_Id, Reimb_Amount, Reimb_Submitted, Reimb_Author, Reimb_Status_Id, Reimb_Type_Id)
-VALUES(1111, 77.50, CURRENT_TIMESTAMP, 7, 2, 3);
-
-INSERT INTO Ers_Reimbursements(Reimb_Id, Reimb_Amount, Reimb_Submitted, Reimb_Author, Reimb_Status_Id, Reimb_Type_Id)
-VALUES(1111, 12.00, CURRENT_TIMESTAMP, 7, 3, 1);
-
-INSERT INTO Ers_Reimbursements(Reimb_Id, Reimb_Amount, Reimb_Submitted, Reimb_Author, Reimb_Status_Id, Reimb_Type_Id)
-VALUES(1111, 99.99, CURRENT_TIMESTAMP, 6, 1, 2);
-
-INSERT INTO Ers_Reimbursements(Reimb_Id, Reimb_Amount, Reimb_Submitted, Reimb_Author, Reimb_Status_Id, Reimb_Type_Id)
-VALUES(1111, 399.99, CURRENT_TIMESTAMP, 6, 1, 1);
+select * from Ers_Users;
+select * from Ers_Reimbursements;
 
 select * from ers_users;
 select * from ers_reimbursements WHERE Reimb_Type_Id = 1;
 
+SELECT * FROM Ers_User_Roles;
+SELECT * FROM Ers_Reimbursement_Type;
+SELECT * FROM Ers_Reimbursement_Status;
+
 SELECT u.User_First_Name, u.User_Last_name, r.User_Role
 FROM Ers_Users u
 JOIN Ers_User_roles r ON u.User_Role_Id = r.Ers_User_Role_Id;
-
-DECLARE
-  reimbs SYS_REFCURSOR;
-  id NUMBER;
-  amount NUMBER;
-  submitted TIMESTAMP;
-  resolved TIMESTAMP;
-  description VARCHAR2(200);
-  receipt BLOB;
-  author NUMBER;
-  resolver NUMBER;
-  status NUMBER;
-  type_id NUMBER;
-BEGIN
-  Find_Reimbs_By_Username('isa', reimbs);
-  LOOP
-  FETCH reimbs INTO id, amount, submitted, resolved, description, receipt, author, resolver, status, type_id;
-  EXIT WHEN reimbs%NOTFOUND;
-  DBMS_OUTPUT.put_line(id || ' ' || amount || ' ' || submitted || ' ' || author || ' ' || status || ' ' || type_id);
-  END LOOP;
-  CLOSE reimbs;
-END;
-/
-
-commit;
-
-alter table ers_reimbursements drop constraint SYS_C007314;
-
-DROP TABLE Ers_Users;
-
-DELETE FROM Ers_Users WHERE Ers_User_Id = 45;
-
-select * from Ers_Users;
-select * from Ers_Reimbursements;
 
 
 commit;

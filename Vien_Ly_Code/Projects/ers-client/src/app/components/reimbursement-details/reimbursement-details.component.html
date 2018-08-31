@@ -1,0 +1,55 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Reimbursement Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <th scope="row">Author</th>
+          <td>{{ reimbursementDetails.authorUsername + " (" + reimbursementDetails.authorFirstName + " " + reimbursementDetails.authorLastName
+            + ")"}}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Amount</th>
+          <td>{{ reimbursementDetails.amount | currency:"USD" }}</td>
+        </tr>
+        <tr *ngIf="reimbursementDetails.description">
+          <th scope="row">Description</th>
+          <td>{{ reimbursementDetails.description }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Type</th>
+          <td>{{ reimbursementDetails.type }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Status</th>
+          <td>{{ reimbursementDetails.status }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Submitted Time</th>
+          <td>{{ reimbursementDetails.submittedTime | date:"medium" }}</td>
+        </tr>
+        <tr *ngIf="reimbursementDetails.resolvedTime">
+          <th scope="row">Resolved Time</th>
+          <td>{{ reimbursementDetails.resolvedTime | date:"medium" }}</td>
+        </tr>
+        <tr *ngIf="reimbursementDetails.resolverUsername">
+          <th scope="row">Resolver</th>
+          <td>
+            {{ reimbursementDetails.resolverUsername + " (" + reimbursementDetails.resolverFirstName + " " + reimbursementDetails.resolverLastName
+            + ")"}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="user && user.role=='MANAGER' && isAdminPanel" class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="closeModal('APPROVED')">Approve</button>
+    <button type="button" class="btn btn-outline-danger" (click)="closeModal('DENIED')">Deny</button>
+  </div>
+</ng-template>

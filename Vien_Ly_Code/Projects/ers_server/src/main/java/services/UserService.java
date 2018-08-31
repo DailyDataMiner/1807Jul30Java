@@ -42,6 +42,14 @@ public class UserService {
 	public List<User> findAll() {
 		return userDAO.findAll();
 	}
+	
+	public User findOne(int id) {
+		return userDAO.findOne(id);
+	}
+	
+	public User findByUsername(String username) {
+		return userDAO.findByUsername(username);
+	}
 
 	public boolean update(User user) {
 		return userDAO.update(user);

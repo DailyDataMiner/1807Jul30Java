@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import beans.User;
 import beans.UserRole;
+import exceptions.UsernameTakenException;
 import utils.ConnectionFactory;
 
 public class UserDAO implements DAO<User> {
@@ -74,7 +74,7 @@ public class UserDAO implements DAO<User> {
 	}
 
 	@Override
-	public boolean insert(User u) {
+	public boolean insert(User u) throws UsernameTakenException {
 		final String sql = "INSERT INTO Ers_Users "
 				+ "(Ers_Username, Ers_Pwd_Hash, Ers_Pwd_Salt, User_First_Name, User_Last_Name, User_Email, User_Role_Id) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -88,10 +88,16 @@ public class UserDAO implements DAO<User> {
 			ps.setString(5, u.getLastName());
 			ps.setString(6, u.getEmail());
 			ps.setInt(7, u.getRole().getId());
-			int n = ps.executeUpdate();
+			int n = 0;
+			try {
+				n = ps.executeUpdate();
+			} catch (SQLIntegrityConstraintViolationException e) {
+				throw new UsernameTakenException("username or email taken");
+			}
 			ResultSet generatedKeys = ps.getGeneratedKeys();
 			if (n == 1 && generatedKeys.next()) {
 				u.setId(generatedKeys.getInt(1));
+				System.out.println("success");
 				return true;
 			}
 		} catch (SQLException e) {

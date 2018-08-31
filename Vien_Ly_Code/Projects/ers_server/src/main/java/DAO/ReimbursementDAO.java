@@ -6,14 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import beans.Reimbursement;
+import beans.ReimbursementDetails;
 import beans.ReimbursementStatus;
 import beans.ReimbursementType;
-import beans.User;
 import oracle.jdbc.internal.OracleTypes;
 import utils.ConnectionFactory;
 
@@ -26,7 +25,6 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			Statement s = conn.createStatement();
 			ResultSet rs = s.executeQuery(sql);
-			System.out.println(sql);
 			while (rs.next()) {
 				reimbs.add(parseResultSet(rs));
 			}
@@ -53,6 +51,38 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ReimbursementDetails getDetails(int id) {
+		ReimbursementDetails ri = new ReimbursementDetails();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "{CALL get_reimbursement_details(?, ?)}";
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.setInt(1, id);
+			cs.registerOutParameter(2, OracleTypes.CURSOR);
+			cs.execute();
+			ResultSet rs = (ResultSet) cs.getObject(2);
+			if (rs.next()) {
+				ri.setId(rs.getInt("id"));
+				ri.setAmount(rs.getDouble("amount"));
+				ri.setSubmittedTime(rs.getTimestamp("submittedTime"));
+				ri.setResolvedTime(rs.getTimestamp("resolvedTime"));
+				ri.setDescription(rs.getString("description"));
+				ri.setReceipt(rs.getBlob("receipt"));
+				ri.setAuthorUsername(rs.getString("authorUsername"));
+				ri.setAuthorFirstName(rs.getString("authorFirstName"));
+				ri.setAuthorLastName(rs.getString("authorLastName"));
+				ri.setResolverUsername(rs.getString("resolverUsername"));
+				ri.setResolverFirstName(rs.getString("resolverFirstName"));
+				ri.setResolverLastName(rs.getString("resolverLastName"));
+				ri.setStatus(rs.getString("status"));
+				ri.setType(rs.getString("typee"));
+			}
+		} catch (SQLException e) {
+			// logger here
+			e.printStackTrace();
+		}
+		return ri;
 	}
 
 	public List<Reimbursement> findAllByAuthor(String username) {
@@ -130,7 +160,7 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 //			ps.setBlob(5, ri.getReceipt());
 			ps.setInt(4, ri.getAuthorId());
 //			ps.setInt(7, ri.getResolverId());
-			ps.setInt(5, ReimbursementStatus.PENDING.getId());
+			ps.setInt(5, ri.getStatus().getId());
 			ps.setInt(6, ri.getType().getId());
 
 			int n = ps.executeUpdate();

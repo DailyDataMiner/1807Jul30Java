@@ -3,15 +3,19 @@ package beans;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import utils.Password;
 
 public class User implements Serializable {
 
-	private static final long serialVersionUID = -885311480803574841L;
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String username;
+	@JsonIgnore
 	private byte[] pwdHash;
+	@JsonIgnore
 	private byte[] pwdSalt;
 	private String firstName;
 	private String lastName;

@@ -26,12 +26,12 @@ public class app {
 //		uService.createUser(user);
 
 //		Reimbursement ri = new Reimbursement(700.00, new Timestamp(System.currentTimeMillis()), "one night in vegas", 46, ReimbursementStatus.PENDING, ReimbursementType.LODGING);
-		ReimbursementService riService = new ReimbursementService();
-//		System.out.println(riService.createReimbursement(ri));
-		for (Reimbursement ri : riService.findByType(ReimbursementType.LODGING)) {
-			System.out.println(ri);
-		}
-		
+//		ReimbursementService riService = new ReimbursementService();
+////		System.out.println(riService.createReimbursement(ri));
+//		for (Reimbursement ri : riService.findByType(ReimbursementType.LODGING)) {
+//			System.out.println(ri);
+//		}
+//		System.out.println(ReimbursementStatus.valueOf());
 //		Reimbursement ri = riService.findOne(7);
 //		
 //		riService.resolve(ri, admin, true);

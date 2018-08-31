@@ -1,0 +1,43 @@
+<br>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" (click)="chooseStatusOption('ALL')">
+    <a class="nav-link active" id="all-tab" data-toggle="tab" role="tab">ALL</a>
+  </li>
+  <li class="nav-item" (click)="chooseStatusOption('PENDING')">
+    <a class="nav-link" id="pending-tab" data-toggle="tab" role="tab">PENDING</a>
+  </li>
+  <li class="nav-item" (click)="chooseStatusOption('APPROVED')">
+    <a class="nav-link" id="approved-tab" data-toggle="tab" role="tab">APPROVED</a>
+  </li>
+  <li class="nav-item" (click)="chooseStatusOption('DENIED')">
+    <a class="nav-link" id="denied-tab" data-toggle="tab" role="tab">DENIED</a>
+  </li>
+</ul>
+
+<table class="table table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Amount</th>
+      <th scope="col">Type</th>
+      <th *ngIf="selectedOption == 'ALL'">Status</th>
+      <th scope="col">Submitted Time</th>
+      <th scope="col" *ngIf="selectedOption != 'PENDING'">Resolved Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ri of reimbursements" (click)="openDetailsModal(ri)">
+      <td>{{ ri.amount | currency:"USD" }}</td>
+      <td>{{ ri.type }}</td>
+      <td *ngIf="selectedOption == 'ALL'">{{ ri.status }}</td>
+      <td>{{ ri.submittedTime | date:"medium" }}</td>
+      <td *ngIf="selectedOption != 'PENDING'">{{ ri.resolvedTime | date:"medium" }}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="col-12 text-center">
+  <button *ngIf="selectedOption==='ALL' || selectedOption==='PENDING'" type="submit" value="newReimbursement" class="col-1 btn btn-lg btn-outline-primary"
+    (click)="openAddReimbursementModal()">&#43;</button>
+</div>
+
+<app-reimbursement-details></app-reimbursement-details>
+<app-add-reimbursement (close)="addReimbursement($event)"></app-add-reimbursement>

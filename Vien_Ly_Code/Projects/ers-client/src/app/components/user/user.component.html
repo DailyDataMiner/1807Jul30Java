@@ -1,0 +1,90 @@
+<div class="container-fluid user-panel-container d-flex align-items-center justify-content-center">
+  <div *ngIf="user" id="user-card" class="card border-dark mb-3 mx-auto col-6" style="min-width: 20rem;">
+    <div class="card-header d-flex justify-content-between">
+      <div>
+        Employee Information
+      </div>
+      <div>
+        <button class="btn btn-outline-primary btn-sm" (click)="toggleEdit()">edit</button>
+      </div>
+    </div>
+    <div class="card-body text-dark">
+      <h5 class="card-title text-center">{{ user.username }}</h5>
+      <table *ngIf="edit" class="table-sm table-borderless w-100">
+        <tbody>
+          <tr>
+            <th scope="row">First Name</th>
+            <td><input type="text" class="" [(ngModel)]="editData.firstName"></td>
+          </tr>
+          <tr>
+            <th scope="row">Last Name</th>
+            <td><input type="text" class="" [(ngModel)]="editData.lastName"></td>
+          </tr>
+          <tr>
+            <th scope="row">Email</th>
+            <td><input type="text" class="" [(ngModel)]="editData.email"></td>
+          </tr>
+          <tr>
+            <th scope="row">Role</th>
+            <td>{{ user.role }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><button class="btn btn-outline-primary w-100" (click)="updateUserInfo()">save</button></td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <table *ngIf="!edit" class="table-sm table-borderless w-100">
+        <tbody>
+          <tr>
+            <th scope="row">First Name</th>
+            <td>{{ user.firstName }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Last Name</th>
+            <td>{{ user.lastName }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Email</th>
+            <td>{{ user.email }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Role</th>
+            <td>{{ user.role }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><button class="btn btn-outline-primary w-100" (click)="openChangePasswordModal()">Change Password</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pending-requests card-footer text-center" (click)="viewReimbursements()">
+      {{pendingCount + " pending requests"}}
+    </div>
+  </div>
+
+  <ng-template #content let-dismiss="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="password-modal-title">Change password</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row align-items-baseline">
+          <label for="new-password" class="col-12 col-md-6"><b>New password:</b></label>
+          <input type="password" id="new-password" class="col-12 col-md form-control" [(ngModel)]="newPassword" required>
+        </div>
+        <div class="row align-items-baseline">
+          <label for="confirm-password" class="col-12 col-md-6"><b>Confirm new password:</b></label>
+          <input type="password" id="check-new-password" class="col-12 col-md form-control" [(ngModel)]="newPasswordCheck" required>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary" (click)="closeChangePasswordModal()">Confirm</button>
+    </div>
+  </ng-template>
+</div>

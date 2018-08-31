@@ -1,0 +1,15 @@
+.user-panel-container {
+    min-height: 50vh;
+}
+
+.my-auto {
+    margin-top: auto;
+}
+
+.pending-requests:hover {
+    cursor: pointer;
+}
+
+#user-card {
+    padding: 0;
+}

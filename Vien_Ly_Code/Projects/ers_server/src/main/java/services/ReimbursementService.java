@@ -5,9 +5,10 @@ import java.util.List;
 
 import DAO.ReimbursementDAO;
 import beans.Reimbursement;
+import beans.ReimbursementDetails;
 import beans.ReimbursementStatus;
 import beans.ReimbursementType;
-import beans.User;
+import servlets.models.ReimbursementResolveData;
 
 public class ReimbursementService {
 
@@ -23,6 +24,10 @@ public class ReimbursementService {
 
 	public Reimbursement findOne(int id) {
 		return riDAO.findOne(id);
+	}
+	
+	public ReimbursementDetails getDetails(int id) {
+		return riDAO.getDetails(id);
 	}
 
 	public List<Reimbursement> findByAuthor(String username) {
@@ -50,11 +55,10 @@ public class ReimbursementService {
 	}
 
 	// Reimb_Resolved, Reimb_Resolver, Reimb_Status_Id
-	public boolean resolve(Reimbursement ri, User resolver, boolean isApproved) {
+	public boolean resolve(Reimbursement ri, int resolverId, ReimbursementResolveData resolveData) {
 		ri.setResolvedTime(new Timestamp(System.currentTimeMillis()));
-		ri.setResolverId(resolver.getId());
-		ri.setStatus(isApproved? ReimbursementStatus.APPROVED : ReimbursementStatus.DENIED);
-		riDAO.update(ri);
-		return isApproved;
+		ri.setResolverId(resolverId);
+		ri.setStatus(resolveData.getStatus());
+		return riDAO.update(ri);
 	}
 }

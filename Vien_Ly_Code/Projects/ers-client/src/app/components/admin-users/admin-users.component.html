@@ -1,0 +1,25 @@
+<table class="table table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of users" (click)="openUserDetailsModal(u)">
+      <td>{{ u.username }}</td>
+      <td>{{ u.firstName }}</td>
+      <td>{{ u.lastName }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.role }}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="col-12 text-center">
+  <button type="submit" value="newUser" class="col-1 btn btn-lg btn-outline-primary" (click)="openAddUserModal()">&#43;</button>
+</div>
+<app-add-user (close)="createUser($event)"></app-add-user>
+<app-user-details (close)="fetchUsers()"></app-user-details>
