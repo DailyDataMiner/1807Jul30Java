@@ -153,7 +153,7 @@ function getInfo(uname, pword){
 
 
 // unused param...
-function viewTable(indexOfmyObj){
+function viewTable(o){
 
 	var xhr = new XMLHttpRequest();
 	
@@ -162,45 +162,21 @@ function viewTable(indexOfmyObj){
         if(xhr.readyState == 4 && xhr.status == 200){
         	
         	$('#viewLoader').html(xhr.responseText);   
-//            var myObj = JSON.parse(xhr.responseText);
 
             $('nav').show();
             $('#viewLoader').html(xhr.responseText);
-            $('#newReimbButton').on('click', newTicketView);
+  
 
             populateUserTable();
-            
 
-            
-//            count = 0;
-//            console.log(myObj);
-//            for(var b of myObj){
-//
-//            	console.log(myObj[count]);
-//                addUserToTable(myObj[count]); 
-//                count++;
-//            }
+            $('#newTicketButton').on('click', sendTicket);
+
         }
 
     }
-//    xhr.open('GET', 'home.view', true);
     xhr.open("GET", 'table.view', true);
     xhr.send();
 }
-
-//function submitRequestForTicketView(){
-//	
-//	var xhr = new XHLHttpRequest();
-//	
-//	xhr.onreadystatechange = function(){
-//		if(xhr.readyState == 4 && xhr.status == 200){
-//			var myObj = JSON.parse(xhr.responseText);
-//			
-//		}
-//	}
-//	xhr.open('GET', 'tickets', true);
-//	xhr.send();
-//}
 
 
 
@@ -219,6 +195,7 @@ function populateUserTable(){
             for(var b of user){
                 addUserToTable(b); 
             }
+            console.log(b);
         }
 
 }
@@ -287,27 +264,59 @@ function submitUser(){
 }
 
 
-function newTicketView(){
-    console.log("Loading newTicketView");
+//function newTicketView(){
+//    console.log("Loading newTicketView");
+//
+//    var xhr = new XMLHttpRequest();
+//    
+//    xhr.onreadystatechange = function(){
+//    	
+//        if(xhr.readyState == 4 && xhr.status == 200){
+//        	
+//        	$('#viewLoader').html(xhr.responseText);     	
+//
+//        }
+//}
+//    xhr.open("GET", 'newTicket.view', true);
+//    xhr.send();
+//	
+//}
 
-    var xhr = new XMLHttpRequest();
-    
-    xhr.onreadystatechange = function(){
-    	
-        if(xhr.readyState == 4 && xhr.status == 200){
-        	
-        	$('#viewLoader').html(xhr.responseText);     	
+function createTicket(x, y, z) {
+	   console.log('Loading createTicket to submit');
+		var xhr = new XMLHttpRequest();
+	    var count = 0;
+	    var uNum = 0;
+	    xhr.onreadystatechange = function(){
 
-        }
+	        if(xhr.readyState == 4 && xhr.status == 200){
+	        	
+	            var myObj = JSON.parse(this.responseText);
+	            console.log(myObj);
+	            
+	            myObj.forEach(function(arrayItem){
+	            	if(arrayItem.userName == uname){
+	            		uNum = count;
+	            	}
+	            	count++;
+	            });
+	            console.log(myObj[uNum]);  
+	            sendTicket(myObj[uNum]);
+	        }
+	    }
+	    xhr.open("GET", "http://localhost:8081/ers/login");
+	    xhr.send();	
 }
-    xhr.open("GET", 'newTicket.view', true);
-    xhr.send();
+
+function sendTicket(o){
+	var x = $('#dropdownMenuButton').val();
+	var y = $('#descriptionText').val();
+	var z = $('#cashMoneyYall').val();
 	
-}
-
-
-
-function sendTicket(){
+	console.log(o);
+	console.log(x);
+	console.log(y);
+	console.log(z);
 
 
     var xhr = new XMLHttpRequest();
