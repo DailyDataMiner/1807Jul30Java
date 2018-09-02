@@ -15,8 +15,9 @@ import com.revature.pojos.Tickets;
 import com.revature.service.TicketsService;
 
 @WebServlet("/ticket")
-public class TicketServlet extends HttpServlet {
 
+public class TicketServlet extends HttpServlet{
+	
 	TicketsService ts = new TicketsService();
 	
 	@Override

@@ -8,13 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/home")
+@WebServlet("/ers")
 public class LoadHomeViewServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("inside doGet of LoadHome");
-		req.getRequestDispatcher("partials/homeView.html").forward(req, resp);
+		System.out.println(req.getRequestURI());
+		req.getRequestDispatcher("ers.html").forward(req, resp);
+		
+		
 	}
 	
 	@Override

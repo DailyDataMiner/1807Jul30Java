@@ -1,81 +1,114 @@
 window.onload = function() {
-    loadHomeView();
-    $('#log').on('click', loadLoginView);
-	 $('#home').on('click', loadHomeView);
-	// $('#entireTab').empty() 
+	loadLogInView();
+    
+    $("#about").on("click", about);
+    $("#logoutButton").on('click', loadLogInView);
+    $('#home').on('click', loadHomeView);
+    
+    $('#myStatementButton').on('click', viewTable);
+    
+}
 
 
+
+function loadLogInView() {
+	console.log("inside my login div");
+	
+	var xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function(){
+		console.log("inside my login function");
+		
+		if(xhr.readyState == 4 && xhr.status == 200){
+			
+			$('nav').hide();
+
+			console.log("inside my login ajax");
+			
+			$('#viewLoader').html(xhr.responseText);
+			
+		    $('#loginViewButton').on('click', loginValues);
+		    
+			
+		}
+		
+	}	
+	xhr.open('GET', 'login.view', true);
+	xhr.send();
+}
+    
+    
+
+function about(){
+	console.log("we are going to the about me page");
+	
+	var xhr = new XMLHttpRequest();
+	
+	
+	xhr.onreadystatechange = function() {
+		
+		console.log("Im inside my about ajax");
+		console.log(xhr.readyState);
+		console.log(xhr.status);
+		
+		if(xhr.readyState == 4 && xhr.status == 200){
+			console.log("inside my ajax function");
+			console.log(xhr.responseText);
+			
+			$('#viewLoader').html(xhr.responseText);
+			
+		}
+	}
+	
+	xhr.open('GET', "about.view", true);
+	xhr.send();
+	
 }
 
 function loadHomeView() {
-    var x = document.getElementById("showlogin");
-    x.style.display = "none";
-
+		
     console.log("Loading HomeView");
-    
-    
+
 	var xhr = new XMLHttpRequest();
 	
-	console.log(xhr.readyState);
-	console.log(xhr.status);
-	
-    if(xhr.readyState == 4 && xhr.status == 200){
+    
+    xhr.onreadystatechange = function(){
+    	
+    	console.log('rs ' + xhr.readyState);
+    	console.log('s ' + xhr.status);
+    	
+        if(xhr.readyState == 4 && xhr.status == 200){
 
-    }  
+        	console.log(xhr.responseText);
+        	
+        	$('#viewLoader').html(xhr.responseText);     	
+        	
+        
+        }
+    }
+
+    
     xhr.open("GET", 'home.view', true);
     xhr.send();      
 }
 
-function loadLoginView(){
- //   $('#showlogin').attr(hidden, "true");
-    var x = document.getElementById("showlogin");   //show/hide login
-        x.style.display = "block";
 
-    console.log("Loading LoginView")
 
-	var xhr = new XMLHttpRequest();
-    
-	xhr.onreadystatechange = function(){
-    //just showing what we're getting back for now
-    //console.log(xhr.responseText);
-    if(xhr.readyState == 4 && xhr.status == 200){
-        $('#view').html(xhr.responseText);
-
-        $('#login').on('click', loginValues);
- //       $('#showlogin').attr('hidden', 'false');
-
-     //   document.getElementById('#login').addEventListener("click", loginValues);
-    }
-}
-xhr.open("GET", "login.view");
-xhr.send(); 
-}
-
-function loginValues(uname, pword){
+function loginValues(){
 	console.log('inside login Values');
-	var uname = document.getElementById('username').value;
-    var pword = document.getElementById('password').value;
-
+	
+	var uname = $('#username').val();
+    var pword = $('#password').val();
+    // variable holding my drop down selection
+    var dropDownSelect = document.getElementById("inlineFormCustomSelect").value;
+  
+    console.log(dropDownSelect + " The dropdown selection!");
+    
     console.log(uname);
     console.log(pword);
     
     getInfo(uname, pword);
 }
-
-function getUser(uname, pword){
-    console.log('Checking One Persons Credentials');
-	var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status == 200){
-            var myObj = JSON.parse(this.responseText);
-
-        	
-        }
-    }
-    xhr.open("GET", "http://localhost:8081/ers/login");
-    xhr.send();   
-}
-
 
 
 function getInfo(uname, pword){
@@ -90,24 +123,25 @@ function getInfo(uname, pword){
             var myObj = JSON.parse(this.responseText);
             console.log(myObj);
             
-        
             myObj.forEach(function(arrayItem){
             	if(arrayItem.userName == uname){
             		uNum = count;
             	}
             	count++;
-            })
+            });
+                    
             
             if(myObj[uNum].userName == uname & myObj[uNum].password == pword){
             	console.log(myObj[uNum].roleId);
             	
             	if(myObj[uNum].roleId == 1){
-            		employee(myObj[uNum]);
+            		viewTable(myObj[uNum]);
             	} 
-            }else{
+            	console.log('thats it?');
+            	}else{
             	console.log(myObj[uNum].roleId);
-            	Alert("Invalid username/password");
-        		loadLoginView;
+            	alert("Invalid username/password");
+            	loadLogInView();
             }
         }
     }
@@ -117,46 +151,78 @@ function getInfo(uname, pword){
 
 
 
-function employee(o){
+
+// unused param...
+function viewTable(indexOfmyObj){
+
 	var xhr = new XMLHttpRequest();
 	
     xhr.onreadystatechange = function(){
 
         if(xhr.readyState == 4 && xhr.status == 200){
-            var myObj = JSON.parse(xhr.responseText);
+        	
+        	$('#viewLoader').html(xhr.responseText);   
+//            var myObj = JSON.parse(xhr.responseText);
 
-            count = 0;
-            console.log(myObj);
-            for(var b of myObj){
+            $('nav').show();
+            $('#viewLoader').html(xhr.responseText);
+            $('#newReimbButton').on('click', newTicketView);
 
-            	console.log(myObj[count]);
-                addUserToTable(myObj[count]); //helper function to create elements **********************************************************
-                count++;
-            }
+            populateUserTable();
+            
+
+            
+//            count = 0;
+//            console.log(myObj);
+//            for(var b of myObj){
+//
+//            	console.log(myObj[count]);
+//                addUserToTable(myObj[count]); 
+//                count++;
+//            }
         }
 
     }
-    xhr.open("GET", "http://localhost:8081/ers/ticket");
+//    xhr.open('GET', 'home.view', true);
+    xhr.open("GET", 'table.view', true);
     xhr.send();
 }
+
+//function submitRequestForTicketView(){
+//	
+//	var xhr = new XHLHttpRequest();
+//	
+//	xhr.onreadystatechange = function(){
+//		if(xhr.readyState == 4 && xhr.status == 200){
+//			var myObj = JSON.parse(xhr.responseText);
+//			
+//		}
+//	}
+//	xhr.open('GET', 'tickets', true);
+//	xhr.send();
+//}
 
 
 
 function populateUserTable(){
-    var x = document.getElementById("entireTab");   // show table
-    x.style.display = "none";
+	
+    
     var xhr = new XMLHttpRequest();
+    
     xhr.onreadystatechange = function(){
+    	
         if(xhr.readyState == 4 && xhr.status == 200){
+        	
             user = JSON.parse(xhr.responseText);
+            
             console.log(user);
             for(var b of user){
-                addUserToTable(b); //helper function to create elements **********************************************************
+                addUserToTable(b); 
             }
         }
 
 }
-    xhr.open("GET", "user");
+    xhr.open("GET", 'ticket', true);
     xhr.send();
 }
 
@@ -186,7 +252,7 @@ function addUserToTable(b){
     row.appendChild(cell6);
     row.appendChild(cell7);
     
-    document.getElementById("userTable").appendChild(row);
+    document.getElementById("entireTab").appendChild(row);
 }
 
 function submitUser(){
@@ -220,7 +286,29 @@ function submitUser(){
         xhr.send(JSON.stringify(users));
 }
 
-function sendTicket(o, type, amt, descrip){
+
+function newTicketView(){
+    console.log("Loading newTicketView");
+
+    var xhr = new XMLHttpRequest();
+    
+    xhr.onreadystatechange = function(){
+    	
+        if(xhr.readyState == 4 && xhr.status == 200){
+        	
+        	$('#viewLoader').html(xhr.responseText);     	
+
+        }
+}
+    xhr.open("GET", 'newTicket.view', true);
+    xhr.send();
+	
+}
+
+
+
+function sendTicket(){
+
 
     var xhr = new XMLHttpRequest();
     

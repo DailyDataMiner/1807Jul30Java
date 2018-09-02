@@ -33,13 +33,14 @@ public class TicketDao extends HelperFunctions implements Dao<Tickets, Integer> 
 			while(selectRS.next()) {
 				Tickets tickets = new Tickets(selectRS.getString(1),
 											  selectRS.getString(2),
-											  selectRS.getDouble(4),
-											  selectRS.getString(3),
+											  selectRS.getDouble(3),
+											  selectRS.getString(4),
 											  selectRS.getString(5),
 											  selectRS.getString(6),
 											  selectRS.getString(7)
 											  );
 				ticketsList.add(tickets);
+				System.out.println(tickets);
 						
 			}							  
 		} catch(SQLException e) {
