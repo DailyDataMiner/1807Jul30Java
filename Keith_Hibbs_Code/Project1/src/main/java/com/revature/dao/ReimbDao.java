@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.TimeZone;
 
 import com.revature.model.Reimbursement;
-import com.revature.model.RequestObj;
+import com.revature.model.RequestObject;
+import com.revature.model.UpdateObject;
 import com.revature.model.UserInformation;
 import com.revature.util.ConnectionFactory;
 
@@ -25,22 +26,22 @@ public class ReimbDao {
 			instance = new ReimbDao();
 			return instance;
 	}	
+	//adding a reimbursement
+	public void addRiemb(RequestObject reqObj) {
+		try(Connection conn = ConnectionFactory.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement("insert into reimbursement (amount, submit_time, r_desc, author, resolver, rs_id, rt_id) "
+					+ "values (?,sysdate, ?, ?, 1, ?");
 
-//	public void addRiemb(RequestObj reqObj) {
-//		try(Connection conn = ConnectionFactory.getConnection()) {
-//			PreparedStatement ps = conn.prepareStatement("insert into reimbursement (amount, submit_time, r_desc, author, resolver, rs_id, rt_id) "
-//					+ "values (?,sysdate, ?, ?, 1, ?");
-//
-//			ps.setDouble(1, amount);
-//			ps.setString(3, description);
-//			ps.setString(4, resolver);
-//			ps.setString(6, type);
-//		
-//	} catch (SQLException e) {
-//		System.err.println(e.getErrorCode() + e.getSQLState());
-//	}
-//	}		
-	
+			ps.setDouble(1, reqObj.getAmount());
+			ps.setString(2, reqObj.getDescription());
+			ps.setString(3, reqObj.getResolver());
+			ps.setInt(4, reqObj.getType());
+		
+	} catch (SQLException e) {
+		System.err.println(e.getErrorCode() + e.getSQLState());
+	}
+	}		
+	//gets reimbursements by username
 	public List<Reimbursement> getReimb(UserInformation ui) {
 		Reimbursement r = null;
 		List<Reimbursement> reimb = new ArrayList<Reimbursement>();
@@ -77,7 +78,7 @@ public class ReimbDao {
 			
 	}
 	
-
+//get all reimbursements
 	public List<Reimbursement> getAllReimb(UserInformation ui) {
 		Reimbursement r = null;
 		List<Reimbursement> reimb = new ArrayList<Reimbursement>();
@@ -113,4 +114,23 @@ public class ReimbDao {
 			return reimb;
 					
 		}
+	//updating reimbursement requets
+	public int updateObject(UpdateObject updateObject) {
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "UPDATE REIMBURSEMENT SET RESOLVED_TIME = SYSDATE, RESOLVER = ?, RS_ID = ? WHERE R_ID = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "admin");
+			ps.setInt(2, UpdateObject.getStatus());
+			ps.setInt(3, UpdateObject.getReimbbId());			
+			int i = ps.executeUpdate();
+			
+			if (i == 1) {
+				return 1;
+			}
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return 0;
+	}
 }

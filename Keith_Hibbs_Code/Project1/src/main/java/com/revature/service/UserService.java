@@ -30,9 +30,16 @@ public class UserService {
 		}
 		
 		User authorized = userDao.getUser(user.getUsername());
-		if (userDao.getPasswordHash(user).equals(authorized.getPassword()))
-			return userDao.getUserInformation(user.getUsername());
-		return null;
+		if (userDao.getPasswordHash(user).equals(authorized.getPassword())) {
+			UserInformation temp = userDao.getUserInformation(user.getUsername());
+			HttpSession session = req.getSession();
+			session.setAttribute("userinfo", temp);
+			return temp;
+		}
+		return null;		
+		
+//		return userDao.getUserInformation(user.getUsername());
+
 	}
 	public static Object checkSession(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();

@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +18,7 @@ import { AdminComponent } from './components/admin/admin.component';
     NavbarComponent,
     UserComponent,
     AdminComponent
+    
   ],
   imports: [
     BrowserModule,

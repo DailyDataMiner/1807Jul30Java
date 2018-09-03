@@ -61,6 +61,7 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	
 	@Override
 	public User getUser(String username) {
 		int index = 0;

@@ -11,10 +11,12 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.ReimbDao;
 import com.revature.model.Reimbursement;
+import com.revature.model.RequestObject;
 import com.revature.model.UserInformation;
 
 public class ReimbService {
 	private static ReimbDao rd = ReimbDao.getInstance();
+//	private static RequestObj reqObj = RequestObject.getInstance
 	
 	public static List<Reimbursement> GetReimb(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
@@ -42,16 +44,16 @@ public class ReimbService {
 //	public static Object addReimb(HttpServletRequest req, HttpServletResponse resp) {
 //		ObjectMapper mapper = new ObjectMapper();
 //		
-//		Reimbursement reimb = null;
+//		RequestObject = null;
 //		try {
 //			
-//			reimb = mapper.readValue(req.getReader(), Reimbursement.class);
+//			RequestObject = mapper.readValue(req.getReader(), Reimbursement.class);
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		rd.addRiemb(Double amount, String description, String author, String receiver, String type);
+//		rd.addRiemb(RequestObject);
 //		return null;
 //	}	
-//	update riemb
+//	update riemb;
 }

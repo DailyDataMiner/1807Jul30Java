@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   private username: string;
   private password: string;
   user: User;
+
   private servletUsername: string;
   private servletFirst: string;
   private servletLast: string;
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
     alert('Please give me data');
   } else {
     this.authService.login(this.username, this.password)
-    .subscribe(user => { this.authService.user = user});
+    .subscribe(user => { this.authService.user = user;
     if (this.authService.user.role == 'EMPLOYEE') {
       this.route.navigate(['user']);
     } else if (this.authService.user.role == 'FINANCE MANAGER') {
@@ -43,8 +44,10 @@ export class LoginComponent implements OnInit {
     } else {
       error =>{ alert('Please Try Again');
     }
-  }
-}
+    }
+    });
+    }
+  
 
     this.authService.login(this.username, this.password).subscribe(
       data => {
@@ -57,5 +60,5 @@ export class LoginComponent implements OnInit {
       }
     );
 
-}
+  } 
 }
