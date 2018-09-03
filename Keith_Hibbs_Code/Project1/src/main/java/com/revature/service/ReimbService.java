@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,20 @@ public class ReimbService {
 		return r;
 		
 	}
-//	Create riemb
-	
+
+//	public static Object addReimb(HttpServletRequest req, HttpServletResponse resp) {
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		Reimbursement reimb = null;
+//		try {
+//			
+//			reimb = mapper.readValue(req.getReader(), Reimbursement.class);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		rd.addRiemb(Double amount, String description, String author, String receiver, String type);
+//		return null;
+//	}	
 //	update riemb
 }

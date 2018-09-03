@@ -25,6 +25,9 @@ emp: Reimbursement[];
   }
   getReimb(username: string): Observable<any> {
     return this.http.post<any>('http://localhost:8888/Project1/GetRiemb.ng', {withCredentials : true});
-
+  }
+  getAllReimb(): Observable<any> {
+    return this.http.post<any>('http://localhost:8888.Project1//allreimbursements.ng',
+  null, {withCredentials : true} );
   }
 }

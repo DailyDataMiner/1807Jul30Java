@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import com.revature.model.Reimbursement;
+import com.revature.model.RequestObj;
 import com.revature.model.UserInformation;
 import com.revature.util.ConnectionFactory;
 
@@ -25,21 +26,21 @@ public class ReimbDao {
 			return instance;
 	}	
 
-//	public void addRiembursement(Reimbursement r) {
-//		int index = 0;
+//	public void addRiemb(RequestObj reqObj) {
 //		try(Connection conn = ConnectionFactory.getConnection()) {
 //			PreparedStatement ps = conn.prepareStatement("insert into reimbursement (amount, submit_time, r_desc, author, resolver, rs_id, rt_id) "
 //					+ "values (?,sysdate, ?, ?, 1, ?");
-//		
-//			System.out.println(r.getAmount());
-//			System.out.println(r.getType());
-//			System.out.println();
+//
+//			ps.setDouble(1, amount);
+//			ps.setString(3, description);
+//			ps.setString(4, resolver);
+//			ps.setString(6, type);
 //		
 //	} catch (SQLException e) {
 //		System.err.println(e.getErrorCode() + e.getSQLState());
 //	}
 //	}		
-//	
+	
 	public List<Reimbursement> getReimb(UserInformation ui) {
 		Reimbursement r = null;
 		List<Reimbursement> reimb = new ArrayList<Reimbursement>();
@@ -76,33 +77,7 @@ public class ReimbDao {
 			
 	}
 	
-//	@Override
-//	public List<Reimbursement> getEmpTables(String username) {
-//		List<Reimbursement> empList = new ArrayList<>();
-//		Reimbursement temp = null;
-//		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-//			PreparedStatement ps = conn.prepareStatement("SELECT * FROM REIMBURSEMENT WHERE USERNAME = ? ORDER BY R_SUBMIT_TIME DESC");
-//			ps.setString(1, username);
-//			ResultSet rs = ps.executeQuery();
-//			while(rs.next()) {
-//				temp = new Reimbursement();
-//				temp.setId(rs.getInt(1));
-//				temp.setAmount(rs.getDouble(2));
-//				temp.setSubmitted(rs.getString(3));
-//				temp.setResolved(rs.getString(4));
-//				temp.setDescription(rs.getString(5));
-//				temp.setReciept(rs.getBytes(6));
-//				temp.setAuthor(rs.getString(7));
-//				temp.setResolver(rs.getString(8));
-//				temp.setStatusid(rs.getInt(9));
-//				temp.setTypeid(rs.getInt(10));
-//				empList.add(temp);
-//				}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return empList;
+
 	public List<Reimbursement> getAllReimb(UserInformation ui) {
 		Reimbursement r = null;
 		List<Reimbursement> reimb = new ArrayList<Reimbursement>();
@@ -136,11 +111,6 @@ public class ReimbDao {
 				System.err.println(e.getErrorCode() + e.getSQLState());
 			}
 			return reimb;
-			
-			
-			
-			
+					
 		}
-		
-
 }

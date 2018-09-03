@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.model.UserInformation;
 import com.revature.service.ReimbService;
 import com.revature.service.UserService;
 
@@ -22,6 +21,9 @@ public class MasterDispatcher {
 			return UserService.checkSession(request, response);
 		case "/Project1/GetRiemb.ng":
 			return ReimbService.GetReimb(request, response);
+		case "/allreimbursements.ng":
+			return ReimbService.getAllReimb(request, response);
+
 		default:
 			return "Path is messed up";
 		}
