@@ -9,16 +9,18 @@ public class Reimbursement {
 
 	private int reimbbId;
 	private double amount;
-	private String submitted;
-	private String resolved;
+	private Timestamp submitted;
+	private Timestamp resolved;
 	private String description;
-	private int author;
-	private int resolver;
-	private int statusID;
-	private int typeID;
+	private String author;
+	private String resolver;
+	private String status;
+	private String type;
+	
+	public Reimbursement () {}
 
-	public Reimbursement(int reimbbId, double amount, String submitted, String resolved, String description, int author,
-			int resolver, int statusID, int typeID) {
+	public Reimbursement(int reimbbId, double amount, Timestamp submitted, Timestamp resolved, String description,
+			String author, String resolver, String status, String type) {
 		super();
 		this.reimbbId = reimbbId;
 		this.amount = amount;
@@ -27,8 +29,8 @@ public class Reimbursement {
 		this.description = description;
 		this.author = author;
 		this.resolver = resolver;
-		this.statusID = statusID;
-		this.typeID = typeID;
+		this.status = status;
+		this.type = type;
 	}
 
 	public int getReimbbId() {
@@ -47,19 +49,19 @@ public class Reimbursement {
 		this.amount = amount;
 	}
 
-	public String getSubmitted() {
+	public Timestamp getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(String submitted) {
+	public void setSubmitted(Timestamp submitted) {
 		this.submitted = submitted;
 	}
 
-	public String getResolved() {
+	public Timestamp getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(String resolved) {
+	public void setResolved(Timestamp resolved) {
 		this.resolved = resolved;
 	}
 
@@ -71,38 +73,44 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-	public int getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-	public int getResolver() {
+	public String getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(int resolver) {
+	public void setResolver(String resolver) {
 		this.resolver = resolver;
 	}
 
-	public int getStatusID() {
-		return statusID;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setStatusID(int statusID) {
-		this.statusID = statusID;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public int getTypeID() {
-		return typeID;
+	public String getType() {
+		return type;
 	}
 
-	public void setTypeID(int typeID) {
-		this.typeID = typeID;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public Reimbursement() {}
-
+	@Override
+	public String toString() {
+		return "Reimbursement [reimbbId=" + reimbbId + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
+				+ resolved + ", description=" + description + ", author=" + author + ", resolver=" + resolver
+				+ ", status=" + status + ", type=" + type + "]";
+	}
+	
+	
 }

@@ -1,6 +1,7 @@
 
 package com.revature.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,8 @@ public class UserDaoImpl implements UserDao {
 		return instance;
 	}
 
+
+	
 	@Override
 	public String getPasswordHash(User user) {
 		int index = 0;
@@ -45,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 		try (Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement stmt = 
 			conn.prepareStatement("SELECT ui.username, ui.firstname, ui.lastname, ui.email, ur.u_role FROM user_info ui "
-					+ "join user_roles ur on ui.ur_id = ur.ur_id WHERE username = 'admin';");
+					+ "join user_roles ur on ui.ur_id = ur.ur_id WHERE username = ?");
 			stmt.setString(++index, username);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next())
@@ -62,9 +65,9 @@ public class UserDaoImpl implements UserDao {
 	public User getUser(String username) {
 		int index = 0;
 		try (Connection conn = ConnectionFactory.getConnection()) {
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM example_users WHERE username = ?");
-			stmt.setString(++index, username);
-			ResultSet rs = stmt.executeQuery();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+			ps.setString(++index, username);
+			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 				return new User(rs.getString(1), rs.getString(2));
 		} catch (SQLException sql) {
@@ -74,7 +77,7 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 	
-//	public static void main(String[] args) {
-//		System.out.println(UserDaoImpl.getInstance().getUserInformation("williamG"));
-//	}
+
+	
+	
 }
