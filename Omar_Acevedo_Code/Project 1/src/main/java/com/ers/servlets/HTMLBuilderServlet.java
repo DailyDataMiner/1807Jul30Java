@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HTMLBuilderServlet extends HttpServlet {
 	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println(req.getRequestURI());
+		System.out.println(" --> " + req.getRequestURI());
 		
 /*
  * 
@@ -66,7 +67,28 @@ public class HTMLBuilderServlet extends HttpServlet {
 				RequestDispatcher addExpReqDispatcher = req.getRequestDispatcher(addExpensesRsrc);
 				addExpReqDispatcher.forward(req, resp);
 				System.out.println("sending reimbursementsFormView resource");
-				break;	
+				break;
+				
+			case "/project1/home.view":
+				String homeRsrc = "partials/home.html";
+				RequestDispatcher homeReqDispatcher = req.getRequestDispatcher(homeRsrc);
+				homeReqDispatcher.forward(req, resp);
+				System.out.println("sending home resource");
+				break;
+				
+			case "/project1/about.view":
+				String aboutRsrc = "partials/about.html";
+				RequestDispatcher aboutReqDispatcher = req.getRequestDispatcher(aboutRsrc);
+				aboutReqDispatcher.forward(req, resp);
+				System.out.println("sending about resource");
+				break;
+				
+			case "/project1/contactus.view":
+				String contactUsRsrc = "partials/contactus.html";
+				RequestDispatcher contactUsReqDispatcher = req.getRequestDispatcher(contactUsRsrc);
+				contactUsReqDispatcher.forward(req, resp);
+				System.out.println("sending contactus resource");
+				break;
 				
 			default:
 				String errorRsrc = "partials/errorPage.html";

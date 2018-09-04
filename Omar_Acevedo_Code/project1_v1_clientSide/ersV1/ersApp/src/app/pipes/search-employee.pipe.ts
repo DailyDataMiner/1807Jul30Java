@@ -17,6 +17,7 @@ export class SearchEmployeePipe implements PipeTransform {
     // );
 
     return items.filter( it => {
+      console.log(it.ticket_status);
       console.log(it.created_by.toLowerCase().includes(searchText));
       return it.created_by.toLowerCase().includes(searchText);
       // return it.toLowerCase().includes(searchText);

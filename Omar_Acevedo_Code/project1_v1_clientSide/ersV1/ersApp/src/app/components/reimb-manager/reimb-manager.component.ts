@@ -94,5 +94,9 @@ export class ReimbManagerComponent implements OnInit {
     );
     return this.reimbursementsArr.length;
   }
+
+  // byId(item1: string, item2: string) {
+  //   return item1.id === item2.id;
+  // }
   
 }

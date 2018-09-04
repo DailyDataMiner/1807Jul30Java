@@ -14,7 +14,7 @@
       </p> -->
     </div>
   </section>
-  <div style="border: 1px solid gray">
+  <div style="border: 1px solid #c3c3c3;">
     <p style="font-family: Charter-Roman;
     font-size: 20px;padding:10px;
     color: rgba(38,41,58,.8);text-align: center;">Welcome <b>{{ loggedUserName }}</b> &nbsp;<br>- {{ user_role_name }} -</p>
@@ -22,10 +22,12 @@
   
   <div class="album py-5 bg-light" style="border:0px solid red;">
     <div class="container" style="border:0px solid black;margin-left:4%;width:955px;">
-      <div id="searchbar" style="border:1px solid gray;padding:10px;margin-bottom: 13px;
+      <div id="searchbar" style="border:1px solid #e6e0e0;padding:10px;margin-bottom: 13px;
                                   border-radius: 4px;box-shadow: 2px 1px 2px darkgrey;">
         <span style="display: table;margin:0 auto;">
         <input type="text" [(ngModel)]="employeeSearch" placeholder="search by employee name" style="width: 125%;" />
+        <!-- <input type="text" [(ngModel)]="statusSearch" placeholder="Search by status" style="width: 125%;" /> -->
+        
         <!-- Qty: # -->
         </span>
       </div>
@@ -50,12 +52,13 @@
                 <th scope="col">Amount</th>
                 <th scope="col">Status</th>
                 <th scope="col">Resolver</th>
-                <th scope="col">Receipt</th>
+                <!-- <th scope="col">Receipt</th> -->
                </tr>
               <!-- </tr> -->
             </thead>
             <tbody id="reimbursementsDataViewRows">
               <tr *ngFor="let r of reimbursementsArr | searchEmployeeFilter : employeeSearch">
+              <!-- <tr *ngFor="let r of reimbursementsArr | searchStatusFilter : statusSearch"> -->
                 <th scope="row">{{ r.ticket_id }}</th>
                 <th scope="row">{{ r.ticket_status }}</th>
                 <th scope="row">{{ r.created_on }}</th>

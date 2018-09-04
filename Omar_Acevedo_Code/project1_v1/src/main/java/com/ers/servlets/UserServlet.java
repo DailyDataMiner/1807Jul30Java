@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ers.pojos.Reimbursement;
 import com.ers.pojos.User;
-import com.ers.services.ReimbursementService;
 import com.ers.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -50,10 +48,12 @@ public class UserServlet extends HttpServlet {
 		
 		User user = new User();
 		UserService uService = new UserService();
+		PrintWriter pWriter = resp.getWriter();
 		
 		System.out.println("This is post data!");
 		
 		String json = "";
+		
 		ObjectMapper mapper = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader( req.getInputStream() ));
 		
@@ -66,8 +66,19 @@ public class UserServlet extends HttpServlet {
 		mapper = new ObjectMapper();
 		
 		User userObj = mapper.readValue(json, User.class);
+		
 		System.out.println(userObj.toString());
-//		uService.save(userObj);
+		
+		json = "{\"succeeded\":";
+//		json += "\"" + uService.save(userObj) + "\"";
+		json += uService.save(userObj);
+		json += "}";
+		
+		resp.setContentType("application/json");
+		
+		System.out.println(json);
+		pWriter.write(json);
+//		pWriter.write("{\"succeeded\":\"true\"}");
 	
 	}
 }

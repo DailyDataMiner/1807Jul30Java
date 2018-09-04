@@ -18,4 +18,9 @@ public class UserService extends UserDaoImplementation {
 	public List<User> getAllUsers() {
 		return getUsers();
 	}
+	
+	public Boolean save(User usrObj) {
+		return create(usrObj);
+	}
+	
 }

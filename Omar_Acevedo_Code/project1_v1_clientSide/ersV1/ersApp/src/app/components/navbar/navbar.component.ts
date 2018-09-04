@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.currentClass = "active";
-    
+    console.log(window.location.href);
   }
 
 }

@@ -5,12 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ers.pojos.Reimbursement;
 import com.ers.pojos.User;
 import com.ers.utils.ConnectionFactory;
 
@@ -110,6 +110,55 @@ public class UserDaoImplementation implements UserDao<User> {
 		}
 		
 		return usersList;
+	}
+
+	@Override
+	public Boolean create(User userObj) {
+		
+		Boolean status = false;
+		
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			
+			String insert_statement = "insert into p1_users " +
+					"( username, firstname, lastname, email, user_role_id ) " +
+					"values " +
+					"( ?, ?, ?, ?, ? )";
+
+			System.out.println("create user -> " + userObj.toString());
+			PreparedStatement ps = conn.prepareStatement(insert_statement);
+			ps.setString(1, userObj.getUsername());
+			ps.setString(2, userObj.getFirstname());
+			ps.setString(3, userObj.getLastname());
+			ps.setString(4, userObj.getEmail());
+			ps.setInt(5, 10);
+			
+			//Execute insert statement and return number of rows added.
+			int rowsInserted = ps.executeUpdate();
+			
+			if (rowsInserted > 0) {
+				System.out.println(rowsInserted + " were added into table.");
+//				status = rowsInserted + " row(s) were added into table.";
+				status = true;
+			} else {
+//				status = rowsInserted + " row(s) were added into table.";
+				System.out.println(rowsInserted + " were added into table.");
+				status = false;
+				
+			}
+			
+		} catch (SQLIntegrityConstraintViolationException sqlICV) {
+			status = false;
+//			status = "SQLIntegrityConstraintViolationException";
+			System.out.println("->");
+			System.out.println("SQLIntegrityConstraintViolationException");
+			sqlICV.printStackTrace();
+		}
+		catch (SQLException e) {
+			status = false;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return status;
 	}
 
 }

@@ -16,6 +16,10 @@ import { ReimbManagerComponent } from './components/reimb-manager/reimb-manager.
 import { UserService } from './services/user.service';
 import { ListUserComponent } from './components/list-user/list-user.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { SearchStatusPipe } from './pipes/search-status.pipe';
+import { UserComponent } from './components/user/user.component';
+import { SignUpComponent } from './components/user/sign-up/sign-up.component';
+import { SignInComponent } from './components/user/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { AddUserComponent } from './components/add-user/add-user.component';
     ReimbManagerComponent,
     SearchEmployeePipe,
     ListUserComponent,
-    AddUserComponent
+    AddUserComponent,
+    SearchStatusPipe,
+    SignUpComponent,
+    UserComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

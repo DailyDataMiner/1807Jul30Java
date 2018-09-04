@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">ERS</a>
+  <a class="navbar-brand" href="/home">ERS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -10,15 +10,26 @@
         <!-- <a class="nav-link" href="#" (click)="testEvent()">Home <span class="sr-only">(current)</span></a> -->
         <!-- <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a> -->
       <!-- </li> -->
-      <li class="nav-item" [ngClass]="currentClass" *ngIf="this.loginAuthSrv.currentLoggedInId==2">
+      
+      <li class="nav-item" [ngClass]="currentClass">
+         
+      <!-- *ngIf="this.loginAuthSrv.currentLoggedInId==2" -->
+      <!-- *ngIf="isLoggedIn; else loggedOut" -->
         <a class="nav-link" href="/reimbursements">My Reimbursements</a>
       </li>
+      
       <li class="nav-item" *ngIf="this.loginAuthSrv.currentLoggedInId!==2">
         <a class="nav-link" href="/reimbursementManager">View All Reimbursements</a>
       </li>
+
       <li class="nav-item" *ngIf="this.loginAuthSrv.currentLoggedInId!==2">
           <a class="nav-link" href="/listusers">View Users</a>
-        </li>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign Up</a>
+      </li>
+
     </ul>
   </div>
 </nav>
