@@ -13,7 +13,8 @@ emp: Reimbursement[];
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>("http://localhost:8888/Project1/login.ng", {username: username, password: password});
+    return this.http.post<any>("http://localhost:8888/Project1/login.ng", {username: username, password: password},
+  {withCredentials: true});
   }
   getCurrentUser(): Observable<any>{
     return this.http.post<any>('http://localhost:8888/Project1/checksession.ng',
@@ -24,10 +25,19 @@ emp: Reimbursement[];
      null, {withCredentials : true});
   }
   getReimb(username: string): Observable<any> {
-    return this.http.post<any>('http://localhost:8888/Project1/GetRiemb.ng', {withCredentials : true});
+    return this.http.post<any>('http://localhost:8888/Project1/GetRiemb.ng', {username: username} 
+    , {withCredentials : true});
   }
   getAllReimb(): Observable<any> {
-    return this.http.post<any>('http://localhost:8888.Project1//allreimbursements.ng',
-  null, {withCredentials : true} );
+    return this.http.post<any>('http://localhost:8888/Project1/allreimbursements.ng',
+   {withCredentials : true} );
+  }
+  addReimb(): Observable<any>{
+    return this.http.post<any>('http://localhost:8888.Project1/addReib.ng',
+    null, {withCredentials : true} );
+  }
+  updateReimb(): Observable<any>{
+    return this.http.post<any>('http://localhost:8888.Project1/updateReimb',
+    null, {withCredentials : true} );
   }
 }

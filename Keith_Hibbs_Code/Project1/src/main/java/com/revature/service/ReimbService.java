@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.ReimbDao;
 import com.revature.model.Reimbursement;
 import com.revature.model.RequestObject;
+import com.revature.model.UpdateObject;
 import com.revature.model.UserInformation;
 
 public class ReimbService {
@@ -21,7 +22,7 @@ public class ReimbService {
 	public static List<Reimbursement> GetReimb(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
 		ObjectMapper mapper = new ObjectMapper();
-		
+			
 		Reimbursement reimb = null;
 		List<Reimbursement> r = new ArrayList<Reimbursement>();
 		UserInformation u = (UserInformation) session.getAttribute("user");
@@ -41,19 +42,28 @@ public class ReimbService {
 		
 	}
 
-//	public static Object addReimb(HttpServletRequest req, HttpServletResponse resp) {
-//		ObjectMapper mapper = new ObjectMapper();
-//		
-//		RequestObject = null;
-//		try {
-//			
-//			RequestObject = mapper.readValue(req.getReader(), Reimbursement.class);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		rd.addRiemb(RequestObject);
-//		return null;
-//	}	
-//	update riemb;
+	public static Object addReimb(HttpServletRequest req, HttpServletResponse resp) {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		RequestObject reqObj = null;
+		try {
+			
+			reqObj= mapper.readValue(req.getReader(), RequestObject.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		rd.addRiemb(reqObj);
+		return null;
+	}	
+	public static Object updateReimb(HttpServletRequest req, HttpServletResponse resp) {
+		ObjectMapper mapper = new ObjectMapper();
+		UpdateObject upObj = null;
+		try {upObj = mapper.readValue(req.getReader(), UpdateObject.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}rd.updateReimb(upObj);
+		return null;
+				
+	}
 }

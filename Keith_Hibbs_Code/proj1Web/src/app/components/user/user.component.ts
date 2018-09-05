@@ -12,11 +12,11 @@ import { AuthService } from '../../services/auth.service';
 export class UserComponent implements OnInit {
 
   user: User;
-  emp: Reimbursement[];
+  reim: Reimbursement[];
 
   private amount: number;
   private description: string;
-  private requestType: number;
+  private requestType: string;
   private requestTypeStr: string;
 
   constructor(private authService: AuthService) { }
@@ -27,14 +27,28 @@ export class UserComponent implements OnInit {
     .subscribe(data => { this.authService.user = data;
     if (this.authService.user !== null) {
       this.user = this.authService.user;
-      this.displayUserTable();
+      this.GetReimb();
     } });
   }
 
-  displayUserTable(){
-    this.authService.getReimb(this.authService.user.username)
-    .subscribe(data => { this.emp = data});
-  }
+GetReimb(){
+  this.authService.getReimb(this.authService.user.username)
+  .subscribe(data => { this.reim = data;
+  });
+
+}
 
   
+
+
+//   submit() {
+   
+//       this.authService.getReimb(this.amount, this.description,
+//          this.requestType, this.authService.user.username)
+//          .subscribe(data => {
+//           this.displayUserTable();
+//       });
+//     }
+//   }
+// }
 }

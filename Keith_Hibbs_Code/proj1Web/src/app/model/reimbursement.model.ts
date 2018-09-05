@@ -1,14 +1,13 @@
 export class Reimbursement {
 
-    id: number;
+    reimbid: number;
     amount: number;
-    submitted: string;
-    resolved: string;
+    submitted: Date;
+    resolved: Date;
     description: string;
-    receipt: ByteString;
-    author: number;
+    author: string;
     resolver: string;
-    statusid: string;
-    typeid: number;
+    status: string;
+    type: string;
 
 }

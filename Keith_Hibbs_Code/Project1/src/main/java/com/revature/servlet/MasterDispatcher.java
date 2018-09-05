@@ -21,9 +21,12 @@ public class MasterDispatcher {
 			return UserService.checkSession(request, response);
 		case "/Project1/GetRiemb.ng":
 			return ReimbService.GetReimb(request, response);
-		case "/allreimbursements.ng":
+		case "/Project1/allreimbursements.ng":
 			return ReimbService.getAllReimb(request, response);
-
+		case "/Project1/addReib.ng":
+			return ReimbService.addReimb(request, response);
+		case "/Project1/updateReimb":
+			return ReimbService.updateReimb(request, response);
 		default:
 			return "Path is messed up";
 		}
