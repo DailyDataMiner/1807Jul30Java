@@ -27,6 +27,6 @@ export class AuthService {
     return this.http.post<any>("http://localhost:8872/Project1/denyReimb.ng", {id: r_id, resolver_id: res_id});
   }
   getUsers(): Observable<any> {
-    return this.http.get<User[]>("http://localhost:8872/Project1/getUsers.ng", {});
+    return this.http.post<User[]>("http://localhost:8872/Project1/getUsers.ng", {});
   }
 }

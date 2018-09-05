@@ -48,6 +48,7 @@ export class ManagerComponent implements OnInit {
           this.resolver = data.resolver_id;
           this.statusID = data.status_id;
           this.typeID = data.type_id;
+          
 
           console.log(this.reimbArr);
       }
