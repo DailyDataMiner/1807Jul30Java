@@ -1,4 +1,4 @@
-package com.rev.dao;
+package com.rev.dao; 
 
 import java.sql.Blob;
 import java.sql.Connection;
@@ -21,7 +21,17 @@ public class ReimbDao {
 	public List<Reimb> checkAcc(int userid){
 		List<Reimb> user = new ArrayList<Reimb>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-			String sql = "select * from Ers_Reimbursement where Reimb_Author = ?";
+			String sql = "select r.reimb_id, r.reimb_amount, r.reimb_submitted, r.reimb_resolved, r.reimb_description, a.USER_FIRST_NAME, b.USER_FIRST_NAME, s.reimb_status, u.reimb_type " + 
+					"from ers_reimbursement r " + 
+					"join ers_reimbursement_type u " + 
+					"on r.REIMB_TYPE_ID = u.REIMB_TYPE_ID " + 
+					"join ers_users a " + 
+					"on r.reimb_author = a.ERS_USERS_ID " + 
+					"left outer join ers_users b " + 
+					"on r.reimb_resolver = a.ERS_USERS_ID " + 
+					"full outer join ers_reimbursement_status s " + 
+					"on r.reimb_status_id = s.reimb_status_id "
+					+ "where a.ers_users_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, userid);
 			ResultSet info = ps.executeQuery();
@@ -34,11 +44,10 @@ public class ReimbDao {
 				temp.setSubmitted(info.getTimestamp(3));
 				temp.setResolved(info.getTimestamp(4));
 				temp.setDescription(info.getString(5));
-				temp.setReceipt(info.getBlob(6));
-				temp.setAuthor(info.getInt(7));
-				temp.setResolver(info.getInt(8));
-				temp.setStatusid(info.getInt(9));
-				temp.setTypeid(info.getInt(10));
+				temp.setSauthor(info.getString(6));
+				temp.setSresolver(info.getString(8));
+				temp.setSstatusid(info.getString(8));
+				temp.setStypeid(info.getString(9));
 				user.add(temp);
 			}
 			
@@ -98,7 +107,7 @@ public class ReimbDao {
 	}
 	
 	//add a reimbursement (Employee) with no blob
-		public void addReimb(double amount, String description, int author, int typeid) {
+		public Reimb addReimb(double amount, String description, int author, int typeid) {
 			Reimb r = new Reimb(amount, description, author, typeid);
 			Timestamp time = new Timestamp(System.currentTimeMillis());
 			try (Connection conn = ConnectionFactory.getInstance().getConnection()){
@@ -118,7 +127,7 @@ public class ReimbDao {
 				ps.setDouble(1, r.getAmount());
 				ps.setTimestamp(2, time);
 				ps.setString(3,r.getDescription());
-				ps.setInt(4, r.getAuthor());
+				ps.setInt(4, author);
 				ps.setInt(5, 1);
 				ps.setInt(6, r.getTypeid());
 				
@@ -138,13 +147,23 @@ public class ReimbDao {
 				} catch (SQLException e) {
 					e.printStackTrace();
 			}
+			return r;
 		}
 	
 	//Finance Manager can see all accounts
 	public List<Reimb> findAll(){
-		List<Reimb> user = new ArrayList<Reimb>();
+		List<Reimb> full = new ArrayList<Reimb>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-			String sql = "select * from Ers_Reimbursement";
+			String sql = "select r.reimb_id, r.reimb_amount, r.reimb_submitted, r.reimb_resolved, r.reimb_description, a.USER_FIRST_NAME, b.USER_FIRST_NAME, s.reimb_status, u.reimb_type " + 
+					"from ers_reimbursement r " + 
+					"join ers_reimbursement_type u " + 
+					"on r.REIMB_TYPE_ID = u.REIMB_TYPE_ID " + 
+					"join ers_users a " + 
+					"on r.reimb_author = a.ERS_USERS_ID " + 
+					"left outer join ers_users b " + 
+					"on r.reimb_resolver = a.ERS_USERS_ID " + 
+					"full outer join ers_reimbursement_status s " + 
+					"on r.reimb_status_id = s.reimb_status_id";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet info = ps.executeQuery();
 			
@@ -156,29 +175,41 @@ public class ReimbDao {
 				temp.setSubmitted(info.getTimestamp(3));
 				temp.setResolved(info.getTimestamp(4));
 				temp.setDescription(info.getString(5));
-				temp.setReceipt(info.getBlob(6));
-				temp.setAuthor(info.getInt(7));
-				temp.setResolver(info.getInt(8));
-				temp.setStatusid(info.getInt(9));
-				temp.setTypeid(info.getInt(10));
-				user.add(temp);
+				temp.setSauthor(info.getString(6));
+				temp.setSresolver(info.getString(7));
+				temp.setSstatusid(info.getString(8));
+				temp.setStypeid(info.getString(9));
+				full.add(temp);
+				//System.out.println(temp);
+				
+
 			}
 			
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		return user;
+		
+		return full;
 	}
 	
 	
 	
 	//Finance Manager wants to filter
-	public List<Reimb> findAllByStatus(int statusid){
+	public List<Reimb> findAllByStatus(String statusid){
 		List<Reimb> user = new ArrayList<Reimb>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-			String sql = "select * from Ers_Reimbursement where Reimb_status_id = ?";
+			String sql = "select r.reimb_id, r.reimb_amount, r.reimb_submitted, r.reimb_resolved, r.reimb_description, a.USER_FIRST_NAME, b.USER_FIRST_NAME, s.reimb_status, u.reimb_type " + 
+					"from ers_reimbursement r " + 
+					"join ers_reimbursement_type u " + 
+					"on r.REIMB_TYPE_ID = u.REIMB_TYPE_ID " + 
+					"join ers_users a " + 
+					"on r.reimb_author = a.ERS_USERS_ID " + 
+					"left outer join ers_users b " + 
+					"on r.reimb_resolver = a.ERS_USERS_ID " + 
+					"full outer join ers_reimbursement_status s " + 
+					"on r.reimb_status_id = s.reimb_status_id where s.reimb_status = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, statusid);
+			ps.setString(1, statusid);
 			ResultSet info = ps.executeQuery();
 			
 			while (info.next()) {
@@ -189,12 +220,13 @@ public class ReimbDao {
 				temp.setSubmitted(info.getTimestamp(3));
 				temp.setResolved(info.getTimestamp(4));
 				temp.setDescription(info.getString(5));
-				temp.setReceipt(info.getBlob(6));
-				temp.setAuthor(info.getInt(7));
-				temp.setResolver(info.getInt(8));
-				temp.setStatusid(info.getInt(9));
-				temp.setTypeid(info.getInt(10));
+				temp.setSauthor(info.getString(6));
+				temp.setSresolver(info.getString(7));
+				temp.setSstatusid(info.getString(8));
+				temp.setStypeid(info.getString(9));
 				user.add(temp);
+				System.out.println(temp.getSstatusid());
+		
 			}
 			
 			} catch (SQLException e) {
@@ -246,10 +278,12 @@ public class ReimbDao {
 		ReimbDao test = new ReimbDao();
 		
 		System.out.println(test.findAll());
-		System.out.println(test.checkAcc(1));
-		System.out.println(test.findAllByStatus(1));
-		test.update(3,1,1);
-		test.addReimb(9.25,"Just for Testing", null , 1, 2);
+//		System.out.println(test.checkAcc("NotMichael"));
+		System.out.println("statusfinda" + test.findAllByStatus("Approved"));
+		System.out.println("statusfinds" + test.findAllByStatus("Denied"));
+		System.out.println("statusfindp" + test.findAllByStatus("Pending"));
+//		test.update(3,1,1);
+//		test.addReimb(9.25,"Just for Testing", null , 1, 2);
 
 	}
 }

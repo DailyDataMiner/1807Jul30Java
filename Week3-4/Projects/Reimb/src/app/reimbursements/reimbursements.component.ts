@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Reimbursement } from './../models/reimbursement.model';
 import { ReimbService } from './../services/reimb.service';
+import { AuthService } from '../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -11,57 +14,111 @@ import { ReimbService } from './../services/reimb.service';
 export class ReimbursementsComponent implements OnInit {
 
   private reimbursements: Reimbursement[] = [];
+  //private reimbursements2: Reimbursement[] = [];
   private statusid: any;
   private typeid: any;
-
+  private id: any;
   servletData: any;
+  newReimb: Reimbursement = new Reimbursement();
+  private fn: string;
+  private rid: number;
+  private ida: number;
 
-  constructor(private reimbSrv: ReimbService) {
+  constructor(private reimbSrv: ReimbService, private authSrv: AuthService, private route: ActivatedRoute) {
    
   }
 
   ngOnInit() {
+    this.authSrv.checkSession();
     console.log("reimbursementinit");
     this.getReimbursements();
-  }
+    this.route.params.subscribe(
+      params => {
+        this.fn = params['firstname'];
+        this.rid = params['roleid'];
+        this.ida = params['id'];
+        console.log;
+         
+  })
+}
 
   addnewReimbursement() {
     this.reimbSrv.getReimbursements();
   }
 
-  getReimbursements(){
+  getPending() {
+    console.log("in Pending method");
+    this.reimbSrv.getPending().subscribe(
+      data => {
+        console.log("pending");
+        console.log(data);
+        this.reimbursements = data;
+        });
+    }
+
+ getApproved() {
+    console.log("in Approve method");
+    this.reimbSrv.getApproved().subscribe(
+      data => {
+        console.log(data);
+        this.reimbursements = data;
+        });
+    } 
+
+  getDenied() {
+      console.log("in Denied method");
+      this.reimbSrv.getDenied().subscribe(
+        data => {
+          console.log(data);
+          this.reimbursements = data;
+          });
+      } 
+    
+    
+
+   // return this.reimbSrv.getReimbursements.filter.map(r => r.statusid === statusid);
+    //return this.genres.filter(g => g.id === id )[0].name;
+
+getReimbursements(){
     console.log("in reimbursement method");
     this.reimbSrv.getReimbursements().subscribe(
       data => {
         console.log(data);
         this.reimbursements = data;
-        for (let entry of this.reimbursements){
-            if(entry.statusid == "1"){
-              entry.statusid = "PENDING";
-            }
-            if(entry.statusid == "2"){
-              entry.statusid = "APPROVED";
-            }
-            if(entry.statusid == "3"){
-              entry.statusid = "DENIED";
-            }
-            if(entry.typeid == "1"){
-              entry.typeid = "Lodging";
-            }
-            if(entry.typeid == "2"){
-              entry.typeid = "Travel";
-            }
-            if(entry.typeid == "3"){
-              entry.typeid = "Food";
-            }
-            if(entry.typeid == "4"){
-              entry.typeid = "Training";
-            }
-            if(entry.typeid == "5"){
-              entry.typeid = "Misc";
-            }
-            
-          }
         });
     }
+
+  approve(){
+    console.log();
+    console.log("approve request");
+    this.statusid = 2;
+    if (this.id === undefined){
+      alert("Must choose a row");
+  } else {
+    this.reimbSrv.updateStatus(this.id, this.statusid)
+      .subscribe(data => {
+        this.getReimbursements();
+      })
+  }
+  }
+
+  deny(){
+    console.log("deny request");
+    this.statusid = 3;
+    if (this.id === undefined){
+      alert("Must choose a row");
+  } else {
+    this.reimbSrv.updateStatus(this.id, this.statusid)
+      .subscribe(data => {
+        this.getReimbursements() ;
+      })
+  }
+  }
+
+  onSelect( id: number ) {
+    this.id = id;
+    console.log(id);
+  }
+  
 }
+

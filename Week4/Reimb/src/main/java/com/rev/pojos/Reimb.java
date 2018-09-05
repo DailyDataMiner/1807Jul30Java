@@ -16,6 +16,13 @@ public class Reimb{
 	private int statusid;
 	private int typeid;
 	
+	private String sauthor;
+	private String sresolver;
+	private String sstatusid;
+	private String stypeid;
+
+	
+	
 	public Reimb() {}
 
 	public Reimb(double amount, String description,
@@ -79,6 +86,54 @@ public class Reimb{
 		this.typeid = typeid;
 	}
 	
+	
+	//returned with String instead of Id numbers
+	public Reimb(int id, double amount, Timestamp submitted, Timestamp resolved, String description, 
+			String sauthor, String sresolver, String sstatusid, String stypeid) {
+		super();
+		this.id = id;
+		this.amount = amount;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.description = description;
+		this.sauthor = sauthor;
+		this.sresolver = sresolver;
+		this.sstatusid = sstatusid;
+		this.stypeid = stypeid;
+	}
+	
+	public String getSauthor() {
+		return sauthor;
+	}
+
+	public void setSauthor(String sauthor) {
+		this.sauthor = sauthor;
+	}
+
+	public String getSresolver() {
+		return sresolver;
+	}
+
+	public void setSresolver(String sresolver) {
+		this.sresolver = sresolver;
+	}
+
+	public String getSstatusid() {
+		return sstatusid;
+	}
+
+	public void setSstatusid(String sstatusid) {
+		this.sstatusid = sstatusid;
+	}
+
+	public String getStypeid() {
+		return stypeid;
+	}
+
+	public void setStypeid(String stypeid) {
+		this.stypeid = stypeid;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -143,8 +198,8 @@ public class Reimb{
 	@Override
 	public String toString() {
 		return "Reimb [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
-				+ ", description=" + description + ", receipt=" + receipt + ", author=" + author + ", resolver="
-				+ resolver + ", statusid=" + statusid + ", typeid=" + typeid + "]";
+				+ ", description=" + description + ", author=" + sauthor + ", resolver="
+				+ sresolver + ", statusid=" + sstatusid + ", typeid=" + stypeid + "]";
 	}
 	
 	

@@ -6,9 +6,9 @@ export class Reimbursement {
     submitted: Date;
     resolved: Date;
     description: string;
-    receipt: Blob;
-    author: any;
-    resolver: any;
-    statusid: any;
-    typeid: any;
+    receipt?: Blob;
+    sauthor: any;
+    sresolver: any;
+    sstatusid: any;
+    stypeid: any;
 }

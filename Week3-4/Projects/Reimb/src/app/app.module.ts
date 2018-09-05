@@ -12,7 +12,8 @@ import { ReimbursementsComponent } from './reimbursements/reimbursements.compone
 import { ReimbService } from './services/reimb.service';
 import { AppRoutingModule } from './app-routing.module';
 import { EmployeeComponent } from './employee/employee.component';
-
+import { AddReimbComponent } from './add-reimb/add-reimb.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { EmployeeComponent } from './employee/employee.component';
     NavbarComponent,
     HomeComponent,
     ReimbursementsComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    AddReimbComponent
   ],
   imports: [
     BrowserModule, 
@@ -30,7 +32,7 @@ import { EmployeeComponent } from './employee/employee.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService, ReimbService],
+  providers: [AuthService, ReimbService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

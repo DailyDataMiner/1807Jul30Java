@@ -1,0 +1,55 @@
+<div class="jumbotron">
+        <h1 class="display-4">Welcome {{this.authService.user.firstname}}!</h1>
+        <div class="row">
+            <div class="col-md-auto h2">
+              Account Information:
+            </div>
+            <div class="col-md-auto align-items-center">
+                <h6 class="text-center-justify-left">First Name: {{ this.authService.user.firstname }}</h6>
+                <h6 class="text-center-justify-left">Last Name: {{ this.authService.user.lastname }}</h6>
+                <h6 class="text-center-justify-left">Email: {{ this.authService.user.email }}</h6>
+            </div>
+          </div>
+      </div>
+      
+      <div class="container">
+        <h2 class="text-left">Reimbursement List</h2>
+        <table class="table table-sm">
+          <thead>
+            <th scope="col">ID</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Submitted Time</th>
+            <th scope="col">Resolved Time</th>
+            <th scope="col">Description</th>
+            <th scope="col">Username</th>
+            <th scope="col">Resolved By</th>
+            <th scope="col">Status ID</th>
+            <th scope="col">Reimbursement Type ID</th>
+          </thead>
+          <tbody>
+            <tr [class.active]="id === empRows.id" *ngFor="let empRows of emps" (click)="onSelect(empRows.id)">
+              <td>{{ empRows.id }}</td>
+              <td>{{ empRows.amount | currency }}</td>
+              <td>{{ empRows.submitted }}</td>
+              <td>{{ empRows.resolved }}</td>
+              <td>{{ empRows.description }}</td>
+              <td>{{ empRows.author }}</td>
+              <td>{{ empRows.resolver }}</td>
+              <td>{{ empRows.statusid }}</td>
+              <td>{{ empRows.typeid }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn btn-primary" (click)="updateRequestApprove(value)">Approve!</button>
+            <button type="button" class="btn btn-primary" (click)="updateRequestDeny(value)">Deny!</button>
+          </div>
+          <div >
+            <button type="button" class="btn btn-info" (click)="filterByPending()">Filter by Pending</button>
+            <button type="button" class="btn btn-info" (click)="filterByApproved()">Filter by Approved</button>
+            <button type="button" class="btn btn-info" (click)="filterByDenied()">Filter by Denied</button>
+            <button type="button" class="btn btn-info" (click)="displayAllTable()">Show All Reimbursements</button>
+          </div>
+        </div>
+      </div>

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Reimbursement } from './../models/reimbursement.model';
+import { ReimbService } from './../services/reimb.service';
+import { AuthService } from '../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-employee',
@@ -7,9 +12,112 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  private reimbursements: Reimbursement[] = [];
+  //private reimbursements2: Reimbursement[] = [];
+  private statusid: any;
+  private typeid: any;
+  private id: any;
+  servletData: any;
+  private fn: string;
+  private rid: number;
+  newReimb: Reimbursement = new Reimbursement();
+  private ide: number;
+  constructor(private reimbSrv: ReimbService, private authSrv: AuthService, private route: ActivatedRoute) {
+   
   }
 
+  ngOnInit() {
+
+    console.log("reimbursementinit");
+    this.route.params.subscribe(
+      params => {
+        this.fn = params['firstname'];
+        this.rid = params['roleid'];
+        this.ide = params['id'];
+        console.log;
+      })
+    this.getReimbursementById();
+  }
+
+  addnewReimbursement() {
+    this.reimbSrv.getReimbursements();
+  }
+
+//   getPending() {
+//     console.log("in Pending method");
+//     this.reimbSrv.getPending().subscribe(
+//       data => {
+//         console.log("pending");
+//         console.log(data);
+//         this.reimbursements = data;
+//         });
+//     }
+
+//  getApproved() {
+//     console.log("in Approve method");
+//     this.reimbSrv.getApproved().subscribe(
+//       data => {
+//         console.log(data);
+//         this.reimbursements = data;
+//         });
+//     } 
+
+//   getDenied() {
+//       console.log("in Denied method");
+//       this.reimbSrv.getDenied().subscribe(
+//         data => {
+//           console.log(data);
+//           this.reimbursements = data;
+//           });
+//       } 
+    
+    
+
+   // return this.reimbSrv.getReimbursements.filter.map(r => r.statusid === statusid);
+    //return this.genres.filter(g => g.id === id )[0].name;
+
+getReimbursementById(){
+    console.log("in reimbursement by Id method");
+    console.log(`Id or Author value: ${this.ide}`)
+    this.reimbSrv.getReimbursementById(this.ide).subscribe(
+      data => {
+        if (data == null)
+          console.log("there's no id value")
+        console.log(data);
+        this.reimbursements = data;
+        });
+    }
+
+  // approve(){
+  //   console.log();
+  //   console.log("approve request");
+  //   this.statusid = 2;
+  //   if (this.id === undefined){
+  //     alert("Must choose a row");
+  // } else {
+  //   this.reimbSrv.updateStatus(this.id, this.statusid)
+  //     .subscribe(data => {
+  //       this.getReimbursements();
+  //     })
+  // }
+  // }
+
+  // deny(){
+  //   console.log("deny request");
+  //   this.statusid = 3;
+  //   if (this.id === undefined){
+  //     alert("Must choose a row");
+  // } else {
+  //   this.reimbSrv.updateStatus(this.id, this.statusid)
+  //     .subscribe(data => {
+  //       this.getReimbursements() ;
+  //     })
+  // }
+  // }
+
+  // onSelect( id: number ) {
+  //   this.id = id;
+  //   console.log(id);
+  // }
+  
 }

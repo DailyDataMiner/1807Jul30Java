@@ -7,9 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
+  public username: string;
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<any>{
     return this.http.post<any>("http://localhost:8081/Reimb/login", {username: username, password: password});
+  }
+  
+  checkSession(): Observable<any> {
+    return this.http.get<any>("http://localhost:8081/Reimb/checksesh");
+  }
+
+  logout() {
+    return this.http.get<any>("http://localhost:8081/Reimb/logout");
   }
 }
