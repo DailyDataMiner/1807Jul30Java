@@ -59,9 +59,9 @@ export class LoginComponent implements OnInit {
           console.log(this.servletId);
           if (this.servletRoleId == 1){
           this.router.navigate(['/reimbursements', {
-              firstname: this.servletFirst,
-              roleid: this.servletRoleId,
-              id:  this.servletId
+              fn: this.servletFirst,
+              rid: this.servletRoleId,
+              ida:  this.servletId
               
           }]);
         } if(data.roleid == 2) {
@@ -77,9 +77,9 @@ export class LoginComponent implements OnInit {
           console.log(this.servletId);
           
           this.router.navigate(['/employee', {
-              firstname: this.servletFirst,
-              roleid: this.servletRoleId,
-              id: this.servletId
+              fn: this.servletFirst,
+              rid: this.servletRoleId,
+              ida: this.servletId
           }]);
 
 

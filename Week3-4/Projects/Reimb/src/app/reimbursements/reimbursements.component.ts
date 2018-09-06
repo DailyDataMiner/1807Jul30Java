@@ -24,7 +24,7 @@ export class ReimbursementsComponent implements OnInit {
   private rid: number;
   private ida: number;
 
-  constructor(private reimbSrv: ReimbService, private authSrv: AuthService, private route: ActivatedRoute) {
+  constructor(private router: Router, private reimbSrv: ReimbService, private authSrv: AuthService, private route: ActivatedRoute) {
    
   }
 
@@ -34,10 +34,10 @@ export class ReimbursementsComponent implements OnInit {
     this.getReimbursements();
     this.route.params.subscribe(
       params => {
-        this.fn = params['firstname'];
-        this.rid = params['roleid'];
-        this.ida = params['id'];
-        console.log;
+        this.fn = params['fn'];
+        this.rid = params['rid'];
+        this.ida = params['ida'];
+        console.log(this.ida);
          
   })
 }
@@ -118,6 +118,26 @@ getReimbursements(){
   onSelect( id: number ) {
     this.id = id;
     console.log(id);
+  }
+
+  passOnR() {
+    console.log("In passOnR");
+    
+    this.router.navigate(['/reimbursements', {
+      fn: this.fn,
+      rid: this.rid,
+      ida:  this.ida
+    }])
+  }
+
+  passOnA() {
+    console.log("In passOnA")
+    this.router.navigate(['/add_reimb', {
+      fn: this.fn,
+      rid: this.rid,
+      ida:  this.ida
+    
+    }])
   }
   
 }

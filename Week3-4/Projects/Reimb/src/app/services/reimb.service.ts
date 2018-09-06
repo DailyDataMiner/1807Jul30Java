@@ -22,17 +22,17 @@ export class ReimbService {
     return Observable.throw(error.statusText);
   }
 
-  public getReimbursementById(userid: number) {
+  public getReimbursementById(author: number) {
     return this.http.
-      post<Reimbursement[]>('http://localhost:8081/Reimb/empreimb', {author: userid});
+      post<Reimbursement[]>('http://localhost:8081/Reimb/empreimb', { author: author });
   }
   public getReimbursements() {
     return this.http.
       get<Reimbursement[]>('http://localhost:8081/Reimb/reimbursement');
   }
 
-  public addReimb(amount: number, description: string, typeid: any) {
-    return this.http.post<any>('http://localhost:8081/Reimb/add', {amount: amount, description: description, typeid: typeid});
+  public addReimb( amount: number, description: string, author: number, typeid: any) {
+    return this.http.post<any>('http://localhost:8081/Reimb/add', { amount: amount, description: description, author: author, typeid: typeid});
   }
 
   login(username: string, password: string): Observable<any>{

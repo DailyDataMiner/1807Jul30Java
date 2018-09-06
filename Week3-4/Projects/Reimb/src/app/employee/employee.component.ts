@@ -21,8 +21,8 @@ export class EmployeeComponent implements OnInit {
   private fn: string;
   private rid: number;
   newReimb: Reimbursement = new Reimbursement();
-  private ide: number;
-  constructor(private reimbSrv: ReimbService, private authSrv: AuthService, private route: ActivatedRoute) {
+  private ida: number;
+  constructor(private router: Router, private reimbSrv: ReimbService, private authSrv: AuthService, private route: ActivatedRoute) {
    
   }
 
@@ -31,12 +31,18 @@ export class EmployeeComponent implements OnInit {
     console.log("reimbursementinit");
     this.route.params.subscribe(
       params => {
-        this.fn = params['firstname'];
-        this.rid = params['roleid'];
-        this.ide = params['id'];
-        console.log;
+        this.fn = params['fn'];
+        this.rid = params['rid'];
+        this.ida = params['ida'];
+        console.log(this.fn);
       })
-    this.getReimbursementById();
+      this.reimbSrv.getReimbursementById(this.ida).subscribe(
+        data => {
+          if (data == null)
+            console.log("there's no id value")
+          console.log(data);
+          this.reimbursements = data;
+          });
   }
 
   addnewReimbursement() {
@@ -78,14 +84,33 @@ export class EmployeeComponent implements OnInit {
 
 getReimbursementById(){
     console.log("in reimbursement by Id method");
-    console.log(`Id or Author value: ${this.ide}`)
-    this.reimbSrv.getReimbursementById(this.ide).subscribe(
+    console.log(`Id or Author value: ${this.ida}`)
+    this.reimbSrv.getReimbursementById(this.ida).subscribe(
       data => {
         if (data == null)
           console.log("there's no id value")
         console.log(data);
         this.reimbursements = data;
         });
+    }
+
+    passOnR() {
+      this.router.navigate(['/employee', {
+        fn: this.fn,
+        rid: this.rid,
+        ida:  this.ida
+     
+      
+      }])
+    }
+  
+    passOnA() {
+      this.router.navigate(['/add_reimb', {
+        fn: this.fn,
+        rid: this.rid,
+        ida:  this.ida
+      
+      }])
     }
 
   // approve(){
