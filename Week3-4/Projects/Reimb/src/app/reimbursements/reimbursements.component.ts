@@ -23,6 +23,7 @@ export class ReimbursementsComponent implements OnInit {
   private fn: string;
   private rid: number;
   private ida: number;
+  private gConditional: string;
 
   constructor(private router: Router, private reimbSrv: ReimbService, private authSrv: AuthService, private route: ActivatedRoute) {
    
@@ -53,6 +54,7 @@ export class ReimbursementsComponent implements OnInit {
         console.log("pending");
         console.log(data);
         this.reimbursements = data;
+        this.gConditional = 'pending';
         });
     }
 
@@ -62,6 +64,7 @@ export class ReimbursementsComponent implements OnInit {
       data => {
         console.log(data);
         this.reimbursements = data;
+        this.gConditional = 'approved';
         });
     } 
 
@@ -71,6 +74,7 @@ export class ReimbursementsComponent implements OnInit {
         data => {
           console.log(data);
           this.reimbursements = data;
+          this.gConditional = 'denied';
           });
       } 
     
@@ -95,9 +99,22 @@ getReimbursements(){
     if (this.id === undefined){
       alert("Must choose a row");
   } else {
-    this.reimbSrv.updateStatus(this.id, this.statusid)
+    this.reimbSrv.updateStatus(this.id, this.ida, this.statusid)
       .subscribe(data => {
+        
+        if (this.gConditional == 'pending') {
+          this.getPending();
+
+        } else if (this.gConditional == 'approved') {
+          this.getApproved();
+          
+        } else if (this.gConditional == 'denied') {
+          this.getDenied();
+          
+        }
         this.getReimbursements();
+
+
       })
   }
   }
@@ -108,9 +125,23 @@ getReimbursements(){
     if (this.id === undefined){
       alert("Must choose a row");
   } else {
-    this.reimbSrv.updateStatus(this.id, this.statusid)
+    this.reimbSrv.updateStatus(this.id, this.ida, this.statusid)
       .subscribe(data => {
-        this.getReimbursements() ;
+        //this.getReimbursements() ;
+        
+        if (this.gConditional == 'pending') {
+          this.getPending();
+
+        } else if (this.gConditional == 'approved') {
+          this.getApproved();
+          
+        } else if (this.gConditional == 'denied') {
+          this.getDenied();
+          
+        }
+        this.getReimbursements();
+
+
       })
   }
   }

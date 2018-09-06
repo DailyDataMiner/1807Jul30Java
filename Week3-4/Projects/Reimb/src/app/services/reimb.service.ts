@@ -49,8 +49,8 @@ export class ReimbService {
     return this.http.get<Reimbursement[]>('http://localhost:8081/Reimb/denied');
   }
 
-  public updateStatus(id: number, statusid: number): Observable<any> {
-    return this.http.post<any>('http://localhost:8081/Reimb/update', {id: id, statusid: statusid})
+  public updateStatus(id: number, resolver: number, statusid: number): Observable<any> {
+    return this.http.post<any>('http://localhost:8081/Reimb/update', {id: id, resolver: resolver, statusid: statusid})
   }
 
 }
