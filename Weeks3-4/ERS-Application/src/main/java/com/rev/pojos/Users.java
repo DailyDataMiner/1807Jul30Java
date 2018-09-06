@@ -8,15 +8,22 @@ public class Users {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String roleID;
+	private int roleID;
 	
 	
 	public Users() {
 		super();
 	}
+	
+	public Users(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+		
+	}
 
 	public Users(int usersID, String username, String password, String firstName, String lastName, String email,
-			String roleID) {
+			int roleID) {
 		super();
 		this.usersID = usersID;
 		this.username = username;
@@ -25,6 +32,18 @@ public class Users {
 		this.lastName = lastName;
 		this.email = email;
 		this.roleID = roleID;
+	}
+	
+	public Users( String username, String password, String firstName, String lastName, String email, int roleID) {
+		super();
+		
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.roleID = roleID;
+		
 	}
 
 	public int getUsersID() {
@@ -75,11 +94,11 @@ public class Users {
 		this.email = email;
 	}
 
-	public String getRoleID() {
+	public int getRoleID() {
 		return roleID;
 	}
 
-	public void setRoleID(String roleID) {
+	public void setRoleID(int roleID) {
 		this.roleID = roleID;
 	}
 

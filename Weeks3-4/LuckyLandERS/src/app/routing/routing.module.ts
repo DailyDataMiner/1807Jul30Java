@@ -4,10 +4,12 @@ import { Routes, RouterModule} from '@angular/router';
 
 import {HomeComponent} from '../home/home.component';
 import {LoginComponent} from '../login/login.component';
+import { ReimbursementComponent } from '../reimbursement/reimbursement.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'reimbursement', component: ReimbursementComponent},
   {path: '**', component: HomeComponent}
 
 

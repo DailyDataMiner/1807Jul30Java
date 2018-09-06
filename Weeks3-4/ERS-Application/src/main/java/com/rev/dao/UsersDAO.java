@@ -12,13 +12,17 @@ import com.rev.pojos.Users;
 import com.rev.util.ConnectionFactory;
 
 public class UsersDAO implements Dao<Users, Integer> {
+	
+	
+	
+	
 
 	public List<Users> findAll() {
 		
 		List<Users> ersUser = new ArrayList<Users>();
 		try(Connection conn = ConnectionFactory.
 				getInstance().getConnection()){
-			String query = "select * from ESR_USERS order by first_Name asc";
+			String query = "select * from ESR_USERS";
 			
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(query);
@@ -61,9 +65,24 @@ public class UsersDAO implements Dao<Users, Integer> {
 		return u;
 	}
 
-	public Users findOne(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Users findOne(Integer obj) {
+		
+		Users user = null;
+		try ( Connection conn = ConnectionFactory.getInstance().getConnection()){
+			
+			String query = "select from ERS_USERS where username = ? AND password = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ResultSet info = ps.executeQuery();
+			while(info.next()) 
+			user = new Users();
+			user.setUsername(info.getString(1));
+			user.setPassword(info.getString(2));
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+		
 	}
 
 	public Users save(Users b) {
@@ -120,7 +139,7 @@ public class UsersDAO implements Dao<Users, Integer> {
 		Users u = null;
 		try(Connection conn = ConnectionFactory
 				.getInstance().getConnection()){
-			String sql = "select * from ERS_Users where username = ? AND password = ?" ;
+			String sql = "select * from ERS_Users where ERS_ID = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, obj.getUsername());
 			ps.setString(2, obj.getPassword());
@@ -128,11 +147,12 @@ public class UsersDAO implements Dao<Users, Integer> {
 			while(info.next()) {
 			u = new Users();
 			u.setUsersID(info.getInt(1));
-			u.setFirstName(info.getString(2));
-			u.setLastName(info.getString(3));
-			u.setEmail(info.getString(4));
-			u.setUsername(info.getString(5));
-			u.setPassword(info.getString(6));
+			u.setUsername(info.getString(2));
+			u.setPassword(info.getString(3));
+			u.setFirstName(info.getString(4));
+			u.setLastName(info.getString(5));
+			u.setEmail(info.getString(6));
+			u.setRoleID(info.getInt(7));
 			}
 			// more code
 		}
@@ -141,6 +161,40 @@ public class UsersDAO implements Dao<Users, Integer> {
 		}
 		return u;
 	}
+	
+	public Users findOneByUsername(Users obj) {
+		
+		
+		Users u = null;
+		try(Connection conn = ConnectionFactory
+				.getInstance().getConnection()){
+			String sql = "select * from ERS_USERS where ERS_username = ? AND ERS_password = ?" ;
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, obj.getUsername());
+			ps.setString(2, obj.getPassword());
+			ResultSet info = ps.executeQuery();
+			while(info.next()) {
+			u = new Users();
+			u.setUsersID(info.getInt(1));
+			u.setUsername(info.getString(2));
+			u.setPassword(info.getString(3));
+			u.setFirstName(info.getString(4));
+			u.setLastName(info.getString(5));
+			u.setEmail(info.getString(6));
+			u.setRoleID(info.getInt(7));
+			}
+			// more code
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
+
+
+
+
+	
 
 		
 }

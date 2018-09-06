@@ -40,7 +40,7 @@ public class ConnectionFactory {
 	public Connection getConnection() {
 		Connection conn = null; // will instantiate in a try block
 		Properties prop = new Properties();
-		String path = "C:/Users/just1_000/my_git_repos/1807Jul30Java/Justin_Reed_Code/Week2/bankapp-jdbc/src/main/resources/application.properties";
+		String path = "C:/Users/just1_000/my_git_repos/1807Jul30Java/Weeks3-4/ERS-Application/src/main/resources/application.properties";
 		try {
 			prop.load(new FileReader(path));
 			Class.forName(prop.getProperty("driver")); //prop.getproperty("Driver") is returning oracle.jdbc.driver.OracleDriver

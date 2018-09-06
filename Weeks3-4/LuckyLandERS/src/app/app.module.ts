@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule } from '@angular/forms';
+
 
 
 
@@ -12,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { ReimbursementComponent } from './reimbursement/reimbursement.component';
 import { AdminComponent } from './admin/admin.component';
 import { RoutingModule } from './routing/routing.module';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import { RoutingModule } from './routing/routing.module';
   imports: [
     BrowserModule,
     RoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

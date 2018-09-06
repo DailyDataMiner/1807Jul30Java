@@ -30,7 +30,9 @@
 			<version>4.0.0</version>
 		</dependency>
 	</dependencies>
-	
+	<build>
+    <finalName>ERS-Application</finalName>
+  </build>
 
 
 </project>

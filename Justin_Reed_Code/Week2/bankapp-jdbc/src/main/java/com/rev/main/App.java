@@ -144,6 +144,8 @@ public class App {
 		
 		temp = bService.findOneId(new BankUser(userName, password));
 		
+		System.out.println(temp);
+		
 		menu2();
 		
 		
