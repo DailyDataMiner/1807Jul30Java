@@ -12,11 +12,11 @@ export class AdminComponent implements OnInit {
 
   user: User;
   reim: Reimbursement[];
-  // up: UpObj;
-  private amount: number;
-  private description: string;
-  private requestType: string;
-  private requestTypeStr: string;
+  
+  private reimbid: number;
+  private resolver: string;
+  private status: string;
+  
 
   constructor(private authService: AuthService) { }
 
@@ -35,7 +35,8 @@ export class AdminComponent implements OnInit {
     .subscribe(data => {this.reim = data;
     });
   }
-  updateReimb(reimbid: number, ){
+  updateReimb(){
+    this.authService.updateReimb(this.reimbid, this.resolver, this.status)
     this.authService.updateReimb
   }
 }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user.model';
 import { Reimbursement } from '../../model/reimbursement.model'
 import { AuthService } from '../../services/auth.service';
-import { ReqObj } from '../../model/ReqObj.model'
+
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -13,15 +14,14 @@ export class UserComponent implements OnInit {
 
   user: User;
   reim: Reimbursement;
-  req: ReqObj;
-
+ 
+  private author: string;
   private amount: number;
   private description: string;
+ 
   private type: string;
-  private resolver: string;
-
-  constructor(private authService: AuthService) { }
-
+  constructor(private authService: AuthService, private route: Router) { }
+  
 
   ngOnInit() {
     this.authService.getCurrentUser()
@@ -29,6 +29,7 @@ export class UserComponent implements OnInit {
     if (this.authService.user !== null) {
       this.user = this.authService.user;
       this.GetReimb();
+ this.authService.user.username=this.author;      
     } });
   }
 
@@ -40,11 +41,9 @@ GetReimb(){
 }
 
     createReimb(){   
-      // if (this.reim.amount == null || this.reim.type == null) {
-      //   alert('Please give me data');
-      // } else { 
-      //   this.req.Resolver = this.authService.user.username;
-      //   this.authService.addReimb(this.req).subscribe();
-      // }
+
+        this.authService.addReimb(this.amount, this.description, this.type, this.authService.user.username)
+        // this.route.navigate(['user']);
       }
-    }
+      }
+    

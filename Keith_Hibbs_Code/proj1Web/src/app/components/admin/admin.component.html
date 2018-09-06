@@ -31,7 +31,8 @@
             <th scope="col">Type</th>
           </thead>
           <tbody>
-            <tr [class.active]="id ===reimb.Rows.id" *ngFor="let adRows of reim" (click)="onSelect(reimbRows.id)">
+            <tr [class.active]="reimbid === adRows.id" *ngFor="let adRows of reim" (click)="onSelect(adRows.id)">
+              <td>{{ adRows.reimbid }}</td>
               <td>{{ adRows.amount | currency }}</td>
               <td>{{ adRows.submitted | date}}</td>              
               <td>{{ adRows.Resolved | date }}</td>
@@ -47,6 +48,7 @@
         <div class="col">
           <button type="button" class="btn btn-primary" (click)="updateRequestApprove(value)">Approve!</button>
           <button type="button" class="btn btn-primary" (click)="updateRequestDeny(value)">Deny!</button>
+      </div>
         </div>
       </div>
   

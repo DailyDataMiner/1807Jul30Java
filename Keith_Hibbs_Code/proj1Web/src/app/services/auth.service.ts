@@ -3,15 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user.model';
 import { Reimbursement } from '../model/reimbursement.model';
-import { ReqObj } from '../model/ReqObj.model'
-import { UpObj } from '../model/UpObj.model'
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
 user: User;
 emp: Reimbursement;
-req: ReqObj;
-up: UpObj;
+
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<any> {
@@ -34,12 +32,16 @@ up: UpObj;
     return this.http.post<any>('http://localhost:8888/Project1/allreimbursements.ng',
    {withCredentials : true} );
   }
-//   addReimb(req): Observable<any>{
-//     return this.http.post<any>('http://localhost:8888.Project1/addReib.ng',
-//     null, {withCredentials : true} );
-//   }
-//   updateReimb(up): Observable<any>{
-//     return this.http.post<any>('http://localhost:8888.Project1/updateReimb',
-//     null, {withCredentials : true} );
-//   }
+  addReimb(amount: number, description: string, type: string, author: string): Observable<any>{
+  // console.log(amount, description, type, author)
+      return this.http.post<any>('http://localhost:8888.Project1/addReib.ng', { amount: amount, description: description, type: type, author: author },
+   {withCredentials : true} );
+  return new Observable<any>();1
+  }
+  updateReimb(reimbId: number, resolver: string, status: string): Observable<any>{
+  console.log(reimbId, resolver, status)
+    // return this.http.post<any>('http://localhost:8888.Project1/updateReimb', {reimbId: reimbId, resolver:resolver, status: status},
+    // {withCredentials : true} );
+    return new Observable<any>();
+  }
 }

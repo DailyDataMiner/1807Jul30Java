@@ -45,21 +45,21 @@
         </table>
 
 
-      <!-- <div class="form-group">
-        <form (submit)="addReimb()">
+      <div class="form-group">
+        <form (submit)="createReimb()">
           <div class="form-group">
             <h2>Reimbursement Form</h2>
             <label for="amount">Please Enter an amount:</label>
             <input type="number" class="form-control" id="amount" name="amount" required [(ngModel)]="amount" />
 
         <label for="description">Description:</label>
-          <input type="Description" class="form-control" id="Description" 
-        name="Description" required [(ngModel)]="Description" />      
+          <input type="Description" class="form-control" id="description" 
+        name="Description" required [(ngModel)]="description" />      
       </div>
 
       <div class="form-dropdown">
           <label for="description">Request Type:</label>
-          <select id="Type" name="dropdown" required [(ngModel)]="requestTypeStr" >
+          <select id="type" name="dropdown" required [(ngModel)]="type" >
             <option value="" selected disabled hidden>Choose here</option>
             <option value="lodging">Lodging</option>
             <option value="travel">Travel</option>
@@ -69,7 +69,7 @@
       </div>
       <input type="submit" class="btn btn-primary mb-2" value="submit!">
     </form>
-  </div>-->
+  </div>
 
 
 
