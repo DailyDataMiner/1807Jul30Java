@@ -10,9 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.ReimbDao;
+import com.revature.model.ReimObj;
 import com.revature.model.Reimbursement;
-import com.revature.model.RequestObject;
-import com.revature.model.UpdateObject;
 import com.revature.model.UserInformation;
 
 public class ReimbService {
@@ -45,21 +44,21 @@ public class ReimbService {
 	public static Object addReimb(HttpServletRequest req, HttpServletResponse resp) {
 		ObjectMapper mapper = new ObjectMapper();
 		
-		RequestObject reqObj = null;
+		ReimObj rObj = null;
 		try {
 			
-			reqObj= mapper.readValue(req.getReader(), RequestObject.class);
+			rObj= mapper.readValue(req.getReader(), ReimObj.class);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		rd.addRiemb(reqObj);
+		rd.addRiemb(rObj);
 		return null;
 	}	
 	public static Object updateReimb(HttpServletRequest req, HttpServletResponse resp) {
 		ObjectMapper mapper = new ObjectMapper();
-		UpdateObject upObj = null;
-		try {upObj = mapper.readValue(req.getReader(), UpdateObject.class);
+		ReimObj upObj = null;
+		try {upObj = mapper.readValue(req.getReader(), ReimObj.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}rd.updateReimb(upObj);

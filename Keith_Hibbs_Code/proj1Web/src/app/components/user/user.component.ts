@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
     if (this.authService.user !== null) {
       this.user = this.authService.user;
       this.GetReimb();
- this.authService.user.username=this.author;      
+     
     } });
   }
 
@@ -41,9 +41,9 @@ GetReimb(){
 }
 
     createReimb(){   
-
-        this.authService.addReimb(this.amount, this.description, this.type, this.authService.user.username)
-        // this.route.navigate(['user']);
-      }
+ 
+        this.authService.addReimb(this.amount, this.description, this.type, this.author)
+        this.route.navigate(['user']);
+              }
       }
     

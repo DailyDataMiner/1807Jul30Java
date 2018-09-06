@@ -33,14 +33,14 @@ emp: Reimbursement;
    {withCredentials : true} );
   }
   addReimb(amount: number, description: string, type: string, author: string): Observable<any>{
-  // console.log(amount, description, type, author)
+  console.log(amount, description, type, author)
       return this.http.post<any>('http://localhost:8888.Project1/addReib.ng', { amount: amount, description: description, type: type, author: author },
    {withCredentials : true} );
-  return new Observable<any>();1
+  // return new Observable<any>();
   }
-  updateReimb(reimbId: number, resolver: string, status: string): Observable<any>{
-  console.log(reimbId, resolver, status)
-    // return this.http.post<any>('http://localhost:8888.Project1/updateReimb', {reimbId: reimbId, resolver:resolver, status: status},
+  updateReimb(reimbbId: number, resolver: string, status: string): Observable<any>{
+  console.log(reimbbId, resolver, status)
+    // return this.http.post<any>('http://localhost:8888.Project1/updateReimb', {reimbbId: reimbbId, resolver:resolver, status: status},
     // {withCredentials : true} );
     return new Observable<any>();
   }

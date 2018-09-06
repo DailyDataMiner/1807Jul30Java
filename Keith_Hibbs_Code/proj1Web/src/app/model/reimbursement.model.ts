@@ -1,6 +1,6 @@
 export class Reimbursement {
 
-    reimbid: number;
+    reimbbId: number;
     amount: number;
     submitted: Date;
     resolved: Date;

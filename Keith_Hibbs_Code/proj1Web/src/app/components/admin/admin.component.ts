@@ -13,7 +13,7 @@ export class AdminComponent implements OnInit {
   user: User;
   reim: Reimbursement[];
   
-  private reimbid: number;
+  private reimbbId: number;
   private resolver: string;
   private status: string;
   
@@ -36,7 +36,7 @@ export class AdminComponent implements OnInit {
     });
   }
   updateReimb(){
-    this.authService.updateReimb(this.reimbid, this.resolver, this.status)
-    this.authService.updateReimb
+    this.authService.updateReimb(this.reimbbId, this.resolver, this.status)
+
   }
 }
