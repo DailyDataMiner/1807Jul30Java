@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user.model';
 import { Reimbursement } from '../model/reimbursement.model';
-
+import { ReqObj } from '../model/ReqObj.model'
+import { UpObj } from '../model/UpObj.model'
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
 user: User;
-emp: Reimbursement[];
-
+emp: Reimbursement;
+req: ReqObj;
+up: UpObj;
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<any> {
@@ -32,12 +34,12 @@ emp: Reimbursement[];
     return this.http.post<any>('http://localhost:8888/Project1/allreimbursements.ng',
    {withCredentials : true} );
   }
-  addReimb(): Observable<any>{
-    return this.http.post<any>('http://localhost:8888.Project1/addReib.ng',
-    null, {withCredentials : true} );
-  }
-  updateReimb(): Observable<any>{
-    return this.http.post<any>('http://localhost:8888.Project1/updateReimb',
-    null, {withCredentials : true} );
-  }
+//   addReimb(req): Observable<any>{
+//     return this.http.post<any>('http://localhost:8888.Project1/addReib.ng',
+//     null, {withCredentials : true} );
+//   }
+//   updateReimb(up): Observable<any>{
+//     return this.http.post<any>('http://localhost:8888.Project1/updateReimb',
+//     null, {withCredentials : true} );
+//   }
 }

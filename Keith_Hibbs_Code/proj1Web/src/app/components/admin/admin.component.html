@@ -1,27 +1,26 @@
-
+ <div class="container"></div>
   <table>
     <thead>
-      <th>firstname</th>
-      <th>lastname</th>
+      <th>Welcome</th>
       <th>email</th>
       <th>role</th>
     </thead>
     <tbody>
       <tr>
-        <td>{{ this.authService.user.firstname }}</td>
-        <td>{{ this.authService.user.lastname }}</td>
+        <td>{{ this.authService.user.firstname }}{{ this.authService.user.lastname }}</td>
         <td>{{ this.authService.user.email }}</td>
         <td>{{ this.authService.user.userole }}</td>
       </tr>
     </tbody>
   </table>
  
-  <div class="container">
+ 
     <div class="row">
       <div class="col-8">
         <h2 class="text-left">Reimbursement History</h2>
-        <table class="table table-sm">
+        <table class="table table-hover">
           <thead>
+            <th scope="col">ID</th>
             <th scope="col">Amount</th>
             <th scope="col">Submission</th>
             <th scope="col">Resolved</th>
@@ -32,7 +31,7 @@
             <th scope="col">Type</th>
           </thead>
           <tbody>
-            <tr scope="row" *ngFor="let adRows of reim" >
+            <tr [class.active]="id ===reimb.Rows.id" *ngFor="let adRows of reim" (click)="onSelect(reimbRows.id)">
               <td>{{ adRows.amount | currency }}</td>
               <td>{{ adRows.submitted | date}}</td>              
               <td>{{ adRows.Resolved | date }}</td>
@@ -44,5 +43,10 @@
               </tr>
           </tbody>
         </table>
+
+        <div class="col">
+          <button type="button" class="btn btn-primary" (click)="updateRequestApprove(value)">Approve!</button>
+          <button type="button" class="btn btn-primary" (click)="updateRequestDeny(value)">Deny!</button>
+        </div>
       </div>
   

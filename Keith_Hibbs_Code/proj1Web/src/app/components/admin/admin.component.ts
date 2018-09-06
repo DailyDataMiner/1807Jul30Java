@@ -12,7 +12,7 @@ export class AdminComponent implements OnInit {
 
   user: User;
   reim: Reimbursement[];
-
+  // up: UpObj;
   private amount: number;
   private description: string;
   private requestType: string;
@@ -23,7 +23,6 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(data => {
       this.authService.user = data;
-      console.log(this.authService.user);
     if (this.authService.user !== null) {
       this.user = this.authService.user;
       this.getAllReimb();
@@ -33,7 +32,10 @@ export class AdminComponent implements OnInit {
 
   getAllReimb(){
     this.authService.getAllReimb()
-    .subscribe(data => {this.user = data;
+    .subscribe(data => {this.reim = data;
     });
+  }
+  updateReimb(reimbid: number, ){
+    this.authService.updateReimb
   }
 }

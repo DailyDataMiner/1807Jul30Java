@@ -46,8 +46,8 @@ public class ReimbDao {
 		Reimbursement r = null;
 		List<Reimbursement> reimb = new ArrayList<Reimbursement>();
 		try(Connection conn = ConnectionFactory.getConnection()) {
-			PreparedStatement ps = conn.prepareStatement("SELECT R.R_ID, R.AMOUNT, R.SUBMIT_TIME, R.RESOLVED_TIME, R.R_DESC, R.AUTHOR, R.RESOLVER, RS.R_STATUS, RT.R_TYPE FROM REIMBURSEMENT R" + 
-					"INNER JOIN R_STATUS RS ON R.RS_ID=RS.RS_ID INNER JOIN R_TYPE RT ON R.RT_ID=RT.RT_ID WHERE AUTHOR = ?" + 
+			PreparedStatement ps = conn.prepareStatement("SELECT R.R_ID, R.AMOUNT, R.SUBMIT_TIME, R.RESOLVED_TIME, R.R_DESC, R.AUTHOR, R.RESOLVER, RS.R_STATUS, RT.R_TYPE FROM REIMBURSEMENT R " + 
+					"INNER JOIN R_STATUS RS ON R.RS_ID=RS.RS_ID INNER JOIN R_TYPE RT ON R.RT_ID=RT.RT_ID WHERE AUTHOR = ? " + 
 					"ORDER BY SUBMIT_TIME desc");
 			ps.setString(1, UserInformation.username);
 			ResultSet rs = ps.executeQuery();
@@ -67,11 +67,12 @@ public class ReimbDao {
 				r.setStatus(rs.getString(8));
 				r.setType(rs.getString(9));
 				reimb.add(r);
-				System.out.println(reimb.size());
+//				System.out.println(reimb.size());
 			
 			}
 			} catch (SQLException e) {
 				System.err.println(e.getErrorCode() + e.getSQLState());
+				e.printStackTrace();
 			}
 			return reimb;
 			
@@ -84,31 +85,32 @@ public class ReimbDao {
 //		int index = 0;
 		try(Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement("SELECT R.R_ID, R.AMOUNT, R.SUBMIT_TIME, R.RESOLVED_TIME, R.R_DESC, R.AUTHOR, R.RESOLVER, RS.R_STATUS, RT.R_TYPE FROM REIMBURSEMENT R " + 
-					"INNER JOIN R_STATUS RS ON R.RS_ID=RS.RS_ID INNER JOIN R_TYPE RT ON R.RT_ID=RT.RT_ID" + 
+					"INNER JOIN R_STATUS RS ON R.RS_ID=RS.RS_ID INNER JOIN R_TYPE RT ON R.RT_ID=RT.RT_ID " + 
 					"ORDER BY SUBMIT_TIME desc");
 			
 //			ps.setString(++index, ui.getUsername());
-			ResultSet info = ps.executeQuery();
-			while (info.next()) {
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
 		
 
 				Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/Costa_Rica"));
 				r = new Reimbursement();
-				r.setReimbbId(info.getInt(1));
-				r.setAmount(info.getDouble(2));
-				r.setSubmitted(info.getTimestamp(3, cal));
-				r.setResolved(info.getTimestamp(4, cal));
-				r.setDescription(info.getString(2));
-				r.setAuthor(info.getString(6));
-				r.setResolver(info.getString(7));
-				r.setStatus(info.getString(8));
-				r.setType(info.getString(9));
+				r.setReimbbId(rs.getInt(1));
+				r.setAmount(rs.getDouble(2));
+				r.setSubmitted(rs.getTimestamp(3, cal));
+				r.setResolved(rs.getTimestamp(4, cal));
+				r.setDescription(rs.getString(2));
+				r.setAuthor(rs.getString(6));
+				r.setResolver(rs.getString(7));
+				r.setStatus(rs.getString(8));
+				r.setType(rs.getString(9));
 				reimb.add(r);
-				System.out.println(reimb.size());
+//				System.out.println(reimb.size());
 			
 			}
 			} catch (SQLException e) {
 				System.err.println(e.getErrorCode() + e.getSQLState());
+				e.printStackTrace();
 			}
 			return reimb;
 					
